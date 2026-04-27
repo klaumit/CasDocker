@@ -2,7 +2,7 @@
   "profiles": {
     "pp": {
       "commandName": "Project",
-      "commandLineArgs": "-p -i %HOME%/Desktop/win3/Sample1 -o ../../../tmp"
+      "commandLineArgs": "-p -i %HOME%/Desktop/win3/Sample -o ../../../tmp"
     }
   }
 }
