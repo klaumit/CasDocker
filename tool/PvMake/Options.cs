@@ -6,10 +6,13 @@ namespace PvMake
 {
     public class Options
     {
-        [Option('h', "hex", HelpText = "Find hex matches.")]
-        public bool HexMatch { get; set; }
+        [Option('p', "process", HelpText = "Process project.")]
+        public bool PreProcess { get; set; }
 
         [Option('i', "input", HelpText = "Set input directory.")]
         public string? InputDir { get; set; }
+
+        [Option('o', "output", HelpText = "Set output directory.")]
+        public string? OutputDir { get; set; }
     }
 }

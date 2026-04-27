@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "pp": {
+      "commandName": "Project",
+      "commandLineArgs": "-p -i %HOME% -o tmp"
+    }
+  }
+}

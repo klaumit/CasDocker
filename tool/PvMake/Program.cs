@@ -1,12 +1,20 @@
-﻿using System;
+﻿using System.Threading.Tasks;
+using CommandLine;
 
 namespace PvMake
 {
     internal static class Program
     {
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var parser = Parser.Default;
+            await parser.ParseArguments<Options>(args).WithParsedAsync(async o =>
+            {
+                if (o.PreProcess)
+                {
+                    await PreProc.Run(o);
+                }
+            });
         }
     }
 }
