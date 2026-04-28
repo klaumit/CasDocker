@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
+using PvMake.Resources;
 using PvMake.Tools;
 
 namespace PvMake.Core
@@ -20,6 +23,14 @@ namespace PvMake.Core
             Console.WriteLine($"Output = {outputDir}");
 
             var ini = await IniExt.ReadFile(Path.Combine(inputDir, prj));
+
+            var (d2M, m2D) = ResTool.ReadDirToModel();
+
+
+            Console.WriteLine(JsonSerializer.Serialize(d2M));
+            Console.WriteLine(JsonSerializer.Serialize(m2D));
+            
+            
 
             var appS = ini.GetSectionSettings(app);
             foreach (var item in appS)
