@@ -19,7 +19,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Update="Resources\dirToModel.json">
+    <None Update="Resources\*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
