@@ -8,10 +8,11 @@ namespace PvMake.Core
 {
     internal static class PreProc
     {
-        private const string app = "Application";
-        private const string tit = "Title";
-        private const string ver = "Version";
-        private const string prj = "project.ini";
+        private const string App = "Application";
+        private const string Nom = "Name";
+        private const string Tit = "Title";
+        private const string Ver = "Version";
+        private const string Prj = "project.ini";
 
         public static async Task Run(Options o)
         {
@@ -20,9 +21,10 @@ namespace PvMake.Core
             Console.WriteLine($"Input  = {inputDir}");
             Console.WriteLine($"Output = {outputDir}");
 
-            var ini = await IniExt.ReadFile(Path.Combine(inputDir, prj));
-            var appTitle = ini.GetSetting(app, tit);
-            var appVersion = ini.GetSetting(app, ver);
+            var ini = await IniExt.ReadFile(Path.Combine(inputDir, Prj));
+            var appName = ini.GetSetting(App, Nom);
+            var appTitle = ini.GetSetting(App, Tit);
+            var appVersion = ini.GetSetting(App, Ver);
 
             var (d2M, m2D) = ResTool.ReadDirToModel();
             foreach (var (dirName, _) in d2M)
@@ -30,6 +32,11 @@ namespace PvMake.Core
                 var dir = FileExt.GetDir(Path.Combine(outputDir, dirName));
                 var local = Path.GetRelativePath(outputDir, dir);
                 Console.WriteLine($" * {local}");
+
+                var cDir = FileExt.GetDir(Path.Combine(dir, "C"));
+                var pDir = FileExt.GetDir(Path.Combine(cDir, appName!));
+                var mkFile = Path.Combine(pDir, "Makefile");
+                FileExt.WriteTo(mkFile, ["???"]);
             }
 
             Console.WriteLine("Done.");

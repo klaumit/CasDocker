@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace PvMake.Tools
 {
@@ -12,6 +14,11 @@ namespace PvMake.Tools
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
             return dir;
+        }
+
+        public static void WriteTo(string file, IEnumerable<string> lines)
+        {
+            File.WriteAllLines(file, lines, Encoding.UTF8);
         }
     }
 }
