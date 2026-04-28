@@ -27,7 +27,7 @@ namespace PvMake.Core
             var ini = await IniExt.ReadFile(Path.Combine(inputDir, Prj));
             var appName = ini.GetSetting(App, Nom);
             var appTitle = ini.GetSetting(App, Tit);
-            var appVersion = ini.GetSetting(App, Ver);
+            var appVer = ini.GetSetting(App, Ver);
 
             var (d2M, m2D) = ResTool.ReadDirToModel();
             foreach (var (dirName, _) in d2M)
@@ -39,7 +39,7 @@ namespace PvMake.Core
                 var cDir = FileExt.GetDir(Path.Combine(dir, "C"));
                 var pDir = FileExt.GetDir(Path.Combine(cDir, appName!));
                 var mkFile = Path.Combine(pDir, "Makefile");
-                FileExt.WriteTo(mkFile, CreateMakeFile(appTitle!));
+                FileExt.WriteTo(mkFile, CreateMakeFile(appTitle!, appVer!));
             }
 
             Console.WriteLine("Done.");

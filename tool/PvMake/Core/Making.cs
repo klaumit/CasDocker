@@ -6,7 +6,7 @@ namespace PvMake.Core
 {
     internal static class Making
     {
-        internal static IEnumerable<string> CreateMakeFile(string target)
+        internal static IEnumerable<string> CreateMakeFile(string target, string ver)
         {
             var list = new List<string>();
             list.Add("#Makefile for PocketViewer Sample Program");
@@ -22,10 +22,13 @@ namespace PvMake.Core
             list.Add($"PROGNAME = \"{target}\"");
             list.Add("");
             list.Add("#== ProgramVersion(EX. 0100->Ver1.00) ==");
+            list.Add($"VERSION = {ver}");
             list.Add("");
             list.Add("#== MenuIcon (Xsize=45dot,Ysize=28dot) ==");
+            list.Add("MICON = menuicon\\icon.bmp");
             list.Add("");
             list.Add("#== ListMenuIcon (Xsize=27dot,Ysize=20dot) ==");
+            list.Add("LICON = menuicon\\Licon.bmp");
             list.Add("");
             list.Add("#== CompileObjectFile ==");
             list.Add("");
