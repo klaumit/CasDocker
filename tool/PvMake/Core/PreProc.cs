@@ -1,10 +1,9 @@
 using System;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
-using SoftCircuits.IniFileParser;
+using PvMake.Tools;
 
-namespace PvMake
+namespace PvMake.Core
 {
     internal static class PreProc
     {
@@ -20,9 +19,7 @@ namespace PvMake
             Console.WriteLine($"Input  = {inputDir}");
             Console.WriteLine($"Output = {outputDir}");
 
-            var utf = Encoding.UTF8;
-            var ini = new IniFile();
-            await ini.LoadAsync(Path.Combine(inputDir, prj), utf);
+            var ini = await IniExt.ReadFile(Path.Combine(inputDir, prj));
 
             var appS = ini.GetSectionSettings(app);
             foreach (var item in appS)

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace PvMake
+namespace PvMake.Tools
 {
     public static class FileExt
     {

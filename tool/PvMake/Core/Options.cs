@@ -2,7 +2,7 @@ using CommandLine;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace PvMake
+namespace PvMake.Core
 {
     public class Options
     {

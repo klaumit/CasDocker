@@ -18,4 +18,10 @@
     <PackageReference Include="SoftCircuits.IniFileParser" Version="3.0.0" />
   </ItemGroup>
   
+  <ItemGroup>
+    <None Update="Resources\dirToModel.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
 </Project>
