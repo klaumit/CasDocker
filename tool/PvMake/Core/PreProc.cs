@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using PvMake.Resources;
 using PvMake.Tools;
@@ -23,20 +21,18 @@ namespace PvMake.Core
             Console.WriteLine($"Output = {outputDir}");
 
             var ini = await IniExt.ReadFile(Path.Combine(inputDir, prj));
+            var appTitle = ini.GetSetting(app, tit);
+            var appVersion = ini.GetSetting(app, ver);
 
             var (d2M, m2D) = ResTool.ReadDirToModel();
-
-
-            Console.WriteLine(JsonSerializer.Serialize(d2M));
-            Console.WriteLine(JsonSerializer.Serialize(m2D));
-            
-            
-
-            var appS = ini.GetSectionSettings(app);
-            foreach (var item in appS)
+            foreach (var (dirName, _) in d2M)
             {
-                Console.WriteLine(item);
+                var dir = FileExt.GetDir(Path.Combine(outputDir, dirName));
+                var local = Path.GetRelativePath(outputDir, dir);
+                Console.WriteLine($" * {local}");
             }
+
+            Console.WriteLine("Done.");
         }
     }
 }
