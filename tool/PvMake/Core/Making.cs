@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 // ReSharper disable UseObjectOrCollectionInitializer
 
@@ -6,7 +8,7 @@ namespace PvMake.Core
 {
     internal static class Making
     {
-        internal static IEnumerable<string> CreateMakeFile(string target, string ver)
+        internal static IEnumerable<string> CreateMakeFile(string target, string ver, string[] hs, string[] cs)
         {
             var list = new List<string>();
             list.Add("#Makefile for PocketViewer Sample Program");
@@ -31,12 +33,20 @@ namespace PvMake.Core
             list.Add("LICON = menuicon\\Licon.bmp");
             list.Add("");
             list.Add("#== CompileObjectFile ==");
+            var cTxt = string.Join("  \\\n\t\t", cs.Reverse().Select(c =>
+                $"$(ODIR)\\{Path.GetFileName(c).Replace(".c", ".obj")}"));
+            list.Add($"APLOBJS =\t{cTxt}");
             list.Add("");
             list.Add("#== IncludeHeaderFile ==");
+            var hTxt = string.Join(" \\\n\t\t", hs.Select(h =>
+                $"$(HDIR)\\{Path.GetFileName(h)}"));
+            list.Add($"HEADFILE = \t{hTxt}");
             list.Add("");
             list.Add("### ----------------------------------------- ###");
             list.Add("");
             list.Add(@"include ..\COM_LNK\MakeSDK.2");
+            list.Add("");
+            list.Add("");
             list.Add("");
             return list;
         }

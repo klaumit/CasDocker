@@ -16,9 +16,16 @@ namespace PvMake.Tools
             return dir;
         }
 
-        public static void WriteTo(string file, IEnumerable<string> lines)
+        public static void WriteWin(string file, IEnumerable<string> lines)
         {
-            File.WriteAllLines(file, lines, Encoding.UTF8);
+            var text = string.Join("\r\n", lines);
+            File.WriteAllText(file, text, Encoding.ASCII);
+        }
+
+        public static string[] Find(string root, string filter)
+        {
+            var files = Directory.GetFiles(root, filter, SearchOption.AllDirectories);
+            return files;
         }
     }
 }

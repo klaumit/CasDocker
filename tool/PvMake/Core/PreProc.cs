@@ -39,7 +39,9 @@ namespace PvMake.Core
                 var cDir = FileExt.GetDir(Path.Combine(dir, "C"));
                 var pDir = FileExt.GetDir(Path.Combine(cDir, appName!));
                 var mkFile = Path.Combine(pDir, "Makefile");
-                FileExt.WriteTo(mkFile, CreateMakeFile(appTitle!, appVer!));
+                var hFiles = FileExt.Find(inputDir, "*.h");
+                var cFiles = FileExt.Find(inputDir, "*.c");
+                FileExt.WriteWin(mkFile, CreateMakeFile(appTitle!, appVer!, hFiles, cFiles));
             }
 
             Console.WriteLine("Done.");
