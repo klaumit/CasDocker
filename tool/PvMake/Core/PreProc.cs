@@ -3,6 +3,9 @@ using System.IO;
 using System.Threading.Tasks;
 using PvMake.Resources;
 using PvMake.Tools;
+using static PvMake.Core.Making;
+
+// ReSharper disable UseObjectOrCollectionInitializer
 
 namespace PvMake.Core
 {
@@ -36,7 +39,7 @@ namespace PvMake.Core
                 var cDir = FileExt.GetDir(Path.Combine(dir, "C"));
                 var pDir = FileExt.GetDir(Path.Combine(cDir, appName!));
                 var mkFile = Path.Combine(pDir, "Makefile");
-                FileExt.WriteTo(mkFile, ["???"]);
+                FileExt.WriteTo(mkFile, CreateMakeFile(appTitle!));
             }
 
             Console.WriteLine("Done.");
