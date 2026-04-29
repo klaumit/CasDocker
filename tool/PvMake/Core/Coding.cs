@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using PvMake.Tools;
 
+// ReSharper disable TooWideLocalVariableScope
 // ReSharper disable UseObjectOrCollectionInitializer
 
 namespace PvMake.Core
@@ -24,7 +25,7 @@ namespace PvMake.Core
             }
         }
 
-        public static void ReWrite(IEnumerable<string>? files, string dest)
+        public static void ReWrite(IEnumerable<string>? files, string dest, bool patchHit = false)
         {
             if (files == null)
                 return;
@@ -32,9 +33,30 @@ namespace PvMake.Core
             {
                 var name = Path.GetFileName(file);
                 var tgt = Path.Combine(dest, name);
-                var lines = File.ReadAllLines(file, Encoding.ASCII);
+                var iLines = File.ReadAllLines(file, Encoding.ASCII);
+                var lines = new List<string>();
+                string tmp;
+                foreach (var iLine in iLines)
+                {
+                    var line = iLine;
+                    if (line.Contains(tmp = "byte far "))
+                        line = line.Replace(tmp, "byte ");
+                    if (line.Contains(tmp = "<stdrom.h>"))
+                        line = line.Replace(tmp, "\"string.h\"");
+                    if (line.Contains(tmp = " far "))
+                        line = line.Replace(tmp, " ");
+                    if (line.Contains(tmp = "== 0xffff "))
+                        line = line.Replace(tmp, "== 0xffffffff ");
+                    if (line.Contains(tmp = "IB_PFONT"))
+                        line = line.Replace(tmp, "(byte)IB_PFONT");
+                    if (line.Contains(tmp = "t_tbl") && !line.Contains("cpy("))
+                        line = line.Replace(tmp, "(char*)t_tbl");
+                    if (line.Contains(tmp = ",\""))
+                        line = line.Replace(tmp, ",(byte *)\"");
+                    lines.Add(line);
+                }
                 FileExt.WriteWin(tgt, lines);
-                Console.WriteLine($"    + {name} ({lines.Length} L) => {tgt}");
+                Console.WriteLine($"    + {name} ({lines.Count} L) => {tgt}");
             }
         }
     }

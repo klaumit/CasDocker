@@ -60,9 +60,9 @@ namespace PvMake.Core
             var prjM = FileExt.GetDir(Path.Combine(pDir, "ICON"));
             Coding.ReCopy(bFiles, prjM);
             var prjC = FileExt.GetDir(Path.Combine(pDir, "SRC"));
-            Coding.ReWrite(cFiles, prjC);
+            Coding.ReWrite(cFiles, prjC, true);
             var prjH = FileExt.GetDir(Path.Combine(pDir, "DEF"));
-            Coding.ReWrite(hFiles, prjH);
+            Coding.ReWrite(hFiles, prjH, true);
         }
 
         private static void RunForIntel(Project p, string inputDir, string dir)
