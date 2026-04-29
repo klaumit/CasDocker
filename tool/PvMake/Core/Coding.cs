@@ -44,11 +44,19 @@ namespace PvMake.Core
                 preProc.AddSymbol("__HITACHI__");
                 symbols["FAR"] = " ";
                 symbols["PADE"] = ",\t0x00";
+                symbols["B@@"] = "(byte)";
+                symbols["C@"] = "(char*)";
+                symbols["B@"] = "(byte *)";
+                symbols["FF@"] = " 0xffffffff";
             }
             else
             {
                 symbols["FAR"] = " far ";
                 symbols["PADE"] = "";
+                symbols["B@@"] = "";
+                symbols["C@"] = "";
+                symbols["B@"] = "";
+                symbols["FF@"] = " 0xffff";
             }
             foreach (var file in files ?? [])
             {
