@@ -8,7 +8,8 @@ namespace PvMake.Core
 {
     internal static class Making
     {
-        internal static IEnumerable<string> CreateMakeFile(string target, string ver, string[] hs, string[] cs)
+        internal static IEnumerable<string> CreateMakeFile(string target, string ver,
+            IEnumerable<string>? hs, IEnumerable<string>? cs)
         {
             var list = new List<string>();
             list.Add("#Makefile for PocketViewer Sample Program");
@@ -33,13 +34,13 @@ namespace PvMake.Core
             list.Add("LICON = menuicon\\Licon.bmp");
             list.Add("");
             list.Add("#== CompileObjectFile ==");
-            var cTxt = string.Join("  \\\n\t\t", cs.Reverse().Select(c =>
-                $"$(ODIR)\\{Path.GetFileName(c).Replace(".c", ".obj")}"));
+            var cTxt = string.Join("  \\\n\t\t", cs?.Reverse().Select(c =>
+                $"$(ODIR)\\{Path.GetFileName(c).Replace(".c", ".obj")}") ?? []);
             list.Add($"APLOBJS =\t{cTxt}");
             list.Add("");
             list.Add("#== IncludeHeaderFile ==");
-            var hTxt = string.Join(" \\\n\t\t", hs.Select(h =>
-                $"$(HDIR)\\{Path.GetFileName(h)}"));
+            var hTxt = string.Join(" \\\n\t\t", hs?.Select(h =>
+                $"$(HDIR)\\{Path.GetFileName(h)}") ?? []);
             list.Add($"HEADFILE = \t{hTxt}");
             list.Add("");
             list.Add("### ----------------------------------------- ###");

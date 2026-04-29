@@ -22,10 +22,19 @@ namespace PvMake.Tools
             File.WriteAllText(file, text, Encoding.ASCII);
         }
 
-        public static string[] Find(string root, string filter)
+        public static SortedDictionary<string, SortedSet<string>> FindAllFiles(string folder)
         {
-            var files = Directory.GetFiles(root, filter, SearchOption.AllDirectories);
-            return files;
+            const SearchOption so = SearchOption.AllDirectories;
+            var files = Directory.GetFiles(folder, "*", so);
+            var dict = new SortedDictionary<string, SortedSet<string>>();
+            foreach (var file in files)
+            {
+                var ext = Path.GetExtension(file).ToLowerInvariant();
+                if (!dict.TryGetValue(ext, out var list))
+                    dict[ext] = list = [];
+                list.Add(file);
+            }
+            return dict;
         }
     }
 }

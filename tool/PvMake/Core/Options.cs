@@ -9,6 +9,9 @@ namespace PvMake.Core
         [Option('p', "process", HelpText = "Process project.")]
         public bool PreProcess { get; set; }
 
+        [Option('c', "clean", HelpText = "Clean project.")]
+        public bool Clean { get; set; }
+
         [Option('i', "input", HelpText = "Set input directory.")]
         public string? InputDir { get; set; }
 

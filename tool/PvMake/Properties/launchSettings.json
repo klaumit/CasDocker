@@ -3,6 +3,10 @@
     "pp": {
       "commandName": "Project",
       "commandLineArgs": "-p -i %HOME%/Desktop/kak6/Sample -o %HOME%/Desktop/kak5"
+    },
+    "cl": {
+      "commandName": "Project",
+      "commandLineArgs": "-c -o %HOME%/Desktop/kak4"
     }
   }
 }

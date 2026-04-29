@@ -14,6 +14,11 @@ namespace PvMake
                 if (o.PreProcess)
                 {
                     await PreProc.Run(o);
+                    return;
+                }
+                if (o.Clean)
+                {
+                    await Cleaner.Run(o);
                 }
             });
         }
