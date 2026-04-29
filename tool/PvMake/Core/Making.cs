@@ -39,7 +39,7 @@ namespace PvMake.Core
             list.Add($"APLOBJS =\t{cTxt}");
             list.Add("");
             list.Add("#== IncludeHeaderFile ==");
-            var hTxt = string.Join(" \\\n\t\t", hs?.Select(h =>
+            var hTxt = string.Join(" \\\n\t\t", hs?.Reverse().Select(h =>
                 $"$(HDIR)\\{Path.GetFileName(h)}") ?? []);
             list.Add($"HEADFILE = \t{hTxt}");
             list.Add("");

@@ -38,11 +38,22 @@ namespace PvMake.Core
 
                 var cDir = FileExt.GetDir(Path.Combine(dir, "C"));
                 var pDir = FileExt.GetDir(Path.Combine(cDir, appName!));
+
                 var mkFile = Path.Combine(pDir, "Makefile");
                 var foundFiles = FileExt.FindAllFiles(inputDir);
                 foundFiles.TryGetValue(".h", out var hFiles);
                 foundFiles.TryGetValue(".c", out var cFiles);
+                foundFiles.TryGetValue(".bmp", out var bFiles);
                 FileExt.WriteWin(mkFile, CreateMakeFile(appTitle!, appVer!, hFiles, cFiles));
+
+                _ = FileExt.GetDir(Path.Combine(pDir, "ForDEBUG"));
+                _ = FileExt.GetDir(Path.Combine(pDir, "OBJ"));
+                var prjM = FileExt.GetDir(Path.Combine(pDir, "MENUICON"));
+                Coding.ReCopy(bFiles, prjM);
+                var prjC = FileExt.GetDir(Path.Combine(pDir, "C"));
+                Coding.ReWrite(cFiles, prjC);
+                var prjH = FileExt.GetDir(Path.Combine(pDir, "H"));
+                Coding.ReWrite(hFiles, prjH);
             }
 
             Console.WriteLine("Done.");
