@@ -53,6 +53,16 @@ namespace PvMake.Core
 
             var mbFile = Path.Combine(pDir, "BuildAll.bat");
             FileExt.WriteWin(mbFile, CreateBuildBat());
+
+            _ = FileExt.GetDir(Path.Combine(pDir, "debug"));
+            _ = FileExt.GetDir(Path.Combine(pDir, "user_bin"));
+
+            var prjM = FileExt.GetDir(Path.Combine(pDir, "ICON"));
+            Coding.ReCopy(bFiles, prjM);
+            var prjC = FileExt.GetDir(Path.Combine(pDir, "SRC"));
+            Coding.ReWrite(cFiles, prjC);
+            var prjH = FileExt.GetDir(Path.Combine(pDir, "DEF"));
+            Coding.ReWrite(hFiles, prjH);
         }
 
         private static void RunForIntel(Project p, string inputDir, string dir)
