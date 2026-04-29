@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
-using PvMake.Tools;
+using SimpleTextPreprocessor;
+using SimpleTextPreprocessor.ExpressionSolver;
+using SimpleTextPreprocessor.IncludeResolver;
 
 // ReSharper disable TooWideLocalVariableScope
 // ReSharper disable UseObjectOrCollectionInitializer
@@ -29,35 +32,43 @@ namespace PvMake.Core
         {
             if (files == null)
                 return;
-            foreach (var file in files)
+            var includer = new EmptyIncludeResolver();
+            var solver = new DefaultExpressionSolver();
+            var opt = PreprocessorOptions.Default;
+            var preProc = new Preprocessor(includer, solver, opt);
+            preProc.AddToIgnored("include");
+            preProc.AddToIgnored("define");
+            if (patchHit)
+                preProc.AddSymbol("__HITACHI__");
+            foreach (var file in files ?? [])
             {
                 var name = Path.GetFileName(file);
                 var tgt = Path.Combine(dest, name);
-                var iLines = File.ReadAllLines(file, Encoding.ASCII);
-                var lines = new List<string>();
-                string tmp;
-                foreach (var iLine in iLines)
+                string content;
+                using (var input = new StreamReader(file, Encoding.ASCII))
                 {
-                    var line = iLine;
-                    if (line.Contains(tmp = "byte far "))
-                        line = line.Replace(tmp, "byte ");
-                    if (line.Contains(tmp = "<stdrom.h>"))
-                        line = line.Replace(tmp, "\"string.h\"");
-                    if (line.Contains(tmp = " far "))
-                        line = line.Replace(tmp, " ");
-                    if (line.Contains(tmp = "== 0xffff "))
-                        line = line.Replace(tmp, "== 0xffffffff ");
-                    if (line.Contains(tmp = "IB_PFONT"))
-                        line = line.Replace(tmp, "(byte)IB_PFONT");
-                    if (line.Contains(tmp = "t_tbl") && !line.Contains("cpy("))
-                        line = line.Replace(tmp, "(char*)t_tbl");
-                    if (line.Contains(tmp = ",\""))
-                        line = line.Replace(tmp, ",(byte *)\"");
-                    lines.Add(line);
+                    var bld = new StringBuilder();
+                    using var writer = new StringWriter(bld);
+                    var report = new ReportList();
+                    if (!preProc.Process(input, writer, report))
+                        throw new InvalidOperationException(ToText(file, report));
+                    content = writer.ToString();
+                    if (!content.Contains("\r\n"))
+                        content = content.Replace("\n", "\r\n");
                 }
-                FileExt.WriteWin(tgt, lines);
-                Console.WriteLine($"    + {name} ({lines.Count} L) => {tgt}");
+                File.WriteAllText(tgt, content);
+                var lineCount = content.Count('\n');
+                Console.WriteLine($"    + {name} ({lineCount} L) => {tgt}");
             }
+        }
+
+        private static string ToText(string file, ReportList report)
+        {
+            var bld = new StringBuilder();
+            bld.AppendLine($"[{file}]");
+            foreach (var e in report.Entries)
+                bld.AppendLine($"{e.FileId}({e.Line},{e.Column}): {e.Message}");
+            return bld.ToString();
         }
     }
 }
