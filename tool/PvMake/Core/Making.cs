@@ -51,5 +51,23 @@ namespace PvMake.Core
             list.Add("");
             return list;
         }
+
+        internal static IEnumerable<string> CreateMakeBat()
+        {
+            var list = new List<string>();
+            list.Add("@echo off");
+            list.Add(@"CALL ..\..\PATHSET.BAT");
+            list.Add(@"@echo\");
+            list.Add("@echo --- MAKE START ---");
+            list.Add("kmmake PMODEL=1");
+            list.Add("if exist make.i del make.i");
+            list.Add("@echo --- MAKE START (ForDEBUG)---");
+            list.Add("kmmake PMODEL=1 DEBUG=1 > err");
+            list.Add("if exist make.i del make.i");
+            list.Add("pause");
+            list.Add("");
+            list.Add("");
+            return list;
+        }
     }
 }

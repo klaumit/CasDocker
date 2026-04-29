@@ -39,12 +39,16 @@ namespace PvMake.Core
                 var cDir = FileExt.GetDir(Path.Combine(dir, "C"));
                 var pDir = FileExt.GetDir(Path.Combine(cDir, appName!));
 
-                var mkFile = Path.Combine(pDir, "Makefile");
                 var foundFiles = FileExt.FindAllFiles(inputDir);
                 foundFiles.TryGetValue(".h", out var hFiles);
                 foundFiles.TryGetValue(".c", out var cFiles);
                 foundFiles.TryGetValue(".bmp", out var bFiles);
+
+                var mkFile = Path.Combine(pDir, "Makefile");
                 FileExt.WriteWin(mkFile, CreateMakeFile(appTitle!, appVer!, hFiles, cFiles));
+
+                var mbFile = Path.Combine(pDir, "mk.bat");
+                FileExt.WriteWin(mbFile, Making.CreateMakeBat());
 
                 _ = FileExt.GetDir(Path.Combine(pDir, "ForDEBUG"));
                 _ = FileExt.GetDir(Path.Combine(pDir, "OBJ"));
