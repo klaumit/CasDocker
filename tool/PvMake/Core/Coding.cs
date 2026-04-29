@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
+using PvMake.Tools;
 using SimpleTextPreprocessor;
 using SimpleTextPreprocessor.ExpressionSolver;
 using SimpleTextPreprocessor.IncludeResolver;
@@ -38,13 +38,23 @@ namespace PvMake.Core
             var preProc = new Preprocessor(includer, solver, opt);
             preProc.AddToIgnored("include");
             preProc.AddToIgnored("define");
+            var symbols = new Dictionary<string, string>();
             if (patchHit)
+            {
                 preProc.AddSymbol("__HITACHI__");
+                symbols["FAR"] = " ";
+                symbols["PADE"] = ",\t0x00";
+            }
+            else
+            {
+                symbols["FAR"] = " far ";
+                symbols["PADE"] = "";
+            }
             foreach (var file in files ?? [])
             {
                 var name = Path.GetFileName(file);
                 var tgt = Path.Combine(dest, name);
-                string content;
+                var lines = new List<string>();
                 using (var input = new StreamReader(file, Encoding.ASCII))
                 {
                     var bld = new StringBuilder();
@@ -52,13 +62,21 @@ namespace PvMake.Core
                     var report = new ReportList();
                     if (!preProc.Process(input, writer, report))
                         throw new InvalidOperationException(ToText(file, report));
-                    content = writer.ToString();
-                    if (!content.Contains("\r\n"))
-                        content = content.Replace("\n", "\r\n");
+                    string tmp;
+                    foreach (var iLine in writer.ToString().Split('\n'))
+                    {
+                        var line = iLine;
+                        foreach (var (key, val) in symbols)
+                        {
+                            tmp = $" {key} ";
+                            if (line.Contains(tmp))
+                                line = line.Replace(tmp, val);
+                        }
+                        lines.Add(line);
+                    }
                 }
-                File.WriteAllText(tgt, content);
-                var lineCount = content.Count('\n');
-                Console.WriteLine($"    + {name} ({lineCount} L) => {tgt}");
+                FileExt.WriteWin(tgt, lines);
+                Console.WriteLine($"    + {name} ({lines.Count} L) => {tgt}");
             }
         }
 
