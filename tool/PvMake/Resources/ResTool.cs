@@ -7,6 +7,12 @@ namespace PvMake.Resources
 {
     public static class ResTool
     {
+        public static string GetDir(string model)
+        {
+            var dir = Path.Combine(nameof(Resources), model);
+            return dir;
+        }
+
         public static Dir2Model ReadDirToModel()
         {
             var file = Path.Combine(nameof(Resources), "dirToModel.json");

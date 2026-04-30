@@ -5,6 +5,7 @@ using PvMake.Models;
 using PvMake.Resources;
 using PvMake.Tools;
 using static PvMake.Core.Making;
+using static PvMake.Core.Siming;
 using static PvMake.Models.KnowIt;
 
 // ReSharper disable UseObjectOrCollectionInitializer
@@ -48,6 +49,19 @@ namespace PvMake.Core
             foundFiles.TryGetValue(".c", out var cFiles);
             foundFiles.TryGetValue(".bmp", out var bFiles);
 
+            var modelExtra = ResTool.GetDir("PV3S1600");
+            var modelFiles = FileExt.FindAllFiles(modelExtra);
+            modelFiles.TryGetValue(".mak", out var mFiles);
+
+            var e1File = Path.Combine(pDir, "PV3S1600.dlr");
+            FileExt.WriteWin(e1File, CreatePv3Dlr());
+
+            var e2File = Path.Combine(pDir, "PV3S1600.dlp");
+            FileExt.WriteWin(e2File, CreatePv3Dlp(p.AppTitle!, p.AppName!));
+
+            var e3File = Path.Combine(pDir, "PV3S1600.dlw");
+            FileExt.WriteWin(e3File, CreatePv3Dlw());
+
             var mkFile = Path.Combine(pDir, "sources.def");
             FileExt.WriteWin(mkFile, CreateSrcDefFile(p.AppTitle!, p.AppVer!, cFiles));
 
@@ -63,6 +77,8 @@ namespace PvMake.Core
             Coding.ReWrite(cFiles, prjC, true);
             var prjH = FileExt.GetDir(Path.Combine(pDir, "DEF"));
             Coding.ReWrite(hFiles, prjH, true);
+            var prjS = FileExt.GetDir(Path.Combine(pDir, "make"));
+            Coding.ReCopy(mFiles, prjS);
         }
 
         private static void RunForIntel(Project p, string inputDir, string dir)
