@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "build": {
+      "commandName": "Project",
+      "commandLineArgs": "--build -i %HOME%/Desktop/kak6/Sample"
+    },
+    "simulate": {
+      "commandName": "Project",
+      "commandLineArgs": "--simulate -i %HOME%/Desktop/kak6/Sample"
+    },
+    "upload": {
+      "commandName": "Project",
+      "commandLineArgs": "--upload -i %HOME%/Desktop/kak6/Sample"
+    }
+  }
+}
