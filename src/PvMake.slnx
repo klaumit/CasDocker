@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PvMake.Lib/PvMake.Lib.n.csproj" />
+  <Project Path="PvMake/PvMake.n.csproj" />
+</Solution>
