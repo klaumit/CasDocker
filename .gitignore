@@ -428,3 +428,5 @@ FodyWeavers.xsd
 *.msm
 *.msp
 .idea/
+/src/win_build/
+/src/win_env/

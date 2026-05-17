@@ -10,7 +10,7 @@ cd win_build
 echo winetricks vb6run
 
 export EXE="wine pvmake"
-export PRJ="%USERPROFILE%\Desktop\kak6\Sample"
+export PRJ="%USERPROFILE%\Projects\Sample"
 
 echo 
 echo  ::: Build ::: 

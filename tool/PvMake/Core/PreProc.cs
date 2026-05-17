@@ -7,13 +7,37 @@ using PvMake.Tools;
 using static PvMake.Core.Making;
 using static PvMake.Core.Siming;
 using static PvMake.Models.KnowIt;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using PvMake.Tools;
+using SimpleTextPreprocessor;
+using SimpleTextPreprocessor.ExpressionSolver;
+using SimpleTextPreprocessor.IncludeResolver;
 
+// ReSharper disable TooWideLocalVariableScope
+// ReSharper disable UseObjectOrCollectionInitializer
 // ReSharper disable UseObjectOrCollectionInitializer
 
 namespace PvMake.Core
 {
     internal static class PreProc
     {
+        public static void ReCopy(IEnumerable<string>? files, string dest)
+        {
+            if (files == null)
+                return;
+            foreach (var file in files)
+            {
+                var name = Path.GetFileName(file);
+                var tgt = Path.Combine(dest, name);
+                var bytes = File.ReadAllBytes(file);
+                File.WriteAllBytes(tgt, bytes);
+                Console.WriteLine($"    + {name} ({bytes.Length} B) => {tgt}");
+            }
+        }
+
         public static async Task Run(Options o)
         {
             var inputDir = FileExt.GetDir(o.InputDir);
