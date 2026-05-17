@@ -36,8 +36,9 @@ namespace PvMake.Core
 
         private static void PrepareHitachi(string sdkDir, Project proj)
         {
-
-            // var pDir = FileExt.GetDir(Path.Combine(cDir, proj.AppName), true);
+            var pDir = FileExt.GetDir(Path.Combine(sdkDir, proj.AppName), true);
+            var mFile = Path.Combine(pDir, "sources.def");
+            FileExt.WriteWin(mFile, Making.CreateSrcDefFile(proj, new List<string>()));
         }
     }
 }

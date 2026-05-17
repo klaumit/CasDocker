@@ -1,5 +1,6 @@
 [
-    { "Name": "LSIJ"                       },  
+    { "Name": "LSIJ"                       },
+    { "Name": "LSIJ_proj"                  },
     { "Name": "PV2EM01",  "Uses": ["LSIJ"] },
     { "Name": "PV2EM02",  "Uses": ["LSIJ"] },
     { "Name": "PV2EN01",  "Uses": ["LSIJ"] },
@@ -7,6 +8,7 @@
     { "Name": "PV2EN03",  "Uses": ["LSIJ"] },
     { "Name": "PV2IN03",  "Uses": ["LSIJ"] },
   
-    { "Name": "SHC"                        },  
-    { "Name": "PV3S1600", "Uses": ["SHC"]  }  
+    { "Name": "SHC"                        },
+    { "Name": "SHC_proj"                   },
+    { "Name": "PV3S1600", "Uses": ["SHC"]  }
 ]
