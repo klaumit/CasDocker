@@ -7,8 +7,8 @@ namespace PvMake.Core
 {
     internal static class Bases
     {
-        private static Project proj;
-        private static string[] mods;
+        internal static Project proj;
+        internal static string[] mods;
         internal static string[] sdks;
         internal static string pvPrefix;
 
