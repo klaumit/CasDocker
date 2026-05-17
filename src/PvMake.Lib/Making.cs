@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace PvMake.Lib
 {
-    internal static class Making
+    public static class Making
     {
-        internal static IEnumerable<string> CreateSrcDefFile(Project p, 
+        public static IEnumerable<string> CreateSrcDefFile(Project p, 
             IEnumerable<string> cs)
         {
             var target = p.AppName;
@@ -46,7 +46,7 @@ namespace PvMake.Lib
             return list;
         }
 
-        internal static IEnumerable<string> CreateMakeFile(Project p,
+        public static IEnumerable<string> CreateMakeFile(Project p,
             IEnumerable<string> hs, IEnumerable<string> cs)
         {
             var target = p.AppName;

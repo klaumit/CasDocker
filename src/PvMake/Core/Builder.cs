@@ -15,11 +15,23 @@ namespace PvMake.Core
             {
                 var isHitachi = KnowIt.IsHitachi(sdk);
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
-
-                Console.WriteLine(" ? " + isHitachi + " -> " + sdkDir);
+                if (isHitachi)
+                    PrepareHitachi(sdkDir);
+                else
+                    PrepareIntel(sdkDir);
             }
 
             Console.WriteLine("Done.");
+        }
+
+        private static void PrepareIntel(string sdkDir)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void PrepareHitachi(string sdkDir)
+        {
+            throw new NotImplementedException();
         }
     }
 }
