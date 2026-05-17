@@ -4,6 +4,10 @@
       "commandName": "Project",
       "commandLineArgs": "--build -i %HOME%/Projects/Sample"
     },
+    "clean": {
+      "commandName": "Project",
+      "commandLineArgs": "--clean -i %HOME%/Projects/Sample"
+    },
     "simulate": {
       "commandName": "Project",
       "commandLineArgs": "--simulate -i %HOME%/Projects/Sample"
