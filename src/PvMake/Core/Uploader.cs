@@ -10,7 +10,7 @@ namespace PvMake.Core
     {
         public static void Run(IOptions o)
         {
-            Bases.LoadAndPrepareProject(o);
+            B.LoadAndPrepareProject(o);
 
             foreach (var sdk in B.sdks)
             {
