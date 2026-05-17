@@ -1,5 +1,7 @@
 using System;
 using PvMake.Lib;
+using System.IO;
+using B = PvMake.Core.Bases;
 
 namespace PvMake.Core
 {
@@ -7,9 +9,15 @@ namespace PvMake.Core
     {
         public static void Run(IOptions o)
         {
-            Bases.LoadAndPrepareProject(o);
+            B.LoadAndPrepareProject(o);
 
-            Console.WriteLine("   TODO   ??!?  ");
+            foreach (var sdk in B.sdks)
+            {
+                var isHitachi = KnowIt.IsHitachi(sdk);
+                var sdkDir = Path.Combine(B.pvPrefix, sdk);
+
+                Console.WriteLine(" ? " + isHitachi + " -> " + sdkDir);
+            }
 
             Console.WriteLine("Done.");
         }
