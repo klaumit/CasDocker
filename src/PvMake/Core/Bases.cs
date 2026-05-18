@@ -7,6 +7,7 @@ namespace PvMake.Core
 {
     internal static class Bases
     {
+        internal static string archRepo;
         internal static Project proj;
         internal static string[] mods;
         internal static string[] sdks;
@@ -29,7 +30,7 @@ namespace PvMake.Core
             Console.WriteLine("SDKs     => {0}", string.Join(" ", sdks));
 
             var archives = Archives.ReadList();
-            var archRepo = FileExt.GetAssDir("Archives", false);
+            archRepo = FileExt.GetAssDir("Archives", false);
             pvPrefix = Prefixes.GetPvPrefix();
             Console.WriteLine("Scratch  => {0}", pvPrefix);
 

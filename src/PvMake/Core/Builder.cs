@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PvMake.Lib;
 using System.IO;
+using static PvMake.Lib.Making;
 using B = PvMake.Core.Bases;
 
 namespace PvMake.Core
@@ -29,16 +30,24 @@ namespace PvMake.Core
         {
             var cDir = FileExt.GetDir(Path.Combine(sdkDir, "C"), false);
             var pDir = FileExt.GetDir(Path.Combine(cDir, proj.AppName), true);
+
+            var zipFile = Path.Combine(B.archRepo, "LSIJ_proj" + ".tar.gz");
+            ZipExt.Uncompress(zipFile, pDir);
+
             var mFile = Path.Combine(pDir, "Makefile");
-            FileExt.WriteWin(mFile, Making.CreateMakeFile(proj,
+            FileExt.WriteWin(mFile, CreateMakeFile(proj,
                 new List<string>(), new List<string>()));
         }
 
         private static void PrepareHitachi(string sdkDir, Project proj)
         {
             var pDir = FileExt.GetDir(Path.Combine(sdkDir, proj.AppName), true);
+
+            var zipFile = Path.Combine(B.archRepo, "SHC_proj" + ".tar.gz");
+            ZipExt.Uncompress(zipFile, pDir);
+
             var mFile = Path.Combine(pDir, "sources.def");
-            FileExt.WriteWin(mFile, Making.CreateSrcDefFile(proj, new List<string>()));
+            FileExt.WriteWin(mFile, CreateSrcDefFile(proj, new List<string>()));
         }
     }
 }

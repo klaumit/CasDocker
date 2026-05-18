@@ -9,7 +9,7 @@ namespace PvMake.Lib
 {
     public static class Making
     {
-        public static IEnumerable<string> CreateSrcDefFile(Project p, 
+        public static IEnumerable<string> CreateSrcDefFile(Project p,
             IEnumerable<string> cs)
         {
             var target = p.AppName;
