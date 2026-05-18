@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace PvMake.Lib
 {
-    internal static class Siming
+    public static class Siming
     {
-        internal static IEnumerable<string> CreatePv3Dlp(Project p)
+        public static IEnumerable<string> CreatePv3Dlp(Project p)
         {
             var title = p.AppTitle;
             var name = p.AppName;

@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using PvMake.Lib;
 using System.IO;
-using static PvMake.Lib.Making;
+using M = PvMake.Lib.Making;
+using S = PvMake.Lib.Siming;
 using B = PvMake.Core.Bases;
 
 namespace PvMake.Core
@@ -40,10 +41,9 @@ namespace PvMake.Core
             var hhDir = FileExt.GetDir(Path.Combine(pDir, "H"), true);
             var miDir = FileExt.GetDir(Path.Combine(pDir, "MENUICON"), true);
             var obDir = FileExt.GetDir(Path.Combine(pDir, "OBJ"), true);
-            
+
             var mFile = Path.Combine(pDir, "Makefile");
-            FileExt.WriteWin(mFile, CreateMakeFile(proj,
-                new List<string>(), new List<string>()));
+            FileExt.WriteWin(mFile, M.CreateMakeFile(proj, new List<string>(), new List<string>()));
         }
 
         private static void PrepareHitachi(string sdkDir, Project proj)
@@ -53,8 +53,18 @@ namespace PvMake.Core
             var zipFile = Path.Combine(B.archRepo, "SHC_proj" + ".tar.gz");
             ZipExt.Uncompress(zipFile, pDir);
 
+            var crDir = FileExt.GetDir(Path.Combine(pDir, "Release"), true);
+            var ccDir = FileExt.GetDir(Path.Combine(pDir, "SRC"), true);
+            var fdDir = FileExt.GetDir(Path.Combine(pDir, "Debug"), true);
+            var hhDir = FileExt.GetDir(Path.Combine(pDir, "DEF"), true);
+            var miDir = FileExt.GetDir(Path.Combine(pDir, "ICON"), true);
+            var cuDir = FileExt.GetDir(Path.Combine(pDir, "user_bin"), true);
+
             var mFile = Path.Combine(pDir, "sources.def");
-            FileExt.WriteWin(mFile, CreateSrcDefFile(proj, new List<string>()));
+            FileExt.WriteWin(mFile, M.CreateSrcDefFile(proj, new List<string>()));
+
+            var sFile = Path.Combine(pDir, "PV3S1600.dlp");
+            FileExt.WriteWin(sFile, S.CreatePv3Dlp(proj));
         }
     }
 }
