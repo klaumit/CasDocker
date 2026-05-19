@@ -44,6 +44,7 @@
     <Compile Include="Core\Bases.cs" />
 	<Compile Include="Core\Cleaner.cs" />
     <Compile Include="Core\Builder.cs" />
+	<Compile Include="Core\Preparer.cs" />
     <Compile Include="Core\Simulator.cs" />
     <Compile Include="Core\Uploader.cs" />
     <Compile Include="Core\Options.cs" />

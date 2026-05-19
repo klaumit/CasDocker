@@ -68,6 +68,7 @@
     <Compile Include="JsonExt.cs" />
 	<Compile Include="CollExt.cs" />
     <Compile Include="Models.cs" />
+	<Compile Include="Writing.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="TextExt.cs" />
     <Compile Include="TmplExt.cs" />

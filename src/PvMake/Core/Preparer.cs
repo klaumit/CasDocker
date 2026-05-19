@@ -5,6 +5,7 @@ using W = PvMake.Lib.Writing;
 using M = PvMake.Lib.Making;
 using S = PvMake.Lib.Siming;
 using B = PvMake.Core.Bases;
+using System.Collections.Generic;
 
 namespace PvMake.Core
 {
@@ -37,13 +38,16 @@ namespace PvMake.Core
             ZipExt.Uncompress(zipFile, pDir);
 
             var foundFiles = FileExt.FindAllFiles(inputDir);
-            foundFiles.TryGetValue(".h", out var hFiles);
-            foundFiles.TryGetValue(".c", out var cFiles);
-            foundFiles.TryGetValue(".bmp", out var bFiles);
+            SortedSet<string> hFiles;
+            foundFiles.TryGetValue(".h", out hFiles);
+            SortedSet<string> cFiles;
+            foundFiles.TryGetValue(".c", out cFiles);
+            SortedSet<string> bFiles;
+            foundFiles.TryGetValue(".bmp", out bFiles);
 
-            _ = FileExt.GetDir(Path.Combine(pDir, "ForDEBUG"), true);
-            _ = FileExt.GetDir(Path.Combine(cDir, "User_Bin"), true);
-            _ = FileExt.GetDir(Path.Combine(pDir, "OBJ"), true);
+            FileExt.GetDir(Path.Combine(pDir, "ForDEBUG"), true);
+            FileExt.GetDir(Path.Combine(cDir, "User_Bin"), true);
+            FileExt.GetDir(Path.Combine(pDir, "OBJ"), true);
 
             var ccDir = FileExt.GetDir(Path.Combine(pDir, "C"), true);
             W.ReWrite(cFiles, ccDir, false, cDir);
@@ -66,13 +70,16 @@ namespace PvMake.Core
             ZipExt.Uncompress(zipFile, pDir);
 
             var foundFiles = FileExt.FindAllFiles(inputDir);
-            foundFiles.TryGetValue(".h", out var hFiles);
-            foundFiles.TryGetValue(".c", out var cFiles);
-            foundFiles.TryGetValue(".bmp", out var bFiles);
+            SortedSet<string> hFiles;
+            foundFiles.TryGetValue(".h", out hFiles);
+            SortedSet<string> cFiles;
+            foundFiles.TryGetValue(".c", out cFiles);
+            SortedSet<string> bFiles;
+            foundFiles.TryGetValue(".bmp", out bFiles);
 
-            _ = FileExt.GetDir(Path.Combine(pDir, "Debug"), true);
-            _ = FileExt.GetDir(Path.Combine(pDir, "User_Bin"), true);
-            _ = FileExt.GetDir(Path.Combine(pDir, "Release"), true);
+            FileExt.GetDir(Path.Combine(pDir, "Debug"), true);
+            FileExt.GetDir(Path.Combine(pDir, "User_Bin"), true);
+            FileExt.GetDir(Path.Combine(pDir, "Release"), true);
 
             var ccDir = FileExt.GetDir(Path.Combine(pDir, "SRC"), true);
             W.ReWrite(cFiles, ccDir, true, sdkDir);

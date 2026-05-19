@@ -21,7 +21,7 @@ namespace PvMake.Lib
                 var bytes = File.ReadAllBytes(file);
                 File.WriteAllBytes(tgt, bytes);
                 var lTgt = Path.GetFullPath(tgt).Replace(root, ".");
-                Console.WriteLine($"    + {name} ({bytes.Length} B) => {lTgt}");
+                Console.WriteLine("    + {0} ({1} B) => {2}", name, bytes.Length, lTgt);
             }
         }
 
@@ -70,7 +70,7 @@ namespace PvMake.Lib
                     {
                         var key = item.Key;
                         var val = item.Value;
-                        tmp = $" {key} ";
+                        tmp = string.Format(" {0} ", key);
                         if (line.Contains(tmp))
                             line = line.Replace(tmp, val);
                     }
@@ -78,7 +78,7 @@ namespace PvMake.Lib
                 }
                 FileExt.WriteWin(tgt, lines);
                 var lTgt = Path.GetFullPath(tgt).Replace(root, ".");
-                Console.WriteLine($"    + {name} ({lines.Count} L) => {lTgt}");
+                Console.WriteLine("    + {0} ({1} L) => {2}", name, lines.Count, lTgt);
             }
         }
     }
