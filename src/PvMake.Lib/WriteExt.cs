@@ -34,18 +34,19 @@ namespace PvMake.Lib
             }
         }
 
-        public static void ReWrite(SortedSet<string> cFiles, string ccDir, bool b)
+        public static void ReWrite(SortedSet<string> files, string dir, bool isHitachi)
         {
 
 
-            
-            
-            
 
 
 
 
-            throw new NotImplementedException();
+
+
+
+
+            throw new NotImplementedException(files.Count + " " + dir + " " + isHitachi);
         }
     }
 }
