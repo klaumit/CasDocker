@@ -14,6 +14,10 @@ namespace PvMake
                 {
                     Cleaner.Run(o);
                 }
+                else if (o.Prepare)
+                {
+                    Preparer.Run(o);
+                }
                 else if (o.Build)
                 {
                     Builder.Run(o);

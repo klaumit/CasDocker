@@ -5,10 +5,13 @@ using PvMake.Lib;
 
 namespace PvMake.Core
 {
-    public class Options : IOptions
+	public class Options : IOptions
 	{
-        [Option('c', "clean", HelpText = "Clean the project.")]
-        public bool Clean { get; set; }
+		[Option('c', "clean", HelpText = "Clean the project.")]
+		public bool Clean { get; set; }
+
+		[Option('p', "prepare", HelpText = "Prepare the project.")]
+		public bool Prepare { get; set; }
 
 		[Option('b', "build", HelpText = "Build the project.")]
 		public bool Build { get; set; }
@@ -21,8 +24,5 @@ namespace PvMake.Core
 
 		[Option('i', "input", HelpText = "Set input directory.")]
 		public string InputDir { get; set; }
-
-		[Option('o', "output", HelpText = "Set output directory.")]
-		public string OutputDir { get; set; }
 	}
 }
