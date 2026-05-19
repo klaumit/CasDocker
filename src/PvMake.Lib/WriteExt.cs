@@ -1,17 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System;
-using System.Collections.Generic;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text;
-using PvMake.Lib;
-using System.IO;
 
 // ReSharper disable TooWideLocalVariableScope
 // ReSharper disable UseObjectOrCollectionInitializer
@@ -76,8 +66,10 @@ namespace PvMake.Lib
                 foreach (var iLine in input.Split('\n'))
                 {
                     var line = iLine.TrimEnd();
-                    foreach (var (key, val) in symbols)
+                    foreach (var item in symbols)
                     {
+                        var key = item.Key;
+                        var val = item.Value;
                         tmp = $" {key} ";
                         if (line.Contains(tmp))
                             line = line.Replace(tmp, val);
