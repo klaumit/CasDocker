@@ -1,5 +1,9 @@
 {
   "profiles": {
+    "prepare": {
+      "commandName": "Project",
+      "commandLineArgs": "--prepare -i %HOME%/Projects/Sample"
+    },
     "build": {
       "commandName": "Project",
       "commandLineArgs": "--build -i %HOME%/Projects/Sample"
