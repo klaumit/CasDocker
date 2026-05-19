@@ -13,6 +13,11 @@ export EXE="wine pvmake"
 export PRJ="%USERPROFILE%\Projects\Sample"
 
 echo 
+echo  ::: Prepare ::: 
+echo 
+$EXE --prepare -i $PRJ
+
+echo 
 echo  ::: Build ::: 
 echo 
 $EXE --build -i $PRJ

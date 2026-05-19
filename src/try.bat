@@ -6,6 +6,11 @@ set EXE=PvMake\bin\Debug\PvMake
 set PRJ=Z:\kak6
 
 echo.
+echo  ::: Prepare ::: 
+echo.
+%EXE% --prepare -i %PRJ%
+
+echo.
 echo  ::: Build ::: 
 echo.
 %EXE% --build -i %PRJ%
