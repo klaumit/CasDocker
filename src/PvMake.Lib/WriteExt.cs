@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 // ReSharper disable TooWideLocalVariableScope
 // ReSharper disable UseObjectOrCollectionInitializer
 
-namespace PvMake.Core
+namespace PvMake.Lib
 {
-    internal static class WriteExt
+    public static class Writing
     {
         public static void ReCopy(IEnumerable<string> files, string dest)
         {

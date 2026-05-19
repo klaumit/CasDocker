@@ -7,6 +7,7 @@ namespace PvMake.Core
 {
     internal static class Bases
     {
+        internal static string inputDir;
         internal static string archRepo;
         internal static Project proj;
         internal static string[] mods;
@@ -15,7 +16,7 @@ namespace PvMake.Core
 
         internal static void LoadAndPrepareProject(IOptions o)
         {
-            var inputDir = FileExt.GetDir(o.InputDir, false);
+            inputDir = FileExt.GetDir(o.InputDir, false);
             Console.WriteLine("Source   => {0}", inputDir);
 
             var prjFile = Path.Combine(inputDir, Project.Fn);
