@@ -16,8 +16,11 @@ namespace PvMake.Lib
             return opt;
         }
 
-        public static T ToObj<T>(string text)
+        public static T ToObj<T>(string raw)
         {
+            string text;
+            if ((text = raw.TrimOrNull()) == null)
+                return default;
             return JsonConvert.DeserializeObject<T>(text, GetConfig());
         }
     }

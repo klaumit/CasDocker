@@ -3,6 +3,7 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 
+// ReSharper disable InlineOutVariableDeclaration
 // ReSharper disable AssignNullToNotNullAttribute
 
 namespace PvMake.Lib

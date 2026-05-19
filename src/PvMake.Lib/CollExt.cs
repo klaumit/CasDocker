@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+// ReSharper disable ConvertClosureToMethodGroup
+// ReSharper disable InlineOutVariableDeclaration
+
 namespace PvMake.Lib
 {
     public static class CollExt
