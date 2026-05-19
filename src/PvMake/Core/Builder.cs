@@ -53,10 +53,10 @@ namespace PvMake.Core
             _ = FileExt.GetDir(Path.Combine(pDir, "OBJ"), true);
 
             var ccDir = FileExt.GetDir(Path.Combine(pDir, "C"), true);
-            W.ReWrite(cFiles, ccDir);
+            W.ReWrite(cFiles, ccDir, false);
 
             var hhDir = FileExt.GetDir(Path.Combine(pDir, "H"), true);
-            W.ReWrite(hFiles, hhDir);
+            W.ReWrite(hFiles, hhDir, false);
 
             var miDir = FileExt.GetDir(Path.Combine(pDir, "MENUICON"), true);
             W.ReCopy(bFiles, miDir);
