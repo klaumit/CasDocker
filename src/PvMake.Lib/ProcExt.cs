@@ -16,6 +16,7 @@ namespace PvMake.Lib
 
         public static bool Start(string exe, string pwd, string args)
         {
+            const int sec = 2;
             var info = new ProcessStartInfo
             {
                 FileName = exe
@@ -39,11 +40,11 @@ namespace PvMake.Lib
 
             try
             {
-                return proc.WaitForInputIdle(5 * 1000);
+                return proc.WaitForInputIdle(sec * 1000);
             }
             catch (InvalidOperationException)
             {
-                return proc.WaitForExit(5 * 1000);
+                return proc.WaitForExit(sec * 1000);
             }            
         }
     }
