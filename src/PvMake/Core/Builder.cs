@@ -26,6 +26,7 @@ namespace PvMake.Core
             {
                 var isHitachi = KnowIt.IsHitachi(sdk);
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
+                Console.WriteLine(" * {0}", sdk);
                 if (isHitachi)
                     PrepareHitachi(sdkDir, B.proj, B.inputDir);
                 else
@@ -53,13 +54,13 @@ namespace PvMake.Core
             _ = FileExt.GetDir(Path.Combine(pDir, "OBJ"), true);
 
             var ccDir = FileExt.GetDir(Path.Combine(pDir, "C"), true);
-            W.ReWrite(cFiles, ccDir, false);
+            W.ReWrite(cFiles, ccDir, false, cDir);
 
             var hhDir = FileExt.GetDir(Path.Combine(pDir, "H"), true);
-            W.ReWrite(hFiles, hhDir, false);
+            W.ReWrite(hFiles, hhDir, false, cDir);
 
             var miDir = FileExt.GetDir(Path.Combine(pDir, "MENUICON"), true);
-            W.ReCopy(bFiles, miDir);
+            W.ReCopy(bFiles, miDir, cDir);
 
             var mFile = Path.Combine(pDir, "Makefile");
             FileExt.WriteWin(mFile, M.CreateMakeFile(proj, hFiles, cFiles));
@@ -82,13 +83,13 @@ namespace PvMake.Core
             _ = FileExt.GetDir(Path.Combine(pDir, "Release"), true);
 
             var ccDir = FileExt.GetDir(Path.Combine(pDir, "SRC"), true);
-            W.ReWrite(cFiles, ccDir, true);
+            W.ReWrite(cFiles, ccDir, true, sdkDir);
 
             var hhDir = FileExt.GetDir(Path.Combine(pDir, "DEF"), true);
-            W.ReWrite(hFiles, hhDir, true);
+            W.ReWrite(hFiles, hhDir, true, sdkDir);
 
             var miDir = FileExt.GetDir(Path.Combine(pDir, "ICON"), true);
-            W.ReCopy(bFiles, miDir);
+            W.ReCopy(bFiles, miDir, sdkDir);
 
             var mFile = Path.Combine(pDir, "sources.def");
             FileExt.WriteWin(mFile, M.CreateSrcDefFile(proj, cFiles));

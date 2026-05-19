@@ -20,7 +20,7 @@ namespace PvMake.Lib
 {
     public static class Writing
     {
-        public static void ReCopy(IEnumerable<string> files, string dest)
+        public static void ReCopy(IEnumerable<string> files, string dest, string root)
         {
             if (files == null)
                 return;
@@ -30,23 +30,28 @@ namespace PvMake.Lib
                 var tgt = Path.Combine(dest, name);
                 var bytes = File.ReadAllBytes(file);
                 File.WriteAllBytes(tgt, bytes);
-                Console.WriteLine($"    + {name} ({bytes.Length} B) => {tgt}");
+                var lTgt = Path.GetFullPath(tgt).Replace(root, ".");
+                Console.WriteLine($"    + {name} ({bytes.Length} B) => {lTgt}");
             }
         }
 
-        public static void ReWrite(SortedSet<string> files, string dir, bool isHitachi)
+        public static void ReWrite(IEnumerable<string> files, string dest, bool patchHit, string root)
         {
+            if (files == null)
+                return;
+            foreach (var file in files)
+            {
+                var name = Path.GetFileName(file);
+                var tgt = Path.Combine(dest, name);
+                var lines = new List<string>();
+                using (var input = new StreamReader(file, Encoding.ASCII))
+                {
 
-
-
-
-
-
-
-
-
-
-            throw new NotImplementedException(files.Count + " " + dir + " " + isHitachi);
+                }
+                FileExt.WriteWin(tgt, lines);
+                var lTgt = Path.GetFullPath(tgt).Replace(root, ".");
+                Console.WriteLine($"    + {name} ({lines.Count} L) => {lTgt}");
+            }
         }
     }
 }
