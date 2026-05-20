@@ -79,7 +79,7 @@ namespace PvMake.Lib
             }
             if (!dirty)
                 return;
-            FileExt.WriteWin(file + ".txt", dst);
+            FileExt.WriteWin(file, dst);
         }
     }
 }
