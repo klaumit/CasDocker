@@ -14,19 +14,19 @@ namespace PvMake
                 {
                     Cleaner.Run(o);
                 }
-                else if (o.Prepare)
+                if (o.Prepare)
                 {
                     Preparer.Run(o);
                 }
-                else if (o.Build)
+                if (o.Build)
                 {
                     Builder.Run(o);
                 }
-                else if (o.Simulate)
+                if (o.Simulate)
                 {
                     Simulator.Run(o);
                 }
-                else if (o.Upload)
+                if (o.Upload)
                 {
                     Uploader.Run(o);
                 }

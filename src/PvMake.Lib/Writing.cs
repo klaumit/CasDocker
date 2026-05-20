@@ -65,7 +65,7 @@ namespace PvMake.Lib
                 string tmp;
                 foreach (var iLine in input.Split('\n'))
                 {
-                    var line = iLine.TrimEnd();
+                    var line = iLine.TrimEnd('\r');
                     foreach (var item in symbols)
                     {
                         var key = item.Key;
