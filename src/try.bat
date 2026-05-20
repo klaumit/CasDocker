@@ -3,26 +3,21 @@
 call build.bat
 
 set EXE=PvMake\bin\Debug\PvMake
-set PRJ=Z:\kak6
+set PRJ=Y:\apps\Sample
 
 echo.
 echo  ::: Prepare ::: 
 echo.
-%EXE% --prepare -i %PRJ%
-
-echo.
-echo  ::: Build ::: 
-echo.
-%EXE% --build -i %PRJ%
+%EXE% --prepare --build -i %PRJ%
 
 echo.
 echo  ::: Simulate ::: 
 echo.
-%EXE% --simulate -i %PRJ%
+echo %EXE% --simulate -i %PRJ%
 
 echo.
 echo  ::: Upload ::: 
 echo.
-%EXE% --upload -i %PRJ%
+echo %EXE% --upload -i %PRJ%
 
 echo.
