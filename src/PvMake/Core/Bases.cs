@@ -52,6 +52,7 @@ namespace PvMake.Core
                     }
                     Console.WriteLine("    * Setting up {0}...", value.Name);
                     ZipExt.Uncompress(zipFile, pvPrefix);
+                    Locating.FixPaths(zipDest, pvPrefix);
                 }
             }
         }

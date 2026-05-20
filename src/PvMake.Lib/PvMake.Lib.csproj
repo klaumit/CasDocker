@@ -54,6 +54,7 @@
     <EmbeddedResource Include="Resources\models.json" />
     <EmbeddedResource Include="Resources\parts.json" />
     <Compile Include="IOptions.cs" />
+    <Compile Include="Locating.cs" />
     <Compile Include="ProcExt.cs" />
     <Compile Include="Resources\ResTool.cs" />
     <Compile Include="Dir2Model.cs" />
@@ -62,13 +63,13 @@
     <Compile Include="Archive.cs" />
     <Compile Include="IniExt.cs" />
     <Compile Include="KnowIt.cs" />
-	<Compile Include="Siming.cs" />
-	<Compile Include="Making.cs" />
+    <Compile Include="Siming.cs" />
+    <Compile Include="Making.cs" />
     <Compile Include="Prefixes.cs" />
     <Compile Include="JsonExt.cs" />
-	<Compile Include="CollExt.cs" />
+    <Compile Include="CollExt.cs" />
     <Compile Include="Models.cs" />
-	<Compile Include="Writing.cs" />
+    <Compile Include="Writing.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="TextExt.cs" />
     <Compile Include="TmplExt.cs" />
