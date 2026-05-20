@@ -42,8 +42,8 @@ namespace PvMake.Core
                 foreach (var value in toExtract)
                 {
                     var zipDest = Path.Combine(pvPrefix, value.Name);
-                    if (Directory.Exists(zipDest))
-                        continue;
+                    // if (Directory.Exists(zipDest))
+                       // continue;
                     var zipFile = Path.Combine(archRepo, value.Name + ".tar.gz");
                     if (!shown)
                     {
