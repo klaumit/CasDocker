@@ -34,9 +34,19 @@ namespace PvMake.Lib
             if (!files.TryGetValue(".def", out defs))
                 defs = new SortedSet<string>();
 
-            var lsijDir = Path.Combine(root, "shc");
+            var shDir = Path.Combine(root, "shc");
             foreach (var def in defs)
-                FixText(def, @"c:\pvshcom\shc", lsijDir);
+                FixText(def, Tuple.Create(@"c:\pvshcom\shc", shDir));
+
+            SortedSet<string> bats;
+            if (!files.TryGetValue(".bat", out bats))
+                bats = new SortedSet<string>();
+
+            foreach (var bat in bats)
+                FixText(bat, 
+                    Tuple.Create(@"c:\pvshcom\shc", shDir),
+                    Tuple.Create(@"c:\casio", root)
+                );
         }
 
         private static void FixModelX86(string root, string dir)
@@ -49,7 +59,17 @@ namespace PvMake.Lib
 
             var lsijDir = Path.Combine(root, "lsij");
             foreach (var dat in dats)
-                FixText(dat, @"C:\lsij\lsic86pv", lsijDir);
+                FixText(dat, Tuple.Create(@"C:\lsij\lsic86pv", lsijDir));
+
+            SortedSet<string> bats;
+            if (!files.TryGetValue(".bat", out bats))
+                bats = new SortedSet<string>();
+
+            foreach (var bat in bats)
+                FixText(bat,
+                    Tuple.Create(@"C:\lsij\lsic86pv", lsijDir),
+                    Tuple.Create(@"C:\CASIO", root)
+                );
         }
 
         private static void FixCompilerX86(string root, string dir)
@@ -62,17 +82,23 @@ namespace PvMake.Lib
 
             var lsijDir = Path.Combine(root, "lsij");
             foreach (var emp in empt)
-                FixText(emp, @"C:\lsij\lsic86pv", lsijDir);
+                FixText(emp, Tuple.Create(@"C:\lsij\lsic86pv", lsijDir));
         }
 
-        private static void FixText(string file, string term, string word)
+        private static void FixText(string file, params Tuple<string, string>[] replaces)
         {
             var src = File.ReadAllLines(file, Encoding.ASCII);
             var dst = new List<string>();
             bool dirty = false;
             foreach (var line in src)
             {
-                var nLine = line.Replace(term, word);
+                string nLine = line;
+                foreach (var repl in replaces)
+                {
+                    var term = repl.Item1;
+                    var word = repl.Item2;
+                    nLine = nLine.Replace(term, word);
+                }                
                 if (!line.Equals(nLine))
                     dirty = true;
                 dst.Add(nLine);
