@@ -68,7 +68,8 @@ namespace PvMake.Lib
             foreach (var bat in bats)
                 FixText(bat,
                     Tuple.Create(@"C:\lsij\lsic86pv", lsijDir),
-                    Tuple.Create(@"C:\CASIO", root)
+                    Tuple.Create(@"C:\CASIO", root),
+                    Tuple.Create((char)26 + "", "")
                 );
         }
 

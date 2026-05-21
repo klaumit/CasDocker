@@ -34,7 +34,7 @@ namespace PvMake.Core
                     new List<KeyValuePair<string, Func<string, bool>>>
                     {
                         new KeyValuePair<string, Func<string, bool>>
-                            ("", x => x.EndsWith("err") || x.EndsWith("fin")),
+                            ("", x => x.EndsWith("err") || (x.EndsWith("fin") && !x.Contains("make"))),
                         new KeyValuePair<string, Func<string, bool>>
                             (".bin", x => !x.Contains("SIM") && !x.Contains("APLALL")),
                         new KeyValuePair<string, Func<string, bool>>
