@@ -62,7 +62,7 @@ namespace PvMake.Lib
         public static void WriteWin(string file, IEnumerable<string> lines)
         {
             var text = string.Join("\r\n", lines);
-            File.WriteAllText(file, text, Encoding.ASCII);
+            File.WriteAllText(file, text, TextExt.Win);
         }
     }
 }

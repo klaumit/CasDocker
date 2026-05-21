@@ -7,6 +7,8 @@ using S = PvMake.Lib.Siming;
 using B = PvMake.Core.Bases;
 using System.Collections.Generic;
 
+// ReSharper disable InlineOutVariableDeclaration
+
 namespace PvMake.Core
 {
     public static class Preparer
@@ -15,21 +17,22 @@ namespace PvMake.Core
         {
             B.LoadAndPrepareProject(o);
 
-            foreach (var sdk in B.sdks)
+            foreach (var item in B.sdks)
             {
+                var sdk = item.Sdk;
                 var isHitachi = KnowIt.IsHitachi(sdk);
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
                 Console.WriteLine(" * {0}", sdk);
                 if (isHitachi)
                     PrepareHitachi(sdkDir, B.proj, B.inputDir);
                 else
-                    PrepareIntel(sdkDir, B.proj, B.inputDir);
+                    PrepareIntel(sdkDir, B.proj, B.inputDir, item);
             }
 
             Console.WriteLine("Done.");
         }
 
-        private static void PrepareIntel(string sdkDir, Project proj, string inputDir)
+        private static void PrepareIntel(string sdkDir, Project proj, string inputDir, Model m)
         {
             var cDir = FileExt.GetDir(Path.Combine(sdkDir, "C"), false);
             var pDir = FileExt.GetDir(Path.Combine(cDir, proj.AppName), true);
@@ -60,6 +63,17 @@ namespace PvMake.Core
 
             var mFile = Path.Combine(pDir, "Makefile");
             FileExt.WriteWin(mFile, M.CreateMakeFile(proj, hFiles, cFiles));
+
+            var simDir = Path.Combine(sdkDir, "SIM");
+            var cpjTpl = Path.Combine(simDir, m.Mod + ".CPJ");
+            W.ReCopy(new[] { cpjTpl }, pDir, cDir);
+
+            var root = Path.GetDirectoryName(sdkDir);
+            var sFile = Path.Combine(pDir, m.Mod + ".CPJ");
+            Locating.FixText(sFile,
+                Tuple.Create(@"C:\CASIO", root),
+                Tuple.Create(@"\SAMPLE.BIN", '\\' + proj.AppName + ".BIN")
+            );
         }
 
         private static void PrepareHitachi(string sdkDir, Project proj, string inputDir)

@@ -10,8 +10,7 @@ namespace PvMake.Core
         internal static string inputDir;
         internal static string archRepo;
         internal static Project proj;
-        internal static string[] mods;
-        internal static string[] sdks;
+        internal static Model[] sdks;
         internal static string pvPrefix;
 
         internal static void LoadAndPrepareProject(IOptions o)
@@ -23,20 +22,21 @@ namespace PvMake.Core
             proj = IniExt.ReadProj(prjFile);
             Console.WriteLine("Project  => {1} v{2} ({0})", proj.AppName, proj.AppTitle, proj.AppVer);
 
-            mods = proj.ForModels;
+            var mods = proj.ForModels;
             Console.WriteLine("Models   => {0}", string.Join(" ", mods));
 
             var dir2M = Models.ReadDirToModel();
-            sdks = mods.Select(dir2M.FindDir).ToArray();
-            Console.WriteLine("SDKs     => {0}", string.Join(" ", sdks));
+            sdks = mods.Select(m => new Model(m, dir2M.FindDir(m))).ToArray();
+            Console.WriteLine("SDKs     => {0}", string.Join(" ", sdks.Select(s => s.Sdk)));
 
             var archives = Archives.ReadList();
             archRepo = FileExt.GetAssDir("Archives", false);
             pvPrefix = Prefixes.GetPvPrefix();
             Console.WriteLine("Scratch  => {0}", pvPrefix);
 
-            foreach (var sdk in sdks)
+            foreach (var item in sdks)
             {
+                var sdk = item.Sdk;
                 var shown = false;
                 var toExtract = archives.Iter(sdk).ToArray();
                 foreach (var value in toExtract)

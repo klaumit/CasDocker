@@ -1,11 +1,7 @@
 using System;
 using System.IO;
 using PvMake.Lib;
-using W = PvMake.Lib.Writing;
-using M = PvMake.Lib.Making;
-using S = PvMake.Lib.Siming;
 using B = PvMake.Core.Bases;
-using System.Diagnostics;
 
 namespace PvMake.Core
 {
@@ -15,8 +11,9 @@ namespace PvMake.Core
         {
             B.LoadAndPrepareProject(o);
 
-            foreach (var sdk in B.sdks)
+            foreach (var item in B.sdks)
             {
+                var sdk = item.Sdk;
                 var isHitachi = KnowIt.IsHitachi(sdk);
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
                 Console.WriteLine(" * {0}", sdk);

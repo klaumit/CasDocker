@@ -14,8 +14,9 @@ namespace PvMake.Core
         {
             B.LoadAndPrepareProject(o);
 
-            foreach (var sdk in B.sdks)
+            foreach (var item in B.sdks)
             {
+                var sdk = item.Sdk;
                 var isHitachi = KnowIt.IsHitachi(sdk);
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
                 var exeName = isHitachi ? "CASIO SimSH.exe" : "Sim3022.exe";

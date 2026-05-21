@@ -14,8 +14,9 @@ namespace PvMake.Core
         {
             B.LoadAndPrepareProject(o);
 
-            foreach (var sdk in B.sdks)
+            foreach (var item in B.sdks)
             {
+                var sdk = item.Sdk;
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
                 CleanDir(sdkDir);
             }

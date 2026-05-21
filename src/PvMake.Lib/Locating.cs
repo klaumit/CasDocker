@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
 
@@ -15,17 +14,17 @@ namespace PvMake.Lib
             switch (kind)
             {
                 case KnowIt.Known.ModelX86:
-                    FixModelX86(root, dir); 
+                    FixModelX86(root, dir);
                     break;
                 case KnowIt.Known.CompilerX86:
                     FixCompilerX86(root, dir);
                     break;
                 case KnowIt.Known.ModelSH3:
-                    FixModelSH3(root, dir); 
+                    FixModelSH3(root, dir);
                     break;
             }
         }
-             
+
         private static void FixModelSH3(string root, string dir)
         {
             var files = FileExt.FindAllFiles(dir);
@@ -43,7 +42,7 @@ namespace PvMake.Lib
                 bats = new SortedSet<string>();
 
             foreach (var bat in bats)
-                FixText(bat, 
+                FixText(bat,
                     Tuple.Create(@"c:\pvshcom\shc", shDir),
                     Tuple.Create(@"c:\casio", root)
                 );
@@ -86,9 +85,9 @@ namespace PvMake.Lib
                 FixText(emp, Tuple.Create(@"C:\lsij\lsic86pv", lsijDir));
         }
 
-        private static void FixText(string file, params Tuple<string, string>[] replaces)
+        public static void FixText(string file, params Tuple<string, string>[] replaces)
         {
-            var src = File.ReadAllLines(file, Encoding.ASCII);
+            var src = File.ReadAllLines(file, TextExt.Win);
             var dst = new List<string>();
             bool dirty = false;
             foreach (var line in src)
@@ -99,7 +98,7 @@ namespace PvMake.Lib
                     var term = repl.Item1;
                     var word = repl.Item2;
                     nLine = nLine.Replace(term, word);
-                }                
+                }
                 if (!line.Equals(nLine))
                     dirty = true;
                 dst.Add(nLine);
