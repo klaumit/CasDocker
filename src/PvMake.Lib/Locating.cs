@@ -103,6 +103,8 @@ namespace PvMake.Lib
                     dirty = true;
                 dst.Add(nLine);
             }
+            dst.Add("");
+            dst.Add("");
             if (!dirty)
                 return;
             FileExt.WriteWin(file, dst);

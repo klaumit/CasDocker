@@ -43,6 +43,8 @@ namespace PvMake.Lib
             list.Add("");
             list.Add("#									#");
             list.Add("#########################################################################");
+            list.Add("");
+            list.Add("");
             return list;
         }
 

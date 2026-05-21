@@ -8,7 +8,7 @@
 *
 *	Copyright (C) 1997 CASIO COMPUTER CO.,LTD. All rights reserved.
 ******************************************************************************/
-#if __HITACHI__
+#ifdef __HITACHI__
 #include	"string.h"
 #else
 #include	<stdrom.h>
@@ -697,7 +697,7 @@ byte		input_end;
 *	[ReturnVAL]	bool TRUE=End
 ******************************************************************************/
 static bool JudgeEnd( void ) {
-#if __HITACHI__
+#ifdef __HITACHI__
 	byte t[6];
 #else
 	char t[6];
