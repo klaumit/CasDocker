@@ -30,12 +30,15 @@ namespace PvMake.Core
                 .Copy(
                     new List<string>()
                     {
-                        ".abs", ".dbg", ".hex", ".lin", ".map", ".pva"
+                        ".abs", ".dbg", ".hex", ".lin", ".map", ".pva", ".rld"
                     },
                     new List<KeyValuePair<string, Func<string, bool>>>
                     {
                         new KeyValuePair<string, Func<string, bool>>
-                            ("", x => x.EndsWith("err") || (x.EndsWith("fin") && !x.Contains("make"))),
+                            ("", x => x.EndsWith("err") || ((x.EndsWith("fin") || x.EndsWith("findbg"))
+                                                        && !x.Contains("make"))),
+                        new KeyValuePair<string, Func<string, bool>>
+                            (".mak", x => x.Contains("srcscp") || x.Contains("temp")),
                         new KeyValuePair<string, Func<string, bool>>
                             (".bin", x => !x.Contains("SIM") && !x.Contains("APLALL")),
                         new KeyValuePair<string, Func<string, bool>>
