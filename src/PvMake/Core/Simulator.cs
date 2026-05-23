@@ -29,6 +29,10 @@ namespace PvMake.Core
                     RegVb(sdkDir);
                 }
                 ProcExt.Start(exe, sdkDir, null);
+
+                Driving.FindAll();
+
+                break;
             }
 
             Console.WriteLine("Done.");

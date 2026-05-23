@@ -44,6 +44,18 @@
     <Reference Include="SmartFormat">
       <HintPath>..\deps\net40\SmartFormat.dll</HintPath>
     </Reference>
+    <Reference Include="Vanara.PInvoke.User32">
+      <HintPath>..\deps\net40\Vanara.PInvoke.User32.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Shared">
+      <HintPath>..\deps\net40\Vanara.PInvoke.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsInput">
+      <HintPath>..\deps\net40\WindowsInput.dll</HintPath>
+    </Reference>
+    <Reference Include="ManagedWinapi">
+      <HintPath>..\deps\net40\ManagedWinapi.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +66,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\models.json" />
     <EmbeddedResource Include="Resources\parts.json" />
+    <Compile Include="Driving.cs" />
     <Compile Include="IOptions.cs" />
     <Compile Include="Locating.cs" />
     <Compile Include="ProcExt.cs" />
