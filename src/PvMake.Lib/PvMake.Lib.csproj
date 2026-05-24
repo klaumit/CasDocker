@@ -44,6 +44,9 @@
     <Reference Include="SmartFormat">
       <HintPath>..\deps\net40\SmartFormat.dll</HintPath>
     </Reference>
+    <Reference Include="Vanara.Core">
+      <HintPath>..\deps\net40\Vanara.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Vanara.PInvoke.User32">
       <HintPath>..\deps\net40\Vanara.PInvoke.User32.dll</HintPath>
     </Reference>
