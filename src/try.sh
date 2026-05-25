@@ -15,12 +15,12 @@ export PRJ="%USERPROFILE%\Projects\Sample"
 echo 
 echo  ::: Prepare ::: 
 echo 
-$EXE --clean --prepare --build -i $PRJ
+echo $EXE --clean --prepare --build -i $PRJ
 
 echo 
 echo  ::: Simulate ::: 
 echo 
-echo $EXE --simulate -i $PRJ
+$EXE --simulate -i $PRJ
 
 echo 
 echo  ::: Upload ::: 

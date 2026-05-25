@@ -81,6 +81,11 @@ namespace PvMake.Lib
 
             var menuBar = User32.GetMenu(windowH.Value);
             var fileMenu = Driving.FindMenuItem(menuBar, "&File");
+            if (fileMenu == null)
+            {
+            	// On Wine, not found by text somehow?!
+            	return;
+            }
             var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open Project");
             User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
 
@@ -98,6 +103,11 @@ namespace PvMake.Lib
 
             var menuBar = User32.GetMenu(windowH.Value);
             var fileMenu = Driving.FindMenuItem(menuBar, "&Project");
+            if (fileMenu == null)
+            {
+            	// On Wine, not found by text somehow?!
+            	return;
+            }
             var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open...");
             User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
 
