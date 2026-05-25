@@ -84,5 +84,24 @@ namespace PvMake.Lib
             var openBtn = User32.FindWindowEx(loadDlg.Value, default(HWND), "Button", "&Open");
             User32.SendMessage(openBtn, W.WM_BM_CLICK);
         }
+
+        public static void OpenInHitachi(string dlpFile)
+        {
+            var windowH = WaitForWindow("New project (Default) - CASIO SimSH Simulator");
+
+            var menuBar = User32.GetMenu(windowH.Value);
+            var fileMenu = Driving.FindMenuItem(menuBar, "&Project");
+            var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open...");
+            User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
+
+            var loadDlg = WaitForWindow("Open project");
+            var combExFld = User32.FindWindowEx(loadDlg.Value, default(HWND), "ComboBoxEx32", "");
+            var combFld = User32.FindWindowEx(combExFld, default(HWND), "ComboBox", "");
+            var editFld = User32.FindWindowEx(combFld, default(HWND), "Edit", "");
+            User32.SendMessage(editFld, W.WM_SETTEXT, 0, dlpFile);
+
+            var openBtn = User32.FindWindowEx(loadDlg.Value, default(HWND), "Button", "&Open");
+            User32.SendMessage(openBtn, W.WM_BM_CLICK);
+        }
     }
 }

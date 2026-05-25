@@ -37,6 +37,9 @@ namespace PvMake.Core
 
                 if (isHitachi)
                 {
+                    var projDir = Path.Combine(B.pvPrefix, sdk, B.proj.AppName);
+                    var simFile = Directory.GetFiles(projDir, simExt).First();
+                    Driving.OpenInHitachi(simFile);
                 }
                 else
                 {
@@ -44,8 +47,6 @@ namespace PvMake.Core
                     var simFile = Directory.GetFiles(projDir, simExt).First();
                     Driving.OpenInIntel(simFile);
                 }
-
-                break;
             }
 
             Console.WriteLine("Done.");
