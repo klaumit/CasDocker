@@ -87,7 +87,7 @@ namespace PvMake.Lib
             return (IntPtr)(int)lParam;
         }
 
-        private static void PressOneKey(HWND hWnd, V key, int delay = 900)
+        private static void PressOneKey(HWND hWnd, V key, int delay = 50)
         {
             User32.PostMessage(hWnd, (uint)W.WM_KEYDOWN, (IntPtr)key,
                 MakeLParam(key, keyUp: false, altDown: false));
@@ -98,7 +98,7 @@ namespace PvMake.Lib
             Thread.Sleep(delay);
         }
         
-        private static void PressSysKey(HWND hWnd, V sys, V key, int delay = 900)
+        private static void PressSysKey(HWND hWnd, V sys, V key, int delay = 50)
         {
             User32.PostMessage(hWnd, (uint)W.WM_SYSKEYDOWN, (IntPtr)sys,
                 MakeLParam(sys, keyUp: false, altDown: false));
