@@ -21,6 +21,7 @@ namespace PvMake.Core
                 var isHitachi = KnowIt.IsHitachi(sdk);
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
                 var exeName = isHitachi ? "CASIO SimSH.exe" : "Sim3022.exe";
+                var simExt = isHitachi ? "*.dlp" : "*.cpj";
 
                 Driving.KillAll(exeName);
 
@@ -34,7 +35,15 @@ namespace PvMake.Core
                 }
                 ProcExt.Start(exe, sdkDir, null);
 
-                Driving.FindAll();
+                if (isHitachi)
+                {
+                }
+                else
+                {
+                    var projDir = Path.Combine(B.pvPrefix, sdk, "C", B.proj.AppName);
+                    var simFile = Directory.GetFiles(projDir, simExt).First();
+                    Driving.OpenInIntel(simFile);
+                }
 
                 break;
             }

@@ -6,6 +6,8 @@ using System.Threading;
 using Vanara.PInvoke;
 using System.Diagnostics;
 using System.IO;
+using W = Vanara.PInvoke.User32.WindowMessage;
+using WindowsInput;
 
 namespace PvMake.Lib
 {
@@ -64,26 +66,23 @@ namespace PvMake.Lib
             return null;
         }
 
-        public static void FindAll()
+        public static readonly Lazy<InputSimulator> Inputer = new Lazy<InputSimulator>();
+
+        public static void OpenInIntel(string cpjFile)
         {
             var windowH = WaitForWindow("SIM3022");
-            Console.WriteLine("Window = " + windowH);
 
             var menuBar = User32.GetMenu(windowH.Value);
             var fileMenu = Driving.FindMenuItem(menuBar, "&File");
             var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open Project");
-            User32.PostMessage(windowH.Value, (uint)User32.WindowMessage.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
+            User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
 
-            var iss = new WindowsInput.InputSimulator();
-            iss.Keyboard.Sleep(TimeSpan.FromSeconds(5));
-            iss.Keyboard.TextEntry("Hello you witch!");
+            var loadDlg = WaitForWindow("Select Loading Project File");
+            Inputer.Value.Keyboard.TextEntry(cpjFile);
+            Inputer.Value.Keyboard.Sleep(50);
 
-            foreach (var w in ManagedWinapi.Windows.SystemWindow.AllToplevelWindows)
-            {
-                Console.WriteLine(" " + w.ClassName);
-            }
-
-            Console.ReadLine();
-        }        
+            var openBtn = User32.FindWindowEx(loadDlg.Value, default(HWND), "Button", "&Open");
+            User32.SendMessage(openBtn, W.WM_BM_CLICK);
+        }
     }
 }
