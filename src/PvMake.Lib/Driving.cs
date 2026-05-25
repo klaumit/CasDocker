@@ -152,11 +152,16 @@ namespace PvMake.Lib
             var fileMenu = Driving.FindMenuItem(menuBar, "&Project");
             if (fileMenu == null)
             {
-            	// On Wine, not found by text somehow?!
-            	return;
+                // On Wine
+                Driving.PressSysKey(windowH.Value, V.VK_MENU, V.VK_P);
+                Driving.PressOneKey(windowH.Value, V.VK_O);
             }
-            var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open...");
-            User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
+            else
+            {
+                // On WinXP
+                var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open...");
+                User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
+            }
 
             var loadDlg = WaitForWindow("Open project");
             var combExFld = User32.FindWindowEx(loadDlg.Value, default(HWND), "ComboBoxEx32", "");
