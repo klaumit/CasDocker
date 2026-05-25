@@ -6,6 +6,8 @@ using System.Threading;
 using Vanara.PInvoke;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
+using Newtonsoft.Json;
 using W = Vanara.PInvoke.User32.WindowMessage;
 using WindowsInput;
 
@@ -43,6 +45,17 @@ namespace PvMake.Lib
             public uint? ItemId;
             public HMENU? SubMenu;
         }
+        
+        public static MenuItemRef GetMenuItemRef(uint i, string name, HMENU menu)
+        {
+            var mir = new MenuItemRef { ItemPos = i, Name = name };
+            var itemId = User32.GetMenuItemID(menu, (int)i);
+            if ((int)itemId == -1)
+                mir.SubMenu = User32.GetSubMenu(menu, (int)i);
+            else
+                mir.ItemId = itemId;
+            return mir;            
+        } 
 
         public static MenuItemRef? FindMenuItem(HMENU menu, string name)
         {
@@ -54,13 +67,7 @@ namespace PvMake.Lib
                 var text = sb.ToString();
                 if (text.Equals(name))
                 {
-                    var mir = new MenuItemRef { ItemPos = i, Name = name };
-                    var itemId = User32.GetMenuItemID(menu, (int)i);
-                    if ((int)itemId == -1)
-                        mir.SubMenu = User32.GetSubMenu(menu, (int)i);
-                    else
-                        mir.ItemId = itemId;
-                    return mir;
+                    return GetMenuItemRef(i, name, menu);
                 }
             }
             return null;
