@@ -9,6 +9,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 using W = Vanara.PInvoke.User32.WindowMessage;
+using V = Vanara.PInvoke.User32.VK;
 using WindowsInput;
 
 namespace PvMake.Lib
@@ -28,7 +29,7 @@ namespace PvMake.Lib
 
         public static HWND? WaitForWindow(string name, int delay = 100, int count = 30)
         {
-            int nr = 0;
+            var nr = 0;
             HWND handle;
             while ((handle = User32.FindWindow(null, name)).IsNull && nr <= count)
             {
@@ -75,6 +76,47 @@ namespace PvMake.Lib
 
         public static readonly Lazy<InputSimulator> Inputer = new Lazy<InputSimulator>();
 
+        private static IntPtr MakeLParam(V vk, bool keyUp, bool altDown)
+        {
+            var scan = User32.MapVirtualKey((uint)vk, User32.MAPVK.MAPVK_VK_TO_VSC);
+            const int repeatCount = 1;
+            var lParam = repeatCount
+                         | (scan << 16)
+                         | ((altDown ? 1u : 0u) << 29)
+                         | ((keyUp ? 1u : 0u) << 31);
+            return (IntPtr)(int)lParam;
+        }
+
+        private static void PressOneKey(HWND hWnd, V key, int delay = 900)
+        {
+            User32.PostMessage(hWnd, (uint)W.WM_KEYDOWN, (IntPtr)key,
+                MakeLParam(key, keyUp: false, altDown: false));
+            Thread.Sleep(delay);
+                
+            User32.PostMessage(hWnd, (uint)W.WM_KEYUP, (IntPtr)key,
+                MakeLParam(key, keyUp: true, altDown: false));
+            Thread.Sleep(delay);
+        }
+        
+        private static void PressSysKey(HWND hWnd, V sys, V key, int delay = 900)
+        {
+            User32.PostMessage(hWnd, (uint)W.WM_SYSKEYDOWN, (IntPtr)sys,
+                MakeLParam(sys, keyUp: false, altDown: false));
+            Thread.Sleep(delay);
+
+            User32.PostMessage(hWnd, (uint)W.WM_SYSKEYDOWN, (IntPtr)key,
+                MakeLParam(key, keyUp: false, altDown: true));
+            Thread.Sleep(delay);
+
+            User32.PostMessage(hWnd, (uint)W.WM_SYSKEYUP, (IntPtr)key,
+                MakeLParam(key, keyUp: true, altDown: true));
+            Thread.Sleep(delay);
+
+            User32.PostMessage(hWnd, (uint)W.WM_SYSKEYUP, (IntPtr)sys,
+                MakeLParam(sys, keyUp: true, altDown: false));
+            Thread.Sleep(delay);
+        }
+
         public static void OpenInIntel(string cpjFile)
         {
             var windowH = WaitForWindow("SIM3022");
@@ -83,11 +125,16 @@ namespace PvMake.Lib
             var fileMenu = Driving.FindMenuItem(menuBar, "&File");
             if (fileMenu == null)
             {
-            	// On Wine, not found by text somehow?!
-            	return;
+                // On Wine
+                Driving.PressSysKey(windowH.Value, V.VK_MENU, V.VK_F);
+                Driving.PressOneKey(windowH.Value, V.VK_O);
             }
-            var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open Project");
-            User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
+            else
+            {
+                // On WinXP
+                var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open Project");
+                User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
+            }
 
             var loadDlg = WaitForWindow("Select Loading Project File");
             var editFld = User32.FindWindowEx(loadDlg.Value, default(HWND), "Edit", "");
