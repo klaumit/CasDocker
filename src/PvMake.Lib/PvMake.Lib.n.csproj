@@ -20,6 +20,15 @@
     <Reference Include="SmartFormat.dll">
       <HintPath>..\deps\net40\SmartFormat.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsInput.dll">
+      <HintPath>..\deps\net40\WindowsInput.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Shared.dll">
+      <HintPath>..\deps\net40\Vanara.PInvoke.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.User32.dll">
+      <HintPath>..\deps\net40\Vanara.PInvoke.User32.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
     <Reference Include="Newtonsoft.Json.dll">
