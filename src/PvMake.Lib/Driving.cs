@@ -78,8 +78,8 @@ namespace PvMake.Lib
             User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
 
             var loadDlg = WaitForWindow("Select Loading Project File");
-            Inputer.Value.Keyboard.TextEntry(cpjFile);
-            Inputer.Value.Keyboard.Sleep(50);
+            var editFld = User32.FindWindowEx(loadDlg.Value, default(HWND), "Edit", "");
+            User32.SendMessage(editFld, W.WM_SETTEXT, 0, cpjFile);
 
             var openBtn = User32.FindWindowEx(loadDlg.Value, default(HWND), "Button", "&Open");
             User32.SendMessage(openBtn, W.WM_BM_CLICK);
