@@ -27,7 +27,7 @@ namespace PvMake.Lib
 
             var checkSum = CalcChecksum32(data);
             var tmp = BitConverter.GetBytes(checkSum);
-            var chck = new byte[] { tmp[0], tmp[2], tmp[1], tmp[3] };
+            var chCk = new byte[] { tmp[0], tmp[2], tmp[1], tmp[3] };
 
             var foot = new byte[]
             {
@@ -40,7 +40,7 @@ namespace PvMake.Lib
             var final = new byte[data.Length + foot.Length + 16];
             B.BlockCopy(data, 0, final, 0, data.Length);
             B.BlockCopy(foot, 0, final, data.Length, foot.Length);
-            B.BlockCopy(chck, 0, final, data.Length + foot.Length, chck.Length);
+            B.BlockCopy(chCk, 0, final, data.Length + foot.Length, chCk.Length);
 
             File.WriteAllBytes(tgtFile, final);
             Console.WriteLine("    => '{0}' created [0x{1:X8}]!", Path.GetFileName(tgtFile), checkSum);
