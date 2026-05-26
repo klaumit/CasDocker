@@ -30,7 +30,7 @@ namespace PvMake.Core
                 .Copy(
                     new List<string>()
                     {
-                        ".abs", ".dbg", ".hex", ".lin", ".map", ".pva", ".rld"
+                        ".abs", ".dbg", ".hex", ".lin", ".map", ".pva", ".rld", ".cpa"
                     },
                     new List<KeyValuePair<string, Func<string, bool>>>
                     {
