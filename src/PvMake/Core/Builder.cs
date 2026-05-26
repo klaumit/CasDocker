@@ -1,7 +1,14 @@
 using System;
 using System.IO;
 using PvMake.Lib;
+using W = PvMake.Lib.Writing;
+using M = PvMake.Lib.Making;
+using S = PvMake.Lib.Siming;
 using B = PvMake.Core.Bases;
+using System.Collections.Generic;
+using K = PvMake.Lib.KnowIt;
+
+// ReSharper disable InlineOutVariableDeclaration
 
 namespace PvMake.Core
 {
@@ -14,16 +21,21 @@ namespace PvMake.Core
             foreach (var item in B.sdks)
             {
                 var sdk = item.Sdk;
-                var sdkDir = Path.Combine(B.pvPrefix, sdk);
                 Console.WriteLine(" * {0}", sdk);
-                
-                throw new InvalidOperationException("'" + sdk + "'");                
-                
-                var isHitachi = KnowIt.IsHitachi(sdk);
-                if (isHitachi)
+                if (K.IsClassPad(sdk))
+                    sdk = B.ClassPadAlias;
+
+                var sdkDir = Path.Combine(B.pvPrefix, sdk);
+                if (K.IsHitachi(sdk))
                     CompileHitachi(sdkDir, B.proj, B.inputDir);
-                else
+                else if (K.IsIntel(sdk))
                     CompileIntel(sdkDir, B.proj, B.inputDir);
+
+                sdk = item.Sdk;
+                if (K.IsClassPad(sdk))
+                {
+                    throw new InvalidOperationException("???");
+                }
             }
 
             Console.WriteLine("Done.");
