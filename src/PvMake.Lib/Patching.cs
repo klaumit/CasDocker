@@ -27,7 +27,7 @@ namespace PvMake.Lib
 
             var checkSum = CalcChecksum32(data);
             var tmp = BitConverter.GetBytes(checkSum);
-            var chCk = new byte[] { tmp[0], tmp[2], tmp[1], tmp[3] };
+            var chCk = new byte[] { tmp[3], tmp[1], tmp[2], tmp[0] };
 
             var foot = new byte[]
             {
