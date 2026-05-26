@@ -91,10 +91,10 @@ namespace PvMake.Lib
         {
             var src = File.ReadAllLines(file, TextExt.Win);
             var dst = new List<string>();
-            bool dirty = false;
+            var dirty = false;
             foreach (var line in src)
             {
-                string nLine = line;
+                var nLine = line;
                 foreach (var repl in replaces)
                 {
                     var term = repl.Item1;

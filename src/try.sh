@@ -15,7 +15,7 @@ export PRJ="%USERPROFILE%\Projects\Sample"
 echo 
 echo  ::: Prepare ::: 
 echo 
-$EXE --clean --prepare --build -i $PRJ
+$EXE --prepare --build --upload -i $PRJ
 
 echo 
 echo  ::: Simulate ::: 
