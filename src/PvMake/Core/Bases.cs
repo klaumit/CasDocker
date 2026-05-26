@@ -7,6 +7,8 @@ namespace PvMake.Core
 {
     internal static class Bases
     {
+        public const string ClassPadAlias = "PV3S1600";
+
         internal static string inputDir;
         internal static string archRepo;
         internal static Project proj;
