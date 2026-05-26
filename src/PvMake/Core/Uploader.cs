@@ -17,8 +17,8 @@ namespace PvMake.Core
             {
                 var sdk = item.Sdk;
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
-                var exeName = K.IsHitachi5(sdk) ? "FTM.exe"
-                    : K.IsIntel5(sdk) ? "PVM.exe"
+                var exeName = K.IsHitachi(sdk) ? "FTM.exe"
+                    : K.IsIntel(sdk) ? "PVM.exe"
                     : K.IsClassPad(sdk) ? "FA-CP1.exe"
                     : null;
                 var exe = FileExt.Find(sdkDir, exeName).FirstOrDefault();

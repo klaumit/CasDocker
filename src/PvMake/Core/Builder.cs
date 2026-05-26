@@ -19,7 +19,7 @@ namespace PvMake.Core
                 
                 throw new InvalidOperationException("'" + sdk + "'");                
                 
-                var isHitachi = KnowIt.IsHitachi5(sdk);
+                var isHitachi = KnowIt.IsHitachi(sdk);
                 if (isHitachi)
                     CompileHitachi(sdkDir, B.proj, B.inputDir);
                 else

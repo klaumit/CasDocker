@@ -23,13 +23,13 @@ namespace PvMake.Lib
             return Known.None;
         }
 
-        public static bool IsHitachi5(string sdk)
+        public static bool IsHitachi(string sdk)
         {
             var kind = CheckKind(sdk);
             return (kind == Known.ModelSH3 || kind == Known.CompilerSH3);
         }
 
-        public static bool IsIntel5(string sdk)
+        public static bool IsIntel(string sdk)
         {
             var kind = CheckKind(sdk);
             return (kind == Known.ModelX86 || kind == Known.CompilerX86);

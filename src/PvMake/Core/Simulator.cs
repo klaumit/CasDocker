@@ -18,16 +18,16 @@ namespace PvMake.Core
             {
                 var sdk = item.Sdk;
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
-                var isHitachi = KnowIt.IsHitachi5(sdk);
-                var isIntel = KnowIt.IsIntel5(sdk);
+                var isHitachi = KnowIt.IsHitachi(sdk);
+                var isIntel = KnowIt.IsIntel(sdk);
                 var isClassy = KnowIt.IsClassPad(sdk);
                 var exeName = isHitachi ? "CASIO SimSH.exe"
                     : isIntel ? "Sim3022.exe"
                     : isClassy ? "ClassPad300.exe"
                     : null;
-                var simExt = (isHitachi || isClassy)
-                    ? "*.dlp"
-                    : "*.cpj";
+                var simExt = isHitachi ? "*.dlp"
+                    : isIntel ? "*.cpj"
+                    : null;
 
                 Driving.KillAll(exeName);
 
@@ -47,7 +47,7 @@ namespace PvMake.Core
                     var simFile = Directory.GetFiles(projDir, simExt).First();
                     Driving.OpenInHitachi(simFile);
                 }
-                else
+                else if (isIntel)
                 {
                     var projDir = Path.Combine(B.pvPrefix, sdk, "C", B.proj.AppName);
                     var simFile = Directory.GetFiles(projDir, simExt).First();
