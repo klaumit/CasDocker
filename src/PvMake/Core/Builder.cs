@@ -33,7 +33,7 @@ namespace PvMake.Core
                 if (K.IsClassPad(sdk))
                 {
                     var projDir = Path.Combine(sdkDir, B.proj.AppName);
-                    var pvaFile = Directory.GetFiles(projDir, "*.pva").First();
+                    var pvaFile = FileExt.Find(projDir, "*.pva").FirstOrDefault();
                     var tgtDir = Path.Combine(B.pvPrefix, sdk);
                     P.PostCompilePad(pvaFile, tgtDir);
                 }
