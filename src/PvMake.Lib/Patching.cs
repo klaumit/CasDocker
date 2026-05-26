@@ -42,7 +42,7 @@ namespace PvMake.Lib
             B.BlockCopy(foot, 0, final, data.Length, foot.Length);
             B.BlockCopy(chck, 0, final, data.Length + foot.Length, chck.Length);
 
-            File.WriteAllBytes(tgtFile, data);
+            File.WriteAllBytes(tgtFile, final);
             Console.WriteLine("    => '{0}' created [0x{1:X8}]!", Path.GetFileName(tgtFile), checkSum);
         }
 
