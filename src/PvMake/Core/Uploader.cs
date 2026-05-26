@@ -19,7 +19,7 @@ namespace PvMake.Core
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
                 var exeName = K.IsHitachi(sdk) ? "FTM.exe"
                     : K.IsIntel(sdk) ? "PVM.exe"
-                    : K.IsClassPad(sdk) ? "FA-CP1.exe"
+                    : K.IsClassPad(sdk) ? "ClassPad Add-In Installer.exe"
                     : null;
                 var exe = FileExt.Find(sdkDir, exeName).FirstOrDefault();
                 var lbl = Path.GetFileNameWithoutExtension(exe);
