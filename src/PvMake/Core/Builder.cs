@@ -1,11 +1,9 @@
 using System;
 using System.IO;
+using System.Linq;
 using PvMake.Lib;
-using W = PvMake.Lib.Writing;
-using M = PvMake.Lib.Making;
-using S = PvMake.Lib.Siming;
 using B = PvMake.Core.Bases;
-using System.Collections.Generic;
+using P = PvMake.Lib.Patching;
 using K = PvMake.Lib.KnowIt;
 
 // ReSharper disable InlineOutVariableDeclaration
@@ -34,7 +32,10 @@ namespace PvMake.Core
                 sdk = item.Sdk;
                 if (K.IsClassPad(sdk))
                 {
-                    throw new InvalidOperationException("???");
+                    var projDir = Path.Combine(sdkDir, B.proj.AppName);
+                    var pvaFile = Directory.GetFiles(projDir, "*.pva").First();
+                    var tgtDir = Path.Combine(B.pvPrefix, sdk);
+                    P.PostCompilePad(pvaFile, tgtDir);
                 }
             }
 
@@ -46,14 +47,14 @@ namespace PvMake.Core
             var cDir = Path.Combine(sdkDir, "C");
             var pDir = Path.Combine(cDir, proj.AppName);
             var mBat = Path.Combine(pDir, "mk.bat");
-            ProcExt.Start(mBat, pDir, null);
+            ProcExt.Start(mBat, pDir, null, sec: 30);
         }
 
         private static void CompileHitachi(string sdkDir, Project proj, string inputDir)
         {
             var pDir = Path.Combine(sdkDir, proj.AppName);
             var mBat = Path.Combine(pDir, "BuildAll.bat");
-            ProcExt.Start(mBat, pDir, null);
+            ProcExt.Start(mBat, pDir, null, sec: 30);
         }
     }
 }

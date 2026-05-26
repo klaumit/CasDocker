@@ -14,9 +14,8 @@ namespace PvMake.Lib
                 Console.WriteLine(prefix + line);
         }
 
-        public static bool Start(string exe, string pwd, string args)
+        public static bool Start(string exe, string pwd, string args, int sec = 2)
         {
-            const int sec = 2;
             var info = new ProcessStartInfo
             {
                 FileName = exe
