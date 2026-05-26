@@ -10,5 +10,7 @@
   
     { "Name": "SHC"                        },
     { "Name": "SHC_proj"                   },
-    { "Name": "PV3S1600", "Uses": ["SHC"]  }
+    { "Name": "Drivers"                    },
+    { "Name": "PV3S1600", "Uses": ["SHC", "Drivers"] },
+    { "Name": "ClPad300", "Uses": ["PV3S1600"      ] }
 ]

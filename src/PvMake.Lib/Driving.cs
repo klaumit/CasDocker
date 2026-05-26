@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using Vanara.PInvoke;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
-using Newtonsoft.Json;
 using W = Vanara.PInvoke.User32.WindowMessage;
 using V = Vanara.PInvoke.User32.VK;
 using WindowsInput;

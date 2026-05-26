@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using PvMake.Lib;
 using B = PvMake.Core.Bases;
-using System.Threading;
 
 // ReSharper disable PossibleNullReferenceException
 
@@ -18,10 +17,17 @@ namespace PvMake.Core
             foreach (var item in B.sdks)
             {
                 var sdk = item.Sdk;
-                var isHitachi = KnowIt.IsHitachi(sdk);
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
-                var exeName = isHitachi ? "CASIO SimSH.exe" : "Sim3022.exe";
-                var simExt = isHitachi ? "*.dlp" : "*.cpj";
+                var isHitachi = KnowIt.IsHitachi5(sdk);
+                var isIntel = KnowIt.IsIntel5(sdk);
+                var isClassy = KnowIt.IsClassPad(sdk);
+                var exeName = isHitachi ? "CASIO SimSH.exe"
+                    : isIntel ? "Sim3022.exe"
+                    : isClassy ? "ClassPad300.exe"
+                    : null;
+                var simExt = (isHitachi || isClassy)
+                    ? "*.dlp"
+                    : "*.cpj";
 
                 Driving.KillAll(exeName);
 

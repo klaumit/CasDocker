@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
+
+// ReSharper disable InlineOutVariableDeclaration
+// ReSharper disable InconsistentNaming
 
 namespace PvMake.Lib
 {

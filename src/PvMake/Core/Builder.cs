@@ -14,9 +14,12 @@ namespace PvMake.Core
             foreach (var item in B.sdks)
             {
                 var sdk = item.Sdk;
-                var isHitachi = KnowIt.IsHitachi(sdk);
                 var sdkDir = Path.Combine(B.pvPrefix, sdk);
                 Console.WriteLine(" * {0}", sdk);
+                
+                throw new InvalidOperationException("'" + sdk + "'");                
+                
+                var isHitachi = KnowIt.IsHitachi5(sdk);
                 if (isHitachi)
                     CompileHitachi(sdkDir, B.proj, B.inputDir);
                 else
