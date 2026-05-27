@@ -82,6 +82,7 @@
     <Compile Include="KnowIt.cs" />
     <Compile Include="Siming.cs" />
     <Compile Include="Making.cs" />
+	<Compile Include="Patching.cs" />
     <Compile Include="Prefixes.cs" />
     <Compile Include="JsonExt.cs" />
     <Compile Include="CollExt.cs" />

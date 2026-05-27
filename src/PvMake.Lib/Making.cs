@@ -35,6 +35,7 @@ namespace PvMake.Lib
             list.Add("");
             list.Add(@"# Application Sources (src\*.c)");
             var i = 0;
+            if (cs == null) cs = new string[0];
             foreach (var c in cs.Reverse())
             {
                 var cFn = Path.GetFileNameWithoutExtension(c);
@@ -78,11 +79,13 @@ namespace PvMake.Lib
             list.Add("LICON = menuicon\\Licon.bmp");
             list.Add("");
             list.Add("#== CompileObjectFile ==");
+            if (cs == null) cs = new string[0];
             var cTxt = string.Join("  \\\n\t\t", cs.Reverse().Select(c =>
                 string.Format("$(ODIR)\\{0}", Path.GetFileName(c).Replace(".c", ".obj"))));
             list.Add(string.Format("APLOBJS =\t{0}", cTxt));
             list.Add("");
             list.Add("#== IncludeHeaderFile ==");
+            if (hs == null) hs = new string[0];
             var hTxt = string.Join(" \\\n\t\t", hs.Reverse().Select(h =>
                 string.Format("$(HDIR)\\{0}", Path.GetFileName(h))));
             list.Add(string.Format("HEADFILE = \t{0}", hTxt));

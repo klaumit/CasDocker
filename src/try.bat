@@ -6,18 +6,19 @@ set EXE=PvMake\bin\Debug\PvMake
 set PRJ=Y:\apps\Sample
 
 echo.
-echo  ::: Prepare ::: 
+echo  ::: Prepare :::
 echo.
-%EXE% --prepare --build -i %PRJ%
+%EXE% --clean --prepare --build --simulate -i %PRJ%
 
 echo.
-echo  ::: Simulate ::: 
+echo  ::: Simulate :::
 echo.
-echo %EXE% --simulate -i %PRJ%
+echo %EXE%  -i %PRJ%
 
 echo.
-echo  ::: Upload ::: 
+echo  ::: Upload :::
 echo.
 echo %EXE% --upload -i %PRJ%
 
 echo.
+
