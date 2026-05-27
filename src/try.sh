@@ -10,12 +10,12 @@ cd win_build
 echo winetricks vb6run
 
 export EXE="wine pvmake"
-export PRJ="%USERPROFILE%\Projects\Sample"
+export PRJ="%USERPROFILE%\Projects\Hello"
 
 echo 
 echo  ::: Prepare ::: 
 echo 
-$EXE --prepare --build --upload -i $PRJ
+$EXE --clean --prepare --build --simulate -i $PRJ
 
 echo 
 echo  ::: Simulate ::: 
