@@ -3,7 +3,7 @@
 call build.bat
 
 set EXE=PvMake\bin\Debug\PvMake
-set PRJ=Y:\apps\Sample
+set PRJ=Y:\apps\Dumpy
 
 echo.
 echo  ::: Prepare :::
@@ -13,7 +13,7 @@ echo.
 echo.
 echo  ::: Simulate :::
 echo.
-echo %EXE%  -i %PRJ%
+echo %EXE% --simulate -i %PRJ%
 
 echo.
 echo  ::: Upload :::
