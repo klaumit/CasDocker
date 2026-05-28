@@ -26,15 +26,14 @@ void main()
 
 	while (1)
 	{
-		if (z >= 160)
-			z = 0;
-		else
-			z = z + 7;
-
 		i = i + 1;
-		sprintf(tmp, "%d %d %d", i);
+		sprintf(tmp, "%d - %d - %d", i, i, i);
 		writeln(tmp, 0, z);
 		wait();
+
+		z = z + 8;
+		if (z > (160-8))
+			z = 0;
 	}
 
 	LibJumpMenu();
