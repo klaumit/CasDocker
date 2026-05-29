@@ -9,7 +9,7 @@ namespace MemForge
     internal static class Program
     {
         [STAThread]
-        public static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -26,7 +26,8 @@ namespace MemForge
                 }
                 else
                 {
-                    MessageBox.Show();
+                    MessageBox.Show("Application is running already!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
             }
         }
