@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="MemForge.Lib/MemForge.Lib.n.csproj" />
+  <Project Path="MemForge/MemForge.n.csproj" />
   <Project Path="PvMake.Lib/PvMake.Lib.n.csproj" />
   <Project Path="PvMake/PvMake.n.csproj" />
 </Solution>
