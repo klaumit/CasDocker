@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MemForge.Lib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Ketchup Inc.")]
+[assembly: AssemblyCompany("klaumit")]
 [assembly: AssemblyProduct("MemForge.Lib")]
-[assembly: AssemblyCopyright("Copyright © Ketchup Inc. 2026")]
+[assembly: AssemblyCopyright("Copyright © klaumit 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

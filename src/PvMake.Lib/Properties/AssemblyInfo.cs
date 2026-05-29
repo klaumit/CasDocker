@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("PvMake.Lib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("xafero")]
+[assembly: AssemblyCompany("klaumit")]
 [assembly: AssemblyProduct("PvMake.Lib")]
-[assembly: AssemblyCopyright("Copyright © xafero 2026")]
+[assembly: AssemblyCopyright("Copyright © klaumit 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
