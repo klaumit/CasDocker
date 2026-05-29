@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using System.ComponentModel;
+using MemForge.Lib;
 
 namespace MemForge
 {
@@ -26,12 +27,19 @@ namespace MemForge
 		private MenuItem[] InitializeMenu()
 		{
 			MenuItem[] menu = new MenuItem[] {
+                new MenuItem("Kill all", menuKillClick),
 				new MenuItem("About", menuAboutClick),
 				new MenuItem("Exit", menuExitClick)
 			};
 			return menu;
 		}
-			
+
+        private void menuKillClick(object sender, EventArgs e)
+        {
+            ProcExt.KillAll("Sim3022");
+            ProcExt.KillAll("CASIO SimSH");
+        }
+
 		private void menuAboutClick(object sender, EventArgs e)
 		{
             MessageBox.Show("MemForge 1.0", "Info", 
