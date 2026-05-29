@@ -11,7 +11,6 @@ namespace MemForge
 		internal NotifyIcon notifyIcon;
 		private ContextMenu notificationMenu;
 		
-		#region Initialize icon and menu
 		public NotificationIcon()
 		{
 			notifyIcon = new NotifyIcon();
@@ -31,9 +30,7 @@ namespace MemForge
 			};
 			return menu;
 		}
-		#endregion
 			
-		#region Event Handlers
 		private void menuAboutClick(object sender, EventArgs e)
 		{
 			MessageBox.Show("About This Application");
@@ -48,6 +45,5 @@ namespace MemForge
 		{
 			MessageBox.Show("The icon was double clicked");
 		}
-		#endregion
 	}
 }

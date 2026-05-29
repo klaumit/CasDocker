@@ -3,9 +3,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using MemForge;
 
-namespace xxyy
+namespace MemForge
 {
     internal static class Program
     {
@@ -16,7 +15,6 @@ namespace xxyy
             Application.SetCompatibleTextRenderingDefault(false);
 
             bool isFirstInstance;
-            // Please use a unique name for the mutex to prevent conflicts with other programs
             using (Mutex mtx = new Mutex(true, "MemForge", out isFirstInstance))
             {
                 if (isFirstInstance)
@@ -28,10 +26,9 @@ namespace xxyy
                 }
                 else
                 {
-                    // The application is already running
-                    // TODO: Display message box or change focus to existing application instance
+                    MessageBox.Show();
                 }
-            } // releases the Mutex
+            }
         }
     }
 }
