@@ -29,7 +29,7 @@ namespace PvMake.Lib
             HWND handle;
             while ((handle = User32.FindWindow(null, name)).IsNull && nr <= count)
             {
-                Thread.Sleep(delay);
+                WaitOnce(delay);
                 nr++;
             }
             return handle.IsNull ? default(HWND?) : handle;
@@ -87,50 +87,45 @@ namespace PvMake.Lib
         {
             User32.PostMessage(hWnd, (uint)W.WM_KEYDOWN, (IntPtr)key,
                 MakeLParam(key, keyUp: false, altDown: false));
-            Thread.Sleep(delay);
+            WaitOnce(delay);
                 
             User32.PostMessage(hWnd, (uint)W.WM_KEYUP, (IntPtr)key,
                 MakeLParam(key, keyUp: true, altDown: false));
-            Thread.Sleep(delay);
+            WaitOnce(delay);
         }
         
         private static void PressSysKey(HWND hWnd, V sys, V key, int delay = 50)
         {
             User32.PostMessage(hWnd, (uint)W.WM_SYSKEYDOWN, (IntPtr)sys,
                 MakeLParam(sys, keyUp: false, altDown: false));
-            Thread.Sleep(delay);
+            WaitOnce(delay);
 
             User32.PostMessage(hWnd, (uint)W.WM_SYSKEYDOWN, (IntPtr)key,
                 MakeLParam(key, keyUp: false, altDown: true));
-            Thread.Sleep(delay);
+            WaitOnce(delay);
 
             User32.PostMessage(hWnd, (uint)W.WM_SYSKEYUP, (IntPtr)key,
                 MakeLParam(key, keyUp: true, altDown: true));
-            Thread.Sleep(delay);
+            WaitOnce(delay);
 
             User32.PostMessage(hWnd, (uint)W.WM_SYSKEYUP, (IntPtr)sys,
                 MakeLParam(sys, keyUp: true, altDown: false));
+            WaitOnce(delay);
+        }
+
+        private static void WaitOnce(int delay = 50)
+        {
             Thread.Sleep(delay);
         }
 
         public static void OpenInIntel(string cpjFile)
         {
             var windowH = WaitForWindow("SIM3022");
+            WaitOnce();
 
-            var menuBar = User32.GetMenu(windowH.Value);
-            var fileMenu = Driving.FindMenuItem(menuBar, "&File");
-            if (fileMenu == null)
-            {
-                // On Wine
-                Driving.PressSysKey(windowH.Value, V.VK_MENU, V.VK_F);
-                Driving.PressOneKey(windowH.Value, V.VK_O);
-            }
-            else
-            {
-                // On WinXP
-                var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open Project");
-                User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
-            }
+            Driving.PressSysKey(windowH.Value, V.VK_MENU, V.VK_F);
+            Driving.PressOneKey(windowH.Value, V.VK_O);
+            WaitOnce();
 
             var loadDlg = WaitForWindow("Select Loading Project File");
             var editFld = User32.FindWindowEx(loadDlg.Value, default(HWND), "Edit", "");
@@ -138,26 +133,19 @@ namespace PvMake.Lib
 
             var openBtn = User32.FindWindowEx(loadDlg.Value, default(HWND), "Button", "&Open");
             User32.SendMessage(openBtn, W.WM_BM_CLICK);
+
+            WaitOnce(100);
+            Driving.PressOneKey(windowH.Value, V.VK_F9);
         }
 
         public static void OpenInHitachi(string dlpFile)
         {
             var windowH = WaitForWindow("New project (Default) - CASIO SimSH Simulator");
+            WaitOnce();
 
-            var menuBar = User32.GetMenu(windowH.Value);
-            var fileMenu = Driving.FindMenuItem(menuBar, "&Project");
-            if (fileMenu == null)
-            {
-                // On Wine
-                Driving.PressSysKey(windowH.Value, V.VK_MENU, V.VK_P);
-                Driving.PressOneKey(windowH.Value, V.VK_O);
-            }
-            else
-            {
-                // On WinXP
-                var openProj = Driving.FindMenuItem(fileMenu.Value.SubMenu.Value, "&Open...");
-                User32.PostMessage(windowH.Value, (uint)W.WM_COMMAND, (IntPtr)openProj.Value.ItemId.Value);
-            }
+            Driving.PressSysKey(windowH.Value, V.VK_MENU, V.VK_P);
+            Driving.PressOneKey(windowH.Value, V.VK_O);
+            WaitOnce();
 
             var loadDlg = WaitForWindow("Open project");
             var combExFld = User32.FindWindowEx(loadDlg.Value, default(HWND), "ComboBoxEx32", "");
@@ -167,6 +155,9 @@ namespace PvMake.Lib
 
             var openBtn = User32.FindWindowEx(loadDlg.Value, default(HWND), "Button", "&Open");
             User32.SendMessage(openBtn, W.WM_BM_CLICK);
+
+            WaitOnce(100);
+            Driving.PressOneKey(windowH.Value, V.VK_F5);
         }
     }
 }
