@@ -2,7 +2,7 @@
 
 call build.bat
 
-set EXE=PvMake\bin\Debug\PvMake
+set EXE=PvMake\bin\Debug\fx40\PvMake
 set PRJ=Y:\apps\MemLink
 
 echo.
