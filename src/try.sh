@@ -7,7 +7,7 @@ export WINEARCH=win32
 export WINEDEBUG=-all
 
 cd win_build
-echo winetricks vb6run
+# winetricks vb6run
 
 export EXE="wine pvmake"
 export PRJ="%USERPROFILE%\Projects\MemLink"
