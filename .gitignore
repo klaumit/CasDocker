@@ -430,3 +430,4 @@ FodyWeavers.xsd
 .idea/
 /src/win_build/
 /src/win_env/
+Thumbs.db

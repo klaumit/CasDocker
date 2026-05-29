@@ -8,19 +8,19 @@ using MemForge.Lib;
 
 namespace MemForge
 {
-	public sealed class NotificationIcon
+	public sealed class NoteIcon
 	{
 		internal NotifyIcon noteIcon;
 		private ContextMenu noteMenu;
 		
-		public NotificationIcon()
+		public NoteIcon()
 		{
 			noteIcon = new NotifyIcon();
 			noteMenu = new ContextMenu(InitializeMenu());
 			
 			noteIcon.DoubleClick += IconDoubleClick;
-			var resources = new ComponentResourceManager(typeof(NotificationIcon));
-			noteIcon.Icon = (Icon)resources.GetObject("$this.Icon");
+            var nis = ResTool.GetStream(typeof(NoteIcon), "Resources", "app.ico");
+            noteIcon.Icon = new Icon(nis);
 			noteIcon.ContextMenu = noteMenu;
 		}
 		

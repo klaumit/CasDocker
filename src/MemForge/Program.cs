@@ -19,7 +19,7 @@ namespace MemForge
             {
                 if (isFirstInstance)
                 {
-                    var obj = new NotificationIcon();
+                    var obj = new NoteIcon();
                     obj.noteIcon.Visible = true;
                     Application.Run();
                     obj.noteIcon.Dispose();
