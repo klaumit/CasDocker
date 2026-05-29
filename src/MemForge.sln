@@ -1,10 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PvMake.Lib", "PvMake.Lib\PvMake.Lib.csproj", "{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PvMake", "PvMake\PvMake.csproj", "{2E5CDFED-D793-48A3-A7E6-2508D1956428}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemForge", "MemForge\MemForge.csproj", "{CA69C75E-7407-473E-B567-7E79378C5610}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemForge.Lib", "MemForge.Lib\MemForge.Lib.csproj", "{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}"
@@ -19,26 +15,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}.Release|x86.ActiveCfg = Release|Any CPU
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Debug|x86.ActiveCfg = Debug|x86
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Debug|x86.Build.0 = Debug|x86
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Release|Any CPU.ActiveCfg = Release|x86
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Release|Mixed Platforms.Build.0 = Release|x86
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Release|x86.ActiveCfg = Release|x86
-		{2E5CDFED-D793-48A3-A7E6-2508D1956428}.Release|x86.Build.0 = Release|x86
 		{CA69C75E-7407-473E-B567-7E79378C5610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CA69C75E-7407-473E-B567-7E79378C5610}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA69C75E-7407-473E-B567-7E79378C5610}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
