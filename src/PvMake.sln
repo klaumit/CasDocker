@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PvMake", "PvMake\PvMake.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemForge", "MemForge\MemForge.csproj", "{CA69C75E-7407-473E-B567-7E79378C5610}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemForge.Lib", "MemForge.Lib\MemForge.Lib.csproj", "{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{CA69C75E-7407-473E-B567-7E79378C5610}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{CA69C75E-7407-473E-B567-7E79378C5610}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CA69C75E-7407-473E-B567-7E79378C5610}.Release|x86.ActiveCfg = Release|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
