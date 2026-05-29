@@ -3,23 +3,24 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace MemForge
 {
 	public sealed class NotificationIcon
 	{
-		internal NotifyIcon notifyIcon;
-		private ContextMenu notificationMenu;
+		internal NotifyIcon noteIcon;
+		private ContextMenu noteMenu;
 		
 		public NotificationIcon()
 		{
-			notifyIcon = new NotifyIcon();
-			notificationMenu = new ContextMenu(InitializeMenu());
+			noteIcon = new NotifyIcon();
+			noteMenu = new ContextMenu(InitializeMenu());
 			
-			notifyIcon.DoubleClick += IconDoubleClick;
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationIcon));
-			notifyIcon.Icon = (Icon)resources.GetObject("$this.Icon");
-			notifyIcon.ContextMenu = notificationMenu;
+			noteIcon.DoubleClick += IconDoubleClick;
+			var resources = new ComponentResourceManager(typeof(NotificationIcon));
+			noteIcon.Icon = (Icon)resources.GetObject("$this.Icon");
+			noteIcon.ContextMenu = noteMenu;
 		}
 		
 		private MenuItem[] InitializeMenu()
@@ -33,7 +34,8 @@ namespace MemForge
 			
 		private void menuAboutClick(object sender, EventArgs e)
 		{
-			MessageBox.Show("About This Application");
+            MessageBox.Show("MemForge 1.0", "Info", 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		
 		private void menuExitClick(object sender, EventArgs e)
@@ -43,7 +45,6 @@ namespace MemForge
 		
 		private void IconDoubleClick(object sender, EventArgs e)
 		{
-			MessageBox.Show("The icon was double clicked");
 		}
 	}
 }

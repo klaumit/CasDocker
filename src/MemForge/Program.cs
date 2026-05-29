@@ -15,14 +15,14 @@ namespace MemForge
             Application.SetCompatibleTextRenderingDefault(false);
 
             bool isFirstInstance;
-            using (Mutex mtx = new Mutex(true, "MemForge", out isFirstInstance))
+            using (var mtx = new Mutex(true, "MemForge", out isFirstInstance))
             {
                 if (isFirstInstance)
                 {
-                    NotificationIcon notificationIcon = new NotificationIcon();
-                    notificationIcon.notifyIcon.Visible = true;
+                    var obj = new NotificationIcon();
+                    obj.noteIcon.Visible = true;
                     Application.Run();
-                    notificationIcon.notifyIcon.Dispose();
+                    obj.noteIcon.Dispose();
                 }
                 else
                 {
