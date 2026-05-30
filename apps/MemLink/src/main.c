@@ -17,8 +17,7 @@ void writeln(char *txt, int x, int y)
 
 void main()
 {
-	char tmp[128];
-	int i = 0;
+	char arr[20][128];
 	int z = 0;
 
 	LibInitDisp();
@@ -26,14 +25,12 @@ void main()
 
 	while (1)
 	{
-		i = i + 1;
-		sprintf(tmp, "%d - %d - %d", i, i, i);
-		writeln(tmp, 0, z);
+		for (z = 0; z < 20; z++)
+		{
+			sprintf(arr[z], "%d - %d + %d", z, z, z);
+			writeln(arr[z], 0, z * 8);
+		}
 		wait();
-
-		z = z + 8;
-		if (z > (160-8))
-			z = 0;
 	}
 
 	LibJumpMenu();
