@@ -20,6 +20,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\app.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MemForge.Lib\MemForge.Lib.n.csproj" />
   </ItemGroup>
 
