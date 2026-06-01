@@ -1,35 +1,36 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
-using System.ComponentModel;
 using MemForge.Lib;
+
+// ReSharper disable ArrangeObjectCreationWhenTypeEvident
+// ReSharper disable RedundantExplicitArrayCreation
 
 namespace MemForge
 {
 	public sealed class NoteIcon
 	{
 		internal NotifyIcon noteIcon;
-		private ContextMenu noteMenu;
+		private ContextMenuStrip noteMenu;
 		
 		public NoteIcon()
 		{
 			noteIcon = new NotifyIcon();
-			noteMenu = new ContextMenu(InitializeMenu());
+			noteMenu = new ContextMenuStrip();
+			noteMenu.Items.AddRange(InitializeMenu());
 			
 			noteIcon.DoubleClick += IconDoubleClick;
             var nis = ResTool.GetStream(typeof(NoteIcon), "Resources", "app.ico");
             noteIcon.Icon = new Icon(nis);
-			noteIcon.ContextMenu = noteMenu;
+			noteIcon.ContextMenuStrip = noteMenu;
 		}
 		
-		private MenuItem[] InitializeMenu()
+		private ToolStripItem[] InitializeMenu()
 		{
-			MenuItem[] menu = new MenuItem[] {
-                new MenuItem("Kill all", menuKillClick),
-				new MenuItem("About", menuAboutClick),
-				new MenuItem("Exit", menuExitClick)
+			var menu = new ToolStripMenuItem[] {
+                new ToolStripMenuItem("Kill all", null, menuKillClick),
+				new ToolStripMenuItem("About", null, menuAboutClick),
+				new ToolStripMenuItem("Exit", null, menuExitClick)
 			};
 			return menu;
 		}
