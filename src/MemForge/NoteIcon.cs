@@ -12,6 +12,8 @@ namespace MemForge
 	{
 		internal NotifyIcon noteIcon;
 		private ContextMenuStrip noteMenu;
+
+        private ProcWatcher _watcher;
 		
 		public NoteIcon()
 		{
@@ -23,6 +25,9 @@ namespace MemForge
             var nis = ResTool.GetStream(typeof(NoteIcon), "Resources", "app.ico");
             noteIcon.Icon = new Icon(nis);
 			noteIcon.ContextMenuStrip = noteMenu;
+
+            _watcher = new ProcWatcher(Defaults.Sim86, Defaults.SimSh);
+            _watcher.Started = OnSimStarted;
 		}
 		
 		private ToolStripItem[] InitializeMenu()
@@ -35,10 +40,17 @@ namespace MemForge
 			return menu;
 		}
 
+        private void OnSimStarted(object sender, uint pid, string name)
+        {
+            var title = "Process found!";
+            var text = string.Format("{0} [{1}]", name, pid);
+            noteIcon.ShowBalloonTip(500, title, text, ToolTipIcon.Info);
+        }
+
         private void menuKillClick(object sender, EventArgs e)
         {
-            ProcExt.KillAll("Sim3022");
-            ProcExt.KillAll("CASIO SimSH");
+            ProcExt.KillAll(Defaults.Sim86);
+            ProcExt.KillAll(Defaults.SimSh);
         }
 
 		private void menuAboutClick(object sender, EventArgs e)
