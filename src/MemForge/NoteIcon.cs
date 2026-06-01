@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using MemForge.Lib;
+using System.Collections.Generic;
+using System.Text;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable RedundantExplicitArrayCreation
@@ -44,8 +46,17 @@ namespace MemForge
             var title = "Process found!";
             var text = string.Format("{0} [{1}]", name, pid);
             noteIcon.ShowBalloonTip(500, title, text, ToolTipIcon.Info);
+
+            FindMyWindows(pid);
         }
 
+        private void FindMyWindows(uint pid)
+        {
+            var windows = WindowExt.GetTopLevelWindows(pid);
+
+            ;
+        }
+        
         private void menuKillClick(object sender, EventArgs e)
         {
             ProcExt.KillAll(Defaults.Sim86);
