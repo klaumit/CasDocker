@@ -26,8 +26,7 @@ namespace MemForge
             noteIcon.Icon = new Icon(nis);
 			noteIcon.ContextMenuStrip = noteMenu;
 
-            _watcher = new ProcWatcher(Defaults.Sim86, Defaults.SimSh);
-            _watcher.Started = OnSimStarted;
+            _watcher = new ProcWatcher(OnSimStarted, Defaults.Sim86, Defaults.SimSh);
 		}
 		
 		private ToolStripItem[] InitializeMenu()

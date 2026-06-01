@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Management;
 using System.IO;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace MemForge.Lib
 {
@@ -14,16 +16,23 @@ namespace MemForge.Lib
         private ManagementEventWatcher _watcher;
         private List<string> _names;
 
-        public ProcWatcher(params string[] names)
+        public ProcWatcher(ProcStarted started, params string[] names)
         {
+            Started = started;
             _names = new List<string>(names);
             string query = "SELECT * FROM Win32_ProcessStartTrace";
             _watcher = new ManagementEventWatcher(query);
             _watcher.EventArrived += ProcessStarted;
             _watcher.Start();
+
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(1000);
+                ProcExt.Find(_names, (o, i, n) => FireStarted(i, n));
+            });
         }
 
-        public ProcStarted Started { get; set; } 
+        public ProcStarted Started { get; private set; }
 
         private void ProcessStarted(object sender, EventArrivedEventArgs e)
         {
@@ -32,9 +41,14 @@ namespace MemForge.Lib
             if (_names.Contains(procName))
             {
                 uint procId = (uint)e.NewEvent["ProcessID"];
-                if (Started != null)
-                    Started(this, procId, procName);
+                FireStarted(procId, procName);
             }             
+        }
+
+        private void FireStarted(uint procId, string procName)
+        {
+            if (Started != null)
+                Started(this, procId, procName);
         }
 
         public void Dispose()
