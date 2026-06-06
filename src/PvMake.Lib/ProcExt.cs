@@ -14,7 +14,7 @@ namespace PvMake.Lib
                 Console.WriteLine(prefix + line);
         }
 
-        public static bool Start(string exe, string pwd, string args, int sec = 2)
+        public static ProcessStartInfo New(string exe, string pwd = null, string args = null)
         {
             var info = new ProcessStartInfo
             {
@@ -24,27 +24,46 @@ namespace PvMake.Lib
                 info.WorkingDirectory = pwd;
             if (!string.IsNullOrWhiteSpace(args))
                 info.Arguments = args;
+            info.UseShellExecute = false;
+            return info;
+        }
+
+        public static bool Listen(this ProcessStartInfo info, int sec = 5)
+        {
             info.RedirectStandardOutput = true;
             info.RedirectStandardError = true;
-            info.UseShellExecute = false;
-            var proc = Process.Start(info);
+            using (var proc = new Process { StartInfo = info })
+            {
+                proc.EnableRaisingEvents = true;
+                proc.ErrorDataReceived += (o, e) =>
+                {
+                    if (e.Data != null)
+                        Console.WriteLine("[ERR] {0}", e.Data);
+                };
+                proc.OutputDataReceived += (o, e) =>
+                {
+                    if (e.Data != null)
+                        Console.WriteLine("[OUT] {0}", e.Data);
+                };
+                if (!proc.Start())
+                {
+                    var name = Path.GetFileNameWithoutExtension(info.FileName);
+                    throw new InvalidOperationException(
+                        string.Format("Could not start process '{0}'!", name)
+                    );
+                }
+                proc.BeginErrorReadLine();
+                proc.BeginOutputReadLine();
+                return proc.WaitForExit(sec * 1000);
+            }
+        }
 
-            var errThread = new Thread(() => 
-                PrintLines(proc.StandardError, " ")) { IsBackground = true };
-            errThread.Start();
-
-            var outThread = new Thread(() =>
-                PrintLines(proc.StandardOutput, " ")) { IsBackground = true };
-            outThread.Start();
-
-            try
+        public static bool Start(this ProcessStartInfo info, int sec = 5)
+        {
+            using (var proc = Process.Start(info))
             {
                 return proc.WaitForInputIdle(sec * 1000);
             }
-            catch (InvalidOperationException)
-            {
-                return proc.WaitForExit(sec * 1000);
-            }            
         }
     }
 }

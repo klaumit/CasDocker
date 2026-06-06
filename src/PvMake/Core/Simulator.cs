@@ -39,7 +39,7 @@ namespace PvMake.Core
                 {
                     RegVb(sdkDir);
                 }
-                ProcExt.Start(exe, sdkDir, null);
+                ProcExt.New(exe, sdkDir).Start();
 
                 if (isHitachi)
                 {
@@ -67,7 +67,7 @@ namespace PvMake.Core
                 return;
             var ocxs = FileExt.Find(sdkDir, "*.OCX").OrderBy(x => x).ToArray();
             foreach (var ocx in ocxs)
-                ProcExt.Start("regsvr32", sdkDir, ocx);
+                ProcExt.New("regsvr32", sdkDir, ocx).Start();
             File.WriteAllText(regMarkF, "done");
         }
     }

@@ -47,14 +47,14 @@ namespace PvMake.Core
             var cDir = Path.Combine(sdkDir, "C");
             var pDir = Path.Combine(cDir, proj.AppName);
             var mBat = Path.Combine(pDir, "mk.bat");
-            ProcExt.Start(mBat, pDir, null, sec: 30);
+            ProcExt.New(mBat, pDir).Listen(sec: 300);
         }
 
         private static void CompileHitachi(string sdkDir, Project proj, string inputDir)
         {
             var pDir = Path.Combine(sdkDir, proj.AppName);
             var mBat = Path.Combine(pDir, "BuildAll.bat");
-            ProcExt.Start(mBat, pDir, null, sec: 30);
+            ProcExt.New(mBat, pDir).Listen(sec: 300);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace PvMake.Core
                 var exe = FileExt.Find(sdkDir, exeName).FirstOrDefault();
                 var lbl = Path.GetFileNameWithoutExtension(exe);
                 Console.WriteLine(" * Starting {0} of {1}...", lbl, sdk);
-                ProcExt.Start(exe, sdkDir, null);
+                ProcExt.New(exe, sdkDir).Start();
             }
 
             Console.WriteLine("Done.");
