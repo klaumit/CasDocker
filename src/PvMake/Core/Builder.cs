@@ -56,7 +56,7 @@ namespace PvMake.Core
                 if (l.Contains("Undefined symbol"))
                     errors.Add(l.Trim());
             });
-            ThrowErrors(errors);
+            ThrowErrors(errors, "Intel");
         }
 
         private static void CompileHitachi(string sdkDir, Project proj, string inputDir)
@@ -71,15 +71,16 @@ namespace PvMake.Core
                 if (l.Contains("Undefined external symbol"))
                     errors.Add(l.Trim());
             });
-            ThrowErrors(errors);
+            ThrowErrors(errors, "Hitachi");
         }
 
-        private static void ThrowErrors(List<string> errors)
+        private static void ThrowErrors(List<string> errors, string name)
         {
             if (errors.Any())
             {
                 var nl = Environment.NewLine;
-                var text = "Could not compile!" + nl + nl + string.Join(nl, errors);
+                var text = "Could not compile " + name + "!" + nl
+                    + nl + string.Join(nl, errors);
                 throw new InvalidOperationException(text);
             }
         }
