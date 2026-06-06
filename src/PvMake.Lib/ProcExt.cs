@@ -5,6 +5,8 @@ using System.IO;
 
 namespace PvMake.Lib
 {
+    public delegate void OutputFilter(string line);
+
     public static class ProcExt
     {
         private static void PrintLines(StreamReader reader, string prefix)
@@ -28,7 +30,8 @@ namespace PvMake.Lib
             return info;
         }
 
-        public static bool Listen(this ProcessStartInfo info, int sec = 5)
+        public static bool Listen(this ProcessStartInfo info, int sec = 5,
+            OutputFilter filter = null)
         {
             info.RedirectStandardOutput = true;
             info.RedirectStandardError = true;
@@ -38,10 +41,12 @@ namespace PvMake.Lib
                 proc.ErrorDataReceived += (o, e) =>
                 {
                     Console.WriteLine(" {0}", e.Data);
+                    if (filter != null) filter.Invoke(e.Data);
                 };
                 proc.OutputDataReceived += (o, e) =>
                 {
                     Console.WriteLine(" {0}", e.Data);
+                    if (filter != null) filter.Invoke(e.Data);
                 };
                 if (!proc.Start())
                 {

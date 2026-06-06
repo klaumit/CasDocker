@@ -5,6 +5,7 @@ using PvMake.Lib;
 using B = PvMake.Core.Bases;
 using P = PvMake.Lib.Patching;
 using K = PvMake.Lib.KnowIt;
+using System.Collections.Generic;
 
 // ReSharper disable InlineOutVariableDeclaration
 
@@ -47,14 +48,40 @@ namespace PvMake.Core
             var cDir = Path.Combine(sdkDir, "C");
             var pDir = Path.Combine(cDir, proj.AppName);
             var mBat = Path.Combine(pDir, "mk.bat");
-            ProcExt.New(mBat, pDir).Listen(sec: 300);
+            var errors = new List<string>();
+            ProcExt.New(mBat, pDir).Listen(sec: 300, filter: l =>
+            {
+                if (l == null)
+                    return;
+                if (l.Contains("Undefined symbol"))
+                    errors.Add(l.Trim());
+            });
+            ThrowErrors(errors);
         }
 
         private static void CompileHitachi(string sdkDir, Project proj, string inputDir)
         {
             var pDir = Path.Combine(sdkDir, proj.AppName);
             var mBat = Path.Combine(pDir, "BuildAll.bat");
-            ProcExt.New(mBat, pDir).Listen(sec: 300);
+            var errors = new List<string>();
+            ProcExt.New(mBat, pDir).Listen(sec: 300, filter: l =>
+            {
+                if (l == null)
+                    return;
+                if (l.Contains("Undefined external symbol"))
+                    errors.Add(l.Trim());
+            });
+            ThrowErrors(errors);
+        }
+
+        private static void ThrowErrors(List<string> errors)
+        {
+            if (errors.Any())
+            {
+                var nl = Environment.NewLine;
+                var text = "Could not compile!" + nl + nl + string.Join(nl, errors);
+                throw new InvalidOperationException(text);
+            }
         }
     }
 }

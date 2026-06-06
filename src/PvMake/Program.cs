@@ -1,4 +1,5 @@
-﻿using CommandLine;
+﻿using System;
+using CommandLine;
 using PvMake.Core;
 
 namespace PvMake
@@ -10,27 +11,39 @@ namespace PvMake
             var parser = Parser.Default;
             parser.ParseArguments<Options>(args).WithParsed(o =>
             {
-                if (o.Clean)
+                try
                 {
-                    Cleaner.Run(o);
+                    RunAll(o);
                 }
-                if (o.Prepare)
+                catch (Exception ex)
                 {
-                    Preparer.Run(o);
-                }
-                if (o.Build)
-                {
-                    Builder.Run(o);
-                }
-                if (o.Simulate)
-                {
-                    Simulator.Run(o);
-                }
-                if (o.Upload)
-                {
-                    Uploader.Run(o);
+                    Console.Error.WriteLine(" [ERROR] {0}", ex.Message);
                 }
             });
+        }
+
+        private static void RunAll(Options o)
+        {
+            if (o.Clean)
+            {
+                Cleaner.Run(o);
+            }
+            if (o.Prepare)
+            {
+                Preparer.Run(o);
+            }
+            if (o.Build)
+            {
+                Builder.Run(o);
+            }
+            if (o.Simulate)
+            {
+                Simulator.Run(o);
+            }
+            if (o.Upload)
+            {
+                Uploader.Run(o);
+            }
         }
     }
 }
