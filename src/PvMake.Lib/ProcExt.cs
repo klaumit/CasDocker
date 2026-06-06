@@ -37,13 +37,11 @@ namespace PvMake.Lib
                 proc.EnableRaisingEvents = true;
                 proc.ErrorDataReceived += (o, e) =>
                 {
-                    if (e.Data != null)
-                        Console.WriteLine("[ERR] {0}", e.Data);
+                    Console.WriteLine(" {0}", e.Data);
                 };
                 proc.OutputDataReceived += (o, e) =>
                 {
-                    if (e.Data != null)
-                        Console.WriteLine("[OUT] {0}", e.Data);
+                    Console.WriteLine(" {0}", e.Data);
                 };
                 if (!proc.Start())
                 {
