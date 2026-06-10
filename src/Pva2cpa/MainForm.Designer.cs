@@ -39,11 +39,13 @@
             this.dropBox.Size = new System.Drawing.Size(250, 250);
             this.dropBox.TabIndex = 1;
             this.dropBox.TabStop = false;
+            this.dropBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.dropBox_DragDrop);
+            this.dropBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.dropBox_DragEnter);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(73, 115);
+            this.label1.Location = new System.Drawing.Point(73, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(104, 13);
             this.label1.TabIndex = 0;
@@ -53,7 +55,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 315);
+            this.ClientSize = new System.Drawing.Size(276, 315);
             this.Controls.Add(this.dropBox);
             this.Controls.Add(this.exitBtn);
             this.Name = "MainForm";
