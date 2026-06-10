@@ -56,4 +56,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pva2cpa.Lib\Pva2cpa.Lib.n.csproj" />
+  </ItemGroup>
+
 </Project>

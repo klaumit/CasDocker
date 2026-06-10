@@ -7,6 +7,8 @@ using S = PvMake.Lib.Siming;
 using B = PvMake.Core.Bases;
 using System.Collections.Generic;
 using K = PvMake.Lib.KnowIt;
+using FileExt = Pva2cpa.Lib.Files;
+using FileEx = PvMake.Lib.FileExt;
 
 // ReSharper disable InlineOutVariableDeclaration
 
@@ -43,7 +45,7 @@ namespace PvMake.Core
             var zipFile = Path.Combine(B.archRepo, "LSIJ_proj" + ".tar.gz");
             ZipExt.Uncompress(zipFile, pDir);
 
-            var foundFiles = FileExt.FindAllFiles(inputDir);
+            var foundFiles = FileEx.FindAllFiles(inputDir);
             SortedSet<string> hFiles;
             foundFiles.TryGetValue(".h", out hFiles);
             SortedSet<string> cFiles;
@@ -65,7 +67,7 @@ namespace PvMake.Core
             W.ReCopy(bFiles, miDir, cDir);
 
             var mFile = Path.Combine(pDir, "Makefile");
-            FileExt.WriteWin(mFile, M.CreateMakeFile(proj, hFiles, cFiles));
+            FileEx.WriteWin(mFile, M.CreateMakeFile(proj, hFiles, cFiles));
 
             var simDir = Path.Combine(sdkDir, "SIM");
             var cpjTpl = Path.Combine(simDir, m.Mod + ".CPJ");
@@ -86,7 +88,7 @@ namespace PvMake.Core
             var zipFile = Path.Combine(B.archRepo, "SHC_proj" + ".tar.gz");
             ZipExt.Uncompress(zipFile, pDir);
 
-            var foundFiles = FileExt.FindAllFiles(inputDir);
+            var foundFiles = FileEx.FindAllFiles(inputDir);
             SortedSet<string> hFiles;
             foundFiles.TryGetValue(".h", out hFiles);
             SortedSet<string> cFiles;
@@ -108,10 +110,10 @@ namespace PvMake.Core
             W.ReCopy(bFiles, miDir, sdkDir);
 
             var mFile = Path.Combine(pDir, "sources.def");
-            FileExt.WriteWin(mFile, M.CreateSrcDefFile(proj, cFiles));
+            FileEx.WriteWin(mFile, M.CreateSrcDefFile(proj, cFiles));
 
             var sFile = Path.Combine(pDir, "PV3S1600.dlp");
-            FileExt.WriteWin(sFile, S.CreatePv3Dlp(proj));
+            FileEx.WriteWin(sFile, S.CreatePv3Dlp(proj));
         }
     }
 }

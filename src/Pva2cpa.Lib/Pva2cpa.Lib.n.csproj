@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net20;net40;net10.0</TargetFrameworks>
+    <NoWarn>NU1510</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RootNamespace>Pva2cpa.Lib</RootNamespace>
+    <AssemblyName>Pva2cpa.Lib</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+</Project>

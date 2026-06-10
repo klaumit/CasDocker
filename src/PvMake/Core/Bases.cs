@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Pva2cpa.Lib;
 using PvMake.Lib;
 
 namespace PvMake.Core
@@ -17,7 +18,7 @@ namespace PvMake.Core
 
         internal static void LoadAndPrepareProject(IOptions o)
         {
-            inputDir = FileExt.GetDir(o.InputDir, false);
+            inputDir = Files.GetDir(o.InputDir, false);
             Console.WriteLine("Source   => {0}", inputDir);
 
             var prjFile = Path.Combine(inputDir, Project.Fn);

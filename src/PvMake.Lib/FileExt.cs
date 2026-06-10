@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using static Pva2cpa.Lib.Files;
 
 // ReSharper disable InlineOutVariableDeclaration
 // ReSharper disable AssignNullToNotNullAttribute
@@ -9,16 +10,6 @@ namespace PvMake.Lib
 {
     public static class FileExt
     {
-        public static string GetDir(string folder, bool create)
-        {
-            if (string.IsNullOrWhiteSpace(folder)) return null;
-            folder = Environment.ExpandEnvironmentVariables(folder ?? "");
-            var dir = Path.GetFullPath(folder);
-            if (create && !Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-            return dir;
-        }
-
         public static string GetAssDir(string name, bool create, Type type = null)
         {
             var myType = type ?? typeof(FileExt);

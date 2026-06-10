@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Pva2cpa.Lib;
 using B = System.Buffer;
 
 // ReSharper disable RedundantExplicitArrayCreation
@@ -9,15 +10,16 @@ namespace PvMake.Lib
 {
     public static class Patching
     {
-        public static void PostCompilePad(string pvaFile, string tgtDir)
+        public static void PostCompilePad(string pvaFile, string tgtDir,
+            TextWriter err, TextWriter con)
         {
-            if (string.IsNullOrWhiteSpace(pvaFile))
+            if (Strings.IsNullOrWhiteSpace(pvaFile))
             {
-                Console.Error.WriteLine("No PVA to be found for patching!");
+                err.WriteLine("No PVA to be found for patching!");
                 return;
             }
 
-            var ubDir = FileExt.GetDir(Path.Combine(tgtDir, "User_Bin"), true);
+            var ubDir = Files.GetDir(Path.Combine(tgtDir, "User_Bin"), true);
             var pvaName = Path.GetFileNameWithoutExtension(pvaFile);
             var tgtFile = Path.Combine(ubDir, string.Format("{0}.cpa", pvaName));
 
@@ -43,7 +45,7 @@ namespace PvMake.Lib
             B.BlockCopy(chCk, 0, final, data.Length + foot.Length, chCk.Length);
 
             File.WriteAllBytes(tgtFile, final);
-            Console.WriteLine("    => '{0}' created [0x{1:X8}]!", Path.GetFileName(tgtFile), checkSum);
+            con.WriteLine("    => '{0}' created [0x{1:X8}]!", Path.GetFileName(tgtFile), checkSum);
         }
 
         private static uint CalcChecksum32(byte[] data)

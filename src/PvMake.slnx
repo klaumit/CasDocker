@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="Pva2cpa.Lib/Pva2cpa.Lib.n.csproj" />
+  <Project Path="Pva2cpa/Pva2cpa.n.csproj" />
   <Project Path="PvMake.Lib/PvMake.Lib.n.csproj" />
-  <Project Path="PvMake/PvMake.n.csproj" />
+  <Project Path="PvMake/PvMake.n.csproj" /> 
 </Solution>
