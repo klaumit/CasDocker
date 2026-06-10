@@ -9,9 +9,12 @@ namespace Pva2cpa
         [STAThread]
         private static void Main(string[] args)
         {
+            Args = args;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
+
+        public static string[] Args { get; private set; }
     }
 }
