@@ -11,7 +11,7 @@ namespace PvMake.Lib
     public static class Patching
     {
         public static void PostCompilePad(string pvaFile, string tgtDir,
-            TextWriter err, TextWriter con)
+            TextWriter err, TextWriter con, string subDir = "User_Bin")
         {
             if (Strings.IsNullOrWhiteSpace(pvaFile))
             {
@@ -19,7 +19,7 @@ namespace PvMake.Lib
                 return;
             }
 
-            var ubDir = Files.GetDir(Path.Combine(tgtDir, "User_Bin"), true);
+            var ubDir = Files.GetDir(Path.Combine(tgtDir, subDir), true);
             var pvaName = Path.GetFileNameWithoutExtension(pvaFile);
             var tgtFile = Path.Combine(ubDir, string.Format("{0}.cpa", pvaName));
 
