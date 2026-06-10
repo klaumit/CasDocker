@@ -19,6 +19,10 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'net20'">
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Pva2cpa.Lib\Pva2cpa.Lib.n.csproj" />
   </ItemGroup>
