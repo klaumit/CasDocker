@@ -13,5 +13,10 @@ namespace Pva2cpa
         {
             InitializeComponent();
         }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }
