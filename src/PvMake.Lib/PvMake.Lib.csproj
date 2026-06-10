@@ -82,7 +82,6 @@
     <Compile Include="KnowIt.cs" />
     <Compile Include="Siming.cs" />
     <Compile Include="Making.cs" />
-	<Compile Include="Patching.cs" />
     <Compile Include="Prefixes.cs" />
     <Compile Include="JsonExt.cs" />
     <Compile Include="CollExt.cs" />
@@ -94,6 +93,12 @@
     <Compile Include="TmplExt.cs" />
     <Compile Include="ZipExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pva2cpa.Lib\Pva2cpa.Lib.csproj">
+      <Project>{079AEBEA-146F-45B4-9B0F-F12055F5519D}</Project>
+      <Name>Pva2cpa.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
