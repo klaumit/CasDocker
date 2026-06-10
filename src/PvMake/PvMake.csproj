@@ -42,9 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Bases.cs" />
-	<Compile Include="Core\Cleaner.cs" />
+    <Compile Include="Core\Cleaner.cs" />
     <Compile Include="Core\Builder.cs" />
-	<Compile Include="Core\Preparer.cs" />
+    <Compile Include="Core\Preparer.cs" />
     <Compile Include="Core\Simulator.cs" />
     <Compile Include="Core\Uploader.cs" />
     <Compile Include="Core\Options.cs" />
@@ -52,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pva2cpa.Lib\Pva2cpa.Lib.csproj">
+      <Project>{079AEBEA-146F-45B4-9B0F-F12055F5519D}</Project>
+      <Name>Pva2cpa.Lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PvMake.Lib\PvMake.Lib.csproj">
       <Project>{FF9551BA-5236-4B6D-91F1-E5B2B68ACE36}</Project>
       <Name>PvMake.Lib</Name>

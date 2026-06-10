@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using static Pva2cpa.Lib.Files;
+using F = Pva2cpa.Lib.Files;
 
 // ReSharper disable InlineOutVariableDeclaration
 // ReSharper disable AssignNullToNotNullAttribute
@@ -17,13 +17,13 @@ namespace PvMake.Lib
             var myDll = Path.GetFullPath(myAss.Location);
             var myDir = Path.GetDirectoryName(myDll);
             var subDir = Path.Combine(myDir, name);
-            return GetDir(subDir, create);
+            return F.GetDir(subDir, create);
         }
 
         public static string GetEnvDir(string name, bool create)
         {
             var folder = Environment.GetEnvironmentVariable(name);
-            return GetDir(folder, create);
+            return F.GetDir(folder, create);
         }
 
         public static IEnumerable<string> Find(string root, string name)

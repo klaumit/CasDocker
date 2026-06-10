@@ -4,7 +4,7 @@ namespace Pva2cpa.Lib
     {
         public static bool IsNullOrWhiteSpace(string folder)
         {
-#if NET20
+#if NETFRAMEWORK
             return string.IsNullOrEmpty(folder);
 #else
             return string.IsNullOrWhiteSpace(folder);
