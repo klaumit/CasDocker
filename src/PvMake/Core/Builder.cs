@@ -6,6 +6,7 @@ using B = PvMake.Core.Bases;
 using P = PvMake.Lib.Patching;
 using K = PvMake.Lib.KnowIt;
 using System.Collections.Generic;
+using Pva2cpa.Lib;
 
 // ReSharper disable InlineOutVariableDeclaration
 
@@ -36,7 +37,7 @@ namespace PvMake.Core
                     var projDir = Path.Combine(sdkDir, B.proj.AppName);
                     var pvaFile = FileExt.Find(projDir, "*.pva").FirstOrDefault();
                     var tgtDir = Path.Combine(B.pvPrefix, sdk);
-                    P.PostCompilePad(pvaFile, tgtDir);
+                    P.PostCompilePad(pvaFile, tgtDir, Console.Error, Console.Out);
                 }
             }
 
