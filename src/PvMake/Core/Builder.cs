@@ -37,7 +37,13 @@ namespace PvMake.Core
                     var projDir = Path.Combine(sdkDir, B.proj.AppName);
                     var pvaFile = FileExt.Find(projDir, "*.pva").FirstOrDefault();
                     var tgtDir = Path.Combine(B.pvPrefix, sdk);
-                    P.PostCompilePad(pvaFile, tgtDir, Console.Error, Console.Out);
+                    var err = string.Empty;
+                    var con = string.Empty;
+                    P.PostCompilePad(pvaFile, tgtDir, ref err, ref con);
+                    if (!string.IsNullOrWhiteSpace(err))
+                        Console.Error.WriteLine(err);
+                    if (!string.IsNullOrWhiteSpace(con))
+                        Console.Out.WriteLine(con);
                 }
             }
 
