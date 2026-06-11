@@ -45,27 +45,25 @@ namespace Pva2cpa
         private void dropBox_DragDrop(object sender, DragEventArgs e)
         {
             var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            foreach (string filePath in files)
+            foreach (var filePath in files)
             {
-                using (var err = new StringWriter())
-                using (var con = new StringWriter())
+                if (!filePath.ToLowerInvariant().EndsWith(".pva"))
+                    continue;
+                var errTxt = string.Empty;
+                var conTxt = string.Empty;
+                var dest = Path.GetDirectoryName(filePath);
+                Patching.PostCompilePad(filePath, dest, ref errTxt, ref conTxt, "");
+                errTxt = errTxt.Trim();
+                conTxt = conTxt.Trim();
+                if (!Strings.IsNullOrWhiteSpace(errTxt))
                 {
-                    var dest = Path.GetDirectoryName(filePath);
-                    Patching.PostCompilePad(filePath, dest, err, con, "");
-                    err.Flush();
-                    con.Flush();
-                    var errTxt = err.GetStringBuilder().ToString().Trim();
-                    var conTxt = con.GetStringBuilder().ToString().Trim();
-                    if (!Strings.IsNullOrWhiteSpace(errTxt))
-                    {
-                        MessageBox.Show(errTxt, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                        return;
-                    }
-                    if (!Strings.IsNullOrWhiteSpace(conTxt))
-                    {
-                        MessageBox.Show(conTxt, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
+                    MessageBox.Show(errTxt, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    return;
+                }
+                if (!Strings.IsNullOrWhiteSpace(conTxt))
+                {
+                    MessageBox.Show(conTxt, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
             }
         }
