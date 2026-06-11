@@ -11,11 +11,11 @@ namespace PvMake.Lib
     public static class Patching
     {
         public static void PostCompilePad(string pvaFile, string tgtDir,
-            TextWriter err, TextWriter con, string subDir = "User_Bin")
+            ref string err, ref string con, string subDir = "User_Bin")
         {
             if (Strings.IsNullOrWhiteSpace(pvaFile))
             {
-                err.WriteLine("No PVA to be found for patching!");
+                err = string.Format("No PVA to be found for patching!");
                 return;
             }
 
@@ -45,7 +45,7 @@ namespace PvMake.Lib
             B.BlockCopy(chCk, 0, final, data.Length + foot.Length, chCk.Length);
 
             File.WriteAllBytes(tgtFile, final);
-            con.WriteLine("    => '{0}' created [0x{1:X8}]!", Path.GetFileName(tgtFile), checkSum);
+            con = string.Format("    => '{0}' created [0x{1:X8}]!", Path.GetFileName(tgtFile), checkSum);
         }
 
         private static uint CalcChecksum32(byte[] data)
