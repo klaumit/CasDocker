@@ -20,7 +20,14 @@ namespace Pva2cpa
 
         private void exitBtn_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            try
+            {
+                Environment.Exit(0);
+            }
+            catch (Exception)
+            {
+                Close();
+            }
         }
 
         private void dropBox_DragEnter(object sender, DragEventArgs e)
