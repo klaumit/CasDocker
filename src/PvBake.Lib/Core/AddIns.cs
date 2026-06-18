@@ -8,10 +8,13 @@ using PvBake.Lib.Tools;
 
 namespace PvBake.Lib.Core
 {
-    public static class Addins
+    public static class AddIns
     {
         internal static AddIn ReadX86AddIn(string file)
         {
+            var info = new FileInfo(file);
+            if (info.Length is < 4 * 1024 or > 126 * 1024)
+                return null;
             var enc = Encoding.ASCII;
             using var stream = File.OpenRead(file);
             using var b = new BinaryReader(stream, enc);
