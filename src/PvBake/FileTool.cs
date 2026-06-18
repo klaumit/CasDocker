@@ -8,7 +8,7 @@ namespace PvRanger
 {
     public static class FileTool
     {
-        public static IFile? Detect(string file)
+        public static IFile Detect(string file)
         {
             return ReadX86AddIn(file);
         }

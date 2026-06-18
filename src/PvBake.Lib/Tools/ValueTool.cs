@@ -7,72 +7,72 @@ namespace PvRanger
 {
     public static class ValueTool
     {
-        public static string? TrimOrNull(this string value)
+        public static string TrimOrNull(this string value)
         {
             return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
         }
 
-        public static string? AsHex(this byte[]? bytes)
+        public static string AsHex(this byte[] bytes)
         {
             return bytes == null ? null : Convert.ToHexString(bytes);
         }
 
-        public static T? AsEnum<T>(this string? txt) where T : struct, Enum
+        public static T? AsEnum<T>(this string txt) where T : struct, Enum
         {
             if (txt == null)
                 return null;
             if (!Enum.TryParse<T>(txt, true, out var val))
                 return null;
-            if (!Enum.IsDefined(val))
+            if (!Enum.IsDefined(typeof(T), val))
                 return null;
             return val;
         }
 
-        public static DateTime? AsDate(this string? txt)
+        public static DateTime? AsDate(this string txt)
         {
             if (txt == null)
                 return null;
             if (txt.Length != 8)
                 return null;
-            var a = txt[..4];
+            var a = txt.Substring(0, 4);
             if (!int.TryParse(a, out var aa))
                 return null;
-            var b = txt[4..6];
+            var b = txt.Substring(4, 2);
             if (!int.TryParse(b, out var bb))
                 return null;
-            var c = txt[6..8];
+            var c = txt.Substring(6, 2);
             if (!int.TryParse(c, out var cc))
                 return null;
             var val = new DateTime(aa, bb, cc);
             return val;
         }
 
-        public static TimeSpan? AsTime(this string? txt)
+        public static TimeSpan? AsTime(this string txt)
         {
             if (txt == null)
                 return null;
             if (txt.Length != 4)
                 return null;
-            var a = txt[..2];
+            var a = txt.Substring(0, 2);
             if (!int.TryParse(a, out var aa))
                 return null;
-            var b = txt[2..4];
+            var b = txt.Substring(2, 2);
             if (!int.TryParse(b, out var bb))
                 return null;
             var val = new TimeSpan(aa, bb, 0);
             return val;
         }
 
-        public static Version? AsVer(this string? txt)
+        public static Version AsVer(this string txt)
         {
             if (txt == null)
                 return null;
             if (txt.Length != 4)
                 return null;
-            var a = txt[..2];
+            var a = txt.Substring(0, 2);
             if (!int.TryParse(a, out var aa))
                 return null;
-            var b = txt[2..4];
+            var b = txt.Substring(2, 2);
             if (!int.TryParse(b, out var bb))
                 return null;
             var val = new Version(aa, bb);
@@ -89,7 +89,7 @@ namespace PvRanger
             return val;
         }
 
-        public static string? FixStr(this string? txt)
+        public static string FixStr(this string txt)
         {
             return txt?.Replace((char)63, ' ').Trim();
         }
@@ -101,7 +101,7 @@ namespace PvRanger
             return txt;
         }
 
-        public static string? Search(string? root, string file)
+        public static string Search(string root, string file)
         {
             file = FixPaths(file);
             var current = root ?? string.Empty;

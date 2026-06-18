@@ -32,7 +32,7 @@ namespace PvRanger
             return null;
         }
 
-        public static byte[]? GetSafeBytes(this BinaryReader reader, int count)
+        public static byte[] GetSafeBytes(this BinaryReader reader, int count)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace PvRanger
             return null;
         }
 
-        public static string? GetSafeStr(this BinaryReader reader, int count, Encoding? enc = null)
+        public static string GetSafeStr(this BinaryReader reader, int count, Encoding enc = null)
         {
             var bytes = reader.GetSafeBytes(count);
             if (bytes == null)
