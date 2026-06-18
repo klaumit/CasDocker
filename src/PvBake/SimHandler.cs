@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Humanizer;
 
 namespace PvRanger
 {
@@ -23,8 +22,8 @@ namespace PvRanger
                 var cpj = IniExt.ReadProject(file);
                 var biosLocal = Path.GetRelativePath(root, cpj.biosFile);
                 var applLocal = Path.GetRelativePath(root, cpj.applFile);
-                Console.WriteLine($"    - ({ByteSize.FromBytes(cpj.biosOffs),6}) {biosLocal}");
-                Console.WriteLine($"    - ({ByteSize.FromBytes(cpj.applOffs),6}) {applLocal}");
+                Console.WriteLine($"    - ({TextExt.ToByteSize(cpj.biosOffs),6}) {biosLocal}");
+                Console.WriteLine($"    - ({TextExt.ToByteSize(cpj.applOffs),6}) {applLocal}");
 
                 var biosArr = File.ReadAllBytes(cpj.biosFile);
                 var applArr = File.ReadAllBytes(cpj.applFile);

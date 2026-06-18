@@ -16,6 +16,9 @@
     <Reference Include="IniParser.dll">
       <HintPath>..\deps\net40\IniParser.dll</HintPath>
     </Reference>
+    <Reference Include="ByteSizeLib.dll">
+      <HintPath>..\deps\net40\ByteSizeLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
     <Reference Include="Newtonsoft.Json.dll">

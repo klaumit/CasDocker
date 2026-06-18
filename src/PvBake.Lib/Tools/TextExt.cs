@@ -1,4 +1,5 @@
 using System.Text;
+using ByteSizeLib;
 
 namespace PvRanger
 {
@@ -15,5 +16,12 @@ namespace PvRanger
         public static Encoding Utf => Encoding.UTF8;
 
         public static Encoding Win => Encoding.GetEncoding("Windows-1252");
+
+        public static string ToByteSize(int bytes)
+        {
+            var obj = ByteSize.FromBytes(bytes);
+            var txt = obj.ToString();
+            return txt;
+        }
     }
 }
