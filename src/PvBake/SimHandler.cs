@@ -15,13 +15,13 @@ namespace PvRanger
 
             foreach (var file in files)
             {
-                var local = Path.GetRelativePath(root, file);
+                var local = Files.GetRelativePath(root, file);
                 var name = Path.GetFileNameWithoutExtension(file).Replace("Plus", "P");
                 Console.WriteLine($" * [{name,-7}] {local}");
 
                 var cpj = IniExt.ReadProject(file);
-                var biosLocal = Path.GetRelativePath(root, cpj.biosFile);
-                var applLocal = Path.GetRelativePath(root, cpj.applFile);
+                var biosLocal = Files.GetRelativePath(root, cpj.biosFile);
+                var applLocal = Files.GetRelativePath(root, cpj.applFile);
                 Console.WriteLine($"    - ({TextExt.ToByteSize(cpj.biosOffs),6}) {biosLocal}");
                 Console.WriteLine($"    - ({TextExt.ToByteSize(cpj.applOffs),6}) {applLocal}");
 
