@@ -6,7 +6,10 @@ namespace PvRanger
     {
         static TextExt()
         {
+#if NETFRAMEWORK
+#else
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+#endif
         }
 
         public static Encoding Utf => Encoding.UTF8;
