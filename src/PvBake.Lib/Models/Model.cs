@@ -4,10 +4,14 @@ namespace PvBake.Lib.Models
     {
         Unknown = 0,
 
+        Z481,
+
         Z486,
 
         Z488,
 
-        G500
+        G500,
+
+        G501
     }
 }
