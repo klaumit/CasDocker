@@ -10,6 +10,9 @@ namespace PvBake.Core
 		[Option('e', "extract", HelpText = "Extract the simulator.")]
 		public bool ExtractSim { get; set; }
 
+		[Option('d', "detect", HelpText = "Detect all binaries.")]
+		public bool DetectAll { get; set; }
+
 		[Option('i', "input", HelpText = "Set input directory.")]
 		public string InputDir { get; set; }
 	}

@@ -3,6 +3,10 @@
     "extractSim": {
       "commandName": "Project",
       "commandLineArgs": "--extract -i %HOME%/Desktop/demo"
+    },
+    "detectAll": {
+      "commandName": "Project",
+      "commandLineArgs": "--detect -i %HOME%/Desktop/demo"
     }
   }
 }
