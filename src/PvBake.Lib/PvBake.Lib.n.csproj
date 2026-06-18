@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net40;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>NU1510</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RootNamespace>PvBake.Lib</RootNamespace>
+    <AssemblyName>PvBake.Lib</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+</Project>

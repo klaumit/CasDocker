@@ -1,0 +1,62 @@
+using System;
+using System.IO;
+using System.Text;
+
+namespace PvRanger
+{
+    public static class ByteTool
+    {
+        public static uint? GetSafeUInt32(this BinaryReader reader)
+        {
+            try
+            {
+                return reader.ReadUInt32();
+            }
+            catch (Exception)
+            {
+                // Ignore!
+            }
+            return null;
+        }
+        
+        public static ushort? GetSafeUInt16(this BinaryReader reader)
+        {
+            try
+            {
+                return reader.ReadUInt16();
+            }
+            catch (Exception)
+            {
+                // Ignore!
+            }
+            return null;
+        }
+
+        public static byte[]? GetSafeBytes(this BinaryReader reader, int count)
+        {
+            try
+            {
+                var array = reader.ReadBytes(count);
+                if (array.Length == count)
+                    return array;
+            }
+            catch (Exception)
+            {
+                // Ignore!
+            }
+            return null;
+        }
+
+        public static string? GetSafeStr(this BinaryReader reader, int count, Encoding? enc = null)
+        {
+            var bytes = reader.GetSafeBytes(count);
+            if (bytes == null)
+                return null;
+            var endPos = Array.IndexOf(bytes, (byte)0);
+            var maxLen = endPos >= 0 ? endPos : count;
+            enc ??= Encoding.ASCII;
+            var txt = enc.GetString(bytes, 0, maxLen).TrimOrNull();
+            return txt;
+        }
+    }
+}

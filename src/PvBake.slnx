@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PvBake.Lib/PvBake.Lib.n.csproj" />
+  <Project Path="PvBake/PvBake.n.csproj" /> 
+</Solution>
