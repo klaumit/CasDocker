@@ -1,6 +1,6 @@
 using System;
 
-namespace PvRanger
+namespace PvBake.Lib.Models
 {
     public sealed class AddIn : IFile
     {

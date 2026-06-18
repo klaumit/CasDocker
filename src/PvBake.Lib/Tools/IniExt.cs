@@ -1,8 +1,9 @@
 using System.IO;
 using IniParser;
 using IniParser.Model;
+using PvBake.Lib.Models;
 
-namespace PvRanger
+namespace PvBake.Lib.Tools
 {
     public static class IniExt
     {

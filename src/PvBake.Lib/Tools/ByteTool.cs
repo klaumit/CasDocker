@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace PvRanger
+namespace PvBake.Lib.Tools
 {
     public static class ByteTool
     {

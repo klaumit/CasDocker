@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace PvRanger
+namespace PvBake.Lib.Tools
 {
     public static class JsonTool
     {

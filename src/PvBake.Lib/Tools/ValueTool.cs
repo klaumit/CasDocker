@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 
-namespace PvRanger
+namespace PvBake.Lib.Tools
 {
     public static class ValueTool
     {

@@ -1,7 +1,8 @@
+using System;
 using System.Text;
 using ByteSizeLib;
 
-namespace PvRanger
+namespace PvBake.Lib.Tools
 {
     public static class TextExt
     {
@@ -21,6 +22,8 @@ namespace PvRanger
         {
             var obj = ByteSize.FromBytes(bytes);
             var txt = obj.ToString();
+            if (txt == " b")
+                txt = "0 b";
             return txt;
         }
     }
