@@ -7,6 +7,11 @@ namespace PvRanger
 {
     public static class ValueTool
     {
+        public static string ToHexString(byte[] bytes)
+        {
+            return BitConverter.ToString(bytes).Replace("-", "");
+        }
+        
         public static string TrimOrNull(this string value)
         {
             return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
@@ -14,7 +19,7 @@ namespace PvRanger
 
         public static string AsHex(this byte[] bytes)
         {
-            return bytes == null ? null : Convert.ToHexString(bytes);
+            return bytes == null ? null : ToHexString(bytes);
         }
 
         public static T? AsEnum<T>(this string txt) where T : struct, Enum
