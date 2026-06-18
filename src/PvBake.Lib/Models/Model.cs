@@ -5,7 +5,9 @@ namespace PvBake.Lib.Models
         Unknown = 0,
 
         Z486,
-        
+
+        Z488,
+
         G500
     }
 }

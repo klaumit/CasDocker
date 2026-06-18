@@ -9,7 +9,7 @@
   <PropertyGroup>
     <RootNamespace>PvBake.Lib</RootNamespace>
     <AssemblyName>PvBake.Lib</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
