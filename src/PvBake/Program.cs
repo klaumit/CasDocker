@@ -1,8 +1,8 @@
 using System;
 using CommandLine;
-using PvMake.Core;
+using PvBake.Core;
 
-namespace PvMake
+namespace PvBake
 {
     internal static class Program
     {
