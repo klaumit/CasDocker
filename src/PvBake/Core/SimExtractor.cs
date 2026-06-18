@@ -4,7 +4,7 @@ using PvBake.Lib.API;
 
 namespace PvBake.Core
 {
-    public static class Cleaner
+    public static class SimExtractor
     {
         public static void Run(IOptions o)
         {

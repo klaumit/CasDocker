@@ -7,7 +7,10 @@ namespace PvBake.Core
 {
 	public class Options : IOptions
 	{
-		[Option('c', "clean", HelpText = "Clean the project.")]
-		public bool Clean { get; set; }
+		[Option('e', "extract", HelpText = "Extract the simulator.")]
+		public bool ExtractSim { get; set; }
+
+		[Option('i', "input", HelpText = "Set input directory.")]
+		public string InputDir { get; set; }
 	}
 }

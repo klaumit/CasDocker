@@ -24,9 +24,9 @@ namespace PvBake
 
         private static void RunAll(Options o)
         {
-            if (o.Clean)
+            if (o.ExtractSim)
             {
-                Cleaner.Run(o);
+                SimExtractor.Run(o);
             }
         }
     }
