@@ -28,6 +28,10 @@ namespace PvBake
             {
                 SimExtractor.Run(o);
             }
+            if (o.DetectAll)
+            {
+                Detector.Run(o);
+            }
         }
     }
 }
