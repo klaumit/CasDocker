@@ -1,15 +1,17 @@
 using System;
 using System.IO;
 using PvBake.Lib.Tools;
+using PvBake.Lib.API;
 
-namespace PvBake
+// ReSharper disable UseObjectOrCollectionInitializer
+
+namespace PvBake.Core
 {
-    internal static class Methods
+    public static class Detector
     {
-        private static void FindAndDetectAll(string[] args)
+        public static void Run(IOptions o)
         {
-            var root = Environment.CurrentDirectory;
-            root = Path.Combine(root, "demo");
+            var root = Path.GetFullPath(o.InputDir);
             Console.WriteLine($"Root = {root}");
 
             const SearchOption so = SearchOption.AllDirectories;

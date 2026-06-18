@@ -8,14 +8,9 @@ using PvBake.Lib.Tools;
 
 namespace PvBake
 {
-    public static class FileTool
+    public static class Addins
     {
-        public static IFile Detect(string file)
-        {
-            return ReadX86AddIn(file);
-        }
-
-        private static AddIn ReadX86AddIn(string file)
+        internal static AddIn ReadX86AddIn(string file)
         {
             var enc = Encoding.ASCII;
             using var stream = File.OpenRead(file);
