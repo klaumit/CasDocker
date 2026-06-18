@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "extractSim": {
-      "commandName": "Project",
-      "commandLineArgs": "--extract -i %HOME%/Desktop/CASIO"
-    },
     "detectAll": {
       "commandName": "Project",
       "commandLineArgs": "--detect -i %HOME%/Desktop/Demo"
+    },
+    "extractSim": {
+      "commandName": "Project",
+      "commandLineArgs": "--extract -i %HOME%/Desktop/CASIO"
     }
   }
 }
