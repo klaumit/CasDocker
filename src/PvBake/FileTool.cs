@@ -13,7 +13,7 @@ namespace PvRanger
             return ReadX86AddIn(file);
         }
 
-        private static AddIn? ReadX86AddIn(string file)
+        private static AddIn ReadX86AddIn(string file)
         {
             var enc = Encoding.ASCII;
             using var stream = File.OpenRead(file);

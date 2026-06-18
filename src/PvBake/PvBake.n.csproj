@@ -19,6 +19,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="CommandLine.dll">
+      <HintPath>..\deps\net40\CommandLine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PvBake.Lib\PvBake.Lib.n.csproj" />
   </ItemGroup>
 
