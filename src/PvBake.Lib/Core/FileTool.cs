@@ -1,9 +1,9 @@
 using PvBake.Lib.Models;
-using static PvBake.Addins; 
+using static PvBake.Lib.Core.Addins; 
 
 // ReSharper disable UseObjectOrCollectionInitializer
 
-namespace PvBake
+namespace PvBake.Lib.Core
 {
     public static class FileTool
     {

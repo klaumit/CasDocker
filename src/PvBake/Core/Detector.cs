@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using PvBake.Lib.Tools;
 using PvBake.Lib.API;
+using PvBake.Lib.Core;
 
 // ReSharper disable UseObjectOrCollectionInitializer
 

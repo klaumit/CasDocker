@@ -6,7 +6,7 @@ using PvBake.Lib.Tools;
 
 // ReSharper disable UseObjectOrCollectionInitializer
 
-namespace PvBake
+namespace PvBake.Lib.Core
 {
     public static class Addins
     {
