@@ -42,7 +42,7 @@ namespace PvRanger
                 return null;
             if (b.GetSafeStr(4) is not { } compTimeStr)
                 return null;
-            if ((compDateStr, compTimeStr).AsDateTime() is not { } appCompiled)
+            if (Tuple.Create(compDateStr, compTimeStr).AsDateTime() is not { } appCompiled)
                 return null;
             if (b.GetSafeStr(4) is not { } versionStr)
                 return null;
@@ -52,7 +52,7 @@ namespace PvRanger
                 return null;
             if (b.GetSafeStr(4) is not { } libTimeStr)
                 return null;
-            if ((libDateStr, libTimeStr).AsDateTime() is not { } libCompiled)
+            if (Tuple.Create(libDateStr, libTimeStr).AsDateTime() is not { } libCompiled)
                 return null;
             if (b.GetSafeStr(4) is not { } libVerStr)
                 return null;

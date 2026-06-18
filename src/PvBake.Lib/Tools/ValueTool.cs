@@ -79,10 +79,10 @@ namespace PvRanger
             return val;
         }
 
-        public static DateTime? AsDateTime(this (string date, string time) t)
+        public static DateTime? AsDateTime(this Tuple<string, string> t)
         {
-            var myDate = t.date.AsDate();
-            var myTime = t.time.AsTime();
+            var myDate = t.Item1.AsDate();
+            var myTime = t.Item2.AsTime();
             if (myDate == null || myTime == null)
                 return null;
             var val = myDate.Value.Date + myTime.Value;
