@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using PvBake.Lib.Tools;
 
 namespace PvBake.Lib.Core
@@ -16,11 +17,26 @@ namespace PvBake.Lib.Core
             while ((got = reader.Read(array, 0, array.Length)) >= 1)
             {
                 var middle = array.ToHexString(lower: true, sp: " ", max: got);
-                var line = $"{adr:x8}: {middle}";
+                var text = PrintAscii(array);
+                var line = $"{adr:x8}: {middle}  {text}";
                 writer.WriteLine(line);
                 adr += got;
             }
             writer.Flush();
+        }
+
+        private static string PrintAscii(byte[] array)
+        {
+            var bld = new StringBuilder();
+            foreach (var item in array)
+            {
+                var bit = (char)item;
+                var let = '.';
+                if (char.IsDigit(bit))
+                    let = bit;
+                bld.Append(let);
+            }
+            return bld.ToString();
         }
 
         public static void PrintHxd(string inFile, string outFile)
