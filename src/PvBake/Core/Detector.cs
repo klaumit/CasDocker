@@ -22,9 +22,11 @@ namespace PvBake.Core
 
             foreach (var file in files)
             {
+                var local = Files.GetRelativePath(inRoot, file);
+                Console.WriteLine($" * {local}");
+
                 if (FileTool.Detect(file) is { } fo)
                 {
-                    Console.WriteLine($" * {file}");
                     Console.WriteLine(JsonTool.ToJson(fo, format: true));
                 }
             }
