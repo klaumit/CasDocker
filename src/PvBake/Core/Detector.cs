@@ -12,11 +12,13 @@ namespace PvBake.Core
     {
         public static void Run(IOptions o)
         {
-            var root = Path.GetFullPath(o.InputDir);
-            Console.WriteLine($"Root = {root}");
+            var inRoot = Path.GetFullPath(o.InputDir);
+            var outRoot = Path.GetFullPath(o.OutputDir);
+            Console.WriteLine($"Input  = {inRoot}");
+            Console.WriteLine($"Output = {outRoot}");
 
             const SearchOption so = SearchOption.AllDirectories;
-            var files = Directory.GetFiles(root, "*.bin", so);
+            var files = Directory.GetFiles(inRoot, "*.bin", so);
 
             foreach (var file in files)
             {
