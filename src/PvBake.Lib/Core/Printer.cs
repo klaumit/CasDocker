@@ -18,7 +18,7 @@ namespace PvBake.Lib.Core
             {
                 var middle = array.ToHexString(lower: true, sp: " ", max: got)
                     .PadRight(39, ' ');
-                var text = PrintAscii(array);
+                var text = PrintAscii(array, got);
                 var line = $"{adr:x8}: {middle}  {text}";
                 writer.WriteLine(line);
                 adr += got;
@@ -26,18 +26,14 @@ namespace PvBake.Lib.Core
             writer.Flush();
         }
 
-        private static string PrintAscii(byte[] array)
+        private static string PrintAscii(byte[] array, int? max)
         {
-            var enc = Encoding.ASCII;
             var bld = new StringBuilder();
-            foreach (var item in array)
+            for (var i = 0; i < array.Length; i++)
             {
-                var bit = enc.GetChars([item])[0];
-                var let = '.';
-                if (char.IsDigit(bit))
-                    let = bit;
-                else if (char.IsLetter(bit))
-                    let = bit;
+                if (i >= max) break;
+                var bit = array[i];
+                var let = bit is >= 0x20 and <= 0x7e ? (char)bit : '.';
                 bld.Append(let);
             }
             return bld.ToString();
