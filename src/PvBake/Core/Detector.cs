@@ -26,7 +26,7 @@ namespace PvBake.Core
                 var name = Path.GetFileName(file);
                 Console.WriteLine($" * {local}");
 
-                if (FileTool.Detect(file) is not { } fo)
+                if (FileTool.Read(file) is not { } fo)
                     continue;
 
                 var json = JsonTool.ToJson(fo, format: true);
@@ -34,12 +34,13 @@ namespace PvBake.Core
 
                 var target = Path.GetFullPath(Path.Combine(outRoot, $"{name}"));
                 Console.WriteLine($"      --> {target}");
-                // File.WriteAllBytes(target, array);
+                using (var stream = File.Create(target))
+                    FileTool.Write(fo, stream);
 
                 var targetH1 = Path.GetFullPath(Path.Combine(outRoot, $"{name}.1.hex"));
-                Printer.PrintXxd(file, targetH1);
+                Printer.PrintXxd(target, targetH1);
                 var targetH2 = Path.GetFullPath(Path.Combine(outRoot, $"{name}.2.hex"));
-                Printer.PrintHxd(file, targetH2);
+                Printer.PrintHxd(target, targetH2);
             }
 
             Console.WriteLine("Done.");

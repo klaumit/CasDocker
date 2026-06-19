@@ -1,3 +1,4 @@
+using System.IO;
 using PvBake.Lib.Models;
 using static PvBake.Lib.Core.AddIns;
 using static PvBake.Lib.Core.Bioses;
@@ -9,7 +10,7 @@ namespace PvBake.Lib.Core
 {
     public static class FileTool
     {
-        public static IFile Detect(string file)
+        public static IFile Read(string file)
         {
             if (ReadX86Dump(file) is { } dump)
                 return dump;
@@ -18,6 +19,17 @@ namespace PvBake.Lib.Core
             if (ReadX86AddIn(file) is { } addIn)
                 return addIn;
             return null;
+        }
+
+        public static bool Write(IFile file, Stream stream)
+        {
+            // if (file is Dump { } dump)
+            //    return SaveX86Dump(dump, stream);
+            // if (file is Bios { } bios)
+            //    return SaveX86Bios(bios, stream);
+            if (file is AddIn { } addIn)
+                return SaveX86AddIn(addIn, stream);
+            return false;
         }
     }
 }
