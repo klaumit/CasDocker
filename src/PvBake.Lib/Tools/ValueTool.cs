@@ -86,12 +86,12 @@ namespace PvBake.Lib.Tools
 
         public static byte[] AsAscii<T>(this T? val) where T : struct, Enum
         {
-            return AsAscii(val.ToString());
+            return val.ToString().AsAscii();
         }
 
         public static byte[] AsAscii(this Version ver)
         {
-            return AsAscii($"{ver.Major:D2}{ver.Minor:D2}");
+            return $"{ver.Major:D2}{ver.Minor:D2}".AsAscii();
         }
 
         public static Version AsVer(this string txt)
@@ -154,6 +154,14 @@ namespace PvBake.Lib.Tools
         public static int ParseHex(this string txt)
         {
             return int.Parse(txt, NumberStyles.HexNumber);
+        }
+
+        public static byte[] Pad(this byte[] bytes, int size, byte bit)
+        {
+            var array = new byte[size];
+            for (var i = 0; i < array.Length; i++) array[i] = bit;
+            Array.Copy(bytes, 0, array, 0, bytes.Length);
+            return array;
         }
     }
 }
