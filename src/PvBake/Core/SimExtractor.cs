@@ -11,21 +11,23 @@ namespace PvBake.Core
     {
         public static void Run(IOptions o)
         {
-            var root = Path.GetFullPath(o.InputDir);
-            Console.WriteLine($"Root = {root}");
+            var inRoot = Path.GetFullPath(o.InputDir);
+            var outRoot = Path.GetFullPath(o.OutputDir);
+            Console.WriteLine($"Input  = {inRoot}");
+            Console.WriteLine($"Output = {outRoot}");
 
             const SearchOption so = SearchOption.AllDirectories;
-            var files = Directory.GetFiles(root, "*.cpj", so);
+            var files = Directory.GetFiles(inRoot, "*.cpj", so);
 
             foreach (var file in files)
             {
-                var local = Files.GetRelativePath(root, file);
+                var local = Files.GetRelativePath(inRoot, file);
                 var name = Path.GetFileNameWithoutExtension(file).Replace("Plus", "P");
                 Console.WriteLine($" * [{name,-7}] {local}");
 
                 var cpj = IniExt.ReadProject(file);
-                var biosLocal = Files.GetRelativePath(root, cpj.biosFile);
-                var applLocal = Files.GetRelativePath(root, cpj.applFile);
+                var biosLocal = Files.GetRelativePath(inRoot, cpj.biosFile);
+                var applLocal = Files.GetRelativePath(inRoot, cpj.applFile);
                 Console.WriteLine($"    - ({TextExt.ToByteSize(cpj.biosOffs),6}) {biosLocal}");
                 Console.WriteLine($"    - ({TextExt.ToByteSize(cpj.applOffs),6}) {applLocal}");
 
@@ -35,7 +37,7 @@ namespace PvBake.Core
                 Array.Copy(biosArr, 0, array, cpj.biosOffs, biosArr.Length);
                 Array.Copy(applArr, 0, array, cpj.applOffs, applArr.Length);
 
-                var target = Path.GetFullPath($"{name}.bin");
+                var target = Path.GetFullPath(Path.Combine(outRoot, $"{name}.bin"));
                 Console.WriteLine($"      --> {target}");
                 File.WriteAllBytes(target, array);
             }
