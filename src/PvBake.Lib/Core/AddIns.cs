@@ -15,8 +15,13 @@ namespace PvBake.Lib.Core
             var info = new FileInfo(file);
             if (info.Length is < 4 * 1024 or > 126 * 1024)
                 return null;
-            var enc = Encoding.ASCII;
             using var stream = File.OpenRead(file);
+            return ReadX86AddIn(stream);
+        }
+
+        internal static AddIn ReadX86AddIn(Stream stream)
+        {
+            var enc = Encoding.ASCII;
             using var b = new BinaryReader(stream, enc);
             if (b.GetSafeBytes(8) is not { } magic)
                 return null;
