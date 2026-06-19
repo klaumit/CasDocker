@@ -7,20 +7,22 @@ namespace PvBake.Lib.Tools
 {
     public static class ValueTool
     {
-        public static string ToHexString(byte[] bytes, bool lower = false, string space = null)
+        public static string ToHexString(this byte[] bytes, bool lower = false,
+            string sp = null, int? max = null, bool rotate = false)
         {
             var bld = new StringBuilder();
             for (var i = 0; i < bytes.Length; i += 2)
             {
-                bld.Append(bytes[i + 0].ToString("X2"));
-                bld.Append(bytes[i + 1].ToString("X2"));
-                if (space != null) bld.Append(space);
+                if (i >= max) break;
+                bld.Append(bytes[i + (rotate ? 1 : 0)].ToString("X2"));
+                bld.Append(bytes[i + (rotate ? 0 : 1)].ToString("X2"));
+                if (sp != null) bld.Append(sp);
             }
             var txt = bld.ToString();
             if (lower) txt = txt.ToLowerInvariant();
-            return txt;
+            return txt.TrimEnd();
         }
-        
+
         public static string TrimOrNull(this string value)
         {
             return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
@@ -28,7 +30,7 @@ namespace PvBake.Lib.Tools
 
         public static string AsHex(this byte[] bytes)
         {
-            return bytes == null ? null : ToHexString(bytes);
+            return bytes == null ? null : bytes.ToHexString();
         }
 
         public static T? AsEnum<T>(this string txt) where T : struct, Enum

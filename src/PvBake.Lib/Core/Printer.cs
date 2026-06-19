@@ -15,7 +15,8 @@ namespace PvBake.Lib.Core
             int got;
             while ((got = reader.Read(array, 0, array.Length)) >= 1)
             {
-                var line = $"{adr:x8}: {ValueTool.ToHexString(array, lower: true, space: "?")}";
+                var middle = array.ToHexString(lower: true, sp: " ", max: got);
+                var line = $"{adr:x8}: {middle}";
                 writer.WriteLine(line);
                 adr += got;
             }
@@ -26,21 +27,20 @@ namespace PvBake.Lib.Core
         {
             using var reader = File.OpenRead(inFile);
             using var writer = File.CreateText(outFile);
-            var size = 16;
-            var adr = 0000000;
-
-            
-            
-         
-            
-
-            // 0000000 ff00 4143 4953 034f 345a 3638 3130 3030
-
-
-
-
-
-
+            const int size = 16;
+            var array = new byte[size];
+            var adr = 00000000;
+            int got;
+            while ((got = reader.Read(array, 0, array.Length)) >= 1)
+            {
+                var middle = array.ToHexString(lower: true, sp: " ", max: got, rotate: true);
+                var line = $"{adr:x7} {middle}";
+                writer.WriteLine(line.PadRight(47, ' '));
+                adr += got;
+            }
+            var last = $"{adr:x7}";
+            writer.WriteLine(last);
+            writer.Flush();
         }
     }
 }
