@@ -15,5 +15,8 @@ namespace PvBake.Core
 
 		[Option('i', "input", HelpText = "Set input directory.")]
 		public string InputDir { get; set; }
+
+		[Option('o', "output", HelpText = "Set output directory.")]
+		public string OutputDir { get; set; }
 	}
 }

@@ -2,7 +2,7 @@
   "profiles": {
     "detectAll": {
       "commandName": "Project",
-      "commandLineArgs": "--detect -i %HOME%/Desktop/Demo"
+      "commandLineArgs": "--detect -i %HOME%/Desktop/Demo/all/in -o %HOME%/Desktop/Demo/all/ou"
     },
     "extractSim": {
       "commandName": "Project",
