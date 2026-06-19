@@ -32,6 +32,13 @@ namespace PvBake.Lib.Core
             b.Write(a.Mode.GetValueOrDefault());
             b.Write((a.Name + end).AsAscii().Pad(16, ff));
             b.Write(a.Length.GetValueOrDefault());
+            b.Write(a.AppCompiled.GetValueOrDefault().AsAscii());
+            b.Write(a.AppVersion.AsAscii());
+            b.Write(a.LibCompiled.GetValueOrDefault().AsAscii());
+            b.Write(a.LibVersion.AsAscii());
+            b.Write(a.MenuIcon.GetValueOrDefault());
+            b.Write(a.ListIcon.GetValueOrDefault());
+            b.Write((a.Comment).AsAscii().Pad(64, ff));
             return true;
         }
 
