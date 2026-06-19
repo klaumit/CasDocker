@@ -35,6 +35,11 @@ namespace PvBake.Core
                 var target = Path.GetFullPath(Path.Combine(outRoot, $"{name}"));
                 Console.WriteLine($"      --> {target}");
                 // File.WriteAllBytes(target, array);
+
+                var targetH1 = Path.GetFullPath(Path.Combine(outRoot, $"{name}.1.hex"));
+                Printer.PrintXxd(file, targetH1);
+                var targetH2 = Path.GetFullPath(Path.Combine(outRoot, $"{name}.2.hex"));
+                Printer.PrintHxd(file, targetH2);
             }
 
             Console.WriteLine("Done.");

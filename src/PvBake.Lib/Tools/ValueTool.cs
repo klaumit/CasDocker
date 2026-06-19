@@ -7,9 +7,18 @@ namespace PvBake.Lib.Tools
 {
     public static class ValueTool
     {
-        public static string ToHexString(byte[] bytes)
+        public static string ToHexString(byte[] bytes, bool lower = false, string space = null)
         {
-            return BitConverter.ToString(bytes).Replace("-", "");
+            var bld = new StringBuilder();
+            for (var i = 0; i < bytes.Length; i += 2)
+            {
+                bld.Append(bytes[i + 0].ToString("X2"));
+                bld.Append(bytes[i + 1].ToString("X2"));
+                if (space != null) bld.Append(space);
+            }
+            var txt = bld.ToString();
+            if (lower) txt = txt.ToLowerInvariant();
+            return txt;
         }
         
         public static string TrimOrNull(this string value)
