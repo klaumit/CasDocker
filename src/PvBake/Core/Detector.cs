@@ -25,7 +25,7 @@ namespace PvBake.Core
                 if (FileTool.Detect(file) is { } fo)
                 {
                     Console.WriteLine($" * {file}");
-                    Console.WriteLine(JsonTool.ToJson(fo));
+                    Console.WriteLine(JsonTool.ToJson(fo, format: true));
                 }
             }
 
