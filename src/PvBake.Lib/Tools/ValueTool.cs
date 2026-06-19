@@ -79,6 +79,21 @@ namespace PvBake.Lib.Tools
             return val;
         }
 
+        public static byte[] AsAscii(this string val)
+        {
+            return Encoding.ASCII.GetBytes(val);
+        }
+
+        public static byte[] AsAscii<T>(this T? val) where T : struct, Enum
+        {
+            return AsAscii(val.ToString());
+        }
+
+        public static byte[] AsAscii(this Version ver)
+        {
+            return AsAscii($"{ver.Major:D2}{ver.Minor:D2}");
+        }
+
         public static Version AsVer(this string txt)
         {
             if (txt == null)

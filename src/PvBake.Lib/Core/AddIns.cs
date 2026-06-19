@@ -23,11 +23,15 @@ namespace PvBake.Lib.Core
         {
             var enc = Encoding.ASCII;
             using var b = new BinaryWriter(stream, enc);
+            const char ff = (char)0xFF;
+            const char end = (char)0x00;
             b.Write(a.Sig);
-            b.Write(Encoding.ASCII.GetBytes(a.Model.ToString()));
-            b.Write(a.HeadVersion.ToString());
+            b.Write(a.Model.AsAscii());
+            b.Write(a.HeadVersion.AsAscii());
             b.Write(a.Status.GetValueOrDefault());
             b.Write(a.Mode.GetValueOrDefault());
+            b.Write((a.Name + end).PadRight(16, ff).AsAscii());
+            b.Write(a.Length.GetValueOrDefault());
             return true;
         }
 
