@@ -24,6 +24,10 @@ namespace PvBake.Lib.Core
             var enc = Encoding.ASCII;
             using var b = new BinaryWriter(stream, enc);
             b.Write(a.Sig);
+            b.Write(Encoding.ASCII.GetBytes(a.Model.ToString()));
+            b.Write(a.HeadVersion.ToString());
+            b.Write(a.Status.GetValueOrDefault());
+            b.Write(a.Mode.GetValueOrDefault());
             return true;
         }
 
