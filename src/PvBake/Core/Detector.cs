@@ -23,12 +23,18 @@ namespace PvBake.Core
             foreach (var file in files)
             {
                 var local = Files.GetRelativePath(inRoot, file);
+                var name = Path.GetFileName(file);
                 Console.WriteLine($" * {local}");
 
-                if (FileTool.Detect(file) is { } fo)
-                {
-                    Console.WriteLine(JsonTool.ToJson(fo, format: true));
-                }
+                if (FileTool.Detect(file) is not { } fo)
+                    continue;
+
+                var json = JsonTool.ToJson(fo, format: true);
+                Console.WriteLine(json);
+
+                var target = Path.GetFullPath(Path.Combine(outRoot, $"{name}"));
+                Console.WriteLine($"      --> {target}");
+                // File.WriteAllBytes(target, array);
             }
 
             Console.WriteLine("Done.");
