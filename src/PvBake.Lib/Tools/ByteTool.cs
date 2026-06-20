@@ -18,7 +18,7 @@ namespace PvBake.Lib.Tools
             }
             return null;
         }
-        
+
         public static ushort? GetSafeUInt16(this BinaryReader reader)
         {
             try
@@ -57,6 +57,13 @@ namespace PvBake.Lib.Tools
             enc ??= Encoding.ASCII;
             var txt = enc.GetString(bytes, 0, maxLen).TrimOrNull();
             return txt;
+        }
+
+        public static byte[] CopyZero(this byte[] array, int max)
+        {
+            var zero = new byte[array.Length];
+            Array.Copy(array, 0, zero, 0, max);
+            return zero;
         }
     }
 }

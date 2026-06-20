@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 using PvBake.Lib.Tools;
@@ -49,6 +50,7 @@ namespace PvBake.Lib.Core
             int got;
             while ((got = reader.Read(array, 0, array.Length)) >= 1)
             {
+                if (got % 2 != 0) array = array.CopyZero(got++);
                 var middle = array.ToHexString(lower: true, sp: " ", max: got, rotate: true);
                 var line = $"{adr:x7} {middle}";
                 writer.WriteLine(line.PadRight(47, ' '));
