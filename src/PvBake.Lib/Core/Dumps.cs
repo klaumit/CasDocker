@@ -21,7 +21,8 @@ namespace PvBake.Lib.Core
         {
             var enc = Encoding.ASCII;
             using var b = new BinaryWriter(stream, enc);
-            b.Write(a.Length);
+            if (a.Bios is { } bios)
+                Bioses.SaveX86Bios(bios, stream);
             return true;
         }
 
@@ -29,14 +30,13 @@ namespace PvBake.Lib.Core
         {
             var enc = Encoding.ASCII;
             using var b = new BinaryReader(stream, enc);
-
-            // TODO
-
             var dumpLen = (int)stream.Length;
-            var o = new Dump
-            {
-                Length = dumpLen
-            };
+            var o = new Dump { Length = dumpLen };
+            var pos = stream.Position;
+            if (Bioses.LoadX86Bios(stream) is { } bios)
+                o.Bios = bios;
+            else
+                stream.Position = pos;
             return o;
         }
     }
