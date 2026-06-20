@@ -1,9 +1,11 @@
 using System;
+using Newtonsoft.Json;
 
 namespace PvBake.Lib.Models
 {
     public sealed class AddIn : IFile
     {
+        [JsonIgnore]
         public byte[] Sig { get; set; }
         public Model? Model { get; set; }
         public Version HeadVersion { get; set; }
@@ -18,6 +20,7 @@ namespace PvBake.Lib.Models
         public uint? MenuIcon { get; set; }
         public uint? ListIcon { get; set; }
         public string Comment { get; set; }
+        [JsonIgnore]
         public byte[] Payload { get; set; }
     }
 }

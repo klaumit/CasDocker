@@ -14,7 +14,9 @@ namespace PvBake.Lib.Tools
             for (var i = 0; i < bytes.Length; i += 2)
             {
                 if (i >= max) break;
+                if (i + 1 >= max) rotate = false;
                 bld.Append(bytes[i + (rotate ? 1 : 0)].ToString("X2"));
+                if (i + 1 >= max) break;
                 bld.Append(bytes[i + (rotate ? 0 : 1)].ToString("X2"));
                 if (sp != null) bld.Append(sp);
             }
