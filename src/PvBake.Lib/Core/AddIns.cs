@@ -37,6 +37,7 @@ namespace PvBake.Lib.Core
             b.Write(a.MenuIcon.GetValueOrDefault());
             b.Write(a.ListIcon.GetValueOrDefault());
             b.Write(a.Comment.AsAscii(length: 64, endMark: true));
+            b.Write(a.Payload);
             return true;
         }
 
@@ -90,12 +91,15 @@ namespace PvBake.Lib.Core
                 return null;
             if (b.GetSafeStr(64).FixStr() is not { } comment)
                 return null;
+            var restLen = (int)addInLen - 144;
+            if (b.GetSafeBytes(restLen) is not { } pyl)
+                return null;
             var o = new AddIn
             {
                 Sig = magic, Model = model, HeadVersion = headVer, Status = status,
                 Mode = mode, Name = addInName, Length = addInLen, AppCompiled = appCompiled,
                 AppVersion = appVer, LibCompiled = libCompiled, LibVersion = libVer,
-                MenuIcon = offsIcon, ListIcon = offsLIcon, Comment = comment
+                MenuIcon = offsIcon, ListIcon = offsLIcon, Comment = comment, Payload = pyl
             };
             return o;
         }

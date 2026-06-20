@@ -18,5 +18,6 @@ namespace PvBake.Lib.Models
         public uint? MenuIcon { get; set; }
         public uint? ListIcon { get; set; }
         public string Comment { get; set; }
+        public byte[] Payload { get; set; }
     }
 }
