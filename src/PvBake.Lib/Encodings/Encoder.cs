@@ -19,10 +19,12 @@ namespace PvBake.Lib.Encodings
                 k => byte.Parse(k.Key, NumberStyles.HexNumber),
                 v => v.Value.Single()
             );
+            PvRusF.Add(0x0, (char)0);
             PvRusT = pvRusDict.ToDictionary(
                 k => k.Value.Single(),
                 v => byte.Parse(v.Key, NumberStyles.HexNumber)
             );
+            PvRusT.Add((char)0, 0x0);
         }
 
         public static byte[] TryAsPvRus(this string text, int index, int count, out int err)

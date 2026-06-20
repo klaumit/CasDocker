@@ -25,5 +25,11 @@ namespace PvBake.Lib.Tools
                 txt = "0 b";
             return txt;
         }
+
+        public static void AddZeroMark(ref string val)
+        {
+            const char end = (char)0x00;
+            val += end;
+        }
     }
 }

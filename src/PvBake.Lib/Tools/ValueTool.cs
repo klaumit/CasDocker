@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using PvBake.Lib.Encodings;
 
@@ -86,11 +87,14 @@ namespace PvBake.Lib.Tools
         {
             if (endMark && !string.IsNullOrWhiteSpace(val))
             {
-                const char end = (char)0x00;
-                val += end;
+                TextExt.AddZeroMark(ref val);
             }
             var res = val.TryAsPvRus(0, val?.Length ?? 0, out var err);
-            if (err != 0)
+            if (err == 0)
+            {
+                res = res?.Concat(new byte[] { 0x00, 0x00 }).ToArray();
+            }
+            else
             {
                 var enc = Encoding.ASCII;
                 res = enc.GetBytes(val ?? string.Empty);
