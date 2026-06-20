@@ -5,7 +5,7 @@ namespace PvBake.Lib.Tools
 {
     public static class JsonTool
     {
-        public static string ToJson(object obj, bool format = false)
+        public static JsonSerializerSettings GetConfig(bool format = false)
         {
             var config = new JsonSerializerSettings
             {
@@ -13,7 +13,19 @@ namespace PvBake.Lib.Tools
                 NullValueHandling = NullValueHandling.Include,
                 Converters = { new StringEnumConverter() }
             };
+            return config;
+        }
+
+        public static string ToJson(object obj, bool format = false)
+        {
+            var config = GetConfig(format);
             return JsonConvert.SerializeObject(obj, config);
+        }
+
+        public static T FromJson<T>(string txt)
+        {
+            var config = GetConfig();
+            return JsonConvert.DeserializeObject<T>(txt, config);
         }
     }
 }
