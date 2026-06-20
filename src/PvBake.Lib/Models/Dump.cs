@@ -6,6 +6,6 @@ namespace PvBake.Lib.Models
     {
         public int Length { get; set; }
         public Bios Bios { get; set; }
-        public List<AddIn> AddIn { get; set; }
+        public List<AddIn> AddIns { get; set; }
     }
 }

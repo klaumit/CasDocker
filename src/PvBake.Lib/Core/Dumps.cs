@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 using PvBake.Lib.Models;
@@ -33,7 +34,7 @@ namespace PvBake.Lib.Core
             var dumpLen = (int)stream.Length;
             var o = new Dump { Length = dumpLen };
             var pos = stream.Position;
-            if (Bioses.LoadX86Bios(stream) is { } bios)
+            if (Bioses.LoadX86Bios(new StayStream(stream)) is { } bios)
                 o.Bios = bios;
             else
                 stream.Position = pos;
