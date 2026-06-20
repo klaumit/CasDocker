@@ -23,8 +23,8 @@ namespace PvBake.Lib.Core
 
         public static bool Write(IFile file, Stream stream)
         {
-            // if (file is Dump { } dump)
-            //    return SaveX86Dump(dump, stream);
+            if (file is Dump { } dump)
+                return SaveX86Dump(dump, stream);
             if (file is Bios { } bios)
                 return SaveX86Bios(bios, stream);
             if (file is AddIn { } addIn)

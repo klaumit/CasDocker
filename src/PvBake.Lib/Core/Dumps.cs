@@ -14,10 +14,18 @@ namespace PvBake.Lib.Core
             if (info.Length is < 1000 * 1024 or > 1300 * 1024)
                 return null;
             using var stream = File.OpenRead(file);
-            return ReadX86Dump(file);
+            return LoadX86Dump(stream);
         }
 
-        internal static Dump ReadX86Dump(Stream stream)
+        internal static bool SaveX86Dump(Dump a, Stream stream)
+        {
+            var enc = Encoding.ASCII;
+            using var b = new BinaryWriter(stream, enc);
+            b.Write(a.Length);
+            return true;
+        }
+
+        internal static Dump LoadX86Dump(Stream stream)
         {
             var enc = Encoding.ASCII;
             using var b = new BinaryReader(stream, enc);
