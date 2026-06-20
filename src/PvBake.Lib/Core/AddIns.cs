@@ -13,7 +13,7 @@ namespace PvBake.Lib.Core
         internal static AddIn ReadX86AddIn(string file)
         {
             var info = new FileInfo(file);
-            if (info.Length is < 4 * 1024 or > 126 * 1024)
+            if (info.Length is < 2867 or > 126 * 1024)
                 return null;
             using var stream = File.OpenRead(file);
             return LoadX86AddIn(stream);
