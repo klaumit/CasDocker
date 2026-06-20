@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using PvBake.Lib.Encodings;
 
 namespace PvBake.Lib.Tools
 {
@@ -48,21 +49,20 @@ namespace PvBake.Lib.Tools
             return null;
         }
 
-        public static string GetSafeStr(this BinaryReader reader, int count, Encoding enc = null)
+        public static string GetSafeStr(this BinaryReader reader, int count)
         {
             var bytes = reader.GetSafeBytes(count);
             if (bytes == null)
                 return null;
             var endPos = Array.IndexOf(bytes, (byte)0);
             var maxLen = endPos >= 0 ? endPos : count;
-            enc ??= Encoding.ASCII;
-
-            Console.Write("'" + string.Join("|", bytes.Select(t => (int)t)) + "'");
-
+            var enc = Encoding.ASCII;
             var txt = enc.GetString(bytes, 0, maxLen).TrimOrNull();
-
-            Console.WriteLine("'" + txt + "'");
-
+            if (txt.StartsWith("??"))
+            {
+                var t = Specials.TryAsPvRus(bytes, 0, maxLen, out var err).TrimOrNull();
+                if (!string.IsNullOrWhiteSpace(t) && err == 0) txt = t;
+            }
             return txt;
         }
 
