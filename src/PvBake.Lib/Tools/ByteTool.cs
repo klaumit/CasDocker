@@ -59,7 +59,7 @@ namespace PvBake.Lib.Tools
             var txt = enc.GetString(bytes, 0, maxLen).TrimOrNull();
             if (txt.StartsWith("??"))
             {
-                var t = Specials.TryAsPvRus(bytes, 0, maxLen, out var err).TrimOrNull();
+                var t = bytes.TryAsPvRus(0, maxLen, out var err).TrimOrNull();
                 if (!string.IsNullOrWhiteSpace(t) && err == 0) txt = t;
             }
             return txt;

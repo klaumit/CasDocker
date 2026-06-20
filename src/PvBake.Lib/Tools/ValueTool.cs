@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using PvBake.Lib.Encodings;
 
 namespace PvBake.Lib.Tools
 {
@@ -88,7 +89,12 @@ namespace PvBake.Lib.Tools
                 const char end = (char)0x00;
                 val += end;
             }
-            var res = Encoding.ASCII.GetBytes(val ?? string.Empty);
+            var res = val.TryAsPvRus(0, val?.Length ?? 0, out var err);
+            if (err != 0)
+            {
+                var enc = Encoding.ASCII;
+                res = enc.GetBytes(val ?? string.Empty);
+            }
             if (length != null)
             {
                 const byte ff = 0xFF;
@@ -106,7 +112,7 @@ namespace PvBake.Lib.Tools
         {
             return $"{ver.Major:D2}{ver.Minor:D2}".AsAscii();
         }
-        
+
         public static byte[] AsAscii(this DateTime dt)
         {
             return $"{dt.Year:D4}{dt.Month:D2}{dt.Day:D2}{dt.Hour:D2}{dt.Minute:D2}".AsAscii();
@@ -178,7 +184,8 @@ namespace PvBake.Lib.Tools
         {
             var array = new byte[size];
             for (var i = 0; i < array.Length; i++) array[i] = bit;
-            Array.Copy(bytes, 0, array, 0, bytes.Length);
+            if (bytes != null)
+                Array.Copy(bytes, 0, array, 0, bytes.Length);
             return array;
         }
     }
