@@ -79,9 +79,20 @@ namespace PvBake.Lib.Tools
             return val;
         }
 
-        public static byte[] AsAscii(this string val)
+        public static byte[] AsAscii(this string val, bool endMark = false, int? length = null)
         {
-            return Encoding.ASCII.GetBytes(val);
+            if (endMark && !string.IsNullOrWhiteSpace(val))
+            {
+                const char end = (char)0x00;
+                val += end;
+            }
+            var res = Encoding.ASCII.GetBytes(val ?? string.Empty);
+            if (length != null)
+            {
+                const byte ff = 0xFF;
+                res = res.Pad(length.Value, ff);
+            }
+            return res;
         }
 
         public static byte[] AsAscii<T>(this T? val) where T : struct, Enum

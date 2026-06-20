@@ -23,14 +23,12 @@ namespace PvBake.Lib.Core
         {
             var enc = Encoding.ASCII;
             using var b = new BinaryWriter(stream, enc);
-            const char end = (char)0x00;
-            const byte ff = 0xFF;
             b.Write(a.Sig);
             b.Write(a.Model.AsAscii());
             b.Write(a.HeadVersion.AsAscii());
             b.Write(a.Status.GetValueOrDefault());
             b.Write(a.Mode.GetValueOrDefault());
-            b.Write((a.Name + end).AsAscii().Pad(16, ff));
+            b.Write(a.Name.AsAscii(length: 16, endMark: true));
             b.Write(a.Length.GetValueOrDefault());
             b.Write(a.AppCompiled.GetValueOrDefault().AsAscii());
             b.Write(a.AppVersion.AsAscii());
@@ -38,7 +36,7 @@ namespace PvBake.Lib.Core
             b.Write(a.LibVersion.AsAscii());
             b.Write(a.MenuIcon.GetValueOrDefault());
             b.Write(a.ListIcon.GetValueOrDefault());
-            b.Write((a.Comment).AsAscii().Pad(64, ff));
+            b.Write(a.Comment.AsAscii(length: 64, endMark: true));
             return true;
         }
 
