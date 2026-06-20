@@ -48,13 +48,15 @@ namespace PvBake.Lib.Core
             var array = new byte[size];
             var adr = 00000000;
             int got;
+            int count;
             while ((got = reader.Read(array, 0, array.Length)) >= 1)
             {
+                count = got;
                 if (got % 2 != 0) array = array.CopyZero(got++);
                 var middle = array.ToHexString(lower: true, sp: " ", max: got, rotate: true);
                 var line = $"{adr:x7} {middle}";
                 writer.WriteLine(line.PadRight(47, ' '));
-                adr += got;
+                adr += count;
             }
             var last = $"{adr:x7}";
             writer.WriteLine(last);
