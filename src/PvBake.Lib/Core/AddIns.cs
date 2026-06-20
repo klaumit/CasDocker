@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using PvBake.Lib.Models;
 using PvBake.Lib.Tools;
@@ -94,6 +95,16 @@ namespace PvBake.Lib.Core
             var restLen = (int)addInLen - 144;
             if (b.GetSafeBytes(restLen) is not { } pyl)
                 return null;
+            var rest = stream.Length - stream.Position;
+            if (rest <= 6 * 1024)
+            {
+                if (b.GetSafeBytes(14) is { } ffs && ffs.All(x => x == 0xff))
+                {
+                    pyl = pyl.Concat(ffs).ToArray();
+                    if (b.GetSafeBytes((int)(rest - ffs.Length)) is { } ext)
+                        pyl = pyl.Concat(ext).ToArray();
+                }
+            }
             var o = new AddIn
             {
                 Sig = magic, Model = model, HeadVersion = headVer, Status = status,
