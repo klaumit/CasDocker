@@ -16,10 +16,20 @@ namespace PvBake.Lib.Core
             if (info.Length is < 127 * 1024 or > 129 * 1024)
                 return null;
             using var stream = File.OpenRead(file);
-            return ReadX86Bios(stream);
+            return LoadX86Bios(stream);
         }
 
-        internal static Bios ReadX86Bios(Stream stream)
+        internal static bool SaveX86Bios(Bios a, Stream stream)
+        {
+            var enc = Encoding.ASCII;
+            using var b = new BinaryWriter(stream, enc);
+            b.Write(a.Sig);
+            b.Write(a.Model.AsAscii());
+            b.Write(a.Payload);
+            return true;
+        }
+
+        internal static Bios LoadX86Bios(Stream stream)
         {
             var enc = Encoding.ASCII;
             using var b = new BinaryReader(stream, enc);
@@ -32,9 +42,12 @@ namespace PvBake.Lib.Core
             if (modelStr.AsEnum<Model>() is not { } model)
                 throw new InvalidOperationException(modelStr);
             const int biosLen = 128 * 1024;
+            const int restLen = biosLen - 12;
+            if (b.GetSafeBytes(restLen) is not { } pyl)
+                return null;
             var o = new Bios
             {
-                Sig = magic, Model = model, Length = biosLen
+                Sig = magic, Model = model, Length = biosLen, Payload = pyl
             };
             return o;
         }

@@ -25,8 +25,8 @@ namespace PvBake.Lib.Core
         {
             // if (file is Dump { } dump)
             //    return SaveX86Dump(dump, stream);
-            // if (file is Bios { } bios)
-            //    return SaveX86Bios(bios, stream);
+            if (file is Bios { } bios)
+                return SaveX86Bios(bios, stream);
             if (file is AddIn { } addIn)
                 return SaveX86AddIn(addIn, stream);
             return false;
