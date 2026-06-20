@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace PvBake.Lib.Tools
@@ -55,7 +56,13 @@ namespace PvBake.Lib.Tools
             var endPos = Array.IndexOf(bytes, (byte)0);
             var maxLen = endPos >= 0 ? endPos : count;
             enc ??= Encoding.ASCII;
+
+            Console.Write("'" + string.Join("|", bytes.Select(t => (int)t)) + "'");
+
             var txt = enc.GetString(bytes, 0, maxLen).TrimOrNull();
+
+            Console.WriteLine("'" + txt + "'");
+
             return txt;
         }
 
