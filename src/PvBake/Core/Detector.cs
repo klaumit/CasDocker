@@ -34,11 +34,6 @@ namespace PvBake.Core
                 using (var stream = File.Create(target))
                     FileTool.Write(fo, stream);
 
-                var targetH1 = Path.GetFullPath(Path.Combine(outRoot, $"{name}.1.hex"));
-                Printer.PrintXxd(target, targetH1);
-                var targetH2 = Path.GetFullPath(Path.Combine(outRoot, $"{name}.2.hex"));
-                Printer.PrintHxd(target, targetH2);
-
                 if (JsonTool.ToJson(fo, format: true) is { } jsonText)
                 {
                     var jsonName = name.Replace(".bin", ".json");
@@ -61,6 +56,14 @@ namespace PvBake.Core
             }
 
             Console.WriteLine("Done.");
+        }
+
+        private static void WriteHex(string outRoot, string name, string target)
+        {
+            var targetH1 = Path.GetFullPath(Path.Combine(outRoot, $"{name}.1.hex"));
+            Printer.PrintXxd(target, targetH1);
+            var targetH2 = Path.GetFullPath(Path.Combine(outRoot, $"{name}.2.hex"));
+            Printer.PrintHxd(target, targetH2);
         }
     }
 }
