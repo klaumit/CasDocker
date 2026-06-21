@@ -1,5 +1,6 @@
 using System.IO;
 using PvBake.Lib.Models;
+using PvBake.Lib.Tools;
 using static PvBake.Lib.Core.AddIns;
 using static PvBake.Lib.Core.Bioses;
 using static PvBake.Lib.Core.Dumps;
@@ -35,6 +36,19 @@ namespace PvBake.Lib.Core
             if (file is Icon { } icon)
                 return SaveX86Icon(icon, stream);
             return false;
+        }
+
+        public static string GetName(this IFile file)
+        {
+            if (file is AddIn { } addIn)
+            {
+                var pName = addIn.Name;
+                if (string.IsNullOrWhiteSpace(pName))
+                    pName = $"0x{addIn.Mode:x4}";
+                var aName = $"{pName} v{addIn.AppVersion}".TrimOrNull();
+                return aName;
+            }
+            return null;
         }
     }
 }

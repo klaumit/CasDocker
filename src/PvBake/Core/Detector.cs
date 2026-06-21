@@ -23,13 +23,16 @@ namespace PvBake.Core
             foreach (var file in files)
             {
                 var local = Files.GetRelativePath(inRoot, file);
-                var name = Path.GetFileName(file);
                 Console.WriteLine($" * {local}");
 
                 if (FileTool.Read(file) is not { } fo)
                     continue;
 
-                var target = Path.GetFullPath(Path.Combine(outRoot, $"{name}"));
+                var fExt = Path.GetExtension(file);
+                var name = fo.GetName() ?? Path.GetFileNameWithoutExtension(file);
+                name = $"{name}{fExt}".Replace(' ', '_');
+
+                var target = Path.GetFullPath(Path.Combine(outRoot, name));
                 Console.WriteLine($"      --> {target}");
                 using (var stream = File.Create(target))
                     FileTool.Write(fo, stream);
@@ -47,7 +50,7 @@ namespace PvBake.Core
                     var bIdx = 0;
                     foreach (var bmpItem in bmpBytes)
                     {
-                        var bmpName = name.Replace(".bin", $".{++bIdx}.bmp");
+                        var bmpName = name.Replace(".bin", $"_{++bIdx}.bmp");
                         var bmpPath = Path.GetFullPath(Path.Combine(outRoot, $"{bmpName}"));
                         File.WriteAllBytes(bmpPath, bmpItem);
                         Console.WriteLine($"      --> {bmpPath}");
