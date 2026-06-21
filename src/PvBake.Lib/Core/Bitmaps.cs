@@ -54,5 +54,16 @@ namespace PvBake.Lib.Core
             }
             return true;
         }
+
+        public static byte[] SaveAsBmp(this IFile obj)
+        {
+            if (obj is Icon icon)
+            {
+                using var stream = new MemoryStream();
+                if (icon.SaveAsBmp(stream))
+                    return stream.ToArray();
+            }
+            return null;
+        }
     }
 }
