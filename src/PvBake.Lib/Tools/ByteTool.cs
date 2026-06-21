@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using PvBake.Lib.Encodings;
 
@@ -70,6 +71,12 @@ namespace PvBake.Lib.Tools
             var zero = new byte[array.Length];
             Array.Copy(array, 0, zero, 0, max);
             return zero;
+        }
+
+        public static byte[] Allocate(this byte value, int count)
+        {
+            var array = Enumerable.Repeat(value, count).ToArray();
+            return array;
         }
     }
 }

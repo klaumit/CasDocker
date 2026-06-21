@@ -1,6 +1,7 @@
 using System.IO;
 using System.Text;
 using PvBake.Lib.Models;
+using PvBake.Lib.Tools;
 
 // ReSharper disable UseObjectOrCollectionInitializer
 
@@ -21,6 +22,8 @@ namespace PvBake.Lib.Core
         {
             var enc = Encoding.ASCII;
             using var b = new BinaryWriter(stream, enc);
+            b.Write(ByteTool.Allocate(0xFF, a.Length));
+            stream.Position = 0;
             if (a.Bios is { } bios)
             {
                 Bioses.SaveX86Bios(bios, new StayStream(stream));
@@ -30,6 +33,7 @@ namespace PvBake.Lib.Core
                 foreach (var pair in addIns)
                 {
                     var offset = pair.Key;
+                    stream.Position = offset;
                     var addIn = pair.Value;
                     AddIns.SaveX86AddIn(addIn, new StayStream(stream));
                 }
