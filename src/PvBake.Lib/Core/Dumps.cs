@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Text;
 using PvBake.Lib.Models;
 using PvBake.Lib.Tools;
@@ -56,11 +57,20 @@ namespace PvBake.Lib.Core
                 stream.Position = pos;
 
             const int step = 512;
-            for (var i = 0; i < stream.Length; i += step)
+            for (var i = (int)stream.Position; i < stream.Length; i += step)
             {
                 stream.Position = i;
                 if (AddIns.LoadX86AddIn(new StayStream(stream)) is { } addIn)
+                {
                     (o.AddIns ??= new()).Add(i, addIn);
+                    continue;
+                }
+                stream.Position = i;
+                var raw = b.GetSafeBytes(step);
+                if (raw == null) continue;
+                if (raw.All(x => x == 0xFF)) continue;
+                var blob = new Blob { Length = (uint)raw.Length, Data = raw };
+                (o.Blobs ??= new()).Add(i, blob);
             }
 
             return o;

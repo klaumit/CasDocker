@@ -7,5 +7,6 @@ namespace PvBake.Lib.Models
         public int Length { get; set; }
         public Bios Bios { get; set; }
         public SortedDictionary<int, AddIn> AddIns { get; set; }
+        public SortedDictionary<int, Blob> Blobs { get; set; }
     }
 }
