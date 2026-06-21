@@ -39,6 +39,20 @@ namespace PvBake.Lib.Core
                     AddIns.SaveX86AddIn(addIn, new StayStream(stream));
                 }
             }
+            if (a.Blobs is { } blobs)
+            {
+                foreach (var pair in blobs)
+                {
+                    var offset = pair.Key;
+                    stream.Position = offset;
+                    var blob = pair.Value;
+
+                    var array = ByteTool.Allocate(0xAB, (int)(blob.Length ?? 0));
+                    stream.Write(array,0,array.Length);
+                    
+                    
+                }
+            }
             return true;
         }
 
