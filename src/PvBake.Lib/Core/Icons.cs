@@ -22,8 +22,8 @@ namespace PvBake.Lib.Core
         {
             var enc = Encoding.ASCII;
             using var b = new BinaryWriter(stream, enc);
-            b.Write(a.Width ?? 0);
-            b.Write(a.Height ?? 0);
+            b.Write(a.Width);
+            b.Write(a.Height);
             return true;
         }
 
