@@ -3,6 +3,7 @@ using PvBake.Lib.Models;
 using static PvBake.Lib.Core.AddIns;
 using static PvBake.Lib.Core.Bioses;
 using static PvBake.Lib.Core.Dumps;
+using static PvBake.Lib.Core.Icons;
 
 // ReSharper disable UseObjectOrCollectionInitializer
 
@@ -18,6 +19,8 @@ namespace PvBake.Lib.Core
                 return bios;
             if (ReadX86AddIn(file) is { } addIn)
                 return addIn;
+            if (ReadX86Icon(file) is { } icon)
+                return icon;
             return null;
         }
 
@@ -29,6 +32,8 @@ namespace PvBake.Lib.Core
                 return SaveX86Bios(bios, stream);
             if (file is AddIn { } addIn)
                 return SaveX86AddIn(addIn, stream);
+            if (file is Icon { } icon)
+                return SaveX86Icon(icon, stream);
             return false;
         }
     }
