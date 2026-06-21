@@ -49,10 +49,14 @@ namespace PvBake.Core
 
                 if (fo.SaveAsBmp() is { } bmpBytes)
                 {
-                    var bmpName = name.Replace(".bin", ".bmp");
-                    var bmpPath = Path.GetFullPath(Path.Combine(outRoot, $"{bmpName}"));
-                    File.WriteAllBytes(bmpPath, bmpBytes);
-                    Console.WriteLine($"      --> {bmpPath}");
+                    var bIdx = 0;
+                    foreach (var bmpItem in bmpBytes)
+                    {
+                        var bmpName = name.Replace(".bin", $".{++bIdx}.bmp");
+                        var bmpPath = Path.GetFullPath(Path.Combine(outRoot, $"{bmpName}"));
+                        File.WriteAllBytes(bmpPath, bmpItem);
+                        Console.WriteLine($"      --> {bmpPath}");
+                    }
                 }
             }
 
