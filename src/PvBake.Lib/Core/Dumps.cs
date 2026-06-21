@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using PvBake.Lib.Models;
@@ -31,13 +32,29 @@ namespace PvBake.Lib.Core
         {
             var enc = Encoding.ASCII;
             using var b = new BinaryReader(stream, enc);
+
             var dumpLen = (int)stream.Length;
             var o = new Dump { Length = dumpLen };
+
             var pos = stream.Position;
             if (Bioses.LoadX86Bios(new StayStream(stream)) is { } bios)
                 o.Bios = bios;
             else
                 stream.Position = pos;
+
+            const int step = 512;
+            int last = 0;
+            for (var i = 0; i < stream.Length; i += step)
+            {
+                stream.Position = i;
+                if (AddIns.LoadX86AddIn(new StayStream(stream)) is { } addIn)
+                {
+                    (o.AddIns ??= new()).Add(i, addIn);
+                    Console.WriteLine($" {i} ({last - i}) => {addIn.Name} {addIn.Mode} {addIn.Status}");
+                    last = i;
+                }
+            }
+
             return o;
         }
     }
