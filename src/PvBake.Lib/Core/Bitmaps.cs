@@ -63,10 +63,15 @@ namespace PvBake.Lib.Core
                 if (icon.SaveAsBmp(stream))
                     return stream.ToArray();
             }
+            if (obj is AddIn addIn)
+            {
+                GetMenuIcon(addIn);
+                GetListIcon(addIn);
+            }
             return null;
         }
 
-        public static byte[] GetIcon(this byte[] payload, uint? offset, int head = AddIns.FixedHeadSize)
+        private static byte[] GetIcon(this byte[] payload, uint? offset, int head = AddIns.FixedHeadSize)
         {
             using var input = new MemoryStream(payload);
             input.Position = (offset ?? 0) - head;
@@ -81,13 +86,13 @@ namespace PvBake.Lib.Core
 
         public static void GetMenuIcon(this AddIn addIn)
         {
-            var bmp = GetIcon(addIn.Payload, addIn.OffsMenuIcon);
+            var bmp = addIn.Payload.GetIcon(addIn.OffsMenuIcon);
             Console.WriteLine(" menu " + bmp.Length);
         }
 
         public static void GetListIcon(this AddIn addIn)
         {
-            var bmp = GetIcon(addIn.Payload, addIn.OffsListIcon);
+            var bmp = addIn.Payload.GetIcon(addIn.OffsListIcon);
             Console.WriteLine(" list " + bmp.Length);
         }
     }
