@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using PvBake.Lib.Models;
@@ -55,20 +56,21 @@ namespace PvBake.Lib.Core
             return true;
         }
 
-        public static byte[] SaveAsBmp(this IFile obj)
+        public static IEnumerable<byte[]> SaveAsBmp(this IFile obj)
         {
             if (obj is Icon icon)
             {
                 using var stream = new MemoryStream();
                 if (icon.SaveAsBmp(stream))
-                    return stream.ToArray();
+                    yield return stream.ToArray();
             }
             if (obj is AddIn addIn)
             {
-                GetMenuIcon(addIn);
-                GetListIcon(addIn);
+                var menu = addIn.GetMenuIcon();
+                if (menu != null) yield return menu;
+                var list = addIn.GetListIcon();
+                if (list != null) yield return list;
             }
-            return null;
         }
 
         private static byte[] GetIcon(this byte[] payload, uint? offset, int head = AddIns.FixedHeadSize)
@@ -84,16 +86,16 @@ namespace PvBake.Lib.Core
             return null;
         }
 
-        public static void GetMenuIcon(this AddIn addIn)
+        public static byte[] GetMenuIcon(this AddIn addIn)
         {
             var bmp = addIn.Payload.GetIcon(addIn.OffsMenuIcon);
-            Console.WriteLine(" menu " + bmp.Length);
+            return bmp;
         }
 
-        public static void GetListIcon(this AddIn addIn)
+        public static byte[] GetListIcon(this AddIn addIn)
         {
             var bmp = addIn.Payload.GetIcon(addIn.OffsListIcon);
-            Console.WriteLine(" list " + bmp.Length);
+            return bmp;
         }
     }
 }
