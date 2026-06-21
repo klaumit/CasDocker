@@ -75,8 +75,11 @@ namespace PvBake.Lib.Core
 
         private static byte[] GetIcon(this byte[] payload, uint? offset, int head = AddIns.FixedHeadSize)
         {
+            var startPos = (offset ?? 0) - head;
             using var input = new MemoryStream(payload);
-            input.Position = (offset ?? 0) - head;
+            if (startPos >= input.Length)
+                return null;
+            input.Position = startPos;
             var icon = Icons.LoadX86Icon(input);
             if (icon == null)
                 return null;
