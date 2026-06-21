@@ -12,7 +12,7 @@ namespace PvBake.Lib.Core
         internal static Dump ReadX86Dump(string file)
         {
             var info = new FileInfo(file);
-            if (info.Length is < 1000 * 1024 or > 1300 * 1024)
+            if (info.Length is < 895 * 1024 or > 1300 * 1024)
                 return null;
             using var stream = File.OpenRead(file);
             return LoadX86Dump(stream);
