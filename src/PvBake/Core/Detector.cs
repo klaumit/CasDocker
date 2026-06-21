@@ -3,6 +3,7 @@ using System.IO;
 using PvBake.Lib.Tools;
 using PvBake.Lib.API;
 using PvBake.Lib.Core;
+using PvBake.Lib.Models;
 
 // ReSharper disable UseObjectOrCollectionInitializer
 
@@ -41,6 +42,20 @@ namespace PvBake.Core
                 Printer.PrintXxd(target, targetH1);
                 var targetH2 = Path.GetFullPath(Path.Combine(outRoot, $"{name}.2.hex"));
                 Printer.PrintHxd(target, targetH2);
+
+                if (fo is { } bmpFo)
+                {
+                    var xame = name.Replace(".bin", ".bmp");
+                    var xarget = Path.GetFullPath(Path.Combine(outRoot, $"{xame}"));
+                    Console.WriteLine($"      --> {xarget}");
+                    using (var stream = File.Create(xarget))
+                        Icons.SaveX86Bmp((Icon)bmpFo, stream);
+
+                    var xargetH1 = Path.GetFullPath(Path.Combine(outRoot, $"{xame}.1.hex"));
+                    Printer.PrintXxd(xarget, xargetH1);
+                    var xargetH2 = Path.GetFullPath(Path.Combine(outRoot, $"{xame}.2.hex"));
+                    Printer.PrintHxd(xarget, xargetH2);
+                }
             }
 
             Console.WriteLine("Done.");
