@@ -27,6 +27,22 @@ namespace PvBake.Lib.Core
             return true;
         }
 
+        private static bool[] ToPixelArray(byte[] data, int offset, int width, int height, int rowBytes)
+        {
+            var pixels = new bool[width * height];
+            for (var y = 0; y < height; y++)
+            {
+                var rowStart = offset + y * rowBytes;
+                for (var x = 0; x < width; x++)
+                {
+                    var val = data[rowStart + (x >> 3)];
+                    var bit = (val >> (7 - (x & 7))) & 1;
+                    pixels[y * width + x] = bit != 0;
+                }
+            }
+            return pixels;
+        }
+
         internal static Icon LoadX86Icon(Stream stream)
         {
             var enc = Encoding.ASCII;
@@ -35,10 +51,12 @@ namespace PvBake.Lib.Core
                 return null;
             if (b.GetSafeUInt16() is not { } height)
                 return null;
-            var o = new Icon
-            {
-                Width = width, Height = height
-            };
+            var o = new Icon { Width = width, Height = height };
+            var dataLen = o.Length - 4;
+            if (b.GetSafeBytes((int)dataLen) is not { } bytes)
+                return null;
+            var rowLen = o.GetRowBytes();
+            o.Pixels = ToPixelArray(bytes, 0, width, height, rowLen);
             return o;
         }
     }
