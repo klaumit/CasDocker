@@ -30,7 +30,7 @@ namespace PvBake.Core
 
                 var fExt = Path.GetExtension(file);
                 var name = fo.GetName() ?? Path.GetFileNameWithoutExtension(file);
-                name = $"{name}{fExt}".Replace(' ', '_');
+                name = $"{name}{fExt}".Replace(' ', '_').Replace("!", "");
 
                 var target = Path.GetFullPath(Path.Combine(outRoot, name));
                 Console.WriteLine($"      --> {target}");
