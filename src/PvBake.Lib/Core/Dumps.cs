@@ -22,7 +22,18 @@ namespace PvBake.Lib.Core
             var enc = Encoding.ASCII;
             using var b = new BinaryWriter(stream, enc);
             if (a.Bios is { } bios)
-                Bioses.SaveX86Bios(bios, stream);
+            {
+                Bioses.SaveX86Bios(bios, new StayStream(stream));
+            }
+            if (a.AddIns is { } addIns)
+            {
+                foreach (var pair in addIns)
+                {
+                    var offset = pair.Key;
+                    var addIn = pair.Value;
+                    AddIns.SaveX86AddIn(addIn, new StayStream(stream));
+                }
+            }
             return true;
         }
 
