@@ -24,8 +24,26 @@ namespace PvBake.Lib.Core
             using var b = new BinaryWriter(stream, enc);
             b.Write(a.Width);
             b.Write(a.Height);
+            var rowLen = a.GetRowBytes();
+            b.Write(FromPixelArray(a.Pixels, a.Width, a.Height, rowLen));
             return true;
         }
+
+        private static byte[] FromPixelArray(bool[] pixels, int width, int height, int rowBytes)
+        {
+            var data = new byte[rowBytes * height];
+            for (var y = 0; y < height; y++)
+            {
+                var rowStart = y * rowBytes;
+                for (var x = 0; x < width; x++)
+                    if (pixels.GetPixel(x, y, width))
+                        data[rowStart + (x >> 3)] |= (byte)(0x80 >> (x & 7));
+            }
+            return data;
+        }
+
+        internal static bool GetPixel(this Icon a, int x, int y) => a.Pixels.GetPixel(x, y, a.Width);
+        internal static bool GetPixel(this bool[] a, int x, int y, int width) => a[y * width + x];
 
         private static bool[] ToPixelArray(byte[] data, int offset, int width, int height, int rowBytes)
         {
