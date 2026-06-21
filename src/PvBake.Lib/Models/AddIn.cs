@@ -17,8 +17,8 @@ namespace PvBake.Lib.Models
         public Version AppVersion { get; set; }
         public DateTime? LibCompiled { get; set; }
         public Version LibVersion { get; set; }
-        public uint? MenuIcon { get; set; }
-        public uint? ListIcon { get; set; }
+        public uint? OffsMenuIcon { get; set; }
+        public uint? OffsListIcon { get; set; }
         public string Comment { get; set; }
         [JsonIgnore]
         public byte[] Payload { get; set; }

@@ -35,8 +35,8 @@ namespace PvBake.Lib.Core
             b.Write(a.AppVersion.AsAscii());
             b.Write(a.LibCompiled.GetValueOrDefault().AsAscii());
             b.Write(a.LibVersion.AsAscii());
-            b.Write(a.MenuIcon.GetValueOrDefault());
-            b.Write(a.ListIcon.GetValueOrDefault());
+            b.Write(a.OffsMenuIcon.GetValueOrDefault());
+            b.Write(a.OffsListIcon.GetValueOrDefault());
             b.Write(a.Comment.AsAscii(length: 64, endMark: true));
             b.Write(a.Payload);
             return true;
@@ -92,7 +92,7 @@ namespace PvBake.Lib.Core
                 return null;
             if (b.GetSafeStr(64).FixStr() is not { } comment)
                 return null;
-            var restLen = (int)addInLen - 144;
+            var restLen = (int)addInLen - FixedHeadSize;
             if (b.GetSafeBytes(restLen) is not { } pyl)
                 return null;
             var rest = stream.Length - stream.Position;
@@ -110,9 +110,12 @@ namespace PvBake.Lib.Core
                 Sig = magic, Model = model, HeadVersion = headVer, Status = status,
                 Mode = mode, Name = addInName, Length = addInLen, AppCompiled = appCompiled,
                 AppVersion = appVer, LibCompiled = libCompiled, LibVersion = libVer,
-                MenuIcon = offsIcon, ListIcon = offsLIcon, Comment = comment, Payload = pyl
+                OffsMenuIcon = offsIcon, OffsListIcon = offsLIcon, Comment = comment, 
+                Payload = pyl
             };
             return o;
         }
+
+        public const int FixedHeadSize = 144;
     }
 }

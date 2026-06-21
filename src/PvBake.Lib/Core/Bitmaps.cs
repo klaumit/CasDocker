@@ -65,5 +65,30 @@ namespace PvBake.Lib.Core
             }
             return null;
         }
+
+        public static byte[] GetIcon(this byte[] payload, uint? offset, int head = AddIns.FixedHeadSize)
+        {
+            using var input = new MemoryStream(payload);
+            input.Position = (offset ?? 0) - head;
+            var icon = Icons.LoadX86Icon(input);
+            if (icon == null)
+                return null;
+            using var output = new MemoryStream();
+            if (icon.SaveAsBmp(output))
+                return output.ToArray();
+            return null;
+        }
+
+        public static void GetMenuIcon(this AddIn addIn)
+        {
+            var bmp = GetIcon(addIn.Payload, addIn.OffsMenuIcon);
+            Console.WriteLine(" menu " + bmp.Length);
+        }
+
+        public static void GetListIcon(this AddIn addIn)
+        {
+            var bmp = GetIcon(addIn.Payload, addIn.OffsListIcon);
+            Console.WriteLine(" list " + bmp.Length);
+        }
     }
 }
