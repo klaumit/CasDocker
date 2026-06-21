@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,11 +47,7 @@ namespace PvBake.Lib.Core
                     var offset = pair.Key;
                     stream.Position = offset;
                     var blob = pair.Value;
-
-                    var array = ByteTool.Allocate(0xAB, (int)(blob.Length ?? 0));
-                    stream.Write(array,0,array.Length);
-                    
-                    
+                    stream.Write(blob.Data, 0, blob.Data.Length);
                 }
             }
             return true;
@@ -71,20 +68,39 @@ namespace PvBake.Lib.Core
                 stream.Position = pos;
 
             const int step = 512;
-            for (var i = (int)stream.Position; i < stream.Length; i += step)
+            var lastEnd = -1;
+            Tuple<int, Blob> lastBlob = null;
+            for (var i = (int)stream.Position; i <= stream.Length; i += step)
             {
                 stream.Position = i;
+                if (stream.Position <= lastEnd)
+                    continue;
                 if (AddIns.LoadX86AddIn(new StayStream(stream)) is { } addIn)
                 {
                     (o.AddIns ??= new()).Add(i, addIn);
+                    lastEnd = (int)stream.Position;
                     continue;
                 }
                 stream.Position = i;
                 var raw = b.GetSafeBytes(step);
                 if (raw == null) continue;
                 if (raw.All(x => x == 0xFF)) continue;
+                if (lastBlob != null)
+                {
+                    var lastBlobIdx = lastBlob.Item1;
+                    var lastBlobLen = (int)(lastBlob.Item2.Length ?? 0);
+                    var diff = i - (lastBlobIdx + lastBlobLen);
+                    if (diff == 0)
+                    {
+                        var lastBlobObj = lastBlob.Item2;
+                        lastBlobObj.Length = (uint)(lastBlobLen + raw.Length);
+                        lastBlobObj.Data = lastBlobObj.Data.Concat(raw).ToArray();
+                        continue;
+                    }
+                }
                 var blob = new Blob { Length = (uint)raw.Length, Data = raw };
-                (o.Blobs ??= new()).Add(i, blob);
+                var bt = lastBlob = Tuple.Create(i, blob);
+                (o.Blobs ??= new()).Add(bt.Item1, bt.Item2);
             }
 
             return o;
