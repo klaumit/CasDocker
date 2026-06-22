@@ -12,6 +12,6 @@ namespace PvBake.Lib.Models
         public DateTime? Compiled { get; set; }
         public Model? SwModel { get; set; }
         [JsonIgnore]
-        public byte[] Payload { get; set; }
+        public byte[][] Payload { get; set; }
     }
 }

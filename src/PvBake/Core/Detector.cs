@@ -36,6 +36,8 @@ namespace PvBake.Core
                 Console.WriteLine($"      --> {target}");
                 using (var stream = File.Create(target))
                     FileTool.Write(fo, stream);
+                
+                WriteHex(outRoot, name, target);
 
                 if (JsonTool.ToJson(fo, format: true) is { } jsonText)
                 {

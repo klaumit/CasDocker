@@ -117,9 +117,10 @@ namespace PvBake.Lib.Tools
             return $"{ver.Major:D2}{ver.Minor:D2}".AsAscii();
         }
 
-        public static byte[] AsAscii(this DateTime dt)
+        public static byte[] AsAscii(this DateTime dt, bool noTime = false)
         {
-            return $"{dt.Year:D4}{dt.Month:D2}{dt.Day:D2}{dt.Hour:D2}{dt.Minute:D2}".AsAscii();
+            var time = noTime ? string.Empty : $"{dt.Hour:D2}{dt.Minute:D2}";
+            return $"{dt.Year:D4}{dt.Month:D2}{dt.Day:D2}{time}".AsAscii();
         }
 
         public static Version AsVer(this string txt)

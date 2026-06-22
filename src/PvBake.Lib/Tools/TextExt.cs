@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text;
 using ByteSizeLib;
 
@@ -30,6 +31,11 @@ namespace PvBake.Lib.Tools
         {
             const char end = (char)0x00;
             val += end;
+        }
+
+        public static byte[] GetPlainBytes(this string text)
+        {
+            return text.Select(t => (byte)t).ToArray();
         }
     }
 }
