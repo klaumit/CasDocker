@@ -3,6 +3,7 @@ using System.IO;
 using PvBake.Lib.Tools;
 using PvBake.Lib.API;
 using PvBake.Lib.Core;
+using PvBake.Lib.Models;
 
 // ReSharper disable UseObjectOrCollectionInitializer
 
@@ -28,39 +29,68 @@ namespace PvBake.Core
                 if (FileTool.Read(file) is not { } fo)
                     continue;
 
-                var fExt = fo.GetExt() ?? Path.GetExtension(file);
-                var name = fo.GetName() ?? Path.GetFileNameWithoutExtension(file);
-                name = $"{name}{fExt}".Replace(' ', '_').Replace("!", "");
-
-                var target = Path.GetFullPath(Path.Combine(outRoot, name));
-                Console.WriteLine($"      --> {target}");
-                using (var stream = File.Create(target))
-                    FileTool.Write(fo, stream);
-                
-                WriteHex(outRoot, name, target);
-
-                if (JsonTool.ToJson(fo, format: true) is { } jsonText)
-                {
-                    var jsonName = name.Replace(fExt, ".json");
-                    var jsonPath = Path.GetFullPath(Path.Combine(outRoot, $"{jsonName}"));
-                    File.WriteAllText(jsonPath, jsonText, TextExt.Utf);
-                    Console.WriteLine($"      --> {jsonPath}");
-                }
-
-                if (fo.SaveAsBmp() is { } bmpBytes)
-                {
-                    var bIdx = 0;
-                    foreach (var bmpItem in bmpBytes)
-                    {
-                        var bmpName = name.Replace(fExt, $"_{++bIdx}.bmp");
-                        var bmpPath = Path.GetFullPath(Path.Combine(outRoot, $"{bmpName}"));
-                        File.WriteAllBytes(bmpPath, bmpItem);
-                        Console.WriteLine($"      --> {bmpPath}");
-                    }
-                }
+                WriteOne(fo, outRoot, file);
             }
 
             Console.WriteLine("Done.");
+        }
+
+        private static void WriteOut(IFile fo, string outRoot, string file)
+        {
+            var fExt = fo.GetExt() ?? Path.GetExtension(file);
+            var name = fo.GetName() ?? Path.GetFileNameWithoutExtension(file);
+            name = $"{name}{fExt}".Replace(' ', '_').Replace("!", "");
+
+            var target = Path.GetFullPath(Path.Combine(outRoot, name));
+            Console.WriteLine($"      --> {target}");
+            using (var stream = File.Create(target))
+                FileTool.Write(fo, stream);
+
+            WriteHex(outRoot, name, target);
+
+            if (JsonTool.ToJson(fo, format: true) is { } jsonText)
+            {
+                var jsonName = name.Replace(fExt, ".json");
+                var jsonPath = Path.GetFullPath(Path.Combine(outRoot, $"{jsonName}"));
+                File.WriteAllText(jsonPath, jsonText, TextExt.Utf);
+                Console.WriteLine($"      --> {jsonPath}");
+            }
+
+            if (fo.SaveAsBmp() is { } bmpBytes)
+            {
+                var bIdx = 0;
+                foreach (var bmpItem in bmpBytes)
+                {
+                    var bmpName = name.Replace(fExt, $"_{++bIdx}.bmp");
+                    var bmpPath = Path.GetFullPath(Path.Combine(outRoot, $"{bmpName}"));
+                    File.WriteAllBytes(bmpPath, bmpItem);
+                    Console.WriteLine($"      --> {bmpPath}");
+                }
+            }
+        }
+
+        private static void WriteOne(IFile file, string outRoot, string iFile)
+        {
+            var baseName = Path.GetFileNameWithoutExtension(iFile);
+            if (file is Dump { } dump)
+            {
+                WriteOut(dump, outRoot, iFile);
+                WriteOne(dump.Bios, outRoot, $"{baseName}_bios");
+                foreach (var (key, val) in dump.AddIns)
+                    WriteOne(val, outRoot, $"{baseName}_a{key}");
+                return;
+            }
+            if (file is Bios { } bios)
+            {
+                WriteOut(bios, outRoot, iFile);
+                return;
+            }
+            if (file is AddIn { } addIn)
+            {
+                WriteOut(addIn, outRoot, iFile);
+                return;
+            }
+            throw new InvalidOperationException(file.GetType().FullName);
         }
 
         private static void WriteHex(string outRoot, string name, string target)
