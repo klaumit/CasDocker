@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using PvBake.Lib.Models;
 using PvBake.Lib.Tools;
@@ -52,16 +51,14 @@ namespace PvBake.Lib.Core
                 return null;
             if (b.GetSafeStr(8) is not { } compDateStr)
                 return null;
-            Console.WriteLine(compDateStr);
             if (compDateStr.AsDate() is not { } bioCompiled)
                 return null;
             if (b.GetSafeStr(4) is not { } sModelStr)
                 return null;
-            Console.WriteLine(sModelStr);
             if (sModelStr.AsEnum<Model>() is not { } sModel)
                 throw new InvalidOperationException(sModelStr);
             var biosLen = Math.Min(128 * 1024, (int)stream.Length);
-            var restLen = biosLen - 12;
+            var restLen = biosLen - FixedHeadSize - OsHeadSize;
             if (b.GetSafeBytes(restLen) is not { } pyl)
                 return null;
             var o = new Bios
@@ -71,5 +68,8 @@ namespace PvBake.Lib.Core
             };
             return o;
         }
+
+        public const int FixedHeadSize = 12;
+        public const int OsHeadSize = 65428;
     }
 }
