@@ -6,6 +6,8 @@ namespace PvBake.Lib.Models
 
         Z481,
 
+        Z482,
+
         Z486,
 
         Z488,

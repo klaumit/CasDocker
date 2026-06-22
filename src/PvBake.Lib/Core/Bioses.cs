@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using PvBake.Lib.Models;
 using PvBake.Lib.Tools;
@@ -41,13 +42,32 @@ namespace PvBake.Lib.Core
                 return null;
             if (modelStr.AsEnum<Model>() is not { } model)
                 throw new InvalidOperationException(modelStr);
+            if (b.GetSafeBytes(65388) is not { } pay1)
+                return null;
+            if (b.GetSafeStr(8) is not { } headMrk)
+                return null;
+            if (headMrk is not "OSHEADER")
+                return null;
+            if (b.GetSafeBytes(8) is not { } pay2)
+                return null;
+            if (b.GetSafeStr(8) is not { } compDateStr)
+                return null;
+            Console.WriteLine(compDateStr);
+            if (compDateStr.AsDate() is not { } bioCompiled)
+                return null;
+            if (b.GetSafeStr(4) is not { } sModelStr)
+                return null;
+            Console.WriteLine(sModelStr);
+            if (sModelStr.AsEnum<Model>() is not { } sModel)
+                throw new InvalidOperationException(sModelStr);
             var biosLen = Math.Min(128 * 1024, (int)stream.Length);
             var restLen = biosLen - 12;
             if (b.GetSafeBytes(restLen) is not { } pyl)
                 return null;
             var o = new Bios
             {
-                Sig = magic, Model = model, Length = (uint)biosLen, Payload = pyl
+                Sig = magic, Model = model, Length = (uint)biosLen,
+                Compiled = bioCompiled, SwModel = sModel, Payload = pyl
             };
             return o;
         }

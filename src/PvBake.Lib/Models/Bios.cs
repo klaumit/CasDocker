@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace PvBake.Lib.Models
@@ -8,6 +9,8 @@ namespace PvBake.Lib.Models
         public byte[] Sig { get; set; }
         public Model? Model { get; set; }
         public uint? Length { get; set; }
+        public DateTime? Compiled { get; set; }
+        public Model? SwModel { get; set; }
         [JsonIgnore]
         public byte[] Payload { get; set; }
     }
