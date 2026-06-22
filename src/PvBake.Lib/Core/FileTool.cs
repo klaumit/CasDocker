@@ -38,6 +38,19 @@ namespace PvBake.Lib.Core
             return false;
         }
 
+        public static string GetExt(this IFile file)
+        {
+            if (file is Dump { } dump)
+                return ".dmp";
+            if (file is Bios { } bios)
+                return ".dat";
+            if (file is AddIn { } addIn)
+                return ".bin";
+            if (file is Icon { } icon)
+                return ".icb";
+            return null;
+        }
+
         public static string GetName(this IFile file)
         {
             if (file is AddIn { } addIn)

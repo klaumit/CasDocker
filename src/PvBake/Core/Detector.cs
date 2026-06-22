@@ -18,7 +18,7 @@ namespace PvBake.Core
             Console.WriteLine($"Output = {outRoot}");
 
             const SearchOption so = SearchOption.AllDirectories;
-            var files = Directory.GetFiles(inRoot, "*.bin", so);
+            var files = Directory.GetFiles(inRoot, "*.*", so);
 
             foreach (var file in files)
             {
@@ -28,7 +28,7 @@ namespace PvBake.Core
                 if (FileTool.Read(file) is not { } fo)
                     continue;
 
-                var fExt = Path.GetExtension(file);
+                var fExt = fo.GetExt() ?? Path.GetExtension(file);
                 var name = fo.GetName() ?? Path.GetFileNameWithoutExtension(file);
                 name = $"{name}{fExt}".Replace(' ', '_').Replace("!", "");
 
@@ -39,7 +39,7 @@ namespace PvBake.Core
 
                 if (JsonTool.ToJson(fo, format: true) is { } jsonText)
                 {
-                    var jsonName = name.Replace(".bin", ".json");
+                    var jsonName = name.Replace(fExt, ".json");
                     var jsonPath = Path.GetFullPath(Path.Combine(outRoot, $"{jsonName}"));
                     File.WriteAllText(jsonPath, jsonText, TextExt.Utf);
                     Console.WriteLine($"      --> {jsonPath}");
@@ -50,7 +50,7 @@ namespace PvBake.Core
                     var bIdx = 0;
                     foreach (var bmpItem in bmpBytes)
                     {
-                        var bmpName = name.Replace(".bin", $"_{++bIdx}.bmp");
+                        var bmpName = name.Replace(fExt, $"_{++bIdx}.bmp");
                         var bmpPath = Path.GetFullPath(Path.Combine(outRoot, $"{bmpName}"));
                         File.WriteAllBytes(bmpPath, bmpItem);
                         Console.WriteLine($"      --> {bmpPath}");
