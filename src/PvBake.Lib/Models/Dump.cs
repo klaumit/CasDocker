@@ -7,8 +7,8 @@ namespace PvBake.Lib.Models
     {
         public int Length { get; set; }
         public Bios Bios { get; set; }
-        [JsonIgnore]
         public SortedDictionary<int, AddIn> AddIns { get; set; }
+        [JsonIgnore]
         public SortedDictionary<int, Blob> Blobs { get; set; }
     }
 }
