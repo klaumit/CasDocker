@@ -20,7 +20,14 @@ void main()
 	);
 	LibStringDsp( B@ debug, 5, 30, 160, B@@ IB_PFONT1);
 
+	sprintf(debug, "Communication: %s", 
+		GetOpenPortStr(OpenPort(GetCommKind()))
+	);
+	LibStringDsp( B@ debug, 5, 40, 160, B@@ IB_PFONT1);
+
 	LibPutDisp();
+
+	TestPort();
 
 	for (i = 0; i < 100; i++)
 	{
@@ -29,5 +36,8 @@ void main()
 		LibPutDisp();
 		LibWait(IB_1SWAIT);
 	}
+
+	ClosePort();
 	LibJumpMenu();
 }
+
