@@ -11,7 +11,7 @@ void main()
 
 	LibInitDisp();
 	LibClrDisp();
-	
+
 	LibStringDsp( B@ "Hello World!!!", 5, 10, 160, B@@ IB_PFONT2);
 	LibStringDsp( B@ "Your device is fucked", 5, 30, 160, B@@ IB_PFONT1);
 	LibStringDsp( B@ "by the mafia", 5, 40, 160, B@@ IB_PFONT2);
@@ -19,13 +19,13 @@ void main()
 	LibStringDsp( B@ "admin@nonsense.com.uk", 5, 70, 160, B@@ IB_PFONT2);
 	LibPutDisp();
 
-	for (i = 0; i < 10000; i++)
+	for (i = 0; i < 100; i++)
 	{
 		sprintf(debug, "Waiting %d sec...", i);
 		LibStringDsp( B@ debug, 5, 100, 160, B@@ IB_PFONT2);
 		LibPutDisp();
 		LibWait(IB_1SWAIT);
-	}	
+	}
 	LibJumpMenu();
 }
 
