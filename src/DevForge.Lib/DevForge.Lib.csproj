@@ -36,7 +36,8 @@
   <ItemGroup>
     <Compile Include="API\ICommDevice.cs" />
     <Compile Include="Legacy\LegacyDevice.cs" />
-    <Compile Include="Modern\ModernDevice.cs" />
+    <Compile Include="Modern\EnumDevNative.cs" />
+	<Compile Include="Modern\ModernDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
