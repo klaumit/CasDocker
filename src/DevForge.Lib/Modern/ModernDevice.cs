@@ -18,6 +18,7 @@ namespace DevForge.Lib.Modern
         private void DoLoop()
         {
             _port = Universals.CreatePort();
+            Console.WriteLine(" " + this.GetType().Name + " ..."); 
             var head = _port.ReadString();
             Console.WriteLine(" " + this.GetType().Name + " => '" + head + "'");
         }

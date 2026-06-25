@@ -19,6 +19,7 @@ namespace DevForge.Lib.Legacy
         private void DoLoop()
         {
             _port = Serials.CreatePort();
+            Console.WriteLine(" " + this.GetType().Name + " ...");
             var head = _port.ReadString();
             Console.WriteLine(" " + this.GetType().Name + " => '" + head + "'");
         }

@@ -54,7 +54,7 @@ namespace DevForge.Lib.Modern
             if (!E.PVReadUsb(handle, buffer, (uint)buffer.Length, out bytesRead))
                 return null;
             var text = Encoding.ASCII.GetString(buffer);
-            var res = text.Substring(0, (int)bytesRead);
+            var res = text.Substring(0, (int)bytesRead).Trim();
             return res;
         }
 

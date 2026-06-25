@@ -29,7 +29,7 @@ namespace DevForge.Lib.Legacy
             if (bytesRead < 1)
                 return null;
             var text = Encoding.ASCII.GetString(buffer);
-            var res = text.Substring(0, bytesRead);
+            var res = text.Substring(0, bytesRead).Trim();
             return res;
         }
 
