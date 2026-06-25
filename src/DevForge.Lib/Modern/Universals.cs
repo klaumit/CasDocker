@@ -14,21 +14,20 @@ namespace DevForge.Lib.Modern
 {
     internal static class Universals
     {
-        public sealed class Uni
+        internal static UsbPort CreatePort()
         {
+            var names = UsbPort.GetPortNames();
+            var name = names.Last();
+            var port = new UsbPort(name);
+            port.Open();
+            return port;
         }
 
-        internal static void Fuck(int wait = 250)
+        internal static void ClosePort(ref UsbPort port)
         {
-            string devicePath;
-            do
-            {
-                var path = new byte[260];
-                var idx = EnumDevNative.PVEnumUsbA(0, path, path.Length);
-                devicePath = Encoding.ASCII.GetString(path).TrimEnd('\0');
-
-                Thread.Sleep(wait);
-            } while (string.IsNullOrWhiteSpace(devicePath));
+            using (port)
+                port.Close();
+            port = null;
         }
     }
 }

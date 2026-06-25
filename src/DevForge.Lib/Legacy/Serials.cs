@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using DevForge.Lib.API;
 using System.IO.Ports;
+using System.Threading;
 
 namespace DevForge.Lib.Legacy
 {
     internal static class Serials
     {
-        public static SerialPort CreatePort()
+        internal static SerialPort CreatePort()
         {
             var names = SerialPort.GetPortNames();
             var name = names.Last();
