@@ -44,7 +44,7 @@ namespace DevForge.Lib.Modern
             _usbHandle = handle;
         }
 
-        private string ReadString(int maxLen = 64)
+        internal string ReadString(int maxLen = 64)
         {
             if (_usbHandle == null)
                 return null;
