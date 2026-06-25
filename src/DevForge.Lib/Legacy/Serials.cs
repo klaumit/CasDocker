@@ -21,6 +21,8 @@ namespace DevForge.Lib.Legacy
 
         internal static void ClosePort(ref SerialPort port)
         {
+            if (port == null)
+                return;
             using (port)
                 port.Close();
             port = null;
