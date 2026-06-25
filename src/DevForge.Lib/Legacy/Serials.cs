@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.IO.Ports;
+using System.Text;
 
 namespace DevForge.Lib.Legacy
 {
@@ -17,6 +18,19 @@ namespace DevForge.Lib.Legacy
             port.Handshake = Handshake.RequestToSend;
             port.Open();
             return port;
+        }
+
+        internal static string ReadString(this SerialPort port, int maxLen = 64)
+        {
+            if (port == null)
+                return null;
+            var buffer = new byte[maxLen];
+            var bytesRead = port.Read(buffer, 0, buffer.Length);
+            if (bytesRead < 1)
+                return null;
+            var text = Encoding.ASCII.GetString(buffer);
+            var res = text.Substring(0, bytesRead);
+            return res;
         }
 
         internal static void ClosePort(ref SerialPort port)
