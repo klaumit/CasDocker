@@ -1,4 +1,3 @@
-using System.Linq;
 using DevForge.Lib.API;
 using System.IO.Ports;
 

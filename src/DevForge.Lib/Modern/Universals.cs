@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DevForge.Lib.API;
-using System.IO.Ports;
-using System.Threading;
+﻿using System.Linq;
 
 namespace DevForge.Lib.Modern
 {
