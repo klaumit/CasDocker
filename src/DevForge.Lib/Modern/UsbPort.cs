@@ -3,6 +3,8 @@ using System.Text;
 using System.Threading;
 using E = DevForge.Lib.Modern.EnumDevNative;
 
+// ReSharper disable InlineOutVariableDeclaration
+
 namespace DevForge.Lib.Modern
 {
     public sealed class UsbPort : IDisposable
@@ -40,6 +42,20 @@ namespace DevForge.Lib.Modern
                 return;
 
             _usbHandle = handle;
+        }
+
+        private string ReadString(int maxLen = 64)
+        {
+            if (_usbHandle == null)
+                return null;
+            var handle = _usbHandle.Value;
+            byte[] buffer = new byte[maxLen];
+            uint bytesRead;
+            if (!E.PVReadUsb(handle, buffer, (uint)buffer.Length, out bytesRead))
+                return null;
+            var text = Encoding.ASCII.GetString(buffer);
+            var res = text.Substring(0, (int)bytesRead);
+            return res;
         }
 
         public void Close()
