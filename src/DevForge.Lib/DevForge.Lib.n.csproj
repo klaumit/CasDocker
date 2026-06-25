@@ -11,4 +11,11 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="lib\EnumDev.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>EnumDev_win32.dll</TargetPath>
+    </None>
+  </ItemGroup>
+
 </Project>
