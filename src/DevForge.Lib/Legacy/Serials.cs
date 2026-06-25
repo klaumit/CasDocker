@@ -16,6 +16,7 @@ namespace DevForge.Lib.Legacy
             const StopBits stopB = StopBits.One;
             var port = new SerialPort(name, speed, parity, dataB, stopB);
             port.Handshake = Handshake.RequestToSend;
+            port.NewLine = "\r\n";
             port.Open();
             return port;
         }
@@ -26,10 +27,13 @@ namespace DevForge.Lib.Legacy
                 return null;
             var buffer = new byte[maxLen];
             var bytesRead = port.Read(buffer, 0, buffer.Length);
+            int rest;
+            while ((rest = port.BytesToRead) >= 1)
+                bytesRead = port.Read(buffer, bytesRead, buffer.Length - bytesRead);
             if (bytesRead < 1)
                 return null;
-            var text = Encoding.ASCII.GetString(buffer);
-            var res = text.Substring(0, bytesRead).Trim();
+            var text = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+            var res = text.Trim();
             return res;
         }
 
