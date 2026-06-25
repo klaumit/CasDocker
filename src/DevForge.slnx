@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DevForge.Lib/DevForge.Lib.n.csproj" />
+  <Project Path="DevForge/DevForge.n.csproj" />
+</Solution>
