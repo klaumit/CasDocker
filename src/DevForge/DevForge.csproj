@@ -40,5 +40,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevForge.Lib\DevForge.Lib.csproj">
+      <Project>{66B13B0B-BB8F-4022-A48A-1617F49F594E}</Project>
+      <Name>DevForge.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

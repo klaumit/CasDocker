@@ -12,9 +12,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="lib\EnumDev.dll">
+    <None Update="EnumDev.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <TargetPath>EnumDev_win32.dll</TargetPath>
     </None>
   </ItemGroup>
 

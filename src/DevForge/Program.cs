@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DevForge.Lib;
 
 namespace DevForge
 {
@@ -9,6 +10,8 @@ namespace DevForge
     {
         static void Main(string[] args)
         {
+            Class1 c;
+
         }
     }
 }
