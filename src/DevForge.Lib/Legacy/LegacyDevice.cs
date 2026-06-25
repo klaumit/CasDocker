@@ -8,18 +8,19 @@ namespace DevForge.Lib.Legacy
     {
         private SerialPort _port;
 
-        public LegacyDevice()
+        public void Start()
         {
-            var names = SerialPort.GetPortNames();
-            var name = names.Last();
-            const int speed = 38400;
-            const Parity parity = Parity.None;
-            const int dataB = 8;
-            const StopBits stopB = StopBits.One;
-            var port = new SerialPort(name, speed, parity, dataB, stopB);
-            port.Handshake = Handshake.RequestToSend;
-            port.Open();
-            _port = port;
+            _port = Serials.CreatePort();
+        }
+
+        public void Stop()
+        {
+            Serials.ClosePort(ref _port);
+        }
+
+        public void Dispose()
+        {
+            Stop();
         }
     }
 }

@@ -9,11 +9,15 @@ namespace DevForge
     {
         private static void Main(string[] args)
         {
-            ICommDevice dev1 = new LegacyDevice();
-            ICommDevice dev2 = new ModernDevice();
+            using (ICommDevice dev1 = new LegacyDevice())
+            using (ICommDevice dev2 = new ModernDevice())
+            {
+                dev1.Start();
+                dev2.Start();
 
-            Console.WriteLine("Waiting...");
-            Console.ReadLine();
+                Console.WriteLine("Waiting...");
+                Console.ReadLine();
+            }
         }
     }
 }
