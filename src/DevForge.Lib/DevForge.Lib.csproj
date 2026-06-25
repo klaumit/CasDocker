@@ -34,7 +34,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="API\Class1.cs" />
+    <Compile Include="Legacy\Class1.cs" />
+    <Compile Include="Modern\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
