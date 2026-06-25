@@ -49,7 +49,7 @@ namespace DevForge.Lib.Modern
             if (_usbHandle == null)
                 return null;
             var handle = _usbHandle.Value;
-            byte[] buffer = new byte[maxLen];
+            var buffer = new byte[maxLen];
             uint bytesRead;
             if (!E.PVReadUsb(handle, buffer, (uint)buffer.Length, out bytesRead))
                 return null;
