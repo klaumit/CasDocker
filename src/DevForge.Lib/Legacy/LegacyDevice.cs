@@ -4,18 +4,18 @@ using System.IO.Ports;
 
 namespace DevForge.Lib.Legacy
 {
-    public sealed class LegacyCommDevice : ICommDevice
+    public sealed class LegacyDevice : ICommDevice
     {
         private SerialPort _port;
 
-        public LegacyCommDevice()
+        public LegacyDevice()
         {
             var names = SerialPort.GetPortNames();
             var name = names.Last();
-            var speed = 38400;
-            var parity = Parity.None;
-            var dataB = 8;
-            var stopB = StopBits.One;
+            const int speed = 38400;
+            const Parity parity = Parity.None;
+            const int dataB = 8;
+            const StopBits stopB = StopBits.One;
             var port = new SerialPort(name, speed, parity, dataB, stopB);
             port.Handshake = Handshake.RequestToSend;
             port.Open();

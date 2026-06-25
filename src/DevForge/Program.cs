@@ -8,8 +8,8 @@ namespace DevForge
     {
         private static void Main(string[] args)
         {
-            ICommDevice dev1 = new LegacyCommDevice();
-            ICommDevice dev2 = new ModernCommDevice();
+            ICommDevice dev1 = new LegacyDevice();
+            ICommDevice dev2 = new ModernDevice();
         }
     }
 }
