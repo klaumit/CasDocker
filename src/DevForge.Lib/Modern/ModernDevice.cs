@@ -1,17 +1,21 @@
+using System.Linq;
 using DevForge.Lib.API;
+using System.IO.Ports;
 
 namespace DevForge.Lib.Modern
 {
     public sealed class ModernDevice : ICommDevice
     {
+        private UsbPort _port;
+
         public void Start()
         {
-            Universals.Fuck();
+            _port = Universals.CreatePort();
         }
 
         public void Stop()
         {
-            throw new System.NotImplementedException();
+            Universals.ClosePort(ref _port);
         }
 
         public void Dispose()
