@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading;
 using E = DevForge.Lib.Modern.EnumDevNative;
 
+// ReSharper disable UseCollectionExpression
 // ReSharper disable InlineOutVariableDeclaration
 
 namespace DevForge.Lib.Modern
@@ -15,21 +16,6 @@ namespace DevForge.Lib.Modern
         public UsbPort(string path)
         {
             _path = path;
-        }
-
-        public static string[] GetPortNames(int wait = 250)
-        {
-            string devicePath;
-            do
-            {
-                var path = new byte[260];
-                var idx = E.PVEnumUsbA(0, path, path.Length);
-                devicePath = Encoding.ASCII.GetString(path).TrimEnd('\0');
-
-                Thread.Sleep(wait);
-            } while (string.IsNullOrWhiteSpace(devicePath));
-
-            return new[] { devicePath };
         }
 
         public void Open()
