@@ -13,7 +13,7 @@ namespace DevForge.Lib.Modern
     public sealed class ModernPort : ICommPort
     {
         private readonly string _devicePath;
-        private IntPtr _usbHandle;
+        private IntPtr? _usbHandle;
 
         public ModernPort(string devicePath)
         {
@@ -28,6 +28,18 @@ namespace DevForge.Lib.Modern
             if (handle == IntPtr.Zero)
                 return;
             _usbHandle = handle;
+        }
+
+        private void Close()
+        {
+            if (_usbHandle != null)
+                K.CloseHandle(_usbHandle.Value);
+            _usbHandle = null;
+        }
+
+        public void Dispose()
+        {
+            Close();
         }
     }
 }

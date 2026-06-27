@@ -5,7 +5,7 @@ namespace DevForge.Lib.Legacy
 {
     public sealed class LegacyPort : ICommPort
     {
-        private readonly SerialPort _port;
+        private SerialPort _port;
 
         public LegacyPort(SerialPort port)
         {
@@ -15,6 +15,18 @@ namespace DevForge.Lib.Legacy
         public void Open()
         {
             _port.Open();
+        }
+
+        private void Close()
+        {
+            if (_port != null)
+                _port.Close();
+            _port = null;
+        }
+
+        public void Dispose()
+        {
+            Close();
         }
     }
 }

@@ -1,6 +1,8 @@
+using System;
+
 namespace DevForge.Lib.API
 {
-    public interface ICommPort
+    public interface ICommPort : IDisposable
     {
         void Open();
     }
