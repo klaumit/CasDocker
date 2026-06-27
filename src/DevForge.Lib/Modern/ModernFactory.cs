@@ -2,7 +2,7 @@ using System.Linq;
 using DevForge.Lib.API;
 using System.Text;
 using System.Threading;
-using E = DevForge.Lib.Modern.EnumDevNative;
+using E = DevForge.Lib.Modern.Internals.EnumDevNative;
 
 // ReSharper disable UseCollectionExpression
 // ReSharper disable InlineOutVariableDeclaration

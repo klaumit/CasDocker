@@ -1,7 +1,7 @@
 ﻿using System;
 using DevForge.Lib.API;
+using DevForge.Lib.Common;
 using DevForge.Lib.Legacy;
-using DevForge.Lib.Modern;
 
 #pragma warning disable CA1859
 // ReSharper disable ConvertToUsingDeclaration

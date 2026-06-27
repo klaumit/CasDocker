@@ -1,4 +1,6 @@
-namespace DevForge.Lib.API
+using DevForge.Lib.API;
+
+namespace DevForge.Lib.Common
 {
     public static class CommExt
     {

@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using DevForge.Lib.API;
 
-namespace DevForge.Lib.Modern
+namespace DevForge.Lib.Common
 {
     public sealed class PocketDevice : ICommDevice
     {

@@ -1,8 +1,8 @@
 using System;
 using System.Text;
 using DevForge.Lib.API;
-using E = DevForge.Lib.Modern.EnumDevNative;
-using K = DevForge.Lib.Modern.KernelNative;
+using E = DevForge.Lib.Modern.Internals.EnumDevNative;
+using K = DevForge.Lib.Modern.Internals.KernelNative;
 
 // ReSharper disable UseCollectionExpression
 // ReSharper disable InlineOutVariableDeclaration

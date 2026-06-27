@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace DevForge.Lib.Modern
+namespace DevForge.Lib.Modern.Internals
 {
     internal static class EnumDevNative
     {
