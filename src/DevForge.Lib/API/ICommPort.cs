@@ -8,6 +8,6 @@ namespace DevForge.Lib.API
 
         void Close();
 
-        string ReadString(int maxLen = 64);
+        byte[] ReadBytes(int count);
     }
 }

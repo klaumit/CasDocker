@@ -1,5 +1,5 @@
+using System;
 using System.IO.Ports;
-using System.Text;
 using DevForge.Lib.API;
 
 // ReSharper disable UseCollectionExpression
@@ -36,20 +36,20 @@ namespace DevForge.Lib.Legacy
             Close();
         }
 
-        public string ReadString(int maxLen = 64)
+        public byte[] ReadBytes(int count)
         {
             if (_port == null)
                 return null;
-            var buffer = new byte[maxLen];
+            var buffer = new byte[count];
             var bytesRead = _port.Read(buffer, 0, buffer.Length);
             int rest;
-            while ((rest = _port.BytesToRead) >= 1)
+            while ((bytesRead < buffer.Length) && (rest = _port.BytesToRead) >= 1)
                 bytesRead += _port.Read(buffer, bytesRead, rest);
             if (bytesRead < 1)
                 return null;
-            var text = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            var res = text.Trim();
-            return res;
+            if (buffer.Length != bytesRead)
+                Array.Resize(ref buffer, bytesRead);
+            return buffer;
         }
     }
 }

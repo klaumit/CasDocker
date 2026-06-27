@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using DevForge.Lib.API;
 using E = DevForge.Lib.Modern.Internals.EnumDevNative;
 using K = DevForge.Lib.Modern.Internals.KernelNative;
@@ -43,18 +42,20 @@ namespace DevForge.Lib.Modern
             Close();
         }
 
-        public string ReadString(int maxLen = 64)
+        public byte[] ReadBytes(int count)
         {
             if (_usbHandle == null)
                 return null;
             var handle = _usbHandle.Value;
-            var buffer = new byte[maxLen];
+            var buffer = new byte[count];
             uint bytesRead;
             if (!E.PVReadUsb(handle, buffer, (uint)buffer.Length, out bytesRead))
                 return null;
-            var text = Encoding.ASCII.GetString(buffer, 0, (int)bytesRead);
-            var res = text.Trim();
-            return res;
+            if (bytesRead < 1)
+                return null;
+            if (buffer.Length != bytesRead)
+                Array.Resize(ref buffer, (int)bytesRead);
+            return buffer;
         }
     }
 }
