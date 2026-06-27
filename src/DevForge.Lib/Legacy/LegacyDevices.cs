@@ -27,5 +27,14 @@ namespace DevForge.Lib.Legacy
             wrap.Open();
             return wrap;
         }
+
+        public static void ClosePort(ref SerialPort port)
+        {
+            if (port == null)
+                return;
+            using (port)
+                port.Close();
+            port = null;
+        }
     }
 }

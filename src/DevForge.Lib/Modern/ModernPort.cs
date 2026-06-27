@@ -30,10 +30,12 @@ namespace DevForge.Lib.Modern
             _usbHandle = handle;
         }
 
-        private void Close()
+        public void Close()
         {
             if (_usbHandle != null)
+            {
                 K.CloseHandle(_usbHandle.Value);
+            }
             _usbHandle = null;
         }
 

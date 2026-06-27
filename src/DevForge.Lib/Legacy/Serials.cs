@@ -4,23 +4,8 @@ using System.Text;
 
 namespace DevForge.Lib.Legacy
 {
-    internal static class Serials
+    internal static class Serials4
     {
-        internal static SerialPort CreatePort()
-        {
-            var names = SerialPort.GetPortNames();
-            var name = names.Last();
-            const int speed = 38400;
-            const Parity parity = Parity.None;
-            const int dataB = 8;
-            const StopBits stopB = StopBits.One;
-            var port = new SerialPort(name, speed, parity, dataB, stopB);
-            port.Handshake = Handshake.RequestToSend;
-            port.NewLine = "\r\n";
-            port.Open();
-            return port;
-        }
-
         internal static string ReadString(this SerialPort port, int maxLen = 64)
         {
             if (port == null)
@@ -35,15 +20,6 @@ namespace DevForge.Lib.Legacy
             var text = Encoding.ASCII.GetString(buffer, 0, bytesRead);
             var res = text.Trim();
             return res;
-        }
-
-        internal static void ClosePort(ref SerialPort port)
-        {
-            if (port == null)
-                return;
-            using (port)
-                port.Close();
-            port = null;
         }
     }
 }

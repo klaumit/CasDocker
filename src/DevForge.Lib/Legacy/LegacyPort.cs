@@ -17,10 +17,13 @@ namespace DevForge.Lib.Legacy
             _port.Open();
         }
 
-        private void Close()
+        public void Close()
         {
             if (_port != null)
+            {
                 _port.Close();
+                _port.Dispose();
+            }
             _port = null;
         }
 
