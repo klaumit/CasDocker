@@ -3,6 +3,8 @@ using DevForge.Lib.API;
 using DevForge.Lib.Legacy;
 using DevForge.Lib.Modern;
 
+// ReSharper disable ConvertToUsingDeclaration
+
 namespace DevForge
 {
     internal static class Program
