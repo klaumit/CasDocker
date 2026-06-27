@@ -13,15 +13,15 @@ namespace DevForge.Lib.Modern
         public static string[] GetPortNames(int wait = 250)
         {
             string devicePath;
-            do
+            while (true)
             {
                 var path = new byte[260];
                 E.PVEnumUsbA(0, path, path.Length);
                 devicePath = Encoding.ASCII.GetString(path).TrimEnd('\0');
-
+                if (!string.IsNullOrWhiteSpace(devicePath))
+                    break;
                 Thread.Sleep(wait);
-            } while (string.IsNullOrWhiteSpace(devicePath));
-
+            }
             return new[] { devicePath };
         }
     }
