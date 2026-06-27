@@ -1,7 +1,6 @@
 using System.IO.Ports;
 using System.Linq;
 using DevForge.Lib.API;
-using DevForge.Lib.API;
 
 namespace DevForge.Lib.Legacy
 {

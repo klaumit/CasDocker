@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using DevForge.Lib.API;
-using System.IO.Ports;
 
 namespace DevForge.Lib.Modern
 {

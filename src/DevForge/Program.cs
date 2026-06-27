@@ -1,12 +1,9 @@
 ﻿using System;
-using System.IO.Ports;
-using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using DevForge.Lib.API;
 using DevForge.Lib.Legacy;
 using DevForge.Lib.Modern;
 
+#pragma warning disable CA1859
 // ReSharper disable ConvertToUsingDeclaration
 
 namespace DevForge
@@ -15,11 +12,9 @@ namespace DevForge
     {
         private static void Main(string[] args)
         {
-            using (ICommDevice dev1 = new PocketDevice(new Legacy()))
-            using (ICommDevice dev2 = new PocketDevice(new Modern()))
+            using (ICommDevice dev = new PocketDevice(new LegacyFactory()))
             {
-                dev1.Start();
-                dev2.Start();
+                dev.Start();
 
                 Console.WriteLine("Waiting...");
                 Console.ReadLine();

@@ -1,7 +1,5 @@
-using System.Linq;
 using System.IO.Ports;
 using System.Text;
-using System.IO.Ports;
 using DevForge.Lib.API;
 
 // ReSharper disable UseCollectionExpression
