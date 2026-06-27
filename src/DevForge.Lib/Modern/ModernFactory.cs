@@ -1,3 +1,7 @@
+using System.IO.Ports;
+using System.Linq;
+using DevForge.Lib.API;
+using DevForge.Lib.API;
 using System;
 using System.Linq;
 using System.Text;
@@ -10,8 +14,13 @@ using E = DevForge.Lib.Modern.EnumDevNative;
 
 namespace DevForge.Lib.Modern
 {
-    public static class ModernDevices
+    public sealed class ModernFactory : ICommFactory
     {
+        public ICommPort Create()
+        {
+            return CreatePort();
+        }
+
         public static string[] GetPortNames(int wait = 250)
         {
             string devicePath;

@@ -1,11 +1,17 @@
 using System.IO.Ports;
 using System.Linq;
 using DevForge.Lib.API;
+using DevForge.Lib.API;
 
 namespace DevForge.Lib.Legacy
 {
-    public static class LegacyDevices
+    public sealed class LegacyFactory : ICommFactory
     {
+        public ICommPort Create()
+        {
+            return CreatePort();
+        }
+
         public static string[] GetPortNames()
         {
             var names = SerialPort.GetPortNames();
@@ -26,15 +32,6 @@ namespace DevForge.Lib.Legacy
             var wrap = new LegacyPort(port);
             wrap.Open();
             return wrap;
-        }
-
-        public static void ClosePort(ref SerialPort port)
-        {
-            if (port == null)
-                return;
-            using (port)
-                port.Close();
-            port = null;
         }
     }
 }

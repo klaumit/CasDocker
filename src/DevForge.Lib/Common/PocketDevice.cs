@@ -3,22 +3,28 @@ using System.Threading;
 using DevForge.Lib.API;
 using System.IO.Ports;
 
-namespace DevForge.Lib.Legacy
+namespace DevForge.Lib.Modern
 {
-    public sealed class LegacyDevice : ICommDevice
+    public sealed class PocketDevice : ICommDevice
     {
+        private readonly ICommFactory _factory;
+        private ICommPort _port;
         private Thread _thread;
-        private SerialPort _port;
+
+        public PocketDevice(ICommFactory factory)
+        {
+            _factory = factory;
+        }
 
         public void Start()
         {
-            _thread = new Thread(DoLoop) { IsBackground = true, Name = "Loop" };
+            _thread = new Thread(DoLoop) { IsBackground = true };
             _thread.Start();
         }
 
         private void DoLoop()
         {
-            _port = Serials.CreatePort();
+            _port = _factory.Create();
             Console.WriteLine(" " + this.GetType().Name + " ...");
             var head = _port.ReadString();
             Console.WriteLine(" " + this.GetType().Name + " => '" + head + "'");
@@ -26,9 +32,8 @@ namespace DevForge.Lib.Legacy
 
         public void Stop()
         {
-            Serials.ClosePort(ref _port);
+            CommExt.ClosePort(ref _port);
             _thread.Interrupt();
-            _thread.Abort();
         }
 
         public void Dispose()

@@ -1,5 +1,11 @@
+using System.Linq;
+using System.IO.Ports;
+using System.Text;
 using System.IO.Ports;
 using DevForge.Lib.API;
+
+// ReSharper disable UseCollectionExpression
+// ReSharper disable InlineOutVariableDeclaration
 
 namespace DevForge.Lib.Legacy
 {
@@ -30,6 +36,22 @@ namespace DevForge.Lib.Legacy
         public void Dispose()
         {
             Close();
+        }
+
+        public string ReadString(int maxLen = 64)
+        {
+            if (_port == null)
+                return null;
+            var buffer = new byte[maxLen];
+            var bytesRead = _port.Read(buffer, 0, buffer.Length);
+            int rest;
+            while ((rest = _port.BytesToRead) >= 1)
+                bytesRead += _port.Read(buffer, bytesRead, rest);
+            if (bytesRead < 1)
+                return null;
+            var text = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+            var res = text.Trim();
+            return res;
         }
     }
 }

@@ -1,6 +1,9 @@
 using System;
 using System.Text;
 using System.Threading;
+using System;
+using System.Text;
+using System.Threading;
 using DevForge.Lib.API;
 using E = DevForge.Lib.Modern.EnumDevNative;
 using K = DevForge.Lib.Modern.KernelNative;
@@ -42,6 +45,20 @@ namespace DevForge.Lib.Modern
         public void Dispose()
         {
             Close();
+        }
+
+        public string ReadString(int maxLen = 64)
+        {
+            if (_usbHandle == null)
+                return null;
+            var handle = _usbHandle.Value;
+            var buffer = new byte[maxLen];
+            uint bytesRead;
+            if (!E.PVReadUsb(handle, buffer, (uint)buffer.Length, out bytesRead))
+                return null;
+            var text = Encoding.ASCII.GetString(buffer, 0, (int)bytesRead);
+            var res = text.Trim();
+            return res;
         }
     }
 }

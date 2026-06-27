@@ -7,5 +7,7 @@ namespace DevForge.Lib.API
         void Open();
 
         void Close();
+
+        string ReadString(int maxLen = 64);
     }
 }
