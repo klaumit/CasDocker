@@ -14,7 +14,7 @@ namespace DevForge.Lib.Legacy
 
         public void Open()
         {
-            throw new System.NotImplementedException();
+            _port.Open();
         }
     }
 }
