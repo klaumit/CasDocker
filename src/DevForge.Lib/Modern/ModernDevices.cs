@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using System.Text;
 using System.Threading;
+using DevForge.Lib.API;
 using E = DevForge.Lib.Modern.EnumDevNative;
 
 // ReSharper disable UseCollectionExpression
@@ -23,6 +25,15 @@ namespace DevForge.Lib.Modern
                 Thread.Sleep(wait);
             }
             return new[] { devicePath };
+        }
+
+        public static ModernPort CreatePort()
+        {
+            var names = GetPortNames();
+            var name = names.Last();
+            var port = new ModernPort(name);
+            port.Open();
+            return port;
         }
     }
 }
