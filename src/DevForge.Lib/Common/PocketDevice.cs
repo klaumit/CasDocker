@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using DevForge.Lib.API;
 using DevForge.Lib.Messages;
+using DevForge.Lib.Messages.Impl;
 
 // ReSharper disable UseNameOfInsteadOfTypeOf
 
@@ -40,8 +41,9 @@ namespace DevForge.Lib.Common
         {
             _port = _factory.Create();
             Console.WriteLine(" [{0}] created...", Name);
-            var head = _port.ReadBytes(64).AsString();
-            Console.WriteLine(" [{0}] => '{1}'", Name, head);
+            var head = _port.ReadMessage();
+            var hello = (head as Hello)?.Text;
+            Console.WriteLine(" [{0}] => '{1}'", Name, hello);
         }
 
         public void Stop()
