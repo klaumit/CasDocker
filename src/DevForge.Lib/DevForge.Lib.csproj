@@ -34,14 +34,25 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\ICommDevice.cs" />
-    <Compile Include="Legacy\LegacyDevice.cs" />
-    <Compile Include="Legacy\Serials.cs" />
-    <Compile Include="Modern\EnumDevNative.cs" />
-    <Compile Include="Modern\ModernDevice.cs" />
-    <Compile Include="Modern\Universals.cs" />
-	<Compile Include="Modern\UsbPort.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+<Compile Include="Modern\ModernFactory.cs" />
+<Compile Include="Modern\ModernPort.cs" />
+<Compile Include="Modern\Internals\KernelNative.cs" />
+<Compile Include="Modern\Internals\EnumDevNative.cs" />
+<Compile Include="Messages\MsgKind.cs" />
+<Compile Include="Messages\MsgTool.cs" />
+<Compile Include="Messages\Message.cs" />
+<Compile Include="Messages\Impl\Hello.cs" />
+<Compile Include="Messages\Impl\Quit.cs" />
+<Compile Include="Messages\Impl\BaseTxt.cs" />
+<Compile Include="Common\PocketDevice.cs" />
+<Compile Include="Common\CommExt.cs" />
+<Compile Include="Common\Checking.cs" />
+<Compile Include="Legacy\LegacyFactory.cs" />
+<Compile Include="Legacy\LegacyPort.cs" />
+<Compile Include="API\ICommPort.cs" />
+<Compile Include="API\ICommFactory.cs" />
+<Compile Include="API\ICommDevice.cs" />
+<Compile Include="Properties\AssemblyInfo.cs" />	
   </ItemGroup>
   <ItemGroup>
     <None Include="EnumDev.dll">

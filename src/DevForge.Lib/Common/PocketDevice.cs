@@ -42,7 +42,7 @@ namespace DevForge.Lib.Common
             _port = _factory.Create();
             Console.WriteLine(" [{0}] created...", Name);
             var head = _port.ReadMessage();
-            var hello = (head as Hello)?.Text;
+            var hello = (head as Hello).Text;
             Console.WriteLine(" [{0}] => '{1}'", Name, hello);
         }
 
