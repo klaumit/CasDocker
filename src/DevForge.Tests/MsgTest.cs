@@ -1,5 +1,5 @@
-﻿using DevForge.Lib.API;
-using DevForge.Lib.Messages;
+﻿using DevForge.Lib.Messages;
+using DevForge.Lib.Messages.Impl;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -10,9 +10,10 @@ namespace DevForge.Tests
         [Fact]
         public void TestSimple()
         {
-            ICommPort cp = new FakePort();
+            using var cp = new FakePort();
+            cp.Open();
 
-            var im = new Hello();
+            var im = new Hello("Test me with this!");
             cp.WriteMessage(im);
 
             var om = cp.ReadMessage();

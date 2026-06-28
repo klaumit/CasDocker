@@ -8,10 +8,19 @@ namespace DevForge.Lib.Messages
 {
     public static class MsgTool
     {
+        public const char Nu = '\0';
+
+        public static byte[] AsBytes(this string text)
+        {
+            var input = text.Trim() + Nu;
+            var res = Encoding.ASCII.GetBytes(input);
+            return res;
+        }
+
         public static string AsString(this byte[] buffer)
         {
             var text = Encoding.ASCII.GetString(buffer);
-            var res = text.Trim('\0').Trim();
+            var res = text.Trim(Nu).Trim();
             return res;
         }
 

@@ -1,15 +1,21 @@
+using System.IO;
 using DevForge.Lib.API;
 
 namespace DevForge.Tests
 {
     internal sealed class FakePort : ICommPort
     {
+        private MemoryStream? _mem;
+
         public void Open()
         {
+            _mem = new MemoryStream();
         }
 
         public void Close()
         {
+            _mem?.Dispose();
+            _mem = null;
         }
 
         public void Dispose()
@@ -17,14 +23,18 @@ namespace DevForge.Tests
             Close();
         }
 
-        public byte[] ReadBytes(int count)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public bool WriteBytes(byte[] buffer)
         {
-            throw new System.NotImplementedException();
+            _mem!.Write(buffer);
+            _mem.Flush();
+            return true;
+        }
+
+        public byte[] ReadBytes(int count)
+        {
+            var buffer = new byte[count];
+            _ = _mem!.Read(buffer);
+            return buffer;
         }
     }
 }
