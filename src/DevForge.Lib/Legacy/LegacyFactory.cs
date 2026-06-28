@@ -19,7 +19,7 @@ namespace DevForge.Lib.Legacy
 
         public static LegacyPort CreatePort()
         {
-            var names = SerialPort.GetPortNames();
+            var names = GetPortNames();
             var name = names.Last();
             const int speed = 38400;
             const Parity parity = Parity.None;
