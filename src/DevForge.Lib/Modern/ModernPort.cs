@@ -1,7 +1,9 @@
 using System;
+using System.IO;
 using DevForge.Lib.API;
 using E = DevForge.Lib.Modern.Internals.EnumDevNative;
 using K = DevForge.Lib.Modern.Internals.KernelNative;
+using System.Threading;
 
 // ReSharper disable UseCollectionExpression
 // ReSharper disable InlineOutVariableDeclaration
@@ -12,6 +14,7 @@ namespace DevForge.Lib.Modern
     {
         private readonly string _devicePath;
         private IntPtr? _usbHandle;
+        private MemoryStream _memory;
 
         public ModernPort(string devicePath)
         {
@@ -42,15 +45,31 @@ namespace DevForge.Lib.Modern
             Close();
         }
 
-        public byte[] ReadBytes(int count)
+        private MemoryStream GetStream()
         {
+            if (_memory != null)
+                return _memory;
+
             if (_usbHandle == null)
                 return null;
+
+            uint got = 0;
             var handle = _usbHandle.Value;
-            var buffer = new byte[count];
-            uint bytesRead;
-            if (!E.PVReadUsb(handle, buffer, (uint)buffer.Length, out bytesRead))
+            const int maxLen = 512;
+            var array = new byte[maxLen];
+            if (E.PVReadUsb(handle, array, (uint)array.Length, out got) && got >= 1)
+                _memory = new MemoryStream(array, 0, (int)got);
+
+            return _memory;
+        }
+        
+        public byte[] ReadBytes(int count)
+        {
+            var mem = GetStream();
+            if (mem == null)
                 return null;
+            var buffer = new byte[count];
+            var bytesRead = mem.Read(buffer, 0, count);
             if (bytesRead < 1)
                 return null;
             if (buffer.Length != bytesRead)
