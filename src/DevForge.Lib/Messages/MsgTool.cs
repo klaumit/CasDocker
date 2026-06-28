@@ -49,8 +49,40 @@ namespace DevForge.Lib.Messages
         public static Message ReadMessage(this ICommPort port)
         {
             var head = port.ReadBytes(5);
+
+            Console.WriteLine("H: " + string.Join(" | ", head.Select(d => d.ToString("x2"))));
+            
             if (head.Length != 5)
                 return null;
+            
+            var syncIdx1 = Array.IndexOf(head, Sync[0], 0);
+            if (syncIdx1 < 0)
+                return null;
+
+            Console.WriteLine("I1: "+syncIdx1);
+            
+            var syncIdx2 = Array.IndexOf(head, Sync[1], syncIdx1);
+            if (syncIdx2 < 0)
+                return null;
+            
+            Console.WriteLine("I2: "+syncIdx2);
+            
+            if (syncIdx1 != 0 || syncIdx2 != 1)
+            {
+                head = head.Skip(syncIdx1).ToArray();
+                
+                Console.WriteLine("Sa: "+head.Length);
+                
+                var fail = port.ReadBytes(syncIdx1);
+                
+                Console.WriteLine("Sb: "+fail?.Length);
+                
+                if (fail != null && fail.Length == syncIdx1)
+                    head = head.Concat(fail).ToArray();
+                
+                Console.WriteLine("Sc: "+head?.Length);
+                
+            }
             if (head[0] != Sync[0])
                 return null;
             if (head[1] != Sync[1])
