@@ -36,5 +36,10 @@ namespace DevForge.Tests
             _ = _mem!.Read(buffer);
             return buffer;
         }
+
+        public void Rewind(int pos = 0)
+        {
+            _mem!.Position = pos;
+        }
     }
 }

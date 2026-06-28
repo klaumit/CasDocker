@@ -16,7 +16,9 @@ namespace DevForge.Tests
             var im = new Hello("Test me with this!");
             cp.WriteMessage(im);
 
+            cp.Rewind();
             var om = cp.ReadMessage();
+
             Assert.Equal(ToJson(im), ToJson(om));
         }
 
