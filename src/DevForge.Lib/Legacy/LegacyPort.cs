@@ -41,10 +41,10 @@ namespace DevForge.Lib.Legacy
             if (_port == null)
                 return null;
             var buffer = new byte[count];
-            int bytesRead = 0;
+            var bytesRead = 0;
             while (bytesRead < count)
             {
-                int got = _port.Read(buffer, bytesRead, count - bytesRead);
+                var got = _port.Read(buffer, bytesRead, count - bytesRead);
                 if (got <= 0) break;
                 bytesRead += got;
             }
