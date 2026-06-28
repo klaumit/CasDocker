@@ -1,6 +1,7 @@
 #include "define.h"
 #include "libc.h"
 #include <string.h>
+#include "msglayer.h"
 
 static const word CrcTable[256] =
 {
@@ -54,14 +55,14 @@ void UpdateCrc(word *crc, const byte *data, word length)
     *crc = c;
 }
 
-int SendTextMessage(unsigned char kind, char *text, unsigned short txtLen)
+int SendTxtMessage(unsigned char kind, char *text)
 {
-    char           buf[txtLen];
-    unsigned char  all[5 + txtLen + 2];
-    unsigned short length, crc, total;
+    char           buf[MAX_PAYLOAD];
+    unsigned char  all[5 + MAX_PAYLOAD + 2];
+    word           length, crc, total;
     
-    strncpy(buf, text, txtLen);
-    length = txtLen;
+    strncpy(buf, text, MAX_PAYLOAD);
+    length = MAX_PAYLOAD;
 
     all[0] = SYNC0;
     all[1] = SYNC1;

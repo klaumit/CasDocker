@@ -32,7 +32,7 @@ void main()
 	sprintf(debug, "app=PocLink;cpu=%s;comm=%s", 
 		GetCpuStr(GetCpuKind()), GetCommStr(GetCommKind())
 	);
-	SendTextMessage(MSG_HELLO, debug, 29);
+	SendTxtMessage(MSG_HELLO, debug);
 
 	maxTry = 15;
 	for (i = 0; i < maxTry; i++)
