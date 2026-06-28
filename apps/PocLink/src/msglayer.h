@@ -16,5 +16,7 @@ typedef struct
     unsigned short checksum;
 } Message;
 
-int SendTextMessage(unsigned char kind, char *text);
+int SendTextMessage(unsigned char kind, char *text, unsigned short txtLen);
+
+void UpdateCrc(word *crc, const byte *data, word length);
 

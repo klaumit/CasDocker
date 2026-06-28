@@ -15,7 +15,7 @@ const char *GetCommStr(byte num)
     switch (num)
     {
         case IB_SRL_COM2: return "9pin";
-        case IB_SRL_COM3: return "USB";
+        case IB_SRL_COM3: return "USB1";
         default: return "?";
     }
 }
