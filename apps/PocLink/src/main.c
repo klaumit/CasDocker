@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "sysdm.h"
+#include "msglayer.h"
 
 void main()
 {
@@ -28,7 +29,10 @@ void main()
 
 	LibPutDisp();
 
-	TestPort();
+	sprintf(debug, "app=PocLink;cpu=%s;comm=%s", 
+		GetCpuStr(GetCpuKind()), GetCommStr(GetCommKind())
+	);
+	SendTextMessage(MSG_HELLO, debug);
 
 	maxTry = 15;
 	for (i = 0; i < maxTry; i++)
