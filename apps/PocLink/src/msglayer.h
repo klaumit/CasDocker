@@ -16,3 +16,5 @@ typedef struct
     unsigned short checksum;
 } Message;
 
+int SendTextMessage(unsigned char kind, char *text);
+
