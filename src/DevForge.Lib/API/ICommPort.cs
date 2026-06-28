@@ -9,5 +9,7 @@ namespace DevForge.Lib.API
         void Close();
 
         byte[] ReadBytes(int count);
+
+        bool WriteBytes(byte[] buffer);
     }
 }

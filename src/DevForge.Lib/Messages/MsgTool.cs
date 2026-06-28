@@ -17,6 +17,25 @@ namespace DevForge.Lib.Messages
 
         private static readonly byte[] Sync = { 0xAA, 0x55 };
 
+        public static void WriteMessage(this ICommPort port, Message msg)
+        {
+            var body = msg.Payload;
+            var length = (ushort)body.Length;
+            var head = new[]
+            {
+                Sync[0], Sync[1], (byte)msg.Kind,
+                (byte)(length & 0xFF), (byte)(length >> 8)
+            };
+            var all = head.Concat(body).ToArray();
+            var check = ushort.MinValue;
+            Checking.UpdateCrc(ref check, all);
+            msg.Checksum = check;
+            msg.Length = length;
+            var end = new[] { (byte)(check & 0xFF), (byte)(check >> 8) };
+            all = all.Concat(end).ToArray();
+            port.WriteBytes(all);
+        }
+
         public static Message ReadMessage(this ICommPort port)
         {
             var head = port.ReadBytes(5);

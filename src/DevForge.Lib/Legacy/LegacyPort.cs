@@ -51,5 +51,13 @@ namespace DevForge.Lib.Legacy
                 Array.Resize(ref buffer, bytesRead);
             return buffer;
         }
+
+        public bool WriteBytes(byte[] buffer)
+        {
+            if (_port == null)
+                return false;
+            _port.Write(buffer, 0, buffer.Length);
+            return true;
+        }
     }
 }

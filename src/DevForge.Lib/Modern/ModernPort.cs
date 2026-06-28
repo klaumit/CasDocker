@@ -57,5 +57,18 @@ namespace DevForge.Lib.Modern
                 Array.Resize(ref buffer, (int)bytesRead);
             return buffer;
         }
+
+        public bool WriteBytes(byte[] buffer)
+        {
+            if (_usbHandle == null)
+                return false;
+            var handle = _usbHandle.Value;
+            uint bytesWritten;
+            if (!E.PVWriteUsb(handle, buffer, (uint)buffer.Length, out bytesWritten))
+                return false;
+            if (bytesWritten < 1)
+                return false;
+            return true;
+        }
     }
 }
