@@ -9,6 +9,7 @@ void main()
 {
 	char debug[128];
 	int i;
+	int maxTry;
 
 	LibInitDisp();
 	LibClrDisp();
@@ -29,9 +30,10 @@ void main()
 
 	TestPort();
 
-	for (i = 0; i < 100; i++)
+	maxTry = 15;
+	for (i = 0; i < maxTry; i++)
 	{
-		sprintf(debug, "Waiting %d sec...", i);
+		sprintf(debug, "Waiting %d of %d sec...", i, maxTry);
 		LibStringDsp( B@ debug, 5, 100, 160, B@@ IB_PFONT2);
 		LibPutDisp();
 		LibWait(IB_1SWAIT);
