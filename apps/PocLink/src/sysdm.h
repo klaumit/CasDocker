@@ -14,3 +14,5 @@ void ClosePort();
 
 void Wait(void);
 
+void UpdateCrc(word *crc, const byte *data, word length);
+
