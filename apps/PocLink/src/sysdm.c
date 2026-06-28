@@ -63,11 +63,6 @@ const char *GetOpenPortStr(word num)
     }
 }
 
-void TestPort()
-{
-    LibSrlSendBlock("\r\nPocLink", 9);
-}
-
 void ClosePort()
 {
     word wTimeout = 8000;
