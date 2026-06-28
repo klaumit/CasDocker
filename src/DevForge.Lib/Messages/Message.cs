@@ -1,6 +1,6 @@
 namespace DevForge.Lib.Messages
 {
-    public sealed class Message
+    public class Message
     {
         public MsgKind Kind { get; set; }
         public ushort Length { get; set; }
