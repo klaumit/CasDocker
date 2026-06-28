@@ -1,11 +1,15 @@
 namespace DevForge.Lib.Messages.Impl
 {
-    public sealed class Quit : Message
+    public sealed class Quit : BaseTxt
     {
-        public Quit(string text)
+        public Quit(string text) : base(text)
         {
             Kind = MsgKind.Quit;
-            Payload = text.AsBytes();
+        }
+
+        public Quit(Message msg) : base(msg)
+        {
+            Kind = MsgKind.Quit;
         }
     }
 }

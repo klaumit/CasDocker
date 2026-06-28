@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using DevForge.Lib.API;
 using DevForge.Lib.Common;
+using DevForge.Lib.Messages.Impl;
 
 namespace DevForge.Lib.Messages
 {
@@ -75,7 +76,13 @@ namespace DevForge.Lib.Messages
             {
                 Kind = kind, Length = length, Payload = body, Checksum = myCheck
             };
-            return msg;
+            switch (kind)
+            {
+                case MsgKind.Hello: return new Hello(msg);
+                case MsgKind.Quit: return new Quit(msg);
+                case MsgKind.Unknown:
+                default: return msg;
+            }
         }
     }
 }

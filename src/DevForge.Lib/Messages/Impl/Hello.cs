@@ -1,11 +1,15 @@
 namespace DevForge.Lib.Messages.Impl
 {
-    public sealed class Hello : Message
+    public sealed class Hello : BaseTxt
     {
-        public Hello(string text)
+        public Hello(string text) : base(text)
         {
             Kind = MsgKind.Hello;
-            Payload = text.AsBytes();
+        }
+
+        public Hello(Message msg) : base(msg)
+        {
+            Kind = MsgKind.Hello;
         }
     }
 }
