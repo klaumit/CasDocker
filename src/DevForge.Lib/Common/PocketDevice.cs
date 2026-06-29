@@ -42,10 +42,19 @@ namespace DevForge.Lib.Common
             _port = _factory.Create();
             Console.WriteLine(" [{0}] created...", Name);
             var head = _port.ReadMessage();
-            var hello = (head as Hello).Text;
-            Console.WriteLine(" [{0}] => '{1}'", Name, hello);
+            var hello = head as Hello;
+            var helloT = hello != null ? hello.Text : head.ToString();
+            Console.WriteLine(" [{0}] => '{1}'", Name, helloT);
+
+            // app=PocLink;cpu=X86;comm=9pin
+            // app=PocLink;cpu=SH3;comm=USB
         }
 
+        public void Send(Message msg)
+        {
+            _port.WriteMessage(msg);
+        }
+        
         public void Stop()
         {
             CommExt.ClosePort(ref _port);

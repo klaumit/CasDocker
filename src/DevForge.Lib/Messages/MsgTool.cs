@@ -29,6 +29,8 @@ namespace DevForge.Lib.Messages
 
         public static void WriteMessage(this ICommPort port, Message msg)
         {
+            if (port == null)
+                return;
             var body = msg.Payload;
             var length = (ushort)body.Length;
             var head = new[]
@@ -48,6 +50,8 @@ namespace DevForge.Lib.Messages
 
         public static Message ReadMessage(this ICommPort port)
         {
+            if (port == null)
+                return null;
             var head = port.ReadBytes(5);
             if (head.Length != 5)
                 return null;
