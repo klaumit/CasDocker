@@ -34,6 +34,7 @@ namespace PvBake.Core
                 var biosArr = File.ReadAllBytes(cpj.biosFile);
                 var applArr = File.ReadAllBytes(cpj.applFile);
                 var array = new byte[cpj.biosOffs + cpj.applOffs + applArr.Length];
+                Array.Fill<byte>(array, 0xFF);
                 Array.Copy(biosArr, 0, array, cpj.biosOffs, biosArr.Length);
                 Array.Copy(applArr, 0, array, cpj.applOffs, applArr.Length);
 
