@@ -19,7 +19,7 @@ namespace DevForge.Lib.Legacy
 
         public static LegacyPort CreatePort()
         {
-            var names = GetPortNames();
+            var names = GetPortNames().OrderBy(p => p);
             var name = names.Last();
             const int speed = 38400;
             const Parity parity = Parity.None;
