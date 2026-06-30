@@ -1,6 +1,7 @@
 #include "define.h"
 #include "libc.h"
 #include "l_define.h"
+#include "l_libc.h"
 
 byte GetCommKind(void)
 {
@@ -21,6 +22,24 @@ const char *GetCommStr(byte num)
     }
 }
 
+byte GetLanguage(void)
+{
+    return LibGetLang();
+}
+
+const char *GetLangStr(byte num)
+{
+    switch (num)
+    {
+        case IB_DEUTSCH: return "German";
+        case IB_ENGLISH: return "English";
+        case IB_ESPANOL: return "Spanish";
+        case IB_FRANCAIS: return "French";
+        case IB_ITALIANO: return "Italian";
+        default: return "?";
+    }
+}
+
 byte GetKeyLayout(void)
 {
     return LibGetKeyKind();
@@ -33,6 +52,7 @@ const char *GetLayoutStr(byte num)
         case IB_QWERTY: return "QWERTY";
         case IB_AZERTY: return "AZERTY";
         case IB_QWERTZ: return "QWERTZ";
+        default: return "?";
     }
 }
 
@@ -51,6 +71,7 @@ const char *GetStateStr(word num)
         case IB_COM3_OPEN: return "USB";
         #else
         #endif
+        default: return "?";
     }
 }
 
