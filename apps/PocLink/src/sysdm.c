@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "define.h"
 #include "libc.h"
 #include "l_define.h"
