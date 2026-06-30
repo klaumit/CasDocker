@@ -27,8 +27,8 @@ void main()
 	);
 	LibStringDsp( B@ debug, 5, 40, 160, B@@ IB_PFONT1);
 
-	sprintf(debug, "Lang: %s (%s)",
-		GetLayoutStr(GetKeyLayout()), GetLangStr(GetLanguage())
+	sprintf(debug, "Lang: %s %s %s",
+		GetLayoutStr(GetKeyLayout()), GetLangStr(GetLanguage()), GetLangSuppStr(GetLangSupport())
 	);
 	LibStringDsp( B@ debug, 5, 50, 160, B@@ IB_PFONT1);
 

@@ -11,6 +11,9 @@ const char *GetLayoutStr(byte num);
 byte GetLanguage(void);
 const char *GetLangStr(byte num);
 
+byte GetLangSupport(void);
+const char *GetLangSuppStr(byte num);
+
 byte GetCpuKind(void);
 const char *GetCpuStr(byte num);
 

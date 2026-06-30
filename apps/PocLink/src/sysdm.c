@@ -22,6 +22,20 @@ const char *GetCommStr(byte num)
     }
 }
 
+byte GetLangSupport(void)
+{
+    return LibGetLangInf();
+}
+
+const char *GetLangSuppStr(byte num)
+{
+    switch (num)
+    {
+        case IB_LANG_ENGLISH: return "America";
+        default:              return "Europe";
+    }
+}
+
 byte GetLanguage(void)
 {
     return LibGetLang();
