@@ -11,6 +11,8 @@ const char *GetLayoutStr(byte num);
 byte GetLanguage(void);
 const char *GetLangStr(byte num);
 
+word GetAPOTimeMs(void);
+
 byte GetLangSupport(void);
 const char *GetLangSuppStr(byte num);
 

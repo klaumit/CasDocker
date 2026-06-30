@@ -32,6 +32,11 @@ void main()
 	);
 	LibStringDsp( B@ debug, 5, 50, 160, B@@ IB_PFONT1);
 
+	sprintf(debug, "APO: %d x 0.5s",
+		GetAPOTimeMs()
+	);
+	LibStringDsp( B@ debug, 5, 60, 160, B@@ IB_PFONT1);
+
 	LibPutDisp();
 
 	sprintf(debug, "app=PocLink;cpu=%s;comm=%s", 

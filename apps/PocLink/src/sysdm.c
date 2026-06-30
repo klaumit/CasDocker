@@ -22,6 +22,11 @@ const char *GetCommStr(byte num)
     }
 }
 
+word GetAPOTimeMs(void)
+{
+    return LibGetAPOTime();
+}
+
 byte GetLangSupport(void)
 {
     return LibGetLangInf();
