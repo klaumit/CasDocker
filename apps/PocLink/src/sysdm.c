@@ -1,5 +1,6 @@
 #include "define.h"
 #include "libc.h"
+#include "l_define.h"
 
 byte GetCommKind(void)
 {
@@ -17,6 +18,21 @@ const char *GetCommStr(byte num)
         case IB_SRL_COM2: return "9pin";
         case IB_SRL_COM3: return "USB";
         default: return "?";
+    }
+}
+
+byte GetKeyLayout(void)
+{
+    return LibGetKeyKind();
+}
+
+const char *GetLayoutStr(byte num)
+{
+    switch (num)
+    {
+        case IB_QWERTY: return "QWERTY";
+        case IB_AZERTY: return "AZERTY";
+        case IB_QWERTZ: return "QWERTZ";
     }
 }
 

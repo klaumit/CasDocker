@@ -5,6 +5,9 @@ const char *GetCommStr(byte num);
 word GetCommState(void);
 const char *GetStateStr(word num);
 
+byte GetKeyLayout(void);
+const char *GetLayoutStr(byte num);
+
 byte GetCpuKind(void);
 const char *GetCpuStr(byte num);
 
