@@ -5,6 +5,7 @@
 #define MSG_UNKNOWN 0
 #define MSG_HELLO   1
 #define MSG_QUIT    2
+#define MSG_INFO    3
 
 #define MAX_PAYLOAD 64
 
