@@ -3,6 +3,18 @@
 #include "l_define.h"
 #include "l_libc.h"
 
+const char *GetBattStr(void)
+{
+    if (LibGetBLD())
+    {
+        return "Normal";
+    }
+    else
+    {
+        return "Low";
+    }
+}
+
 byte GetCommKind(void)
 {
 	#ifdef __HITACHI__

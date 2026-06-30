@@ -1,4 +1,6 @@
 
+const char *GetBattStr(void);
+
 byte GetCommKind(void);
 const char *GetCommStr(byte num);
 

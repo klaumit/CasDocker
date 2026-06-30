@@ -32,8 +32,8 @@ void main()
 	);
 	LibStringDsp( B@ debug, 5, 50, 160, B@@ IB_PFONT1);
 
-	sprintf(debug, "APO: %d x 0.5s",
-		GetAPOTimeMs()
+	sprintf(debug, "APO %d*0.5s  Batt: %s",
+		GetAPOTimeMs(), GetBattStr()
 	);
 	LibStringDsp( B@ debug, 5, 60, 160, B@@ IB_PFONT1);
 
