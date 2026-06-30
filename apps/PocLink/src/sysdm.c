@@ -20,6 +20,24 @@ const char *GetCommStr(byte num)
     }
 }
 
+word GetCommState(void)
+{
+    return LibSrlGetOpenStat();
+}
+
+const char *GetStateStr(word num)
+{
+    switch (num)
+    {
+        case IB_NO_OPEN: return "Closed";
+        case IB_COM2_OPEN: return "9pin";
+        #ifdef __HITACHI__
+        case IB_COM3_OPEN: return "USB";
+        #else
+        #endif
+    }
+}
+
 byte GetCpuKind(void)
 {
     #ifdef __HITACHI__

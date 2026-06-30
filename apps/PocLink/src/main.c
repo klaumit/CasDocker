@@ -22,8 +22,8 @@ void main()
 	);
 	LibStringDsp( B@ debug, 5, 30, 160, B@@ IB_PFONT1);
 
-	sprintf(debug, "Communication: %s", 
-		GetOpenPortStr(OpenPort(GetCommKind()))
+	sprintf(debug, "Comm: %s (%s)",
+		GetOpenPortStr(OpenPort(GetCommKind())), GetStateStr(GetCommState())
 	);
 	LibStringDsp( B@ debug, 5, 40, 160, B@@ IB_PFONT1);
 
@@ -34,7 +34,7 @@ void main()
 	);
 	SendTxtMessage(MSG_HELLO, debug);
 
-	maxTry = 15;
+	maxTry = 1500;
 	for (i = 0; i < maxTry; i++)
 	{
 		sprintf(debug, "Waiting %d of %d sec...", i, maxTry);
