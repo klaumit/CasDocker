@@ -44,7 +44,7 @@ void main()
 	);
 	SendTxtMessage(MSG_HELLO, debug);
 
-	maxTry = 1500;
+	maxTry = 15;
 	for (i = 0; i < maxTry; i++)
 	{
 		sprintf(debug, "Waiting %d of %d sec...", i, maxTry);
