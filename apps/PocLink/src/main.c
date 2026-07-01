@@ -51,8 +51,10 @@ void main()
 
 	LibPutDisp();
 
-	sprintf(debug, "app=PocLink;cpu=%s;comm=%s", 
-		GetCpuStr(GetCpuKind()), GetCommStr(GetCommKind())
+	sprintf(debug, "app=PocLink;cpu=%s;comm=%s;area=%s;ver=%s;chip=%s;mem=%d",
+		GetCpuStr(GetCpuKind()), GetCommStr(GetCommKind()),
+		GetLangSuppStr(GetLangSupport()), GetVersionStr(),
+		GetModelStr(), GetTotalMemory()
 	);
 	SendTxtMessage(MSG_HELLO, debug);
 
