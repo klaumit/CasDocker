@@ -34,13 +34,13 @@ void main()
 	);
 	LibStringDsp( B@ debug, 5, 50, 160, B@@ IB_PFONT1);
 
-	sprintf(debug, "APO %d*0.5s  Batt: %s",
-		GetAPOTimeMs(), GetBattStr()
+	sprintf(debug, "APO: %d s  Batt: %s",
+		GetAPOTimeS(), GetBattStr()
 	);
 	LibStringDsp( B@ debug, 5, 60, 160, B@@ IB_PFONT1);
 
-	sprintf(debug, "Free: %3.0d% % ",
-		GetFreeMemory()
+	sprintf(debug, "Free: %3.0d% % of %d blocks",
+		GetFreeMemory(), GetTotalMemory()
 	);
 	LibStringDsp( B@ debug, 5, 70, 160, B@@ IB_PFONT1);
 

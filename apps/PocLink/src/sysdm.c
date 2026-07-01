@@ -35,9 +35,11 @@ const char *GetCommStr(byte num)
     }
 }
 
-word GetAPOTimeMs(void)
+word GetAPOTimeS(void)
 {
-    return LibGetAPOTime();
+    word sec;
+    sec = (word)( (float)LibGetAPOTime() * (float)0.5 );
+    return sec;
 }
 
 word GetFreeMemory(void)
@@ -46,8 +48,15 @@ word GetFreeMemory(void)
     if (LibGetFlash() == 0)
         mem = 0;
     else
-        mem = (word) (100*((float) LibGetFreeBlock() / (float) LibGetFlash()));
+        mem = (word)(100 * ((float)LibGetFreeBlock() / (float)LibGetFlash()));
     return mem;
+}
+
+word GetTotalMemory(void)
+{
+    word total;
+    total = LibGetFlash();
+    return total;
 }
 
 byte GetLangSupport(void)
@@ -138,7 +147,7 @@ const char *GetCpuStr(byte num)
 
 word OpenPort(byte kind)
 {
-    SRL_STAT srl;    
+    SRL_STAT srl;
     LibSrlTxBufClr();
     LibSrlRxBufClr();
     srl.port = kind;
