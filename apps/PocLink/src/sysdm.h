@@ -18,6 +18,8 @@ word GetAPOTimeS(void);
 word GetFreeMemory(void);
 word GetTotalMemory(void);
 
+const char *GetModelStr(void);
+
 byte GetLangSupport(void);
 const char *GetLangSuppStr(byte num);
 

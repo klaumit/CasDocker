@@ -35,6 +35,19 @@ const char *GetCommStr(byte num)
     }
 }
 
+const char *GetModelStr(void)
+{
+    static char debug[12];
+    dword num;
+    num = LibGetModelType();    
+    switch (num)
+    {
+        default:
+            sprintf(debug, "%u", num);
+            return debug;
+    }
+}
+
 word GetAPOTimeS(void)
 {
     word sec;

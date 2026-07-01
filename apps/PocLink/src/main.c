@@ -44,6 +44,11 @@ void main()
 	);
 	LibStringDsp( B@ debug, 5, 70, 160, B@@ IB_PFONT1);
 
+	sprintf(debug, "Model: %s",
+		GetModelStr()
+	);
+	LibStringDsp( B@ debug, 5, 80, 160, B@@ IB_PFONT1);
+
 	LibPutDisp();
 
 	sprintf(debug, "app=PocLink;cpu=%s;comm=%s", 
