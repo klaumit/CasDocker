@@ -40,7 +40,7 @@ const char *GetVersionStr(void)
     byte version[16 + 1];
     static char ascii[16 + 1];
     LibGetVer2(version);
-    sprintf(debug, "%s", version);
+    sprintf(ascii, "%s", version);
     return ascii;
 }
 

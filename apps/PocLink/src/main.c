@@ -44,8 +44,8 @@ void main()
 	);
 	LibStringDsp( B@ debug, 5, 70, 160, B@@ IB_PFONT1);
 
-	sprintf(debug, "Model: %s",
-		GetModelStr()
+	sprintf(debug, "M: %s (%s)",
+		GetModelStr(), GetVersionStr()
 	);
 	LibStringDsp( B@ debug, 5, 80, 160, B@@ IB_PFONT1);
 
