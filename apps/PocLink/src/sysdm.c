@@ -40,6 +40,16 @@ word GetAPOTimeMs(void)
     return LibGetAPOTime();
 }
 
+word GetFreeMemory(void)
+{
+    word mem;
+    if (LibGetFlash() == 0)
+        mem = 0;
+    else
+        mem = (word) (100*((float) LibGetFreeBlock() / (float) LibGetFlash()));
+    return mem;
+}
+
 byte GetLangSupport(void)
 {
     return LibGetLangInf();

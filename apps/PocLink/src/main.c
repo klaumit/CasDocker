@@ -21,6 +21,8 @@ void main()
 		GetCpuStr(GetCpuKind()), GetCommStr(GetCommKind())
 	);
 	LibStringDsp( B@ debug, 5, 30, 160, B@@ IB_PFONT1);
+	
+	LibPutDisp();
 
 	sprintf(debug, "Comm: %s (%s)",
 		GetOpenPortStr(OpenPort(GetCommKind())), GetStateStr(GetCommState())
@@ -36,6 +38,11 @@ void main()
 		GetAPOTimeMs(), GetBattStr()
 	);
 	LibStringDsp( B@ debug, 5, 60, 160, B@@ IB_PFONT1);
+
+	sprintf(debug, "Free: %3.0d% % ",
+		GetFreeMemory()
+	);
+	LibStringDsp( B@ debug, 5, 70, 160, B@@ IB_PFONT1);
 
 	LibPutDisp();
 

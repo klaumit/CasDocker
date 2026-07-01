@@ -15,6 +15,8 @@ const char *GetLangStr(byte num);
 
 word GetAPOTimeMs(void);
 
+word GetFreeMemory(void);
+
 byte GetLangSupport(void);
 const char *GetLangSuppStr(byte num);
 
