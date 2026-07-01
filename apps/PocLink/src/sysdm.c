@@ -37,15 +37,14 @@ const char *GetCommStr(byte num)
 
 const char *GetModelStr(void)
 {
-    static char debug[12];
-    dword num;
-    num = LibGetModelType();    
-    switch (num)
-    {
-        default:
-            sprintf(debug, "%u", num);
-            return debug;
-    }
+    dword num = LibGetModelType();
+    static char ascii[5];
+    ascii[0] = (num >> 24) & 0xFF;
+    ascii[1] = (num >> 16) & 0xFF;
+    ascii[2] = (num >> 8)  & 0xFF;
+    ascii[3] = num & 0xFF;
+    ascii[4] = '\0';
+    return ascii;
 }
 
 word GetAPOTimeS(void)
