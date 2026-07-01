@@ -24,8 +24,8 @@ void main()
 	
 	LibPutDisp();
 
-	sprintf(debug, "Comm: %s (%s)",
-		GetOpenPortStr(OpenPort(GetCommKind())), GetStateStr(GetCommState())
+	sprintf(debug, "Communication: %s",
+		GetOpenPortStr(OpenPort(GetCommKind()))
 	);
 	LibStringDsp( B@ debug, 5, 40, 160, B@@ IB_PFONT1);
 
