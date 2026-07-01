@@ -7,7 +7,7 @@
 #define MSG_QUIT    2
 #define MSG_INFO    3
 
-#define MAX_PAYLOAD 64
+#define MAX_PAYLOAD 90
 
 typedef struct
 {
