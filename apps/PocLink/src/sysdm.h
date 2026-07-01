@@ -19,6 +19,7 @@ word GetFreeMemory(void);
 word GetTotalMemory(void);
 
 const char *GetModelStr(void);
+const char *GetVersionStr(void);
 
 byte GetLangSupport(void);
 const char *GetLangSuppStr(byte num);

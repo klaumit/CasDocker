@@ -35,10 +35,19 @@ const char *GetCommStr(byte num)
     }
 }
 
+const char *GetVersionStr(void)
+{
+    byte version[16 + 1];
+    static char ascii[16 + 1];
+    LibGetVer2(version);
+    sprintf(debug, "%s", version);
+    return ascii;
+}
+
 const char *GetModelStr(void)
 {
     dword num = LibGetModelType();
-    static char ascii[5];
+    static char ascii[4 + 1];
     ascii[0] = (num >> 24) & 0xFF;
     ascii[1] = (num >> 16) & 0xFF;
     ascii[2] = (num >> 8)  & 0xFF;
