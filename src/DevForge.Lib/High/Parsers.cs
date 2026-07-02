@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DevForge.Lib.Messages.Impl;
 using DevForge.Lib.Tools;
 
 namespace DevForge.Lib.High
@@ -20,6 +21,15 @@ namespace DevForge.Lib.High
                 dict[key] = val;
             }
             return dict;
+        }
+
+        public static PvInfo Parse(Hello hello)
+        {
+            var text = hello.Text;
+            var dict = ParseDict(text);
+            var json = JsonExt.ToJson(dict);
+            var info = JsonExt.ToObj<PvInfo>(json);
+            return info;
         }
     }
 }
