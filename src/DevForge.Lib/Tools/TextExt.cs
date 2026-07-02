@@ -1,4 +1,4 @@
-namespace PvMake.Lib
+namespace DevForge.Lib.Tools
 {
     public static class TextExt
     {

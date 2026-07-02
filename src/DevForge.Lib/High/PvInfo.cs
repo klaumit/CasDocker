@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace sss
+namespace DevForge.Lib.High
 {
     public sealed class PvInfo
     {

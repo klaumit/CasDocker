@@ -1,4 +1,6 @@
-namespace sss
+// ReSharper disable InconsistentNaming
+
+namespace DevForge.Lib.High
 {
     public enum PvCpu
     {
