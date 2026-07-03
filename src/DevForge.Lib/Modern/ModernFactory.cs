@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using DevForge.Lib.API;
 using System.Text;
@@ -13,7 +14,14 @@ namespace DevForge.Lib.Modern
     {
         public ICommPort Create()
         {
-            return CreatePort();
+            try
+            {
+                return CreatePort();
+            }
+            catch (Exception)
+            {
+                return new ModernPort("<none>");
+            }
         }
 
         public static string[] GetPortNames(int wait = 250)
