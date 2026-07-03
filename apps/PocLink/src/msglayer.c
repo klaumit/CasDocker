@@ -143,6 +143,8 @@ bool ReadTxtMessage(unsigned char *kind, char *text)
         return FALSE;
         
     memcpy(text, all, length);
+    text[length] = '\0';
+
     return TRUE;
 }
 
