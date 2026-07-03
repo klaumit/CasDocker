@@ -104,28 +104,42 @@ bool SendTxtMessage(unsigned char kind, char *text)
     return SendBlock(all, total);
 }
 
-bool FindSync()
+bool ReadTxtMessage(unsigned char kind, char *text)
 {
     byte           head[3];
     char           buf[MAX_PAYLOAD];
     unsigned char  all[MAX_PAYLOAD + 2];
     word           num;
     
-    if (ReadPort(head) && head[0] == SYNC0)
-    {
-        if (ReadPort(head) && head[0] == SYNC1)
-        {
-            if (ReadBlock(head, 3, &num) && num == 3)
-            {
-                kind   = head[0];
-                length = ((word) head[2] << 8) | head[1];
+    if (!ReadPort(head) || head[0] != SYNC0)
+        return false;
+    sync0 = head[0];
 
-                if (ReadBlock(all, (length + 2), &num) && num == (length + 2))
-                {
-                    memcpy(all, buf, length);
-                }
-            }
-        }
-    }
+    if (!ReadPort(head) || head[0] != SYNC1)
+        return false;
+    sync1 = head[0];
+        
+    if (!ReadBlock(head, 3, &num) || num != 3)
+        return false;
+
+    kind   = head[0];
+    length = ((word) head[2] << 8) | head[1];
+
+    if (!ReadBlock(all, (length + 2), &num) || num != (length + 2))
+        return false;
+
+    crc = 0;
+    UpdateCrc(&crc, &sync0, 1);
+    UpdateCrc(&crc, &sync1, 1);
+    UpdateCrc(&crc, head, 3);
+    UpdateCrc(&crc, all, length);
+    
+    receivedCrc = ((word) all[length + 1] << 8) | all[length];
+
+    if (crc != receivedCrc)
+        return false;
+        
+    memcpy(buf, all, length);
+    return true;
 }
 
