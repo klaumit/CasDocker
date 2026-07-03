@@ -104,29 +104,32 @@ bool SendTxtMessage(unsigned char kind, char *text)
     return SendBlock(all, total);
 }
 
-bool ReadTxtMessage(unsigned char kind, char *text)
+bool ReadTxtMessage(unsigned char *kind, char *text)
 {
-    byte           head[3];
-    char           buf[MAX_PAYLOAD];
-    unsigned char  all[MAX_PAYLOAD + 2];
-    word           num;
+    byte            sync0, sync1;
+    byte            head[3];
+    word            num, length, crc, gotCrc;
+    unsigned char   all[MAX_PAYLOAD + 2];
     
     if (!ReadPort(head) || head[0] != SYNC0)
-        return false;
+        return FALSE;
     sync0 = head[0];
 
     if (!ReadPort(head) || head[0] != SYNC1)
-        return false;
+        return FALSE;
     sync1 = head[0];
         
     if (!ReadBlock(head, 3, &num) || num != 3)
-        return false;
+        return FALSE;
 
-    kind   = head[0];
+    *kind  = head[0];
     length = ((word) head[2] << 8) | head[1];
 
+    if (length > MAX_PAYLOAD)
+        return FALSE;
+
     if (!ReadBlock(all, (length + 2), &num) || num != (length + 2))
-        return false;
+        return FALSE;
 
     crc = 0;
     UpdateCrc(&crc, &sync0, 1);
@@ -134,12 +137,12 @@ bool ReadTxtMessage(unsigned char kind, char *text)
     UpdateCrc(&crc, head, 3);
     UpdateCrc(&crc, all, length);
     
-    receivedCrc = ((word) all[length + 1] << 8) | all[length];
+    gotCrc = ((word) all[length + 1] << 8) | all[length];
 
-    if (crc != receivedCrc)
-        return false;
+    if (crc != gotCrc)
+        return FALSE;
         
-    memcpy(buf, all, length);
-    return true;
+    memcpy(text, all, length);
+    return TRUE;
 }
 

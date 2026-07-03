@@ -24,5 +24,5 @@ typedef struct
 } Message;
 
 bool SendTxtMessage(unsigned char kind, char *text);
-bool ReadTxtMessage(unsigned char kind, char *text);
+bool ReadTxtMessage(unsigned char *kind, char *text);
 

@@ -8,6 +8,8 @@
 
 void main()
 {
+	char text[MAX_PAYLOAD];
+	byte kind;
 	char debug[128];
 	int i;
 	int maxTry;
@@ -58,13 +60,19 @@ void main()
 	);
 	SendTxtMessage(MSG_HELLO, debug);
 
-	maxTry = 15;
+	maxTry = 20;
 	for (i = 0; i < maxTry; i++)
 	{
-		FindSync();
 		sprintf(debug, "Waiting %d of %d sec...", i, maxTry);
 		LibStringDsp( B@ debug, 5, 100, 160, B@@ IB_PFONT2);
 		LibPutDisp();
+
+		if (ReadTxtMessage(&kind, text))
+		{
+			sprintf(debug, "[ %d ] ( %s )", kind, text);
+			LibStringDsp( B@ debug, 5, 120, 160, B@@ IB_PFONT2);
+			LibPutDisp();
+		}
 		LibWait(IB_1SWAIT);
 	}
 
