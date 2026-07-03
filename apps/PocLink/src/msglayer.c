@@ -104,11 +104,28 @@ bool SendTxtMessage(unsigned char kind, char *text)
     return SendBlock(all, total);
 }
 
-void TestIt()
+bool FindSync()
 {
-    byte buf[1024];
-    word size,num,err;
-    size = 1024;
-    err = ReadBlock(buf,size,&num);
+    byte           head[3];
+    char           buf[MAX_PAYLOAD];
+    unsigned char  all[MAX_PAYLOAD + 2];
+    word           num;
+    
+    if (ReadPort(head) && head[0] == SYNC0)
+    {
+        if (ReadPort(head) && head[0] == SYNC1)
+        {
+            if (ReadBlock(head, 3, &num) && num == 3)
+            {
+                kind   = head[0];
+                length = ((word) head[2] << 8) | head[1];
+
+                if (ReadBlock(all, (length + 2), &num) && num == (length + 2))
+                {
+                    memcpy(all, buf, length);
+                }
+            }
+        }
+    }
 }
 

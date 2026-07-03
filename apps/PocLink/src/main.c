@@ -61,6 +61,7 @@ void main()
 	maxTry = 15;
 	for (i = 0; i < maxTry; i++)
 	{
+		FindSync();
 		sprintf(debug, "Waiting %d of %d sec...", i, maxTry);
 		LibStringDsp( B@ debug, 5, 100, 160, B@@ IB_PFONT2);
 		LibPutDisp();

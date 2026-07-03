@@ -25,3 +25,5 @@ typedef struct
 
 bool SendTxtMessage(unsigned char kind, char *text);
 
+bool FindSync(void);
+
