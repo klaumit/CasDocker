@@ -1,4 +1,10 @@
 
+void UpdateCrc(word *crc, const byte *data, word length);
+
+bool ReadPort(byte *data);
+bool SendPort(byte *data, word size);
+bool ReadBlock(byte *data, word size, word *num);
+
 #define SYNC0       0xAA
 #define SYNC1       0x55
 
@@ -18,6 +24,4 @@ typedef struct
 } Message;
 
 int SendTxtMessage(unsigned char kind, char *text);
-
-void UpdateCrc(word *crc, const byte *data, word length);
 

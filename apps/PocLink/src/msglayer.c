@@ -55,6 +55,28 @@ void UpdateCrc(word *crc, const byte *data, word length)
     *crc = c;
 }
 
+bool ReadPort(byte *data)
+{
+    word res;
+    res = LibSrlRecvByte(data);
+    return res == IW_SRL_NOERR;
+}
+
+bool ReadBlock(byte *data, word size, word *num)
+{
+    word res;
+    res = LibSrlRecvBlock(data, size, num);
+    return res == IW_SRL_NOERR;
+}
+
+bool SendPort(byte *data, word size)
+{
+    word res;
+    /* (0 < size < 255) */
+    res = LibSrlSendBlock(data, size);
+    return res == IW_SRL_NOERR;
+}
+
 int SendTxtMessage(unsigned char kind, char *text)
 {
     char           buf[MAX_PAYLOAD];
