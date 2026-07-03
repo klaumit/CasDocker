@@ -69,7 +69,7 @@ bool ReadBlock(byte *data, word size, word *num)
     return res == IW_SRL_NOERR;
 }
 
-bool SendPort(byte *data, word size)
+bool SendBlock(byte *data, word size)
 {
     word res;
     /* (0 < size < 255) */
@@ -77,7 +77,7 @@ bool SendPort(byte *data, word size)
     return res == IW_SRL_NOERR;
 }
 
-int SendTxtMessage(unsigned char kind, char *text)
+bool SendTxtMessage(unsigned char kind, char *text)
 {
     char           buf[MAX_PAYLOAD];
     unsigned char  all[5 + MAX_PAYLOAD + 2];
@@ -101,6 +101,6 @@ int SendTxtMessage(unsigned char kind, char *text)
     all[5 + length + 1] = (unsigned char)(crc >> 8);
     
     total = 5 + length + 2;
-    LibSrlSendBlock(all, total);
+    return SendBlock(all, total);
 }
 

@@ -2,7 +2,7 @@
 void UpdateCrc(word *crc, const byte *data, word length);
 
 bool ReadPort(byte *data);
-bool SendPort(byte *data, word size);
+bool SendBlock(byte *data, word size);
 bool ReadBlock(byte *data, word size, word *num);
 
 #define SYNC0       0xAA
@@ -23,5 +23,5 @@ typedef struct
     unsigned short checksum;
 } Message;
 
-int SendTxtMessage(unsigned char kind, char *text);
+bool SendTxtMessage(unsigned char kind, char *text);
 
