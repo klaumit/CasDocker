@@ -8,7 +8,7 @@
 
 void main()
 {
-	char text[MAX_PAYLOAD];
+	char text[MAX_PAYLOAD+1];
 	byte kind;
 	char debug[128];
 	int i;
