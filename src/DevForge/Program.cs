@@ -15,17 +15,17 @@ namespace DevForge
     {
         private static void Main(string[] args)
         {
-            using (ICommDevice dev1 = new PocketDevice(new LegacyFactory()))
+            // using (ICommDevice dev1 = new PocketDevice(new LegacyFactory()))
             using (ICommDevice dev2 = new PocketDevice(new ModernFactory()))
             {
-                dev1.Start();
+                // dev1.Start();
                 dev2.Start();
 
                 Console.WriteLine("Waiting...");
                 Console.ReadLine();
 
                 var quit = new Quit("Noyb");
-                dev1.Send(quit);
+                // dev1.Send(quit);
                 dev2.Send(quit);
 
                 Console.WriteLine("Sending...");
