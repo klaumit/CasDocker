@@ -104,3 +104,11 @@ bool SendTxtMessage(unsigned char kind, char *text)
     return SendBlock(all, total);
 }
 
+void TestIt()
+{
+    byte buf[1024];
+    word size,num,err;
+    size = 1024;
+    err = ReadBlock(buf,size,&num);
+}
+
