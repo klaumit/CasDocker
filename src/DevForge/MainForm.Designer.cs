@@ -32,25 +32,26 @@
             // 
             // imgBox
             // 
-            this.imgBox.Location = new System.Drawing.Point(120, 94);
+            this.imgBox.Location = new System.Drawing.Point(108, 222);
             this.imgBox.Name = "imgBox";
             this.imgBox.Size = new System.Drawing.Size(228, 168);
             this.imgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgBox.TabIndex = 1;
             this.imgBox.TabStop = false;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(530, 420);
             this.Controls.Add(this.imgBox);
             this.Controls.Add(this.quitBtn);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "DevForge";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imgBox)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.Button quitBtn;
