@@ -20,11 +20,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\app.ico" />
+    <EmbeddedResource Include="Resources\*.ico" />
+    <EmbeddedResource Include="Resources\*.png" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MemForge.Lib\MemForge.Lib.n.csproj" />
+    <Reference Include="Vanara.PInvoke.Shared">
+      <HintPath>..\deps\net40\Vanara.PInvoke.Shared.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
