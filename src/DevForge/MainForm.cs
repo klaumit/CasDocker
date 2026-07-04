@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DevForge.Resources;
+using System.Drawing;
 
 namespace DevForge
 {
@@ -23,8 +24,8 @@ namespace DevForge
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var img = ResExt.ToImage(ResExt.GetStream("device.png"));
-            imgBox.Image = img;
+            Icon = ResExt.ToIcon(ResExt.GetStream("app.ico"));
+            imgBox.Image = ResExt.ToImage(ResExt.GetStream("device.png"));
         }
     }   
 }

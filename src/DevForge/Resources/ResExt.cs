@@ -14,9 +14,15 @@ namespace DevForge.Resources
             return stream;
         }
 
-        internal static Image ToImage(Stream stream)
+        internal static Bitmap ToImage(this Stream stream)
         {
             var img = new Bitmap(stream);
+            return img;
+        }
+
+        internal static Icon ToIcon(this Stream stream)
+        {
+            var img = new Icon(stream);
             return img;
         }
     }
