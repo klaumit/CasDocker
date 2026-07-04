@@ -23,8 +23,8 @@ namespace DevForge
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Icon = ResExt.ToIcon(ResExt.GetStream("app.ico"));
-            imgBox.Image = ResExt.ToImage(ResExt.GetStream("device.png"));
+            Icon = ResExt.GetStream("app.ico").ToIcon();
+            imgBox.Image = ResExt.GetStream("device.png").ToImage();
 
             Utils.X1();
             Utils.X2();
