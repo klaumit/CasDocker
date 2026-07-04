@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Wine": {
+      "commandName": "Executable",
+      "executablePath": "/usr/bin/wine",
+      "commandLineArgs": "bin/Debug/net40/MemForge.exe",
+      "workingDirectory": "$(ProjectDir)"
+    }
+  }
+}
