@@ -1,38 +1,21 @@
 ﻿using System;
-using DevForge.Lib.API;
-using DevForge.Lib.Common;
-using DevForge.Lib.Modern;
-using DevForge.Lib.Legacy;
-using DevForge.Lib.Messages.Impl;
-using System.Threading;
-
-#pragma warning disable CA1859
-// ReSharper disable ConvertToUsingDeclaration
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace DevForge
 {
-    internal static class Program
+    static class Program
     {
-        private static void Main(string[] args)
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
         {
-            using (ICommDevice dev1 = new PocketDevice(new LegacyFactory()))
-            // using (ICommDevice dev2 = new PocketDevice(new ModernFactory()))
-            {
-                dev1.Start();
-                // dev2.Start();
-
-                Console.WriteLine("Waiting...");
-                Console.ReadLine();
-
-                var quit = new Quit("Fick dich, C# !");
-                dev1.Send(quit);
-                // dev2.Send(quit);
-
-                Console.WriteLine("Sending...");
-                Thread.Sleep(1000);
-            }
-
-            Console.WriteLine("Done.");
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
         }
     }
 }
