@@ -32,5 +32,5 @@ const char *GetOpenPortStr(word num);
 
 void ClosePort();
 
-void Wait(void);
+void Wait(byte sec);
 

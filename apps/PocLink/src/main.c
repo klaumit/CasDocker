@@ -60,7 +60,7 @@ void main()
 	);
 	SendTxtMessage(MSG_HELLO, debug);
 
-	maxTry = 20;
+	maxTry = 25;
 	for (i = 0; i < maxTry; i++)
 	{
 		sprintf(debug, "Waiting %d of %d sec...", i, maxTry);
@@ -69,11 +69,20 @@ void main()
 
 		if (ReadTxtMessage(&kind, text))
 		{
-			sprintf(debug, "[ %d ] ( %s )", kind, text);
+			sprintf(debug, " [%d] %s", kind, text);
 			LibStringDsp( B@ debug, 5, 120, 160, B@@ IB_PFONT2);
 			LibPutDisp();
+
+			if (kind == MSG_QUIT)
+			{
+				sprintf(debug, "  --> I will quit soon!");
+				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
+				LibPutDisp();
+				Wait(5);
+				break;
+			}
 		}
-		LibWait(IB_1SWAIT);
+		Wait(1);
 	}
 
 	ClosePort();
