@@ -45,9 +45,6 @@ namespace DevForge.Lib.Common
             var hello = head as Hello;
             var helloT = hello != null ? hello.Text : head.ToString();
             Console.WriteLine(" [{0}] => '{1}'", Name, helloT);
-
-            // app=PocLink;cpu=X86;comm=9pin
-            // app=PocLink;cpu=SH3;comm=USB
         }
 
         public void Send(Message msg)

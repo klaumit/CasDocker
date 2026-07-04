@@ -63,7 +63,6 @@
             this.dropBox.ResumeLayout(false);
             this.dropBox.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         private System.Windows.Forms.Button exitBtn;
