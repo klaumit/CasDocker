@@ -1,3 +1,5 @@
+using DevForge.Lib.High;
+
 namespace DevForge.Lib.Messages.Impl
 {
     public sealed class Hello : BaseTxt
@@ -10,6 +12,11 @@ namespace DevForge.Lib.Messages.Impl
         public Hello(Message msg) : base(msg)
         {
             Kind = MsgKind.Hello;
+        }
+
+        public PvInfo AsInfo()
+        {
+            return Parsers.Parse(this);
         }
     }
 }

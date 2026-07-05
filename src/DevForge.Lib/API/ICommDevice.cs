@@ -7,12 +7,14 @@ namespace DevForge.Lib.API
 {
     public interface ICommDevice : IDisposable
     {
+        string Name { get; }
+
         void Start();
 
         void Stop();
 
-        void Send(Message msg);
+        Message Receive();
 
-        string Name { get; }
+        void Send(Message msg);
     }
 }

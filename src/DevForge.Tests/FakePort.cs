@@ -30,6 +30,11 @@ namespace DevForge.Tests
             return true;
         }
 
+        public bool IsOpen()
+        {
+            return true;
+        }
+
         public byte[] ReadBytes(int count)
         {
             var buffer = new byte[count];

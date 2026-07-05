@@ -7,5 +7,7 @@ namespace DevForge.Lib.API
         byte[] ReadBytes(int count);
 
         bool WriteBytes(byte[] buffer);
+
+        bool IsOpen();
     }
 }

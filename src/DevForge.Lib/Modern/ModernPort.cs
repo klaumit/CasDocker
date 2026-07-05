@@ -61,7 +61,7 @@ namespace DevForge.Lib.Modern
 
             return _memory;
         }
-        
+
         public byte[] ReadBytes(int count)
         {
             var mem = GetStream();
@@ -87,6 +87,11 @@ namespace DevForge.Lib.Modern
             if (bytesWritten < 1)
                 return false;
             return true;
+        }
+
+        public bool IsOpen()
+        {
+            return _usbHandle != null;
         }
     }
 }

@@ -32,29 +32,45 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+	<Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-<Compile Include="Modern\ModernFactory.cs" />
-<Compile Include="Modern\ModernPort.cs" />
-<Compile Include="Modern\Internals\KernelNative.cs" />
-<Compile Include="Modern\Internals\EnumDevNative.cs" />
-<Compile Include="Messages\MsgKind.cs" />
-<Compile Include="Messages\MsgTool.cs" />
-<Compile Include="Messages\Message.cs" />
-<Compile Include="Messages\Impl\Hello.cs" />
-<Compile Include="Messages\Impl\Quit.cs" />
-<Compile Include="Messages\Impl\BaseTxt.cs" />
-<Compile Include="Common\PocketDevice.cs" />
-<Compile Include="Common\DeviceHub.cs" />
-<Compile Include="Common\CommExt.cs" />
-<Compile Include="Common\Checking.cs" />
-<Compile Include="Legacy\LegacyFactory.cs" />
-<Compile Include="Legacy\LegacyPort.cs" />
-<Compile Include="API\ICloseable.cs" />
-<Compile Include="API\ICommPort.cs" />
-<Compile Include="API\ICommFactory.cs" />
-<Compile Include="API\ICommDevice.cs" />
-<Compile Include="Properties\AssemblyInfo.cs" />	
+    <Compile Include="Modern\ModernFactory.cs" />
+    <Compile Include="Modern\ModernPort.cs" />
+    <Compile Include="Modern\Internals\KernelNative.cs" />
+    <Compile Include="Modern\Internals\EnumDevNative.cs" />
+    <Compile Include="High\Parsers.cs" />
+    <Compile Include="High\PvInfo.cs" />
+    <Compile Include="High\PvArea.cs" />
+    <Compile Include="High\PvChip.cs" />
+    <Compile Include="High\PvComm.cs" />
+    <Compile Include="High\PvVer.cs" />
+    <Compile Include="High\PvVerConv.cs" />
+    <Compile Include="High\PvCpu.cs" />
+    <Compile Include="Messages\MsgKind.cs" />
+    <Compile Include="Messages\MsgTool.cs" />
+    <Compile Include="Messages\Message.cs" />
+    <Compile Include="Messages\Impl\Hello.cs" />
+    <Compile Include="Messages\Impl\Quit.cs" />
+    <Compile Include="Messages\Impl\BaseTxt.cs" />
+    <Compile Include="Common\PocketDevice.cs" />
+    <Compile Include="Common\DeviceHub.cs" />
+    <Compile Include="Common\CommExt.cs" />
+    <Compile Include="Common\Checking.cs" />
+    <Compile Include="Legacy\LegacyFactory.cs" />
+    <Compile Include="Legacy\LegacyPort.cs" />
+    <Compile Include="API\ICloseable.cs" />
+    <Compile Include="API\ICommPort.cs" />
+    <Compile Include="API\ICommFactory.cs" />
+    <Compile Include="API\ICommDevice.cs" />
+	<Compile Include="Tools\JsonExt.cs" />
+	<Compile Include="Tools\TextExt.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\deps\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="EnumDev.dll">

@@ -62,7 +62,7 @@ namespace DevForge.Lib.Messages
             if (syncIdx2 < 0)
                 return null;
             if (syncIdx1 != 0 || syncIdx2 != 1)
-            {
+           { 
                 head = head.Skip(syncIdx1).ToArray();
                 var fail = port.ReadBytes(syncIdx1);
                 if (fail != null && fail.Length == syncIdx1)

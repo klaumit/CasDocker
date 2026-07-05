@@ -42,7 +42,7 @@ namespace DevForge
 
             InvokeGui(() =>
             {
-                var form = new DeviceForm(dev);
+                var form = new DeviceForm(e);
                 form.Show(Main);
             });
         }

@@ -38,13 +38,30 @@ namespace DevForge.Lib.Common
             _thread.Start();
         }
 
+        public event EventHandler<GotMessageArgs> NewMessage;
+
+        private void OnNewMessage(Message msg)
+        {
+            if (NewMessage == null) return;
+            var a = new GotMessageArgs { Stamp = DateTime.Now, Message = msg };
+            NewMessage.Invoke(this, a);
+        }
+
         private void DoLoop()
         {
-            Console.WriteLine(" [{0}] created...", Name);
-            var head = _port.ReadMessage();
-            var hello = head as Hello;
-            var helloT = hello != null ? hello.Text : head.ToString();
-            Console.WriteLine(" [{0}] => '{1}'", Name, helloT);
+            while (_port.IsOpen())
+            {
+                var message = _port.ReadMessage();
+                if (message == null)
+                    continue;
+                OnNewMessage(message);
+            }
+        }
+
+        public Message Receive()
+        {
+            var message = _port.ReadMessage();
+            return message;
         }
 
         public void Send(Message msg)
@@ -61,6 +78,6 @@ namespace DevForge.Lib.Common
         public void Dispose()
         {
             Stop();
-        }
+        }        
     }
 }

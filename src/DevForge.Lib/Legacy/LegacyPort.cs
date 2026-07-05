@@ -62,5 +62,10 @@ namespace DevForge.Lib.Legacy
             _port.Write(buffer, 0, buffer.Length);
             return true;
         }
+        
+        public bool IsOpen()
+        {
+            return _port.IsOpen;
+        }
     }
 }

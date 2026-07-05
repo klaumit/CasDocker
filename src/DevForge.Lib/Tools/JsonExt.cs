@@ -27,7 +27,7 @@ namespace DevForge.Lib.Tools
         {
             string text;
             if ((text = raw.TrimOrNull()) == null)
-                return default;
+                return default(T);
             return JsonConvert.DeserializeObject<T>(text, GetConfig());
         }
     }
