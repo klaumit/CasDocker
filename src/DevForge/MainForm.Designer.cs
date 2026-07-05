@@ -24,7 +24,7 @@
             // 
             // quitBtn
             // 
-            this.quitBtn.Location = new System.Drawing.Point(152, 37);
+            this.quitBtn.Location = new System.Drawing.Point(156, 37);
             this.quitBtn.Name = "quitBtn";
             this.quitBtn.Size = new System.Drawing.Size(96, 33);
             this.quitBtn.TabIndex = 0;
@@ -71,6 +71,7 @@
             this.ClientSize = new System.Drawing.Size(305, 128);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "DevForge";
             this.Load += new System.EventHandler(this.Form1_Load);
