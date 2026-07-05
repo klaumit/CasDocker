@@ -32,10 +32,13 @@ namespace DevForge
             Icon = ResExt.GetStream("app.ico").ToIcon();
             imgBox.Image = ResExt.GetStream("device.png").ToImage();
 
-            _hub.Value.NewDevice += (o, s) =>
-            {
-                Console.WriteLine(" " + o + " = " + s);
-            };
+            _hub.Value.NewDevice += OnNewDevice;
+            _hub.Value.StartOnce();
+        }
+
+        private void OnNewDevice(object s, DeviceHub.DeviceFoundArgs e)
+        {
+            Console.WriteLine(" " + s + " = " + e);
         }
     }
 }
