@@ -5,7 +5,7 @@ namespace DevForge.Lib.Common
 {
     public abstract class BaseFactory : ICommFactory
     {
-        public string Prefix => GetType().Name.Split('F').First();
+        public string Prefix { get { return GetType().Name.Split('F').First(); } }
 
         public abstract ICommPort Create();
     }
