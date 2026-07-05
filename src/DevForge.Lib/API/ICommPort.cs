@@ -2,7 +2,7 @@ using System;
 
 namespace DevForge.Lib.API
 {
-    public interface ICommPort : IDisposable, ICloseable
+    public interface ICommPort : ICloseable
     {
         void Open();
 

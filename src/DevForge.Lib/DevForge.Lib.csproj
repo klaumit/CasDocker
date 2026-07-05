@@ -45,10 +45,12 @@
 <Compile Include="Messages\Impl\Quit.cs" />
 <Compile Include="Messages\Impl\BaseTxt.cs" />
 <Compile Include="Common\PocketDevice.cs" />
+<Compile Include="Common\DeviceHub.cs" />
 <Compile Include="Common\CommExt.cs" />
 <Compile Include="Common\Checking.cs" />
 <Compile Include="Legacy\LegacyFactory.cs" />
 <Compile Include="Legacy\LegacyPort.cs" />
+<Compile Include="API\ICloseable.cs" />
 <Compile Include="API\ICommPort.cs" />
 <Compile Include="API\ICommFactory.cs" />
 <Compile Include="API\ICommDevice.cs" />
