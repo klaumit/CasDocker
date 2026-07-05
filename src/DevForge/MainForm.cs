@@ -30,10 +30,20 @@ namespace DevForge
         private void Form1_Load(object sender, EventArgs e)
         {
             Icon = ResExt.GetStream("app.ico").ToIcon();
-            imgBox.Image = ResExt.GetStream("device.png").ToImage();
 
             _hub.Value.NewDevice += OnNewDevice;
-            _hub.Value.StartOnce();
+            tryFind1Btn_Click(sender, e);
+            tryFind2Btn_Click(sender, e);
+        }
+
+        private void tryFind1Btn_Click(object sender, EventArgs e)
+        {
+            _hub.Value.StartModern();
+        }
+
+        private void tryFind2Btn_Click(object sender, EventArgs e)
+        {
+            _hub.Value.StartLegacy();
         }
 
         private void OnNewDevice(object s, DeviceFoundArgs e)

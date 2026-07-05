@@ -30,9 +30,13 @@ namespace DevForge.Lib.Common
             OnNewDevice(new DeviceFoundArgs { Stamp = DateTime.Now, Device = dev });
         }
 
-        public void StartOnce()
+        public void StartLegacy()
         {
             Task.Factory.StartNew(DoLegacy);
+        }
+
+        public void StartModern()
+        {
             Task.Factory.StartNew(DoModern);
         }
 
