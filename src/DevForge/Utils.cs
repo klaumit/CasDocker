@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using DevForge.Lib.Common;
 using System.Collections.Generic;
 using DevForge.Lib.API;
@@ -18,6 +17,16 @@ namespace DevForge
         internal static MainForm Main;
         private static readonly List<ICommDevice> devices = new List<ICommDevice>();
 
+        internal static void InvokeGui(Action action)
+        {
+            if (Main.InvokeRequired)
+            {
+                Main.Invoke(action);
+                return;
+            }
+            action();
+        }
+
         internal static void OnExiting(object sender, FormClosingEventArgs e)
         {
             foreach (var device in devices)
@@ -31,8 +40,11 @@ namespace DevForge
             var dev = e.Device;
             devices.Add(dev);
 
-            var form = new DeviceForm(dev);
-            form.Show(Main);
+            InvokeGui(() =>
+            {
+                var form = new DeviceForm(dev);
+                form.Show(Main);
+            });
         }
     }
 }
