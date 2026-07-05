@@ -247,6 +247,7 @@
             this.Name = "DeviceForm";
             this.Text = "DeviceForm";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += OnFormClosing;
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
             this.infoBox.ResumeLayout(false);
             this.infoBox.PerformLayout();

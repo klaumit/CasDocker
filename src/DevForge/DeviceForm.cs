@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using DevForge.Resources;
-using DevForge.Lib.API;
 using DevForge.Lib.Common;
 using DevForge.Lib.Messages.Impl;
-using Msg = DevForge.Lib.Messages.Message;
-using DevForge.Lib.High;
 
+// ReSharper disable UseCollectionExpression
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable LocalizableElement
 
@@ -43,19 +40,23 @@ namespace DevForge
                 var info = hello.AsInfo();
                 if (info != null)
                 {
-                    chipLbl.Text = info.Chip + "";
-                    areaLbl.Text = info.Area + "";
-                    cpuLbl.Text = info.Cpu + "";
-                    memLbl.Text = info.Mem + "";
-                    commLbl.Text = (info.Comm + "").TrimStart('_');
+                    chipLbl.Text = info.Chip.GetEnumStr();
+                    areaLbl.Text = info.Area.GetEnumStr();
+                    cpuLbl.Text = info.Cpu.GetEnumStr();
+                    memLbl.Text = info.Mem.GetEnumStr();
+                    commLbl.Text = info.Comm.GetEnumStr();
                     appLbl.Text = info.App;
-                    var ots = info.Ver.OsDate.ToString("u");
-                    osDtLbl.Text = ots.Split(new[] { ' ' }, 2).First();
-                    osVerLbl.Text = info.Ver.OsVer + "";
+                    osDtLbl.Text = info.Ver.OsDate.GetDateStr();
+                    osVerLbl.Text = info.Ver.OsVer.GetVerStr();
                 }
             }
-            var dts = stamp.ToString("u").TrimEnd('Z');
-            dtLbl.Text = dts.Split(new[] { ' ' }, 2).Last();
+            dtLbl.Text = stamp.GetTimeStr();
+        }
+
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            var dev = _args.Device;
+            dev.Send(new Quit("Please stop now!"));
         }
     }
 }

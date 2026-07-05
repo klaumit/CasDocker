@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using DevForge.Lib.API;
 using DevForge.Lib.Messages;
-using DevForge.Lib.Messages.Impl;
 
 // ReSharper disable ReplaceWithFieldKeyword
 // ReSharper disable UseNameOfInsteadOfTypeOf
