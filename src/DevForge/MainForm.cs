@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using DevForge.Lib.Common;
-using DevForge.Lib.Common;
 using DevForge.Resources;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
