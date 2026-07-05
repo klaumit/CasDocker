@@ -31,6 +31,7 @@ namespace DevForge
         {
             Icon = ResExt.GetStream("app.ico").ToIcon();
 
+            FormClosing += Utils.OnExiting;
             _hub.Value.NewDevice += Utils.OnNewDevice;
             tryFind1Btn_Click(sender, e);
             tryFind2Btn_Click(sender, e);
