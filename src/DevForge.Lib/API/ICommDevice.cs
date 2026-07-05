@@ -12,5 +12,7 @@ namespace DevForge.Lib.API
         void Stop();
 
         void Send(Message msg);
+
+        string Name { get; }
     }
 }

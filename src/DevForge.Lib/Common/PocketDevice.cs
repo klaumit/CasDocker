@@ -22,7 +22,7 @@ namespace DevForge.Lib.Common
             _port = port;
         }
 
-        private string Name
+        public string Name
         {
             get
             {
