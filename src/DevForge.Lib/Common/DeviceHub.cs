@@ -9,14 +9,14 @@ using DevForge.Lib.Modern;
 
 namespace DevForge.Lib.Common
 {
+    public sealed class DeviceFoundArgs : EventArgs
+    {
+        public DateTime Stamp { get; set; }
+        public ICommDevice Device { get; set; }
+    }
+    
     public sealed class DeviceHub
     {
-        public sealed class DeviceFoundArgs : EventArgs
-        {
-            public DateTime Stamp { get; set; }
-            public ICommDevice Device { get; set; }
-        }
-
         public event EventHandler<DeviceFoundArgs> NewDevice;
 
         private void OnNewDevice(DeviceFoundArgs e)

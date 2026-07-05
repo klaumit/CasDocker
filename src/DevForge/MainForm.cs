@@ -36,7 +36,7 @@ namespace DevForge
             _hub.Value.StartOnce();
         }
 
-        private void OnNewDevice(object s, DeviceHub.DeviceFoundArgs e)
+        private void OnNewDevice(object s, DeviceFoundArgs e)
         {
             Console.WriteLine(" " + s + " = " + e);
         }
