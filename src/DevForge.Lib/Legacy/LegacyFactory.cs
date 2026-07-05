@@ -1,12 +1,13 @@
 using System.IO.Ports;
 using System.Linq;
 using DevForge.Lib.API;
+using DevForge.Lib.Common;
 
 namespace DevForge.Lib.Legacy
 {
-    public sealed class LegacyFactory : ICommFactory
+    public sealed class LegacyFactory : BaseFactory 
     {
-        public ICommPort Create()
+        public override ICommPort Create()
         {
             return CreatePort();
         }

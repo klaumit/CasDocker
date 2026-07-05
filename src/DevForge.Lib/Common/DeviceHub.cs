@@ -14,7 +14,7 @@ namespace DevForge.Lib.Common
         public DateTime Stamp { get; set; }
         public ICommDevice Device { get; set; }
     }
-    
+
     public sealed class DeviceHub
     {
         public event EventHandler<DeviceFoundArgs> NewDevice;
@@ -38,16 +38,22 @@ namespace DevForge.Lib.Common
 
         private void DoLegacy()
         {
-            var dev = new PocketDevice(new LegacyFactory());
-            dev.Start();
+            var factory = new LegacyFactory();
+            var prefix = factory.Prefix;
+            var port = factory.Create();
+            var dev = new PocketDevice(prefix, port);
             OnNewDevice(dev);
+            dev.Start();
         }
 
         private void DoModern()
         {
-            var dev = new PocketDevice(new ModernFactory());
-            dev.Start();
+            var factory = new ModernFactory();
+            var prefix = factory.Prefix;
+            var port = factory.Create();
+            var dev = new PocketDevice(prefix, port);
             OnNewDevice(dev);
+            dev.Start();
         }
     }
 }

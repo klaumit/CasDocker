@@ -5,28 +5,29 @@ using DevForge.Lib.API;
 using DevForge.Lib.Messages;
 using DevForge.Lib.Messages.Impl;
 
+// ReSharper disable ReplaceWithFieldKeyword
 // ReSharper disable UseNameOfInsteadOfTypeOf
 
 namespace DevForge.Lib.Common
 {
     public sealed class PocketDevice : ICommDevice
     {
-        private readonly ICommFactory _factory;
+        private readonly string _prefix;
         private ICommPort _port;
         private Thread _thread;
 
-        public PocketDevice(ICommFactory factory)
+        public PocketDevice(string prefix, ICommPort port)
         {
-            _factory = factory;
+            _prefix = prefix;
+            _port = port;
         }
 
         private string Name
         {
             get
             {
-                var prefix = _factory.GetType().Name.Split('F').First();
                 var last = GetType().Name.Split('t').Last();
-                var name = prefix + last;
+                var name = _prefix + last;
                 return name;
             }
         }
@@ -39,7 +40,6 @@ namespace DevForge.Lib.Common
 
         private void DoLoop()
         {
-            _port = _factory.Create();
             Console.WriteLine(" [{0}] created...", Name);
             var head = _port.ReadMessage();
             var hello = head as Hello;

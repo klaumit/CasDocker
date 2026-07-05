@@ -3,6 +3,7 @@ using System.Linq;
 using DevForge.Lib.API;
 using System.Text;
 using System.Threading;
+using DevForge.Lib.Common;
 using E = DevForge.Lib.Modern.Internals.EnumDevNative;
 
 // ReSharper disable UseCollectionExpression
@@ -10,9 +11,9 @@ using E = DevForge.Lib.Modern.Internals.EnumDevNative;
 
 namespace DevForge.Lib.Modern
 {
-    public sealed class ModernFactory : ICommFactory
+    public sealed class ModernFactory : BaseFactory
     {
-        public ICommPort Create()
+        public override ICommPort Create()
         {
             try
             {
