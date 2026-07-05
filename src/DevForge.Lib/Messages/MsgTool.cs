@@ -53,6 +53,8 @@ namespace DevForge.Lib.Messages
             if (port == null)
                 return null;
             var head = port.ReadBytes(5);
+            if (head == null)
+                return null;
             if (head.Length != 5)
                 return null;
             var syncIdx1 = Array.IndexOf(head, Sync[0], 0);
