@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
+using DevForge.Lib.Common;
+using DevForge.Lib.Common;
 using DevForge.Resources;
+
+// ReSharper disable ArrangeObjectCreationWhenTypeEvident
+// ReSharper disable LocalizableElement
 
 namespace DevForge
 {
     public partial class MainForm : Form
     {
+        private readonly Lazy<DeviceHub> _hub = new Lazy<DeviceHub>();
+
         public MainForm()
         {
             InitializeComponent();
@@ -26,8 +33,10 @@ namespace DevForge
             Icon = ResExt.GetStream("app.ico").ToIcon();
             imgBox.Image = ResExt.GetStream("device.png").ToImage();
 
-            Utils.X1();
-            Utils.X2();
+            _hub.Value.NewDevice += (o, s) =>
+            {
+                Console.WriteLine(" " + o + " = " + s);
+            };
         }
     }
 }
