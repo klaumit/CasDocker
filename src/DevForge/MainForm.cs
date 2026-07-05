@@ -31,7 +31,7 @@ namespace DevForge
         {
             Icon = ResExt.GetStream("app.ico").ToIcon();
 
-            _hub.Value.NewDevice += OnNewDevice;
+            _hub.Value.NewDevice += Utils.OnNewDevice;
             tryFind1Btn_Click(sender, e);
             tryFind2Btn_Click(sender, e);
         }
@@ -44,11 +44,6 @@ namespace DevForge
         private void tryFind2Btn_Click(object sender, EventArgs e)
         {
             _hub.Value.StartLegacy();
-        }
-
-        private void OnNewDevice(object s, DeviceFoundArgs e)
-        {
-            Console.WriteLine(" " + s + " = " + e);
         }
     }
 }
