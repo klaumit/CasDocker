@@ -3,6 +3,11 @@
 #include <string.h>
 #include "msglayer.h"
 
+#ifdef __HITACHI__
+#else
+    #include <stdrom.h>
+#endif
+
 static const word CrcTable[256] =
 {
     0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
@@ -146,5 +151,29 @@ bool ReadTxtMessage(unsigned char *kind, char *text)
     text[length] = '\0';
 
     return TRUE;
+}
+
+#ifdef __HITACHI__
+    #define	FP_SEG(p)	((unsigned short)((unsigned long)((void *)(p)) >> 16))
+    #define	FP_OFF(p)	(unsigned short)(p)
+    #define	MK_FP(s, o)	((void *)(((unsigned long)(s) << 16)|(unsigned short)(o)))
+#else
+#endif
+
+void ReadMemory(unsigned short segment,
+                unsigned short offset,
+                unsigned char *dest,
+                unsigned int length)
+{
+    #ifdef __HITACHI__
+        unsigned char     *src = (unsigned char     *)MK_FP(segment, offset);
+    #else
+        unsigned char far *src = (unsigned char far *)MK_FP(segment, offset);
+    #endif
+
+    while (length--)
+    {
+        *dest++ = *src++;
+    }
 }
 
