@@ -203,7 +203,7 @@ void ClosePort()
 void Wait(byte sec)
 {
     word i; 
-    for (i = 0; i < count; i++)
+    for (i = 0; i < sec; i++)
     {
         LibWait(IB_1SWAIT);
     }
