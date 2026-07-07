@@ -11,8 +11,7 @@ void main()
 	char text[MAX_PAYLOAD+1];
 	byte kind;
 	char debug[128];
-	int i, maxTry;
-	word newTry;
+	int i, maxTry, newTry;
 
 	LibInitDisp();
 	LibClrDisp();
@@ -60,7 +59,7 @@ void main()
 	);
 	SendTxtMessage(MSG_HELLO, debug);
 
-	maxTry = 25;
+	maxTry = 15;
 	for (i = 0; i < maxTry; i++)
 	{
 		sprintf(debug, "Waiting %d of %d sec...", i, maxTry);
