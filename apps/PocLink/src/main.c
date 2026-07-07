@@ -11,8 +11,8 @@ void main()
 	char text[MAX_PAYLOAD+1];
 	byte kind;
 	char debug[128];
-	int i;
-	int maxTry;
+	int i, maxTry;
+	word newTry;
 
 	LibInitDisp();
 	LibClrDisp();
@@ -83,10 +83,14 @@ void main()
 			}
 			if (kind == MSG_ALIVE)
 			{
-				sprintf(debug, "  --> I will wait %d s!", ma);
+				if (sscanf(text, "%x", &newTry) != 1)
+				{
+					newTry = 21;
+				}
+				sprintf(debug, "  --> I will wait %d s!", newTry);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
-				maxTry = ma;
+				maxTry = newTry;
 				i = 0;
 			}
 		}
