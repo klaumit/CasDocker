@@ -1,6 +1,9 @@
 #include "define.h"
 #include "libc.h"
+#include "L_define.h"
+#include "L_libc.h"
 #include <string.h>
+#include "hacks.h"
 #include "msglayer.h"
 
 #ifdef __HITACHI__
@@ -153,13 +156,6 @@ bool ReadTxtMessage(unsigned char *kind, char *text)
     return TRUE;
 }
 
-#ifdef __HITACHI__
-    #define	FP_SEG(p)	((unsigned short)((unsigned long)((void *)(p)) >> 16))
-    #define	FP_OFF(p)	(unsigned short)(p)
-    #define	MK_FP(s, o)	((void *)(((unsigned long)(s) << 16)|(unsigned short)(o)))
-#else
-#endif
-
 void ReadMemory(unsigned short segment,
                 unsigned short offset,
                 unsigned char *dest,
@@ -175,5 +171,23 @@ void ReadMemory(unsigned short segment,
     {
         *dest++ = *src++;
     }
+}
+
+void SwitchMe(int iBank, int iOffset, int i, char *text, int iTextLen)
+{
+    #ifdef __HITACHI__
+        unsigned char *pData;
+    #else
+        unsigned char far *pData;
+    #endif
+    unsigned char c;
+
+    pData = MK_FP(0x6000, 0x0000);
+    pData = MK_FP(0x7000, 0x0000);
+
+    SwitchBank((iBank & 0x1E) + 0x0100, 3);
+    c = pData[iOffset + i];
+    sprintf(&text[iTextLen], "%02X", c);
+    SwitchBank(0x0104, 3); /* Fonts */
 }
 
