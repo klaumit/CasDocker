@@ -32,9 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-	<Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\Impl\Alive.cs" />
     <Compile Include="Modern\ModernFactory.cs" />
     <Compile Include="Modern\ModernPort.cs" />
     <Compile Include="Modern\Internals\KernelNative.cs" />
@@ -63,8 +64,8 @@
     <Compile Include="API\ICommPort.cs" />
     <Compile Include="API\ICommFactory.cs" />
     <Compile Include="API\ICommDevice.cs" />
-	<Compile Include="Tools\JsonExt.cs" />
-	<Compile Include="Tools\TextExt.cs" />
+    <Compile Include="Tools\JsonExt.cs" />
+    <Compile Include="Tools\TextExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,10 @@ namespace DevForge.Lib.Messages
 
         Hello = 1,
 
-        Quit = 2
+        Quit = 2,
+
+        Alive = 3,
+
+        MemRead = 4
     }
 }

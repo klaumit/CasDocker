@@ -17,24 +17,26 @@
         {
             this.picBox = new System.Windows.Forms.PictureBox();
             this.infoBox = new System.Windows.Forms.GroupBox();
-            this.dtLbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.chipLbl = new System.Windows.Forms.Label();
-            this.areaLbl = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.memLbl = new System.Windows.Forms.Label();
-            this.cpuLbl = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.commLbl = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.osVerLbl = new System.Windows.Forms.Label();
             this.osDtLbl = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.appLbl = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.memLbl = new System.Windows.Forms.Label();
+            this.cpuLbl = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.commLbl = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.areaLbl = new System.Windows.Forms.Label();
+            this.chipLbl = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtLbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.closeBtn = new System.Windows.Forms.Button();
+            this.keepLiveBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.infoBox.SuspendLayout();
             this.SuspendLayout();
@@ -74,114 +76,6 @@
             this.infoBox.TabIndex = 1;
             this.infoBox.TabStop = false;
             this.infoBox.Text = "Info";
-            // 
-            // dtLbl
-            // 
-            this.dtLbl.AutoSize = true;
-            this.dtLbl.Location = new System.Drawing.Point(70, 25);
-            this.dtLbl.Name = "dtLbl";
-            this.dtLbl.Size = new System.Drawing.Size(16, 13);
-            this.dtLbl.TabIndex = 3;
-            this.dtLbl.Text = "---";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Seen at:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Chipset:";
-            // 
-            // chipLbl
-            // 
-            this.chipLbl.AutoSize = true;
-            this.chipLbl.Location = new System.Drawing.Point(70, 48);
-            this.chipLbl.Name = "chipLbl";
-            this.chipLbl.Size = new System.Drawing.Size(16, 13);
-            this.chipLbl.TabIndex = 5;
-            this.chipLbl.Text = "---";
-            // 
-            // areaLbl
-            // 
-            this.areaLbl.AutoSize = true;
-            this.areaLbl.Location = new System.Drawing.Point(70, 70);
-            this.areaLbl.Name = "areaLbl";
-            this.areaLbl.Size = new System.Drawing.Size(16, 13);
-            this.areaLbl.TabIndex = 7;
-            this.areaLbl.Text = "---";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 70);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Area:";
-            // 
-            // memLbl
-            // 
-            this.memLbl.AutoSize = true;
-            this.memLbl.Location = new System.Drawing.Point(193, 70);
-            this.memLbl.Name = "memLbl";
-            this.memLbl.Size = new System.Drawing.Size(16, 13);
-            this.memLbl.TabIndex = 13;
-            this.memLbl.Text = "---";
-            // 
-            // cpuLbl
-            // 
-            this.cpuLbl.AutoSize = true;
-            this.cpuLbl.Location = new System.Drawing.Point(193, 48);
-            this.cpuLbl.Name = "cpuLbl";
-            this.cpuLbl.Size = new System.Drawing.Size(16, 13);
-            this.cpuLbl.TabIndex = 11;
-            this.cpuLbl.Text = "---";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(139, 70);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(33, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Mem:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(139, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(32, 13);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "CPU:";
-            // 
-            // commLbl
-            // 
-            this.commLbl.AutoSize = true;
-            this.commLbl.Location = new System.Drawing.Point(193, 25);
-            this.commLbl.Name = "commLbl";
-            this.commLbl.Size = new System.Drawing.Size(16, 13);
-            this.commLbl.TabIndex = 9;
-            this.commLbl.Text = "---";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(139, 25);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 13);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Comm:";
             // 
             // osVerLbl
             // 
@@ -237,17 +131,146 @@
             this.label12.TabIndex = 14;
             this.label12.Text = "App:";
             // 
+            // memLbl
+            // 
+            this.memLbl.AutoSize = true;
+            this.memLbl.Location = new System.Drawing.Point(193, 70);
+            this.memLbl.Name = "memLbl";
+            this.memLbl.Size = new System.Drawing.Size(16, 13);
+            this.memLbl.TabIndex = 13;
+            this.memLbl.Text = "---";
+            // 
+            // cpuLbl
+            // 
+            this.cpuLbl.AutoSize = true;
+            this.cpuLbl.Location = new System.Drawing.Point(193, 48);
+            this.cpuLbl.Name = "cpuLbl";
+            this.cpuLbl.Size = new System.Drawing.Size(16, 13);
+            this.cpuLbl.TabIndex = 11;
+            this.cpuLbl.Text = "---";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(139, 70);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(33, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Mem:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(139, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 13);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "CPU:";
+            // 
+            // commLbl
+            // 
+            this.commLbl.AutoSize = true;
+            this.commLbl.Location = new System.Drawing.Point(193, 25);
+            this.commLbl.Name = "commLbl";
+            this.commLbl.Size = new System.Drawing.Size(16, 13);
+            this.commLbl.TabIndex = 9;
+            this.commLbl.Text = "---";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(139, 25);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Comm:";
+            // 
+            // areaLbl
+            // 
+            this.areaLbl.AutoSize = true;
+            this.areaLbl.Location = new System.Drawing.Point(70, 70);
+            this.areaLbl.Name = "areaLbl";
+            this.areaLbl.Size = new System.Drawing.Size(16, 13);
+            this.areaLbl.TabIndex = 7;
+            this.areaLbl.Text = "---";
+            // 
+            // chipLbl
+            // 
+            this.chipLbl.AutoSize = true;
+            this.chipLbl.Location = new System.Drawing.Point(70, 48);
+            this.chipLbl.Name = "chipLbl";
+            this.chipLbl.Size = new System.Drawing.Size(16, 13);
+            this.chipLbl.TabIndex = 5;
+            this.chipLbl.Text = "---";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 70);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Area:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Chipset:";
+            // 
+            // dtLbl
+            // 
+            this.dtLbl.AutoSize = true;
+            this.dtLbl.Location = new System.Drawing.Point(70, 25);
+            this.dtLbl.Name = "dtLbl";
+            this.dtLbl.Size = new System.Drawing.Size(16, 13);
+            this.dtLbl.TabIndex = 3;
+            this.dtLbl.Text = "---";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(17, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Seen at:";
+            // 
+            // closeBtn
+            // 
+            this.closeBtn.Location = new System.Drawing.Point(317, 143);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(75, 23);
+            this.closeBtn.TabIndex = 2;
+            this.closeBtn.Text = "Send quit";
+            this.closeBtn.UseVisualStyleBackColor = true;
+            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
+            // 
+            // keepLiveBtn
+            // 
+            this.keepLiveBtn.Location = new System.Drawing.Point(157, 143);
+            this.keepLiveBtn.Name = "keepLiveBtn";
+            this.keepLiveBtn.Size = new System.Drawing.Size(75, 23);
+            this.keepLiveBtn.TabIndex = 3;
+            this.keepLiveBtn.Text = "Keep alive";
+            this.keepLiveBtn.UseVisualStyleBackColor = true;
+            this.keepLiveBtn.Click += new System.EventHandler(this.keepLiveBtn_Click);
+            // 
             // DeviceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 339);
+            this.ClientSize = new System.Drawing.Size(508, 203);
+            this.Controls.Add(this.keepLiveBtn);
+            this.Controls.Add(this.closeBtn);
             this.Controls.Add(this.infoBox);
             this.Controls.Add(this.picBox);
             this.Name = "DeviceForm";
             this.Text = "DeviceForm";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.FormClosing += OnFormClosing;
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
             this.infoBox.ResumeLayout(false);
             this.infoBox.PerformLayout();
@@ -275,5 +298,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label appLbl;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button closeBtn;
+        private System.Windows.Forms.Button keepLiveBtn;
     }
 }
