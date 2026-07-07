@@ -81,6 +81,14 @@ void main()
 				Wait(5);
 				break;
 			}
+			if (kind == MSG_ALIVE)
+			{
+				sprintf(debug, "  --> I will wait %d s!", ma);
+				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
+				LibPutDisp();
+				maxTry = ma;
+				i = 0;
+			}
 		}
 		Wait(1);
 	}

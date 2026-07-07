@@ -8,12 +8,13 @@ bool ReadBlock(byte *data, word size, word *num);
 #define SYNC0       0xAA
 #define SYNC1       0x55
 
-#define MSG_UNKNOWN 0
-#define MSG_HELLO   1
-#define MSG_QUIT    2
-#define MSG_INFO    3
+#define MSG_UNKNOWN  0
+#define MSG_HELLO    1
+#define MSG_QUIT     2
+#define MSG_ALIVE    3
+#define MSG_MEM_READ 4
 
-#define MAX_PAYLOAD 90
+#define MAX_PAYLOAD 240
 
 typedef struct
 {
