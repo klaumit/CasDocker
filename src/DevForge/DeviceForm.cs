@@ -53,21 +53,32 @@ namespace DevForge
             dtLbl.Text = stamp.GetTimeStr();
         }
 
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            base.OnFormClosed(e);
+            SendClose();
+        }
+
         private void closeBtn_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        private void SendClose()
         {
             var dev = _args.Device;
             dev.Send(new Quit("Please stop. Now."));
         }
 
-        private void keepLiveBtn_Click(object sender, EventArgs e)
+        private void SendLive()
         {
             var dev = _args.Device;
             dev.Send(new Alive("1E"));
+        }
+
+        private void keepLiveBtn_Click(object sender, EventArgs e)
+        {
+            SendLive();
         }
     }
 }
