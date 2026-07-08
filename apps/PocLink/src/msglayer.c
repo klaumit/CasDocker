@@ -163,18 +163,23 @@ bool SendMemRead(word srcAdr, byte bank, word seg, word off, word len)
     #else
         unsigned char far *src = (unsigned char far *)MK_FP(seg, off);
     #endif
+    unsigned char text[MAX_PAYLOAD];
     unsigned char c;
     word i, ptr;
+    bool res;
+
+    ptr = sprintf(text, "%04X|%02X|%04X|%04X|%04X|", srcAdr, bank, seg, off, len);
 
     SwitchBank(srcAdr, bank);
-    for (i = 0, ptr = 0; i < len; i++)
+    for (i = 0; i < len; i++)
     {
         c = src[i];
         sprintf(&text[ptr], "%02X", c);
         ptr += 2;
     }
     SwitchBank(0x0104, bank); /* Fonts */
-    sprintf(text, "%04X|%02X|%04X|%04X|%04X|", srcAdr, bank, seg, off, len);
-    return SendTxtMessage(MSG_MEM_READ, text);
+
+    res = SendTxtMessage(MSG_MEM_READ, text);
+    return res;
 }
 
