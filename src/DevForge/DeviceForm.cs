@@ -80,5 +80,14 @@ namespace DevForge
         {
             SendLive();
         }
-    }
+
+		private void todoBtn_Click(object sender, EventArgs e)
+		{
+            var dev = _args.Device;
+            var args = string.Join("|",
+                new[] { "0110", "03", "6000", "0000", "32", "" }
+            );
+            dev.Send(new Read(args));
+        }
+	}
 }
