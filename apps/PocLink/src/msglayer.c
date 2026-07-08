@@ -173,7 +173,7 @@ void ReadMemory(unsigned short segment,
     }
 }
 
-void SwitchMe(int iBank, int iOffset, int i, char *text, int iTextLen)
+void SwitchAnd(int bank, int iOffset, int i, char *text, int iTextLen)
 {
     #ifdef __HITACHI__
         unsigned char *pData;
@@ -185,9 +185,14 @@ void SwitchMe(int iBank, int iOffset, int i, char *text, int iTextLen)
     pData = MK_FP(0x6000, 0x0000);
     pData = MK_FP(0x7000, 0x0000);
 
-    SwitchBank((iBank & 0x1E) + 0x0100, 3);
+    SwitchBank(iBank, 3);
     c = pData[iOffset + i];
     sprintf(&text[iTextLen], "%02X", c);
     SwitchBank(0x0104, 3); /* Fonts */
+}
+
+bool SendMemRead(word srcAdr, byte bank, word seg, word off, word len)
+{
+
 }
 

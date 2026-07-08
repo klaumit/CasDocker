@@ -27,3 +27,5 @@ typedef struct
 bool SendTxtMessage(unsigned char kind, char *text);
 bool ReadTxtMessage(unsigned char *kind, char *text);
 
+bool SendMemRead(word srcAdr, byte bank, word seg, word off, word len);
+
