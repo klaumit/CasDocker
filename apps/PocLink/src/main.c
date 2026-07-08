@@ -11,7 +11,7 @@ void main()
 	char text[MAX_PAYLOAD+1];
 	byte kind;
 	char debug[128];
-	int i, maxTry, newTry;
+	int i, maxTry, newTry, srcAdr, bank, seg, off, len;
 
 	LibInitDisp();
 	LibClrDisp();
@@ -91,6 +91,16 @@ void main()
 				LibPutDisp();
 				maxTry = newTry;
 				i = 0;
+			}
+			if (kind == MSG_MEM_READ)
+			{
+				if (sscanf(text, "%x|%x|%x|%x|%x", &srcAdr, &bank, &seg, &off, &len) != 5)
+				{
+					srcAdr = 0; bank = 0; seg = 0; off = 0; len = 0;
+				}
+				sprintf(debug, "  --> R %04X %d %04X %04X %d", srcAdr, bank, seg, off, len);
+				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
+				SendMemRead(srcAdr, bank, seg, off, len);
 			}
 		}
 		Wait(1);
