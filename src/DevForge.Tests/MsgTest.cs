@@ -12,7 +12,7 @@ namespace DevForge.Tests
         public void TestHello()
         {
             const string name = "TestMeWithThis!";
-            TestSimple(new Hello("app=" + name), out var m);
+            TestSimple(new Hello($"app={name}"), out var m);
             Assert.Equal(name, m.AsInfo().App);
         }
 
@@ -33,13 +33,8 @@ namespace DevForge.Tests
         [Fact]
         public void TestRead()
         {
-            TestSimple(new Read(""), out var m);
-
-            
-            
-            
-
-
+            TestSimple(new Read("0330|03|6000|3000|0023|"), out var m);
+            Assert.Equal(30, m.AsNumber());
         }
 
         private static string ToJson(Message obj)
