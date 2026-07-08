@@ -1,3 +1,5 @@
+using DevForge.Lib.High;
+
 namespace DevForge.Lib.Messages.Impl
 {
     public sealed class Read : BaseTxt
@@ -10,6 +12,11 @@ namespace DevForge.Lib.Messages.Impl
         public Read(Message msg) : base(msg)
         {
             Kind = MsgKind.MemRead;
+        }
+
+        public PvBuff AsBuff()
+        {
+            return Parsers.Parse(this);
         }
     }
 }

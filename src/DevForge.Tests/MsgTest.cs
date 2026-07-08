@@ -33,8 +33,8 @@ namespace DevForge.Tests
         [Fact]
         public void TestRead()
         {
-            TestSimple(new Read("0330|03|6000|3000|0023|"), out var m);
-            Assert.Equal(30, m.AsNumber());
+            TestSimple(new Read("0330|03|6000|3000|0023|123456446"), out var m);
+            Assert.Equal(0x6000, m.AsBuff().Seg);
         }
 
         private static string ToJson(Message obj)

@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 
 namespace DevForge.Lib.Tools
@@ -14,6 +15,14 @@ namespace DevForge.Lib.Tools
             if (long.TryParse(text, NumberStyles.HexNumber, null, out var res))
                 return res;
             return defVal;
+        }
+
+        public static byte[] FromHexString(string hex)
+        {
+            var bytes = new byte[hex.Length / 2];
+            for (var i = 0; i < bytes.Length; i++)
+                bytes[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+            return bytes;
         }
     }
 }
