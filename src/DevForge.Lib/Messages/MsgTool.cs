@@ -99,6 +99,8 @@ namespace DevForge.Lib.Messages
             {
                 case MsgKind.Hello: return new Hello(msg);
                 case MsgKind.Quit: return new Quit(msg);
+                case MsgKind.Alive: return new Alive(msg);
+                case MsgKind.MemRead: return new Read(msg);
                 case MsgKind.Unknown:
                 default: return msg;
             }

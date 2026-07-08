@@ -10,11 +10,37 @@ namespace DevForge.Tests
     {
         [Fact]
         public void TestHello()
-            => TestSimple(new Hello("Test me with this!"));
+        {
+            const string name = "TestMeWithThis!";
+            TestSimple(new Hello("app=" + name), out var m);
+            Assert.Equal(name, m.AsInfo().App);
+        }
 
         [Fact]
         public void TestQuit()
-            => TestSimple(new Quit("No reason."));
+        {
+            TestSimple(new Quit("No reason."), out var m);
+            Assert.Equal(10, m.Text.Length);
+        }
+
+        [Fact]
+        public void TestAlive()
+        {
+            TestSimple(new Alive("1E"), out var m);
+            Assert.Equal(30, m.AsNumber());
+        }
+
+        [Fact]
+        public void TestRead()
+        {
+            TestSimple(new Read(""), out var m);
+
+            
+            
+            
+
+
+        }
 
         private static string ToJson(Message obj)
             => JsonConvert.SerializeObject(obj, new JsonSerializerSettings
@@ -22,13 +48,13 @@ namespace DevForge.Tests
                 Converters = { new StringEnumConverter() },
             });
 
-        private static void TestSimple<T>(T im) where T : Message
+        private static void TestSimple<T>(T im, out T om) where T : Message
         {
             using var cp = new FakePort();
             cp.Open();
             cp.WriteMessage(im);
             cp.Rewind();
-            var om = cp.ReadMessage();
+            om = (T)cp.ReadMessage();
             var first = ToJson(im);
             var second = ToJson(om);
             Assert.Equal(first, second);

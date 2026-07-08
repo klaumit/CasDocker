@@ -1,4 +1,6 @@
-﻿namespace DevForge.Lib.Messages.Impl
+﻿using DevForge.Lib.Tools;
+
+namespace DevForge.Lib.Messages.Impl
 {
     public sealed class Alive : BaseTxt
     {
@@ -10,6 +12,11 @@
         public Alive(Message msg) : base(msg)
         {
             Kind = MsgKind.Alive;
+        }
+
+        public byte AsNumber()
+        {
+            return (byte)TextExt.ParseHex(Text, 0);
         }
     }
 }

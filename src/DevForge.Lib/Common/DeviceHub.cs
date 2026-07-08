@@ -11,19 +11,6 @@ using DevForge.Lib.Messages.Impl;
 
 namespace DevForge.Lib.Common
 {
-    public sealed class GotMessageArgs : EventArgs
-    {
-        public DateTime Stamp { get; set; }
-        public Message Message { get; set; }
-    }
-
-    public sealed class DeviceFoundArgs : EventArgs
-    {
-        public DateTime Stamp { get; set; }
-        public ICommDevice Device { get; set; }
-        public Hello Hello { get; set; }
-    }
-
     public sealed class DeviceHub
     {
         public event EventHandler<DeviceFoundArgs> NewDevice;
