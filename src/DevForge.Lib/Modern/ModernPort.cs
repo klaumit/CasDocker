@@ -52,7 +52,7 @@ namespace DevForge.Lib.Modern
             if (_usbHandle == null)
                 return null;
 
-            uint got = 0;
+            uint got;
             var handle = _usbHandle.Value;
             const int maxLen = 512;
             var array = new byte[maxLen];
@@ -65,6 +65,14 @@ namespace DevForge.Lib.Modern
         public byte[] ReadBytes(int count)
         {
             var mem = GetStream();
+            if (mem == null)
+                return null;
+            var rest = mem.Length - mem.Position;
+            if (rest < count)
+            {
+                _memory = null;
+                mem = GetStream();
+            }
             if (mem == null)
                 return null;
             var buffer = new byte[count];

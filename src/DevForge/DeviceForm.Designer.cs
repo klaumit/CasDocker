@@ -38,6 +38,7 @@
 			this.closeBtn = new System.Windows.Forms.Button();
 			this.keepLiveBtn = new System.Windows.Forms.Button();
 			this.todoBtn = new System.Windows.Forms.Button();
+			this.todaBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.SuspendLayout();
@@ -270,11 +271,22 @@
 			this.todoBtn.UseVisualStyleBackColor = true;
 			this.todoBtn.Click += new System.EventHandler(this.todoBtn_Click);
 			// 
+			// todaBtn
+			// 
+			this.todaBtn.Location = new System.Drawing.Point(24, 126);
+			this.todaBtn.Name = "todaBtn";
+			this.todaBtn.Size = new System.Drawing.Size(75, 23);
+			this.todaBtn.TabIndex = 5;
+			this.todaBtn.Text = "TODA";
+			this.todaBtn.UseVisualStyleBackColor = true;
+			this.todaBtn.Click += new System.EventHandler(this.todaBtn_Click);
+			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 203);
+			this.Controls.Add(this.todaBtn);
 			this.Controls.Add(this.todoBtn);
 			this.Controls.Add(this.keepLiveBtn);
 			this.Controls.Add(this.closeBtn);
@@ -313,5 +325,6 @@
         private System.Windows.Forms.Button closeBtn;
         private System.Windows.Forms.Button keepLiveBtn;
 		private System.Windows.Forms.Button todoBtn;
+		private System.Windows.Forms.Button todaBtn;
 	}
 }

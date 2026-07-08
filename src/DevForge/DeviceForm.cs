@@ -89,5 +89,14 @@ namespace DevForge
             );
             dev.Send(new Read(args));
         }
-	}
+
+		private void todaBtn_Click(object sender, EventArgs e)
+		{
+            var dev = _args.Device;
+            var args = string.Join("|",
+                new[] { "0000", "00", "0000", "1C00", "32", "" }
+            );
+            dev.Send(new Read(args));
+        }
+    }
 }
