@@ -156,43 +156,25 @@ bool ReadTxtMessage(unsigned char *kind, char *text)
     return TRUE;
 }
 
-void ReadMemory(unsigned short segment,
-                unsigned short offset,
-                unsigned char *dest,
-                unsigned int length)
-{
-    #ifdef __HITACHI__
-        unsigned char     *src = (unsigned char     *)MK_FP(segment, offset);
-    #else
-        unsigned char far *src = (unsigned char far *)MK_FP(segment, offset);
-    #endif
-
-    while (length--)
-    {
-        *dest++ = *src++;
-    }
-}
-
-void SwitchAnd(int bank, int iOffset, int i, char *text, int iTextLen)
-{
-    #ifdef __HITACHI__
-        unsigned char *pData;
-    #else
-        unsigned char far *pData;
-    #endif
-    unsigned char c;
-
-    pData = MK_FP(0x6000, 0x0000);
-    pData = MK_FP(0x7000, 0x0000);
-
-    SwitchBank(iBank, 3);
-    c = pData[iOffset + i];
-    sprintf(&text[iTextLen], "%02X", c);
-    SwitchBank(0x0104, 3); /* Fonts */
-}
-
 bool SendMemRead(word srcAdr, byte bank, word seg, word off, word len)
 {
+    #ifdef __HITACHI__
+        unsigned char     *src = (unsigned char     *)MK_FP(seg, off);
+    #else
+        unsigned char far *src = (unsigned char far *)MK_FP(seg, off);
+    #endif
+    unsigned char c;
+    word i, ptr;
 
+    SwitchBank(srcAdr, bank);
+    for (i = 0, ptr = 0; i < len; i++)
+    {
+        c = src[i];
+        sprintf(&text[ptr], "%02X", c);
+        ptr += 2;
+    }
+    SwitchBank(0x0104, bank); /* Fonts */
+    sprintf(text, "%04X|%02X|%04X|%04X|%04X|", srcAdr, bank, seg, off, len);
+    return SendTxtMessage(MSG_MEM_READ, text);
 }
 
