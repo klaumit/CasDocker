@@ -35,7 +35,6 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messages\Impl\Alive.cs" />
     <Compile Include="Modern\ModernFactory.cs" />
     <Compile Include="Modern\ModernPort.cs" />
     <Compile Include="Modern\Internals\KernelNative.cs" />
@@ -48,16 +47,22 @@
     <Compile Include="High\PvVer.cs" />
     <Compile Include="High\PvVerConv.cs" />
     <Compile Include="High\PvCpu.cs" />
+    <Compile Include="High\PvBuff.cs" />
     <Compile Include="Messages\MsgKind.cs" />
     <Compile Include="Messages\MsgTool.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\Impl\Hello.cs" />
+    <Compile Include="Messages\Impl\Read.cs" />
+	<Compile Include="Messages\Impl\Alive.cs" />
     <Compile Include="Messages\Impl\Quit.cs" />
     <Compile Include="Messages\Impl\BaseTxt.cs" />
     <Compile Include="Common\PocketDevice.cs" />
     <Compile Include="Common\DeviceHub.cs" />
     <Compile Include="Common\CommExt.cs" />
+    <Compile Include="Common\BaseFactory.cs" />
     <Compile Include="Common\Checking.cs" />
+	<Compile Include="Common\GotMessageArgs.cs" />
+	<Compile Include="Common\DeviceFoundArgs.cs" />
     <Compile Include="Legacy\LegacyFactory.cs" />
     <Compile Include="Legacy\LegacyPort.cs" />
     <Compile Include="API\ICloseable.cs" />
