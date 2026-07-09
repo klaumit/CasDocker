@@ -159,14 +159,14 @@ bool ReadTxtMessage(unsigned char *kind, char *text)
 bool SendMemRead(word srcAdr, byte bank, word seg, word off, word len)
 {
     #ifdef __HITACHI__
-        unsigned char     *src = (unsigned char     *)MK_FP(seg, off);
+        unsigned long addr = ((unsigned long)(seg) << 16) | off;
+        unsigned char *src = (volatile unsigned char *)addr;
     #else
         unsigned char far *src = (unsigned char far *)MK_FP(seg, off);
     #endif
     unsigned char text[MAX_PAYLOAD];
     unsigned char c;
     word i, ptr;
-    bool res;
 
     ptr = sprintf(text, "%04X|%02X|%04X|%04X|%04X|", srcAdr, bank, seg, off, len);
 
@@ -179,7 +179,6 @@ bool SendMemRead(word srcAdr, byte bank, word seg, word off, word len)
     }
     SwitchBank(0x0104, bank); /* Fonts */
 
-    res = SendTxtMessage(MSG_MEM_READ, text);
-    return res;
+    return SendTxtMessage(MSG_MEM_READ, (char *)text);
 }
 

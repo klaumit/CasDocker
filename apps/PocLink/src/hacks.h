@@ -1,11 +1,7 @@
 
 #ifdef __HITACHI__
 
-    #define	FP_SEG(p)	((unsigned short)((unsigned long)((void *)(p)) >> 16))
-    #define	FP_OFF(p)	(unsigned short)(p)
-    #define	MK_FP(s, o)	((void *)(((unsigned long)(s) << 16)|(unsigned short)(o)))
-
-    #define SwitchBank(addr,bank) {}
+    #define SwitchBank(addr,bank) 
     
 #else
 
