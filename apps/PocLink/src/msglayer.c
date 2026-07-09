@@ -3,7 +3,7 @@
 #include "L_define.h"
 #include "L_libc.h"
 #include <string.h>
-#include "hacks.h"
+#include "xhacks.h"
 #include "msglayer.h"
 
 #ifdef __HITACHI__
@@ -159,7 +159,7 @@ bool ReadTxtMessage(unsigned char *kind, char *text)
 bool SendMemRead(word srcAdr, byte bank, word seg, word off, word len)
 {
     #ifdef __HITACHI__
-        unsigned long addr = ((unsigned long)(seg) << 16) | off;
+        unsigned long addr = (((unsigned long)(seg) << 16) | (unsigned long)(off));
         unsigned char *src = (volatile unsigned char *)addr;
     #else
         unsigned char far *src = (unsigned char far *)MK_FP(seg, off);
