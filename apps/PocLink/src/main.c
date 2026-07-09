@@ -101,7 +101,8 @@ void main()
 				}
 				sprintf(debug, "  --> R %04X %d %04X %04X %d", srcAdr, bank, seg, off, len);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
-				SendMemRead(srcAdr, bank, seg, off, len);
+				LibPutDisp();
+				SendMemRead((word)srcAdr, (byte)bank, (word)seg, (word)off, (word)len);
 			}
 		}
 		Wait(1);
