@@ -3,8 +3,6 @@
 
 #define SwitchBank(addr,bank) 
 
-unsigned long GetIP(void);
-
 #else
 
 /*
@@ -52,8 +50,13 @@ unsigned long GetIP(void);
 void _asm_switchbank(char *,int,int);
 #define SwitchBank(addr,bank) _asm_switchbank("\n MOV BH,AL\n MOV AL,AH\n MOV AH,BL\n OR AH,80h\n INT 0C8h\n MOV AL,BH\n MOV AH,BL\n INT 0C8h\n",addr,bank);
 
-unsigned long _asm_getcsip(char *);
-#define GetIP() _asm_getcsip("\n PUSH CS\n POP DX\n CALL $+3\n POP AX\n")
+unsigned int _asm_getipseg(char *);
+#define GetIPSeg() _asm_getipseg("\n PUSH CS\n POP AX\n")
+
+unsigned int _asm_getipoff(char *);
+#define GetIPOff() _asm_getipoff("\n CALL $+3\n POP AX\n")
 
 #endif
+
+unsigned long GetIP(void);
 

@@ -26,7 +26,7 @@ void main()
 	
 	LibPutDisp();
 
-	sprintf(debug, "Comm: %s  Ptr: %08X",
+	sprintf(debug, "Comm: %s  Ptr: %08lX",
 		GetOpenPortStr(OpenPort(GetCommKind())), GetIP()
 	);
 	LibStringDsp( B@ debug, 5, 40, 160, B@@ IB_PFONT1);

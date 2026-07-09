@@ -1,3 +1,4 @@
+#include "xhacks.h"
 
 #ifdef __HITACHI__
 
@@ -16,8 +17,9 @@ unsigned long GetIP()
 
 #else
 
-void TestMe()
-{    
+unsigned long GetIP()
+{
+    return (((unsigned long)GetIPSeg() << 16) | (unsigned long)GetIPOff());
 }
 
 #endif
