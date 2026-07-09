@@ -5,6 +5,7 @@
 #include <string.h>
 #include "sysdm.h"
 #include "msglayer.h"
+#include "xhacks.h"
 
 void main()
 {
@@ -25,8 +26,8 @@ void main()
 	
 	LibPutDisp();
 
-	sprintf(debug, "Communication: %s",
-		GetOpenPortStr(OpenPort(GetCommKind()))
+	sprintf(debug, "Comm: %s  Ptr: %08X",
+		GetOpenPortStr(OpenPort(GetCommKind())), GetIP()
 	);
 	LibStringDsp( B@ debug, 5, 40, 160, B@@ IB_PFONT1);
 
