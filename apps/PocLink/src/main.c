@@ -134,6 +134,8 @@ void main()
 				}
 				SwitchBank(0x0104, (byte)bank); /* Fonts */
 				SendTxtMessage(MSG_MEM_READ, (char *)tmp);
+				maxTry = 25;
+				i = 0;
 			}
 		}
 		Wait(1);
