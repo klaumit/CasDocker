@@ -314,7 +314,7 @@
 			this.msgLenDw.Size = new System.Drawing.Size(66, 20);
 			this.msgLenDw.TabIndex = 7;
 			this.msgLenDw.Value = new decimal(new int[] {
-            100,
+            108,
             0,
             0,
             0});
