@@ -7,12 +7,27 @@
 #include "msglayer.h"
 #include "xhacks.h"
 
+#ifdef __HITACHI__
+#else
+    #include <stdrom.h>
+#endif
+
 void main()
 {
 	char text[MAX_PAYLOAD+1];
 	byte kind;
 	char debug[128];
 	int i, maxTry, newTry, srcAdr, bank, seg, off, len;
+
+	#ifdef __HITACHI__
+	    volatile byte *src;
+	    byte c;
+	#else
+	    unsigned char far *src;
+	    unsigned char c;
+	#endif
+	char tmp[MAX_PAYLOAD];
+	word j, ptr;
 
 	LibInitDisp();
 	LibClrDisp();
@@ -102,7 +117,23 @@ void main()
 				sprintf(debug, "  --> R %04X %d %04X %04X %d", srcAdr, bank, seg, off, len);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
-				SendMemRead((word)srcAdr, (byte)bank, (word)seg, (word)off, (word)len);
+
+				#ifdef __HITACHI__
+				    src = (volatile byte *)(((unsigned long)(word)(seg) << 16) | (unsigned long)(word)(off));
+				#else
+				    src = (unsigned char far *)MK_FP((word)seg, (word)off);
+				#endif
+
+				ptr = sprintf(tmp, "%04X|%02X|%04X|%04X|%04X|", (word)srcAdr, (byte)bank, (word)seg, (word)off, (word)len);
+				SwitchBank((word)srcAdr, (byte)bank);
+				for (j = 0; j < len; j++)
+				{
+				    c = src[j];
+				    sprintf(&tmp[ptr], "%02X", c);
+				    ptr += 2;
+				}
+				SwitchBank(0x0104, (byte)bank); /* Fonts */
+				SendTxtMessage(MSG_MEM_READ, (char *)tmp);
 			}
 		}
 		Wait(1);
