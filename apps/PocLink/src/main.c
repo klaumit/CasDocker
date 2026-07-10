@@ -90,7 +90,7 @@ void main()
 
 			if (kind == MSG_QUIT)
 			{
-				sprintf(debug, "  --> I will quit soon!");
+				sprintf(debug, " -> I will quit soon!");
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
 				Wait(5);
@@ -102,7 +102,7 @@ void main()
 				{
 					newTry = 21;
 				}
-				sprintf(debug, "  --> I will wait %d s!", newTry);
+				sprintf(debug, " -> I will wait %d s!", newTry);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
 				maxTry = newTry;
@@ -114,7 +114,7 @@ void main()
 				{
 					srcAdr = 0; bank = 0; seg = 0; off = 0; len = 0;
 				}
-				sprintf(debug, "  --> R %04X %d %04X %04X %d", srcAdr, bank, seg, off, len);
+				sprintf(debug, " -> R %04X %d %04X %04X %d", srcAdr, bank, seg, off, len);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
 
