@@ -39,8 +39,11 @@
 			this.keepLiveBtn = new System.Windows.Forms.Button();
 			this.todoBtn = new System.Windows.Forms.Button();
 			this.todaBtn = new System.Windows.Forms.Button();
+			this.statusSrp = new System.Windows.Forms.StatusStrip();
+			this.statusLbl = new System.Windows.Forms.ToolStripStatusLabel();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
+			this.statusSrp.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// picBox
@@ -281,11 +284,28 @@
 			this.todaBtn.UseVisualStyleBackColor = true;
 			this.todaBtn.Click += new System.EventHandler(this.todaBtn_Click);
 			// 
+			// statusSrp
+			// 
+			this.statusSrp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLbl});
+			this.statusSrp.Location = new System.Drawing.Point(0, 195);
+			this.statusSrp.Name = "statusSrp";
+			this.statusSrp.Size = new System.Drawing.Size(508, 22);
+			this.statusSrp.TabIndex = 6;
+			this.statusSrp.Text = "statusStrip1";
+			// 
+			// statusLbl
+			// 
+			this.statusLbl.Name = "statusLbl";
+			this.statusLbl.Size = new System.Drawing.Size(22, 17);
+			this.statusLbl.Text = "---";
+			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(508, 203);
+			this.ClientSize = new System.Drawing.Size(508, 217);
+			this.Controls.Add(this.statusSrp);
 			this.Controls.Add(this.todaBtn);
 			this.Controls.Add(this.todoBtn);
 			this.Controls.Add(this.keepLiveBtn);
@@ -298,7 +318,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
 			this.infoBox.ResumeLayout(false);
 			this.infoBox.PerformLayout();
+			this.statusSrp.ResumeLayout(false);
+			this.statusSrp.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
@@ -326,5 +349,7 @@
         private System.Windows.Forms.Button keepLiveBtn;
 		private System.Windows.Forms.Button todoBtn;
 		private System.Windows.Forms.Button todaBtn;
+		private System.Windows.Forms.StatusStrip statusSrp;
+		private System.Windows.Forms.ToolStripStatusLabel statusLbl;
 	}
 }

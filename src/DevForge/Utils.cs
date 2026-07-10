@@ -44,7 +44,7 @@ namespace DevForge
             });
         }
 
-        public static string GetDateStr(this DateTime date)
+		public static string GetDateStr(this DateTime date)
         {
             var dts = date.ToString("u");
             return dts.Split(new[] { ' ' }, 2).First();
