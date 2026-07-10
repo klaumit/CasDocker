@@ -94,7 +94,7 @@ namespace DevForge
 		{
             var dev = _args.Device;
             var args = string.Join("|",
-                new[] { "0000", "00", "1234", "5678", "32", "" }
+                new[] { "0000", "00", "8C00", "0000", "32", "" }
             );
             dev.Send(new Read(args));
         }
