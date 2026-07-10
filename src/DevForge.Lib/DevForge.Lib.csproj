@@ -53,7 +53,7 @@
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\Impl\Hello.cs" />
     <Compile Include="Messages\Impl\Read.cs" />
-	<Compile Include="Messages\Impl\Alive.cs" />
+    <Compile Include="Messages\Impl\Alive.cs" />
     <Compile Include="Messages\Impl\Quit.cs" />
     <Compile Include="Messages\Impl\BaseTxt.cs" />
     <Compile Include="Common\PocketDevice.cs" />
@@ -61,8 +61,8 @@
     <Compile Include="Common\CommExt.cs" />
     <Compile Include="Common\BaseFactory.cs" />
     <Compile Include="Common\Checking.cs" />
-	<Compile Include="Common\GotMessageArgs.cs" />
-	<Compile Include="Common\DeviceFoundArgs.cs" />
+    <Compile Include="Common\GotMessageArgs.cs" />
+    <Compile Include="Common\DeviceFoundArgs.cs" />
     <Compile Include="Legacy\LegacyFactory.cs" />
     <Compile Include="Legacy\LegacyPort.cs" />
     <Compile Include="API\ICloseable.cs" />
@@ -70,6 +70,7 @@
     <Compile Include="API\ICommFactory.cs" />
     <Compile Include="API\ICommDevice.cs" />
     <Compile Include="Tools\JsonExt.cs" />
+    <Compile Include="Tools\JsonLines.cs" />
     <Compile Include="Tools\TextExt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
