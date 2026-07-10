@@ -41,9 +41,11 @@
 			this.todaBtn = new System.Windows.Forms.Button();
 			this.statusSrp = new System.Windows.Forms.StatusStrip();
 			this.statusLbl = new System.Windows.Forms.ToolStripStatusLabel();
+			this.msgLenDw = new System.Windows.Forms.NumericUpDown();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.msgLenDw)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// picBox
@@ -246,7 +248,7 @@
 			// 
 			// closeBtn
 			// 
-			this.closeBtn.Location = new System.Drawing.Point(317, 143);
+			this.closeBtn.Location = new System.Drawing.Point(379, 143);
 			this.closeBtn.Name = "closeBtn";
 			this.closeBtn.Size = new System.Drawing.Size(75, 23);
 			this.closeBtn.TabIndex = 2;
@@ -256,7 +258,7 @@
 			// 
 			// keepLiveBtn
 			// 
-			this.keepLiveBtn.Location = new System.Drawing.Point(157, 143);
+			this.keepLiveBtn.Location = new System.Drawing.Point(261, 143);
 			this.keepLiveBtn.Name = "keepLiveBtn";
 			this.keepLiveBtn.Size = new System.Drawing.Size(75, 23);
 			this.keepLiveBtn.TabIndex = 3;
@@ -300,11 +302,29 @@
 			this.statusLbl.Size = new System.Drawing.Size(22, 17);
 			this.statusLbl.Text = "---";
 			// 
+			// msgLenDw
+			// 
+			this.msgLenDw.Location = new System.Drawing.Point(136, 146);
+			this.msgLenDw.Maximum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
+			this.msgLenDw.Name = "msgLenDw";
+			this.msgLenDw.Size = new System.Drawing.Size(66, 20);
+			this.msgLenDw.TabIndex = 7;
+			this.msgLenDw.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 217);
+			this.Controls.Add(this.msgLenDw);
 			this.Controls.Add(this.statusSrp);
 			this.Controls.Add(this.todaBtn);
 			this.Controls.Add(this.todoBtn);
@@ -320,6 +340,7 @@
 			this.infoBox.PerformLayout();
 			this.statusSrp.ResumeLayout(false);
 			this.statusSrp.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.msgLenDw)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -351,5 +372,6 @@
 		private System.Windows.Forms.Button todaBtn;
 		private System.Windows.Forms.StatusStrip statusSrp;
 		private System.Windows.Forms.ToolStripStatusLabel statusLbl;
+		private System.Windows.Forms.NumericUpDown msgLenDw;
 	}
 }

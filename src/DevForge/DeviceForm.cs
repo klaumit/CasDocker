@@ -111,11 +111,13 @@ namespace DevForge
             SendLive();
         }
 
-		private void todoBtn_Click(object sender, EventArgs e)
+        private string LenHex => ((int)msgLenDw.Value).ToString("X2");
+
+        private void todoBtn_Click(object sender, EventArgs e)
 		{
             var dev = _args.Device;
             var args = string.Join("|",
-                new[] { "0110", "03", "6000", "0000", "32", "" }
+                new[] { "0110", "03", "6000", "0000", LenHex, "" }
             );
             dev.Send(new Read(args));
         }
@@ -124,7 +126,7 @@ namespace DevForge
 		{
             var dev = _args.Device;
             var args = string.Join("|",
-                new[] { "0000", "00", "8C00", "0000", "32", "" }
+                new[] { "0000", "00", "8C00", "0000", LenHex, "" }
             );
             dev.Send(new Read(args));
         }
