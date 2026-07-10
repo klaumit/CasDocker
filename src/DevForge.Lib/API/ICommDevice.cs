@@ -1,4 +1,5 @@
 using System;
+using DevForge.Lib.Common;
 using DevForge.Lib.Messages;
 
 // ReSharper disable UnusedMemberInSuper.Global
@@ -10,6 +11,8 @@ namespace DevForge.Lib.API
         string Name { get; }
 
         void Start();
+
+        event EventHandler<GotMessageArgs> NewMessage;
 
         void Stop();
 
