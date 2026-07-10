@@ -50,7 +50,7 @@ namespace DevForge.Lib.Common
         {
             while (_port.IsOpen())
             {
-                var message = _port.ReadMessage();
+                var message = Receive();
                 if (message == null)
                     continue;
                 OnNewMessage(message);

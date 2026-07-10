@@ -37,17 +37,17 @@ namespace DevForge.Lib.Common
         private void DoLegacy()
         {
             var factory = new LegacyFactory();
-            var prefix = factory.Prefix;
-            var port = factory.Create();
-            var dev = new PocketDevice(prefix, port);
-            var h = ToHello(dev.Receive());
-            OnNewDevice(dev, h);
-            dev.Start();
+            DoOnePort(factory);
         }
 
         private void DoModern()
         {
             var factory = new ModernFactory();
+            DoOnePort(factory);
+        }
+
+        private void DoOnePort(BaseFactory factory)
+        {
             var prefix = factory.Prefix;
             var port = factory.Create();
             var dev = new PocketDevice(prefix, port);
