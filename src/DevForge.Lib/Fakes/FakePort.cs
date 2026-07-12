@@ -42,9 +42,10 @@ namespace DevForge.Lib.Fakes
 
 		public bool WriteBytes(byte[] buffer)
 		{
+			var oldPos = _mem.Position;
 			_mem.Write(buffer, 0, buffer.Length);
 			_mem.Flush();
-			_mem.Position = 0L;
+			_mem.Position = oldPos;
 			return true;
 		}
 
