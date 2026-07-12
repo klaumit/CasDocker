@@ -248,7 +248,7 @@
 			// 
 			// closeBtn
 			// 
-			this.closeBtn.Location = new System.Drawing.Point(379, 143);
+			this.closeBtn.Location = new System.Drawing.Point(421, 168);
 			this.closeBtn.Name = "closeBtn";
 			this.closeBtn.Size = new System.Drawing.Size(75, 23);
 			this.closeBtn.TabIndex = 2;
@@ -258,7 +258,7 @@
 			// 
 			// keepLiveBtn
 			// 
-			this.keepLiveBtn.Location = new System.Drawing.Point(261, 143);
+			this.keepLiveBtn.Location = new System.Drawing.Point(421, 133);
 			this.keepLiveBtn.Name = "keepLiveBtn";
 			this.keepLiveBtn.Size = new System.Drawing.Size(75, 23);
 			this.keepLiveBtn.TabIndex = 3;
@@ -290,7 +290,7 @@
 			// 
 			this.statusSrp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLbl});
-			this.statusSrp.Location = new System.Drawing.Point(0, 195);
+			this.statusSrp.Location = new System.Drawing.Point(0, 220);
 			this.statusSrp.Name = "statusSrp";
 			this.statusSrp.Size = new System.Drawing.Size(508, 22);
 			this.statusSrp.TabIndex = 6;
@@ -304,7 +304,7 @@
 			// 
 			// msgLenDw
 			// 
-			this.msgLenDw.Location = new System.Drawing.Point(136, 146);
+			this.msgLenDw.Location = new System.Drawing.Point(30, 188);
 			this.msgLenDw.Maximum = new decimal(new int[] {
             250,
             0,
@@ -323,7 +323,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(508, 217);
+			this.ClientSize = new System.Drawing.Size(508, 242);
 			this.Controls.Add(this.msgLenDw);
 			this.Controls.Add(this.statusSrp);
 			this.Controls.Add(this.todaBtn);
