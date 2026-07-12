@@ -47,5 +47,10 @@ namespace DevForge
         {
             _hub.Value.StartLegacy();
         }
+
+		private void fakeBtn_Click(object sender, EventArgs e)
+		{
+            _hub.Value.StartFake();
+        }
     }
 }
