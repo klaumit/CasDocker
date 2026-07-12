@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using DevForge.Lib.API;
+using DevForge.Lib.Fakes;
 using DevForge.Lib.Legacy;
 using DevForge.Lib.Modern;
 using DevForge.Lib.Messages;
@@ -18,7 +19,8 @@ namespace DevForge.Lib.Common
         private void OnNewDevice(ICommDevice dev, Hello hel)
         {
             if (NewDevice == null) return;
-            var a = new DeviceFoundArgs { 
+            var a = new DeviceFoundArgs
+            {
                 Stamp = DateTime.Now, Device = dev, Hello = hel
             };
             NewDevice.Invoke(this, a);
@@ -43,6 +45,12 @@ namespace DevForge.Lib.Common
         private void DoModern()
         {
             var factory = new ModernFactory();
+            DoOnePort(factory);
+        }
+
+        public void StartFake()
+        {
+            var factory = new FakeFactory();
             DoOnePort(factory);
         }
 
