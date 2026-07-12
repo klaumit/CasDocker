@@ -1,4 +1,5 @@
-﻿using DevForge.Lib.Messages;
+﻿using DevForge.Lib.Fakes;
+using DevForge.Lib.Messages;
 using DevForge.Lib.Messages.Impl;
 using DevForge.Lib.Ponder;
 using Newtonsoft.Json;
@@ -56,7 +57,7 @@ namespace DevForge.Tests
 
         private static void TestSimple<T>(T im, out T om) where T : Message
         {
-            using var cp = new FakePort();
+            using var cp = new FakePort(nameof(Xunit));
             cp.Open();
             cp.WriteMessage(im);
             cp.Rewind();
