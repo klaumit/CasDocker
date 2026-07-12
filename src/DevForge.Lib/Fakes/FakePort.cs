@@ -43,6 +43,7 @@ namespace DevForge.Lib.Fakes
 		{
 			_mem.Write(buffer, 0, buffer.Length);
 			_mem.Flush();
+			_mem.Position = 0L;
 			return true;
 		}
 
