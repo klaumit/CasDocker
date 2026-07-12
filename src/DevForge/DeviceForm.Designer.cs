@@ -42,10 +42,13 @@
 			this.statusLbl = new System.Windows.Forms.ToolStripStatusLabel();
 			this.msgLenDw = new System.Windows.Forms.NumericUpDown();
 			this.backupBtn = new System.Windows.Forms.Button();
+			this.label3 = new System.Windows.Forms.Label();
+			this.delayDown = new System.Windows.Forms.NumericUpDown();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.msgLenDw)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.delayDown)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// picBox
@@ -319,11 +322,39 @@
 			this.backupBtn.UseVisualStyleBackColor = true;
 			this.backupBtn.Click += new System.EventHandler(this.backupBtn_Click);
 			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(191, 153);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(59, 13);
+			this.label3.TabIndex = 9;
+			this.label3.Text = "Delay (ms):";
+			// 
+			// delayDown
+			// 
+			this.delayDown.Location = new System.Drawing.Point(256, 151);
+			this.delayDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.delayDown.Name = "delayDown";
+			this.delayDown.Size = new System.Drawing.Size(68, 20);
+			this.delayDown.TabIndex = 10;
+			this.delayDown.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 242);
+			this.Controls.Add(this.delayDown);
+			this.Controls.Add(this.label3);
 			this.Controls.Add(this.backupBtn);
 			this.Controls.Add(this.msgLenDw);
 			this.Controls.Add(this.statusSrp);
@@ -341,6 +372,7 @@
 			this.statusSrp.ResumeLayout(false);
 			this.statusSrp.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.msgLenDw)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.delayDown)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -373,5 +405,7 @@
 		private System.Windows.Forms.ToolStripStatusLabel statusLbl;
 		private System.Windows.Forms.NumericUpDown msgLenDw;
 		private System.Windows.Forms.Button backupBtn;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.NumericUpDown delayDown;
 	}
 }

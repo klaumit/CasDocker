@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Globalization;
+using System.Threading;
 
 // ReSharper disable UseCollectionExpression
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
@@ -44,7 +45,7 @@ namespace DevForge
             statusLbl.Text = "[" + ts + "] (" + e.Message.Kind + ") " + e.Message.Length + " bytes";
             _log.Write(e.Message);
 
-            if (e.Message is Read r)
+            if (e.Message is Read r && _reads != null)
             {
                 var buff = r.AsBuff();
                 if (buff.Bytes == null && _args.Device.Name == "FakeDevice")
@@ -56,6 +57,8 @@ namespace DevForge
                 foreach (var hex in buff.PrintHexDump())
                     _got.WriteLine(hex);
                 _got.Flush();
+                var wait = TimeSpan.FromMilliseconds((double)delayDown.Value);
+                Thread.Sleep(wait);
                 SendTopRead();
             }
         }
