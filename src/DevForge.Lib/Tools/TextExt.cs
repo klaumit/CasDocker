@@ -18,7 +18,12 @@ namespace DevForge.Lib.Tools
             return defVal;
         }
 
-        public static string ToHexString(byte[] bytes)
+		internal static string FixPath(string path)
+		{
+            return path.Replace('?', '-');
+		}
+
+		public static string ToHexString(byte[] bytes)
         {
             if (bytes == null) return null;
             return string.Join("", bytes.Select(b => b.ToString("X2")));

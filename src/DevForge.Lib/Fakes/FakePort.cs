@@ -1,24 +1,31 @@
 ﻿using System.IO;
 using DevForge.Lib.API;
+using DevForge.Lib.Common;
 
 // ReSharper disable UseCollectionExpression
 // ReSharper disable InlineOutVariableDeclaration
 
 namespace DevForge.Lib.Fakes
 {
-	public sealed class FakePort : ICommPort
+	public sealed class FakePort : BaseFactory, ICommPort
 	{
 		private readonly string _name;
 		private MemoryStream _mem;
 
-		public FakePort(string name)
+		public FakePort(string name = "Dojo")
 		{
 			_name = name;
 		}
 
+		public override ICommPort Create()
+		{
+			return this;
+		}
+
 		public void Open()
 		{
-			_mem = new MemoryStream();
+			if (_mem == null)
+				_mem = new MemoryStream();
 		}
 
 		public void Close()
@@ -47,7 +54,8 @@ namespace DevForge.Lib.Fakes
 		public byte[] ReadBytes(int count)
 		{
 			var buffer = new byte[count];
-			_ = _mem.Read(buffer, 0, buffer.Length);
+			if (_mem != null)
+				_ = _mem.Read(buffer, 0, buffer.Length);
 			return buffer;
 		}
 

@@ -50,7 +50,12 @@ namespace DevForge.Lib.Common
 
         public void StartFake()
         {
-            var factory = new FakeFactory();
+            var factory = new FakePort();
+            factory.Open();
+            factory.WriteMessage(
+                new Hello("app=Fake;cpu=Unknown;comm=Unknown;area=Unknown;ver=1972030723590103;chip=Unknown;mem=42000")
+            );
+            factory.Rewind();
             DoOnePort(factory);
         }
 
