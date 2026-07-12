@@ -55,12 +55,12 @@ namespace DevForge.Lib.High
             dict.TryGetValue("6", out var hV);
             var info = new PvBuff
             {
-                Addr = (ushort)TextExt.ParseHex(dict["1"], 0),
+                Src = (ushort)TextExt.ParseHex(dict["1"], 0),
                 Bank = (byte)TextExt.ParseHex(dict["2"], 0),
                 Seg = (ushort)TextExt.ParseHex(dict["3"], 0),
                 Off = (ushort)TextExt.ParseHex(dict["4"], 0),
-                Len = (ushort)TextExt.ParseHex(dict["5"], 0),
-                Hex = TextExt.FromHexString(hV)
+                Size = (ushort)TextExt.ParseHex(dict["5"], 0),
+                Bytes = TextExt.FromHexString(hV)
             };
             return info;
         }

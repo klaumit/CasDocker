@@ -22,7 +22,7 @@ namespace DevForge.Lib.Ponder
 
         public static long Get86Address(this PvBuff call)
         {
-            var addrIndex = (call.Addr - AddrStart) / 2;
+            var addrIndex = (call.Src - AddrStart) / 2;
             var segIndex = call.Seg == Segments[1] ? 1 : 0;
             return ((long)addrIndex * 2 + segIndex) * SegmentSize + call.Off;
         }
@@ -68,8 +68,8 @@ namespace DevForge.Lib.Ponder
                     var length = Math.Min(MaxChunkSize, remaining);
                     calls.Add(new PvBuff
                     {
-                        Addr = (ushort)addr, Bank = DefaultBank, Seg = (ushort)seg,
-                        Off = (ushort)offset, Len = (ushort)length
+                        Src = (ushort)addr, Bank = DefaultBank, Seg = (ushort)seg,
+                        Off = (ushort)offset, Size = (ushort)length
                     });
                     offset += length;
                 }
