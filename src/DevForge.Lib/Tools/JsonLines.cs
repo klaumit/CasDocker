@@ -10,7 +10,7 @@ namespace DevForge.Lib.Tools
 		private StreamWriter _writer;
 		private JsonSerializerSettings _config;
 
-		public JsonLines(string path) : this(File.AppendText(TextExt.FixPath(path)))
+		public JsonLines(string path) : this(File.AppendText(path))
 		{
 		}
 

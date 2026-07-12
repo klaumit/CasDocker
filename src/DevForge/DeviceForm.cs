@@ -8,6 +8,9 @@ using DevForge.Lib.High;
 using DevForge.Lib.Tools;
 using DevForge.Lib.Ponder;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Globalization;
 
 // ReSharper disable UseCollectionExpression
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
@@ -20,6 +23,7 @@ namespace DevForge
         private DeviceFoundArgs _args;
         private PvInfo _info;
         private JsonLines _log;
+        private StreamWriter _got;
         private Dictionary<long, Read> _reads;
 
         public DeviceForm()
@@ -39,6 +43,30 @@ namespace DevForge
             var ts = e.Stamp.ToString("u").TrimEnd('Z');
             statusLbl.Text = "[" + ts + "] (" + e.Message.Kind + ") " + e.Message.Length + " bytes";
             _log.Write(e.Message);
+
+            if (e.Message is Read r)
+            {
+                var buff = r.AsBuff();
+                if (buff.Bytes == null && _args.Device.Name == "FakeDevice")
+                {
+                    buff.Bytes = new byte[] { 1, 2, 3, 4, 5 };
+                }
+                var addr = buff.Get86Address();
+                _reads.Remove(addr);
+                foreach (var hex in buff.PrintHexDump())
+                    _got.WriteLine(hex);
+                _got.Flush();
+                SendTopRead();
+            }
+        }
+
+        private void SendTopRead()
+        {
+            if (_reads != null && _reads.Count >= 1)
+            {
+                var read = _reads.FirstOrDefault().Value;
+                _args.Device.Send(read);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -58,7 +86,7 @@ namespace DevForge
                 var info = hello.AsInfo();
                 if (info != null)
                 {
-                    _log = new JsonLines(GetLogName(info));
+                    _log = new JsonLines(GetLogName(info, ".log"));
                     chipLbl.Text = info.Chip.GetEnumStr();
                     areaLbl.Text = info.Area.GetEnumStr();
                     cpuLbl.Text = info.Cpu.GetEnumStr();
@@ -73,10 +101,11 @@ namespace DevForge
             dtLbl.Text = stamp.GetTimeStr();
         }
 
-        private string GetLogName(PvInfo info)
+        private string GetLogName(PvInfo info, string end)
         {
-            return info.Chip + "_" + GetLogName(info.Area) + "_" + info.Mem + "_v" +
-                info.Ver.OsVer.GetVerStr() + "_" + info.Ver.OsDate.GetDateStr() + ".log";
+            var name = info.Chip + "_" + GetLogName(info.Area) + "_" + info.Mem + "_v" +
+                info.Ver.OsVer.GetVerStr() + "_" + info.Ver.OsDate.GetDateStr() + end;
+            return TextExt.FixPath(name);
         }
 
         private string GetLogName(PvArea area)
@@ -140,11 +169,30 @@ namespace DevForge
             {
                 _reads = MemMap86Gen.GenerateCalls()
                     .ToDictionary(k => k.Get86Address(), v => new Read(v));
-                ;
             }
             else if (_info.Cpu == PvCpu.SH3)
             {
+                // TODO
+                return;
             }
+            var xxdFile = GetLogName(_info, ".xxd");
+            if (_got != null)
+            {
+                _got.Flush();
+                _got.Dispose();
+                _got = null;
+            }
+            var existing = File.Exists(xxdFile) ? File.ReadAllLines(xxdFile, Encoding.UTF8) : new string[0];
+            foreach (var line in existing)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+                var tmp = line.Split(new[] { ':' }, 2);
+                var addr = int.Parse(tmp[0], NumberStyles.HexNumber);
+                _reads.Remove(addr);
+            }
+            _got = File.AppendText(xxdFile);
+            SendTopRead();
         }
     }
 }

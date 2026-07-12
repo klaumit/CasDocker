@@ -18,7 +18,7 @@ namespace DevForge.Lib.Tools
             return defVal;
         }
 
-		internal static string FixPath(string path)
+		public static string FixPath(string path)
 		{
             return path.Replace('?', '-');
 		}

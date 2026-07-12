@@ -13,10 +13,12 @@ namespace DevForge.Lib.Fakes
 		private readonly string _name;
 		private MemoryStream _mem;
 
-		public FakePort(string name = "Dojo")
+		public FakePort(string name = "Fake")
 		{
 			_name = name;
 		}
+
+		public override string Prefix => _name;
 
 		public override ICommPort Create()
 		{
