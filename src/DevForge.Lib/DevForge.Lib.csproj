@@ -47,7 +47,7 @@
     <Compile Include="High\PvVer.cs" />
     <Compile Include="High\PvVerConv.cs" />
     <Compile Include="High\PvCpu.cs" />
-    <Compile Include="High\PvBuff.cs" />
+    <Compile Include="Ponder\PvBuff.cs" />
     <Compile Include="Messages\MsgKind.cs" />
     <Compile Include="Messages\MsgTool.cs" />
     <Compile Include="Messages\Message.cs" />
