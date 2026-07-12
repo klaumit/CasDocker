@@ -9,13 +9,21 @@ namespace DevForge.Lib.Ponder
         public const int DefaultBank = 3;
         public static readonly int[] Segments = { 0x6000, 0x7000 };
         public const int SegmentSize = 0x10000;
+        public const int AddrStart = 0x0100;
 
         public static IEnumerable<int> GetAddresses()
         {
-            for (var addr = 0x0100; addr <= 0x010E; addr += 2)
+            for (var addr = AddrStart; addr <= 0x010E; addr += 2)
                 yield return addr;
             for (var addr = 0x0110; addr <= 0x011E; addr += 2)
                 yield return addr;
+        }
+
+        public static long Get86Address(this ReadMemCall call)
+        {
+            var addrIndex = (call.Addr - AddrStart) / 2;
+            var segIndex = call.Seg == Segments[1] ? 1 : 0;
+            return ((long)addrIndex * 2 + segIndex) * SegmentSize + call.Off;
         }
 
         public static List<ReadMemCall> GenerateCalls()
