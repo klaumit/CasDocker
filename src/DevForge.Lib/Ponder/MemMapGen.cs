@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 
 namespace DevForge.Lib.Ponder
@@ -21,7 +20,7 @@ namespace DevForge.Lib.Ponder
                 yield return addr;
         }
 
-        public static long Get86Address(this ReadMemCall call)
+        public static long Get86Address(this PvBuff call)
         {
             var addrIndex = (call.Addr - AddrStart) / 2;
             var segIndex = call.Seg == Segments[1] ? 1 : 0;
@@ -56,9 +55,9 @@ namespace DevForge.Lib.Ponder
             }
         }
 
-        public static List<ReadMemCall> GenerateCalls()
+        public static List<PvBuff> GenerateCalls()
         {
-            var calls = new List<ReadMemCall>();
+            var calls = new List<PvBuff>();
             foreach (var addr in GetAddresses())
             foreach (var seg in Segments)
             {
@@ -67,7 +66,7 @@ namespace DevForge.Lib.Ponder
                 {
                     var remaining = SegmentSize - offset;
                     var length = Math.Min(MaxChunkSize, remaining);
-                    calls.Add(new ReadMemCall
+                    calls.Add(new PvBuff
                     {
                         Addr = (ushort)addr, Bank = DefaultBank, Seg = (ushort)seg,
                         Off = (ushort)offset, Len = (ushort)length
