@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using DevForge.Resources;
 using DevForge.Lib.Common;
 using DevForge.Lib.Messages.Impl;
 using DevForge.Lib.High;
 using DevForge.Lib.Tools;
+using DevForge.Lib.Ponder;
+using System.Collections.Generic;
 
 // ReSharper disable UseCollectionExpression
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
@@ -15,7 +18,9 @@ namespace DevForge
     public partial class DeviceForm : Form
     {
         private DeviceFoundArgs _args;
+        private PvInfo _info;
         private JsonLines _log;
+        private Dictionary<long, Read> _reads;
 
         public DeviceForm()
         {
@@ -36,7 +41,7 @@ namespace DevForge
             _log.Write(e.Message);
         }
 
-		private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             Icon = ResExt.GetStream("app.ico").ToIcon();
             picBox.Image = ResExt.GetStream("device.png").ToImage();
@@ -62,16 +67,17 @@ namespace DevForge
                     appLbl.Text = info.App;
                     osDtLbl.Text = info.Ver.OsDate.GetDateStr();
                     osVerLbl.Text = info.Ver.OsVer.GetVerStr();
+                    _info = info;
                 }
             }
             dtLbl.Text = stamp.GetTimeStr();
         }
 
-		private string GetLogName(PvInfo info)
-		{
-            return info.Chip + "_" + GetLogName(info.Area) + "_" + info.Mem + "_v" + 
+        private string GetLogName(PvInfo info)
+        {
+            return info.Chip + "_" + GetLogName(info.Area) + "_" + info.Mem + "_v" +
                 info.Ver.OsVer.GetVerStr() + "_" + info.Ver.OsDate.GetDateStr() + ".log";
-		}
+        }
 
         private string GetLogName(PvArea area)
         {
@@ -83,7 +89,7 @@ namespace DevForge
             }
         }
 
-		protected override void OnFormClosed(FormClosedEventArgs e)
+        protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
             SendClose();
@@ -113,22 +119,32 @@ namespace DevForge
 
         private string LenHex => ((int)msgLenDw.Value).ToString("X2");
 
-        private void todoBtn_Click(object sender, EventArgs e)
-		{
+        private void testReadBtn_Click(object sender, EventArgs e)
+        {
             var dev = _args.Device;
-            var args = string.Join("|",
-                new[] { "0110", "03", "6000", "0000", LenHex, "" }
-            );
-            dev.Send(new Read(args));
+            if (_info.Cpu == PvCpu.X86)
+            {
+                var args = string.Join("|", new[] { "0110", "03", "6000", "0000", LenHex, "" });
+                dev.Send(new Read(args));
+            }
+            else if (_info.Cpu == PvCpu.SH3)
+            {
+                var args = string.Join("|", new[] { "0000", "00", "8C00", "0000", LenHex, "" });
+                dev.Send(new Read(args));
+            }
         }
 
-		private void todaBtn_Click(object sender, EventArgs e)
-		{
-            var dev = _args.Device;
-            var args = string.Join("|",
-                new[] { "0000", "00", "8C00", "0000", LenHex, "" }
-            );
-            dev.Send(new Read(args));
+        private void backupBtn_Click(object sender, EventArgs e)
+        {
+            if (_info.Cpu == PvCpu.X86)
+            {
+                _reads = MemMap86Gen.GenerateCalls()
+                    .ToDictionary(k => k.Get86Address(), v => new Read(v));
+                ;
+            }
+            else if (_info.Cpu == PvCpu.SH3)
+            {
+            }
         }
-	}
+    }
 }

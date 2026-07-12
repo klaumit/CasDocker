@@ -37,11 +37,11 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.closeBtn = new System.Windows.Forms.Button();
 			this.keepLiveBtn = new System.Windows.Forms.Button();
-			this.todoBtn = new System.Windows.Forms.Button();
-			this.todaBtn = new System.Windows.Forms.Button();
+			this.testReadBtn = new System.Windows.Forms.Button();
 			this.statusSrp = new System.Windows.Forms.StatusStrip();
 			this.statusLbl = new System.Windows.Forms.ToolStripStatusLabel();
 			this.msgLenDw = new System.Windows.Forms.NumericUpDown();
+			this.backupBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
@@ -248,7 +248,7 @@
 			// 
 			// closeBtn
 			// 
-			this.closeBtn.Location = new System.Drawing.Point(421, 168);
+			this.closeBtn.Location = new System.Drawing.Point(421, 182);
 			this.closeBtn.Name = "closeBtn";
 			this.closeBtn.Size = new System.Drawing.Size(75, 23);
 			this.closeBtn.TabIndex = 2;
@@ -258,7 +258,7 @@
 			// 
 			// keepLiveBtn
 			// 
-			this.keepLiveBtn.Location = new System.Drawing.Point(421, 133);
+			this.keepLiveBtn.Location = new System.Drawing.Point(421, 153);
 			this.keepLiveBtn.Name = "keepLiveBtn";
 			this.keepLiveBtn.Size = new System.Drawing.Size(75, 23);
 			this.keepLiveBtn.TabIndex = 3;
@@ -266,25 +266,15 @@
 			this.keepLiveBtn.UseVisualStyleBackColor = true;
 			this.keepLiveBtn.Click += new System.EventHandler(this.keepLiveBtn_Click);
 			// 
-			// todoBtn
+			// testReadBtn
 			// 
-			this.todoBtn.Location = new System.Drawing.Point(24, 155);
-			this.todoBtn.Name = "todoBtn";
-			this.todoBtn.Size = new System.Drawing.Size(75, 23);
-			this.todoBtn.TabIndex = 4;
-			this.todoBtn.Text = "TODO";
-			this.todoBtn.UseVisualStyleBackColor = true;
-			this.todoBtn.Click += new System.EventHandler(this.todoBtn_Click);
-			// 
-			// todaBtn
-			// 
-			this.todaBtn.Location = new System.Drawing.Point(24, 126);
-			this.todaBtn.Name = "todaBtn";
-			this.todaBtn.Size = new System.Drawing.Size(75, 23);
-			this.todaBtn.TabIndex = 5;
-			this.todaBtn.Text = "TODA";
-			this.todaBtn.UseVisualStyleBackColor = true;
-			this.todaBtn.Click += new System.EventHandler(this.todaBtn_Click);
+			this.testReadBtn.Location = new System.Drawing.Point(24, 155);
+			this.testReadBtn.Name = "testReadBtn";
+			this.testReadBtn.Size = new System.Drawing.Size(75, 23);
+			this.testReadBtn.TabIndex = 4;
+			this.testReadBtn.Text = "Test read";
+			this.testReadBtn.UseVisualStyleBackColor = true;
+			this.testReadBtn.Click += new System.EventHandler(this.testReadBtn_Click);
 			// 
 			// statusSrp
 			// 
@@ -319,15 +309,25 @@
             0,
             0});
 			// 
+			// backupBtn
+			// 
+			this.backupBtn.Location = new System.Drawing.Point(421, 124);
+			this.backupBtn.Name = "backupBtn";
+			this.backupBtn.Size = new System.Drawing.Size(75, 23);
+			this.backupBtn.TabIndex = 8;
+			this.backupBtn.Text = "Backup";
+			this.backupBtn.UseVisualStyleBackColor = true;
+			this.backupBtn.Click += new System.EventHandler(this.backupBtn_Click);
+			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 242);
+			this.Controls.Add(this.backupBtn);
 			this.Controls.Add(this.msgLenDw);
 			this.Controls.Add(this.statusSrp);
-			this.Controls.Add(this.todaBtn);
-			this.Controls.Add(this.todoBtn);
+			this.Controls.Add(this.testReadBtn);
 			this.Controls.Add(this.keepLiveBtn);
 			this.Controls.Add(this.closeBtn);
 			this.Controls.Add(this.infoBox);
@@ -368,10 +368,10 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button closeBtn;
         private System.Windows.Forms.Button keepLiveBtn;
-		private System.Windows.Forms.Button todoBtn;
-		private System.Windows.Forms.Button todaBtn;
+		private System.Windows.Forms.Button testReadBtn;
 		private System.Windows.Forms.StatusStrip statusSrp;
 		private System.Windows.Forms.ToolStripStatusLabel statusLbl;
 		private System.Windows.Forms.NumericUpDown msgLenDw;
+		private System.Windows.Forms.Button backupBtn;
 	}
 }
