@@ -53,7 +53,7 @@ namespace DevForge.Lib.Common
             var factory = new FakePort();
             factory.Open();
             factory.WriteMessage(
-                new Hello("app=Fake;cpu=Unknown;comm=Unknown;area=Unknown;ver=1972030723590103;chip=Unknown;mem=42000")
+                new Hello("app=Fake;cpu=X86;comm=Unknown;area=Unknown;ver=1972030723590103;chip=Unknown;mem=42000")
             );
             factory.Rewind();
             DoOnePort(factory);
