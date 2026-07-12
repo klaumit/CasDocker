@@ -20,6 +20,7 @@ namespace DevForge.Lib.Tools
 
         public static string ToHexString(byte[] bytes)
         {
+            if (bytes == null) return null;
             return string.Join("", bytes.Select(b => b.ToString("X2")));
         }
 

@@ -45,7 +45,7 @@ namespace DevForge.Tests
             Assert.Equal(0x6000, m.AsBuff().Seg);
             Assert.Equal(0x3000, m.AsBuff().Off);
             Assert.Equal(0x23, m.AsBuff().Size);
-            Assert.Equal(4, m.AsBuff().Bytes.Length);
+            Assert.Equal(4, m.AsBuff().Bytes?.Length);
         }
 
         private static string ToJson(Message obj)
