@@ -3,6 +3,8 @@ using DevForge.Lib.Messages.Impl;
 using DevForge.Lib.Ponder;
 using DevForge.Lib.Tools;
 
+// ReSharper disable UseStringInterpolation
+
 namespace DevForge.Lib.High
 {
     public static class Parsers
@@ -63,6 +65,14 @@ namespace DevForge.Lib.High
                 Bytes = TextExt.FromHexString(hV)
             };
             return info;
+        }
+
+        public static string WriteStr(PvBuff buf)
+        {
+            var hex = TextExt.ToHexString(buf.Bytes);
+            var txt = string.Format("{0:X4}|{1:X2}|{2:X4}|{3:X4}|{4:X4}|{5}",
+                buf.Src, buf.Bank, buf.Seg, buf.Off, buf.Size, hex);
+            return txt;
         }
     }
 }

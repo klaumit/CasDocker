@@ -15,6 +15,10 @@ namespace DevForge.Lib.Messages.Impl
             Kind = MsgKind.MemRead;
         }
 
+        public Read(PvBuff buf) : this(Parsers.WriteStr(buf))
+        {
+        }
+
         public PvBuff AsBuff()
         {
             return Parsers.Parse(this);

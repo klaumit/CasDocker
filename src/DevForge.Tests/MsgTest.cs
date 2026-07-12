@@ -1,5 +1,6 @@
 ﻿using DevForge.Lib.Messages;
 using DevForge.Lib.Messages.Impl;
+using DevForge.Lib.Ponder;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Xunit;
@@ -33,7 +34,12 @@ namespace DevForge.Tests
         [Fact]
         public void TestRead()
         {
-            TestSimple(new Read("0330|03|6000|3000|0023|12345644"), out var m);
+            var arg = new PvBuff
+            {
+                Src = 0x330, Bank = 3, Seg = 0x6000, Off = 0x3000, Size = 0x23,
+                Bytes = [0x12, 0x34, 0x56, 0x44]
+            };
+            TestSimple(new Read(arg), out var m);
             Assert.Equal(0x330, m.AsBuff().Src);
             Assert.Equal(3, m.AsBuff().Bank);
             Assert.Equal(0x6000, m.AsBuff().Seg);

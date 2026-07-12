@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace DevForge.Lib.Tools
 {
@@ -17,8 +18,14 @@ namespace DevForge.Lib.Tools
             return defVal;
         }
 
+        public static string ToHexString(byte[] bytes)
+        {
+            return string.Join("", bytes.Select(b => b.ToString("X2")));
+        }
+
         public static byte[] FromHexString(string hex)
         {
+            if (string.IsNullOrWhiteSpace(hex)) return null;
             var bytes = new byte[hex.Length / 2];
             for (var i = 0; i < bytes.Length; i++)
                 bytes[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
