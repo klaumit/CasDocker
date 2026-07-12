@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+// ReSharper disable ConvertIfStatementToNullCoalescingExpression
+
 namespace DevForge.Lib.Ponder
 {
     public static class MemMap86Gen
@@ -25,6 +27,13 @@ namespace DevForge.Lib.Ponder
             var addrIndex = (call.Src - AddrStart) / 2;
             var segIndex = call.Seg == Segments[1] ? 1 : 0;
             return ((long)addrIndex * 2 + segIndex) * SegmentSize + call.Off;
+        }
+
+        public static IEnumerable<string> PrintHexDump(this PvBuff buff)
+        {
+            var array = buff.Bytes;
+            if (array == null) array = new byte[0];
+            return PrintHexDump(buff.Get86Address(), array);
         }
 
         public static IEnumerable<string> PrintHexDump(long address, byte[] data, int len = 16)
