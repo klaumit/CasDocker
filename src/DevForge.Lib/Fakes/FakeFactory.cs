@@ -8,7 +8,7 @@ namespace DevForge.Lib.Fakes
     {
         public override ICommPort Create()
         {
-            throw new NotImplementedException();
+            return new FakePort("Dojo");
         }
     }
 }

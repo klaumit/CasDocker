@@ -8,6 +8,13 @@ namespace DevForge.Lib.Fakes
 {
 	public sealed class FakePort : ICommPort
 	{
+		private readonly string _name;
+
+		public FakePort(string name)
+		{
+			_name = name;
+		}
+
 		public void Dispose()
 		{
 			// TODO release managed resources here
