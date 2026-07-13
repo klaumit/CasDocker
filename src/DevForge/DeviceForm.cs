@@ -55,7 +55,7 @@ namespace DevForge
                 {
                     buff.Bytes = new byte[] { 1, 2, 3, 4, 5 };
                 }
-                var addr = buff.Get86Address();
+                var addr = buff.GetAddress(_info.Cpu);
                 _reads.Remove(addr);
                 foreach (var hex in buff.PrintHexDump())
                     _got.WriteLine(hex);
