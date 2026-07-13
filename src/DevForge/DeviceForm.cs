@@ -166,7 +166,7 @@ namespace DevForge
             }
             else if (_info.Cpu == PvCpu.SH3)
             {
-                var args = string.Join("|", new[] { "0000", "00", "8C00", "0000", LenHex, "" });
+                var args = string.Join("|", new[] { "0000", "00", "8C00", "0040", LenHex, "" });
                 dev.Send(new Read(args));
             }
         }
@@ -180,8 +180,8 @@ namespace DevForge
             }
             else if (_info.Cpu == PvCpu.SH3)
             {
-                // TODO
-                return;
+                _reads = MemMapSHGen.GenerateCalls()
+                    .ToDictionary(k => k.GetSHAddress(), v => new Read(v));
             }
             var xxdFile = GetLogName(_info, ".xxd");
             if (_got != null)
