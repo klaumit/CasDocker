@@ -1,11 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DevForge.Lib.High;
 
 namespace DevForge.Lib.Ponder
 {
     internal static class MemMapGen
     {
+        public static long GetAddress(this PvBuff call, PvCpu cpu)
+        {
+            switch (cpu)
+            {
+                case PvCpu.X86: return call.Get86Address();
+                case PvCpu.SH3: return call.GetSHAddress();
+                default: return -1;
+            }
+        }
+
         public static IEnumerable<string> PrintHexDump(long address, byte[] data, int len = 16)
         {
             for (var rowStart = 0; rowStart < data.Length; rowStart += len)
