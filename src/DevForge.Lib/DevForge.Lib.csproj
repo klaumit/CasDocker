@@ -50,6 +50,8 @@
     <Compile Include="High\PvCpu.cs" />
     <Compile Include="Ponder\PvBuff.cs" />
     <Compile Include="Ponder\MemMap86Gen.cs" />
+    <Compile Include="Ponder\MemMapSHGen.cs" />
+	<Compile Include="Ponder\MemMapGen.cs" />
     <Compile Include="Messages\MsgKind.cs" />
     <Compile Include="Messages\MsgTool.cs" />
     <Compile Include="Messages\Message.cs" />
