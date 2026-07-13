@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using ByteSizeLib;
 
 namespace DevForge.Lib.Tools
 {
@@ -18,12 +19,12 @@ namespace DevForge.Lib.Tools
             return defVal;
         }
 
-		public static string FixPath(string path)
-		{
+        public static string FixPath(string path)
+        {
             return path.Replace('?', '-');
-		}
+        }
 
-		public static string ToHexString(byte[] bytes)
+        public static string ToHexString(byte[] bytes)
         {
             if (bytes == null) return null;
             return string.Join("", bytes.Select(b => b.ToString("X2")));
@@ -36,6 +37,15 @@ namespace DevForge.Lib.Tools
             for (var i = 0; i < bytes.Length; i++)
                 bytes[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
             return bytes;
+        }
+
+        public static string ToByteSize(double bytes)
+        {
+            var size = ByteSize.FromBytes(bytes);
+            var txt = size.ToString();
+            if (txt == " b")
+                txt = "0 b";
+            return txt;
         }
     }
 }
