@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using DevForge.Lib.API;
+using DevForge.Lib.Ponder;
 using E = DevForge.Lib.Modern.Internals.EnumDevNative;
 using K = DevForge.Lib.Modern.Internals.KernelNative;
 
@@ -13,7 +16,7 @@ namespace DevForge.Lib.Modern
     {
         private readonly string _devicePath;
         private IntPtr? _usbHandle;
-        private MemoryStream _memory;
+        private IEnumerator<byte> _sink;
 
         public ModernPort(string devicePath)
         {
@@ -32,6 +35,11 @@ namespace DevForge.Lib.Modern
 
         public void Close()
         {
+            if (_sink != null)
+            {
+                _sink.Dispose();
+            }
+            _sink = null;
             if (_usbHandle != null)
             {
                 K.CloseHandle(_usbHandle.Value);
@@ -44,44 +52,55 @@ namespace DevForge.Lib.Modern
             Close();
         }
 
-        private MemoryStream GetStream()
+        public int WaitMs { get; set; } = 25;
+        public int MaxLen { get; set; } = 256;
+
+        private IEnumerable<byte> ReadOneByte()
         {
-            if (_memory != null)
-                return _memory;
+            while (IsOpen())
+            {
+                var handle = _usbHandle.Value;
+                var array = new byte[MaxLen];
+                uint got;
+                if (E.PVReadUsb(handle, array, (uint)array.Length, out got))
+                {
+                    WriteLogLine(" " + DateTime.Now + " " + nameof(E.PVReadUsb) + " (" + got + ") => " +
+                        Environment.NewLine + "" + string.Join(Environment.NewLine, MemMapGen.PrintHexDump(0, array))
+                    );
 
-            if (_usbHandle == null)
-                return null;
+                    for (var i = 0; i < got; i++)
+                        yield return array[i];
+                }
+                Thread.Sleep(WaitMs);
+            }
+        }
 
-            uint got;
-            var handle = _usbHandle.Value;
-            const int maxLen = 512;
-            var array = new byte[maxLen];
-            if (E.PVReadUsb(handle, array, (uint)array.Length, out got) && got >= 1)
-                _memory = new MemoryStream(array, 0, (int)got);
-
-            return _memory;
+        private bool MoveNext()
+        {
+            if (_sink != null)
+            {
+                if (_sink.MoveNext())
+                    return true;
+                _sink.Dispose();
+                _sink = null;
+            }
+            if (_sink == null)
+            {
+                var iter = ReadOneByte();
+                _sink = iter.GetEnumerator();
+            }
+            return _sink.MoveNext();
         }
 
         public byte[] ReadBytes(int count)
         {
-            var mem = GetStream();
-            if (mem == null)
-                return null;
-            var rest = mem.Length - mem.Position;
-            if (rest < count)
+            var array = new byte[count];
+            for (var i = 0; i < count; i++)
             {
-                _memory = null;
-                mem = GetStream();
+                if (MoveNext())
+                    array[i] = _sink.Current;
             }
-            if (mem == null)
-                return null;
-            var buffer = new byte[count];
-            var bytesRead = mem.Read(buffer, 0, count);
-            if (bytesRead < 1)
-                return null;
-            if (buffer.Length != bytesRead)
-                Array.Resize(ref buffer, (int)bytesRead);
-            return buffer;
+            return array;
         }
 
         public bool WriteBytes(byte[] buffer)
@@ -90,6 +109,11 @@ namespace DevForge.Lib.Modern
                 return false;
             var handle = _usbHandle.Value;
             uint bytesWritten;
+
+            WriteLogLine(" " + DateTime.Now + " " + nameof(E.PVWriteUsb) + " => " +
+                Environment.NewLine + "" + string.Join(Environment.NewLine, MemMapGen.PrintHexDump(0, buffer))
+            );
+
             if (!E.PVWriteUsb(handle, buffer, (uint)buffer.Length, out bytesWritten))
                 return false;
             if (bytesWritten < 1)
