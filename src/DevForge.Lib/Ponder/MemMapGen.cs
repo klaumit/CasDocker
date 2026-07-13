@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using DevForge.Lib.High;
 
+// ReSharper disable UseArrayEmptyMethod
+
 namespace DevForge.Lib.Ponder
 {
     public static class MemMapGen
@@ -13,7 +15,7 @@ namespace DevForge.Lib.Ponder
             {
                 case PvCpu.X86: return call.Print86Hex();
                 case PvCpu.SH3: return call.PrintSHHex();
-                default: return [];
+                default: return new string[0];
             }
         }
 
