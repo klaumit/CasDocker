@@ -12,12 +12,16 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="ByteSize" Version="2.1.2" />
     <PackageReference Include="System.IO.Ports" Version="10.0.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
     <Reference Include="Newtonsoft.Json.dll">
       <HintPath>..\deps\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ByteSizeLib.dll">
+      <HintPath>..\deps\net40\ByteSizeLib.dll</HintPath>
     </Reference>
   </ItemGroup>
 
