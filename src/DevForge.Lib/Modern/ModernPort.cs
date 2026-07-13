@@ -63,14 +63,8 @@ namespace DevForge.Lib.Modern
                 var array = new byte[MaxLen];
                 uint got;
                 if (E.PVReadUsb(handle, array, (uint)array.Length, out got))
-                {
-                    WriteLogLine(" " + DateTime.Now + " " + nameof(E.PVReadUsb) + " (" + got + ") => " +
-                        Environment.NewLine + "" + string.Join(Environment.NewLine, MemMapGen.PrintHexDump(0, array))
-                    );
-
                     for (var i = 0; i < got; i++)
                         yield return array[i];
-                }
                 Thread.Sleep(WaitMs);
             }
         }
@@ -109,11 +103,6 @@ namespace DevForge.Lib.Modern
                 return false;
             var handle = _usbHandle.Value;
             uint bytesWritten;
-
-            WriteLogLine(" " + DateTime.Now + " " + nameof(E.PVWriteUsb) + " => " +
-                Environment.NewLine + "" + string.Join(Environment.NewLine, MemMapGen.PrintHexDump(0, buffer))
-            );
-
             if (!E.PVWriteUsb(handle, buffer, (uint)buffer.Length, out bytesWritten))
                 return false;
             if (bytesWritten < 1)
