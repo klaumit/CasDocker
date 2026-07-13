@@ -26,6 +26,9 @@ namespace DevForge
         private JsonLines _log;
         private StreamWriter _got;
         private Dictionary<long, Read> _reads;
+        private long _packGot;
+        private long _packStill;
+        private int _packSize = 64;
 
         public DeviceForm()
         {
@@ -57,7 +60,9 @@ namespace DevForge
                 foreach (var hex in buff.PrintHexDump())
                     _got.WriteLine(hex);
                 _got.Flush();
-                var wait = TimeSpan.FromMilliseconds((double)delayDown.Value);
+                MarkOne();
+                var waitMs = (double)delayDown.Value;
+                var wait = TimeSpan.FromMilliseconds(waitMs);
                 Thread.Sleep(wait);
                 SendTopRead();
             }
@@ -185,6 +190,8 @@ namespace DevForge
                 _got.Dispose();
                 _got = null;
             }
+            _packStill = _reads.Count;
+            _packGot = 0;
             var existing = File.Exists(xxdFile) ? File.ReadAllLines(xxdFile, Encoding.UTF8) : new string[0];
             foreach (var line in existing)
             {
@@ -192,10 +199,27 @@ namespace DevForge
                     continue;
                 var tmp = line.Split(new[] { ':' }, 2);
                 var addr = int.Parse(tmp[0], NumberStyles.HexNumber);
-                _reads.Remove(addr);
+                if (_reads.ContainsKey(addr))
+                {
+                    _reads.Remove(addr);
+                    MarkOne(update: false);
+                }
             }
             _got = File.AppendText(xxdFile);
             SendTopRead();
+        }
+
+        private void MarkOne(bool update = true)
+        {
+            _packStill = _reads.Count;
+            _packGot++;
+            if (!update) return;
+            Action action = () =>
+            {
+                stillLbl.Text = TextExt.ToByteSize(_packStill * _packSize);
+                gotLbl.Text = TextExt.ToByteSize(_packGot * _packSize);
+            };
+            Invoke(action);
         }
     }
 }

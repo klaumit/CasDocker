@@ -44,6 +44,10 @@
 			this.backupBtn = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
 			this.delayDown = new System.Windows.Forms.NumericUpDown();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label11 = new System.Windows.Forms.Label();
+			this.gotLbl = new System.Windows.Forms.Label();
+			this.stillLbl = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
@@ -325,7 +329,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(191, 153);
+			this.label3.Location = new System.Drawing.Point(191, 134);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(59, 13);
 			this.label3.TabIndex = 9;
@@ -333,7 +337,7 @@
 			// 
 			// delayDown
 			// 
-			this.delayDown.Location = new System.Drawing.Point(256, 151);
+			this.delayDown.Location = new System.Drawing.Point(256, 132);
 			this.delayDown.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -348,11 +352,51 @@
             0,
             0});
 			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(191, 165);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(27, 13);
+			this.label5.TabIndex = 11;
+			this.label5.Text = "Got:";
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(257, 165);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(26, 13);
+			this.label11.TabIndex = 12;
+			this.label11.Text = "Still:";
+			// 
+			// gotLbl
+			// 
+			this.gotLbl.AutoSize = true;
+			this.gotLbl.Location = new System.Drawing.Point(191, 187);
+			this.gotLbl.Name = "gotLbl";
+			this.gotLbl.Size = new System.Drawing.Size(16, 13);
+			this.gotLbl.TabIndex = 13;
+			this.gotLbl.Text = "---";
+			// 
+			// stillLbl
+			// 
+			this.stillLbl.AutoSize = true;
+			this.stillLbl.Location = new System.Drawing.Point(257, 187);
+			this.stillLbl.Name = "stillLbl";
+			this.stillLbl.Size = new System.Drawing.Size(16, 13);
+			this.stillLbl.TabIndex = 14;
+			this.stillLbl.Text = "---";
+			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 242);
+			this.Controls.Add(this.stillLbl);
+			this.Controls.Add(this.gotLbl);
+			this.Controls.Add(this.label11);
+			this.Controls.Add(this.label5);
 			this.Controls.Add(this.delayDown);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.backupBtn);
@@ -407,5 +451,9 @@
 		private System.Windows.Forms.Button backupBtn;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.NumericUpDown delayDown;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Label gotLbl;
+		private System.Windows.Forms.Label stillLbl;
 	}
 }
