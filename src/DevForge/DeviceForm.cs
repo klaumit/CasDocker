@@ -198,7 +198,7 @@ namespace DevForge
                 if (string.IsNullOrWhiteSpace(line))
                     continue;
                 var tmp = line.Split(new[] { ':' }, 2);
-                var addr = int.Parse(tmp[0], NumberStyles.HexNumber);
+                var addr = long.Parse(tmp[0], NumberStyles.HexNumber);
                 if (_reads.ContainsKey(addr))
                 {
                     _reads.Remove(addr);
