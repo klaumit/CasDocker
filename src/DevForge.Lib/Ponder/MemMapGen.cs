@@ -5,8 +5,18 @@ using DevForge.Lib.High;
 
 namespace DevForge.Lib.Ponder
 {
-    internal static class MemMapGen
+    public static class MemMapGen
     {
+        public static IEnumerable<string> PrintHex(this PvBuff call, PvCpu cpu)
+        {
+            switch (cpu)
+            {
+                case PvCpu.X86: return call.Print86Hex();
+                case PvCpu.SH3: return call.PrintSHHex();
+                default: return [];
+            }
+        }
+
         public static long GetAddress(this PvBuff call, PvCpu cpu)
         {
             switch (cpu)
@@ -17,7 +27,7 @@ namespace DevForge.Lib.Ponder
             }
         }
 
-        public static IEnumerable<string> PrintHexDump(long address, byte[] data, int len = 16)
+        internal static IEnumerable<string> PrintHexDump(long address, byte[] data, int len = 16)
         {
             for (var rowStart = 0; rowStart < data.Length; rowStart += len)
             {

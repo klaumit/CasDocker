@@ -57,7 +57,7 @@ namespace DevForge
                 }
                 var addr = buff.GetAddress(_info.Cpu);
                 _reads.Remove(addr);
-                foreach (var hex in buff.PrintHexDump())
+                foreach (var hex in MemMapGen.PrintHex(buff, _info.Cpu))
                     _got.WriteLine(hex);
                 _got.Flush();
                 MarkOne();
