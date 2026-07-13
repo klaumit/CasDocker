@@ -29,12 +29,10 @@ namespace DevForge.Lib.Ponder
             return ((long)addrIndex * 2 + segIndex) * SegmentSize + call.Off;
         }
 
-        public static IEnumerable<string> PrintHexDump(this PvBuff buff)
+        public static IEnumerable<string> Print86Hex(this PvBuff buff)
         {
             var array = buff.Bytes;
             if (array == null) array = new byte[0];
-            return PrintHexDump(buff.Get86Address(), array);
-        }
 
         public static IEnumerable<string> PrintHexDump(long address, byte[] data, int len = 16)
         {
@@ -61,7 +59,7 @@ namespace DevForge.Lib.Ponder
                     line.Append(b >= 0x20 && b <= 0x7E ? (char)b : '.');
                 }
                 yield return line.ToString();
-            }
+            return MemMapGen.PrintHexDump(buff.Get86Address(), array);
         }
 
         public static List<PvBuff> GenerateCalls()
