@@ -22,11 +22,11 @@ namespace DevForge.Lib.Ponder
                 yield return addr;
         }
 
-        public static long Get86Address(this PvBuff call)
+        public static uint Get86Address(this PvBuff call)
         {
             var addrIndex = (call.Src - AddrStart) / 2;
             var segIndex = call.Seg == Segments[1] ? 1 : 0;
-            return ((long)addrIndex * 2 + segIndex) * SegmentSize + call.Off;
+            return (uint)(((uint)addrIndex * 2 + segIndex) * SegmentSize + call.Off);
         }
 
         public static IEnumerable<string> Print86Hex(this PvBuff buff)

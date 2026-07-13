@@ -13,9 +13,9 @@ namespace DevForge.Lib.Ponder
                 yield return AddrStart + (MaxChunkSize * i);
         }
 
-        public static long GetSHAddress(this PvBuff call)
+        public static uint GetSHAddress(this PvBuff call)
         {
-            return (call.Seg << 16) | call.Off;
+            return ((uint)call.Seg << 16) | call.Off;
         }
 
         public static IEnumerable<string> PrintSHHex(this PvBuff buff)

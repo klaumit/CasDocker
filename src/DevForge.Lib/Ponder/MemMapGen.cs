@@ -19,13 +19,13 @@ namespace DevForge.Lib.Ponder
             }
         }
 
-        public static long GetAddress(this PvBuff call, PvCpu cpu)
+        public static uint GetAddress(this PvBuff call, PvCpu cpu)
         {
             switch (cpu)
             {
                 case PvCpu.X86: return call.Get86Address();
                 case PvCpu.SH3: return call.GetSHAddress();
-                default: return -1;
+                default: return 0;
             }
         }
 

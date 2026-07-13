@@ -25,7 +25,7 @@ namespace DevForge
         private PvInfo _info;
         private JsonLines _log;
         private StreamWriter _got;
-        private Dictionary<long, Read> _reads;
+        private Dictionary<uint, Read> _reads;
         private long _packGot;
         private long _packStill;
         private int _packSize = 64;
@@ -198,7 +198,7 @@ namespace DevForge
                 if (string.IsNullOrWhiteSpace(line))
                     continue;
                 var tmp = line.Split(new[] { ':' }, 2);
-                var addr = long.Parse(tmp[0], NumberStyles.HexNumber);
+                var addr = uint.Parse(tmp[0], NumberStyles.HexNumber);
                 if (_reads.ContainsKey(addr))
                 {
                     _reads.Remove(addr);
