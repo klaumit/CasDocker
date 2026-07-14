@@ -97,7 +97,7 @@ void main()
 				sprintf(debug, " -> I will quit soon!");
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
-				Wait(5);
+				WaitTicks(5 * TICKS_PER_SEC);
 				break;
 			}
 			if (kind == MSG_ALIVE)
