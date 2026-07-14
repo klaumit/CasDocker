@@ -75,12 +75,15 @@ void main()
 	);
 	SendTxtMessage(MSG_HELLO, debug);
 
-	maxTry = 15;
+	maxTry = 15 * TICKS_PER_SEC;
 	for (i = 0; i < maxTry; i++)
 	{
-		sprintf(debug, "Waiting %d of %d sec...", i, maxTry);
+		if (i % TICKS_PER_SEC == 0)
+		{
+		sprintf(debug, "Waiting %d of %d sec...", i / TICKS_PER_SEC, maxTry / TICKS_PER_SEC);
 		LibStringDsp( B@ debug, 5, 100, 160, B@@ IB_PFONT2);
 		LibPutDisp();
+		}
 
 		if (ReadTxtMessage(&kind, text))
 		{
@@ -105,7 +108,7 @@ void main()
 				sprintf(debug, " -> I will wait %d s!", newTry);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
-				maxTry = newTry;
+				maxTry = newTry * TICKS_PER_SEC;
 				i = 0;
 			}
 			if (kind == MSG_MEM_READ)
@@ -134,11 +137,11 @@ void main()
 				}
 				SwitchBank(0x0104, (byte)bank); /* Fonts */
 				SendTxtMessage(MSG_MEM_READ, (char *)tmp);
-				maxTry = 25;
+				maxTry = 25 * TICKS_PER_SEC;
 				i = 0;
 			}
 		}
-		Wait(1);
+		WaitTicks(1);
 	}
 
 	ClosePort();

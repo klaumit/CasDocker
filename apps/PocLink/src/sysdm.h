@@ -32,5 +32,7 @@ const char *GetOpenPortStr(word num);
 
 void ClosePort();
 
-void Wait(byte sec);
+#define TICKS_PER_SEC 8
+
+void WaitTicks(word ticks);
 

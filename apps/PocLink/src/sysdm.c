@@ -200,12 +200,12 @@ void ClosePort()
     LibSrlPortFClose();
 }
 
-void Wait(byte sec)
+void WaitTicks(word ticks)
 {
     word i; 
-    for (i = 0; i < sec; i++)
+    for (i = 0; i < ticks; i++)
     {
-        LibWait(IB_1SWAIT);
+        LibWait(IB_125MWAIT);
     }
 }
 
