@@ -9,7 +9,21 @@ namespace DevForge.Lib.Ponder
         public static IEnumerable<uint> GetAddresses(int maxChunkSize)
         {
             for (uint i = 0; i < 1024 * 16; i++)
-                yield return (uint)(AddrStart + (maxChunkSize * i));
+                yield return (uint)(0x8C000000 + (maxChunkSize * i));
+
+            for (uint i = 0; i < 1024; i++)
+                yield return (uint)(0x8C400000 + (maxChunkSize * i));
+
+            for (uint i = 0; i < 1024; i++)
+                yield return (uint)(0x8CC00000 + (maxChunkSize * i));
+
+            for (uint i = 0; i < 1024; i++)
+                yield return (uint)(0xA0000000 + (maxChunkSize * i));
+
+            // TLB Error in 0xC0000000 !
+
+            for (uint i = 0; i < 1024; i++)
+                yield return (uint)(0xD0000000 + (maxChunkSize * i));
         }
 
         public static uint GetSHAddress(this PvBuff call)
