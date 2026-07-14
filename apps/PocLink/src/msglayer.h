@@ -15,6 +15,8 @@ bool ReadBlock(byte *data, word size, word *num);
 #define MSG_MEM_READ 4
 
 #define MAX_PAYLOAD 240
+#define PKT_SIZE     64
+#define SEG_SIZE  65536
 
 typedef struct
 {
