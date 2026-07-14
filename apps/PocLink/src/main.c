@@ -18,6 +18,7 @@ void main()
 	byte kind;
 	char debug[128];
 	int i, maxTry, newTry, srcAdr, bank, seg, off, len;
+	int curOff, remaining, chunkLen;
 
 	#ifdef __HITACHI__
 	    volatile byte *src;
@@ -120,23 +121,37 @@ void main()
 				sprintf(debug, " -> R %04X %d %04X %04X %d", srcAdr, bank, seg, off, len);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
+				SwitchBank((word)srcAdr, (byte)bank);
+				remaining = len;
+				curOff = off;
+
+				do
+				{
+				chunkLen = PKT_SIZE;
+				if (chunkLen > remaining) chunkLen = remaining;
+				if (curOff + chunkLen > SEG_SIZE) chunkLen = (SEG_SIZE - curOff);
 
 				#ifdef __HITACHI__
-				    src = (volatile byte *)(((unsigned long)(word)(seg) << 16) | (unsigned long)(word)(off));
+				    src = (volatile byte *)(((unsigned long)(word)(seg) << 16) | (unsigned long)(word)(curOff));
 				#else
-				    src = (unsigned char far *)MK_FP((word)seg, (word)off);
+				    src = (unsigned char far *)MK_FP((word)seg, (word)curOff);
 				#endif
 
-				ptr = sprintf(tmp, "%04X|%02X|%04X|%04X|%04X|", (word)srcAdr, (byte)bank, (word)seg, (word)off, (word)len);
-				SwitchBank((word)srcAdr, (byte)bank);
-				for (j = 0; j < len; j++)
+				ptr = sprintf(tmp, "%04X|%02X|%04X|%04X|%04X|", (word)srcAdr, (byte)bank, (word)seg, (word)curOff, (word)chunkLen);
+				for (j = 0; j < chunkLen; j++)
 				{
 				    c = src[j];
 				    sprintf(&tmp[ptr], "%02X", c);
 				    ptr += 2;
 				}
-				SwitchBank(0x0104, (byte)bank); /* Fonts */
 				SendTxtMessage(MSG_MEM_READ, (char *)tmp);
+
+				curOff += chunkLen;
+				remaining -= chunkLen;
+				} 
+				while (remaining > 0 && curOff < SEG_SIZE);
+
+				SwitchBank(0x0104, (byte)bank); /* Fonts */
 				maxTry = 25 * TICKS_PER_SEC;
 				i = 0;
 			}
