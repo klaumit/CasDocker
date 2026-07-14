@@ -8,7 +8,7 @@ namespace DevForge.Lib.Ponder
 
         public static IEnumerable<uint> GetAddresses(int maxChunkSize)
         {
-            for (uint i = 0; i < 1000; i++)
+            for (uint i = 0; i < 1024 * 16; i++)
                 yield return (uint)(AddrStart + (maxChunkSize * i));
         }
 
