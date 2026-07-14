@@ -347,7 +347,7 @@
 			this.delayDown.Size = new System.Drawing.Size(68, 20);
 			this.delayDown.TabIndex = 10;
 			this.delayDown.Value = new decimal(new int[] {
-            1000,
+            1,
             0,
             0,
             0});
