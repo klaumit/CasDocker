@@ -9,6 +9,8 @@ namespace DevForge.Lib.Ponder
 {
     public static class MemMapGen
     {
+        public const int MaxChunkSizeX = 64;
+
         public static IEnumerable<string> PrintHex(this PvBuff call, PvCpu cpu)
         {
             switch (cpu)

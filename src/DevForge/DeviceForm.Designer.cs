@@ -303,7 +303,7 @@
 			// 
 			this.msgLenDw.Location = new System.Drawing.Point(30, 188);
 			this.msgLenDw.Maximum = new decimal(new int[] {
-            250,
+            66560,
             0,
             0,
             0});
@@ -311,7 +311,7 @@
 			this.msgLenDw.Size = new System.Drawing.Size(66, 20);
 			this.msgLenDw.TabIndex = 7;
 			this.msgLenDw.Value = new decimal(new int[] {
-            108,
+            64,
             0,
             0,
             0});

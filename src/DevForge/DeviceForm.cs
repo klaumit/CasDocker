@@ -173,14 +173,15 @@ namespace DevForge
 
         private void backupBtn_Click(object sender, EventArgs e)
         {
+            var maxChunkSize = (int)msgLenDw.Value;
             if (_info.Cpu == PvCpu.X86)
             {
-                _reads = MemMap86Gen.GenerateCalls()
+                _reads = MemMap86Gen.GenerateCalls(maxChunkSize)
                     .ToDictionary(k => k.Get86Address(), v => new Read(v));
             }
             else if (_info.Cpu == PvCpu.SH3)
             {
-                _reads = MemMapSHGen.GenerateCalls()
+                _reads = MemMapSHGen.GenerateCalls(maxChunkSize)
                     .ToDictionary(k => k.GetSHAddress(), v => new Read(v));
             }
             var xxdFile = GetLogName(_info, ".xxd");

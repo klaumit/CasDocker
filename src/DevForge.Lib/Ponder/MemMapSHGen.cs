@@ -4,13 +4,12 @@ namespace DevForge.Lib.Ponder
 {
     public static class MemMapSHGen
     {
-        public const int MaxChunkSize = 64;
         public const uint AddrStart = 0x8C000000;
 
-        public static IEnumerable<uint> GetAddresses()
+        public static IEnumerable<uint> GetAddresses(int maxChunkSize)
         {
             for (uint i = 0; i < 1000; i++)
-                yield return AddrStart + (MaxChunkSize * i);
+                yield return (uint)(AddrStart + (maxChunkSize * i));
         }
 
         public static uint GetSHAddress(this PvBuff call)
@@ -25,12 +24,12 @@ namespace DevForge.Lib.Ponder
             return MemMapGen.PrintHexDump(buff.GetSHAddress(), array);
         }
 
-        public static List<PvBuff> GenerateCalls()
+        public static List<PvBuff> GenerateCalls(int maxChunkSize)
         {
             var calls = new List<PvBuff>();
-            foreach (var addr in GetAddresses())
+            foreach (var addr in GetAddresses(maxChunkSize))
             {
-                var length = MaxChunkSize;
+                var length = maxChunkSize;
                 ushort seg = (ushort)(addr >> 16);
                 ushort off = (ushort)(addr & 0xFFFF);
                 calls.Add(new PvBuff

@@ -148,6 +148,7 @@ void main()
 
 				curOff += chunkLen;
 				remaining -= chunkLen;
+				if (remaining > 0) WaitTicks(1);
 				} 
 				while (remaining > 0 && curOff < SEG_SIZE);
 

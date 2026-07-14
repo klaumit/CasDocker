@@ -8,7 +8,6 @@ namespace DevForge.Lib.Ponder
 {
     public static class MemMap86Gen
     {
-        public const int MaxChunkSize = 64;
         public const int DefaultBank = 3;
         public static readonly int[] Segments = { 0x6000, 0x7000 };
         public const int SegmentSize = 0x10000;
@@ -36,7 +35,7 @@ namespace DevForge.Lib.Ponder
             return MemMapGen.PrintHexDump(buff.Get86Address(), array);
         }
 
-        public static List<PvBuff> GenerateCalls()
+        public static List<PvBuff> GenerateCalls(int maxChunkSize)
         {
             var calls = new List<PvBuff>();
             foreach (var addr in GetAddresses())
@@ -46,7 +45,7 @@ namespace DevForge.Lib.Ponder
                 while (offset < SegmentSize)
                 {
                     var remaining = SegmentSize - offset;
-                    var length = Math.Min(MaxChunkSize, remaining);
+                    var length = Math.Min(maxChunkSize, remaining);
                     calls.Add(new PvBuff
                     {
                         Src = (ushort)addr, Bank = DefaultBank, Seg = (ushort)seg,
