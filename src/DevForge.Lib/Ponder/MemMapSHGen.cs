@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 
 namespace DevForge.Lib.Ponder
@@ -6,24 +7,36 @@ namespace DevForge.Lib.Ponder
     {
         public const uint AddrStart = 0x8C000000;
 
+        private static IEnumerable<uint> Iter(uint start, int size, int count = 1024 * 16)
+        {
+            for (uint i = 0; i < count; i++)
+                yield return (uint)(start + (size * i));
+        }
+
         public static IEnumerable<uint> GetAddresses(int maxChunkSize)
         {
-            for (uint i = 0; i < 1024 * 16; i++)
-                yield return (uint)(0x8C000000 + (maxChunkSize * i));
-
-            for (uint i = 0; i < 1024; i++)
-                yield return (uint)(0x8C400000 + (maxChunkSize * i));
-
-            for (uint i = 0; i < 1024; i++)
-                yield return (uint)(0x8CC00000 + (maxChunkSize * i));
-
-            for (uint i = 0; i < 1024; i++)
-                yield return (uint)(0xA0000000 + (maxChunkSize * i));
-
-            // TLB Error in 0xC0000000 !
-
-            for (uint i = 0; i < 1024; i++)
-                yield return (uint)(0xD0000000 + (maxChunkSize * i));
+            return new uint[0] { }
+                // .Concat(Iter(0x00000000, maxChunkSize)) TLB Error!!
+                .Concat(Iter(0x10000000, maxChunkSize, 100)) /* 1002D000 error */
+                // .Concat(Iter(0x20000000, maxChunkSize)) TLB Error!!
+                // .Concat(Iter(0x30000000, maxChunkSize)) TLB Error!!
+                // .Concat(Iter(0x40000000, maxChunkSize)) TLB Error!!
+                // .Concat(Iter(0x50000000, maxChunkSize)) TLB Error!!
+                .Concat(Iter(0x60000000, maxChunkSize, 100)) /* 60004000 error */
+                // .Concat(Iter(0x70000000, maxChunkSize)) TLB Error!!
+                .Concat(Iter(0x80000000, maxChunkSize))
+                .Concat(Iter(0x8C000000, maxChunkSize))
+                .Concat(Iter(0x8C024800, maxChunkSize))
+                .Concat(Iter(0x8C400000, maxChunkSize))
+                .Concat(Iter(0x8CC00000, maxChunkSize))
+                .Concat(Iter(0x90000000, maxChunkSize))
+                .Concat(Iter(0xA0000000, maxChunkSize))
+                .Concat(Iter(0xB0000000, maxChunkSize))
+                // .Concat(Iter(0xC0000000, maxChunkSize)) TLB Error!!
+                .Concat(Iter(0xD0000000, maxChunkSize, 100)) /* D003D000 error */
+                .Concat(Iter(0xE0000000, maxChunkSize))
+                .Concat(Iter(0xF0000000, maxChunkSize))
+                ;
         }
 
         public static uint GetSHAddress(this PvBuff call)
