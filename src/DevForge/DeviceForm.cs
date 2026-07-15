@@ -176,13 +176,13 @@ namespace DevForge
             var maxChunkSize = (int)msgLenDw.Value;
             if (_info.Cpu == PvCpu.X86)
             {
-                _reads = MemMap86Gen.GenerateCalls(maxChunkSize)
-                    .ToDictionary(k => k.Get86Address(), v => new Read(v));
+                _reads = CollExt.ToDict(MemMap86Gen.GenerateCalls(maxChunkSize),
+                    k => k.Get86Address(), v => new Read(v));
             }
             else if (_info.Cpu == PvCpu.SH3)
             {
-                _reads = MemMapSHGen.GenerateCalls(maxChunkSize)
-                    .ToDictionary(k => k.GetSHAddress(), v => new Read(v));
+                _reads = CollExt.ToDict(MemMapSHGen.GenerateCalls(maxChunkSize),
+                    k => k.GetSHAddress(), v => new Read(v));
             }
             var xxdFile = GetLogName(_info, ".xxd");
             if (_got != null)

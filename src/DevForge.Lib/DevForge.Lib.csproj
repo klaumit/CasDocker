@@ -51,7 +51,7 @@
     <Compile Include="Ponder\PvBuff.cs" />
     <Compile Include="Ponder\MemMap86Gen.cs" />
     <Compile Include="Ponder\MemMapSHGen.cs" />
-	<Compile Include="Ponder\MemMapGen.cs" />
+    <Compile Include="Ponder\MemMapGen.cs" />
     <Compile Include="Messages\MsgKind.cs" />
     <Compile Include="Messages\MsgTool.cs" />
     <Compile Include="Messages\Message.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="API\ICommPort.cs" />
     <Compile Include="API\ICommFactory.cs" />
     <Compile Include="API\ICommDevice.cs" />
+    <Compile Include="Tools\CollExt.cs" />
     <Compile Include="Tools\JsonExt.cs" />
     <Compile Include="Tools\JsonLines.cs" />
     <Compile Include="Tools\TextExt.cs" />
@@ -82,9 +83,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\deps\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-	<Reference Include="ByteSizeLib.dll">
+    <Reference Include="ByteSizeLib.dll">
       <HintPath>..\deps\net40\ByteSizeLib.dll</HintPath>
-	</Reference>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="EnumDev.dll">
