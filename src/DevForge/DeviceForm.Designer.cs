@@ -57,6 +57,7 @@
         	this.fromBox = new System.Windows.Forms.TextBox();
         	this.label15 = new System.Windows.Forms.Label();
         	this.label14 = new System.Windows.Forms.Label();
+        	this.purgeBtn = new System.Windows.Forms.Button();
         	((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
         	this.infoBox.SuspendLayout();
         	this.statusSrp.SuspendLayout();
@@ -495,11 +496,22 @@
         	this.label14.TabIndex = 12;
         	this.label14.Text = "from";
         	// 
+        	// purgeBtn
+        	// 
+        	this.purgeBtn.Location = new System.Drawing.Point(421, 244);
+        	this.purgeBtn.Name = "purgeBtn";
+        	this.purgeBtn.Size = new System.Drawing.Size(75, 23);
+        	this.purgeBtn.TabIndex = 19;
+        	this.purgeBtn.Text = "Purge";
+        	this.purgeBtn.UseVisualStyleBackColor = true;
+        	this.purgeBtn.Click += new System.EventHandler(this.PurgeBtnClick);
+        	// 
         	// DeviceForm
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         	this.ClientSize = new System.Drawing.Size(508, 353);
+        	this.Controls.Add(this.purgeBtn);
         	this.Controls.Add(this.cstGrpBox);
         	this.Controls.Add(this.groupBox1);
         	this.Controls.Add(this.msgLenDw);
@@ -526,6 +538,7 @@
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.Button purgeBtn;
         private System.Windows.Forms.Button customBtn;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;

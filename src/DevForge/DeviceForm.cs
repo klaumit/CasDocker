@@ -293,5 +293,10 @@ namespace DevForge
             }
             DoBackup();
         }
+        
+        private void PurgeBtnClick(object sender, EventArgs e)
+        {
+        	_reads.Clear();
+        }
     }
 }
