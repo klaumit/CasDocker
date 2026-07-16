@@ -184,12 +184,14 @@ namespace DevForge
         	var maxChunkSize = GetPkgLen();
             if (_info.Cpu == PvCpu.X86)
             {
-                _reads = CollExt.ToDict(MemMap86Gen.GenerateCalls(maxChunkSize),
+            	var calls = MemMap86Gen.GenerateCalls(maxChunkSize);
+                _reads = CollExt.ToDict(calls,
                     k => k.Get86Address(), v => new Read(v));
             }
             else if (_info.Cpu == PvCpu.SH3)
             {
-                _reads = CollExt.ToDict(MemMapSHGen.GenerateCalls(maxChunkSize),
+            	var calls = MemMapSHGen.GenerateCalls(maxChunkSize);
+                _reads = CollExt.ToDict(calls,
                     k => k.GetSHAddress(), v => new Read(v));
             }
             DoBackup();

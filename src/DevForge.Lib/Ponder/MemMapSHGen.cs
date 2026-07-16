@@ -57,13 +57,13 @@ namespace DevForge.Lib.Ponder
             return MemMapGen.PrintHexDump(buff.GetSHAddress(), array);
         }
         
-        public static List<PvBuff> GenerateCalls(int maxChunkSize)
+        public static IEnumerable<PvBuff> GenerateCalls(int maxChunkSize)
         {
         	var addresses = GetAddresses(maxChunkSize);
         	return GenerateCalls(maxChunkSize, addresses);
         }
 
-        public static List<PvBuff> GenerateCalls(int maxChunkSize, 
+        public static IEnumerable<PvBuff> GenerateCalls(int maxChunkSize, 
                                                 IEnumerable<uint> addresses)
         {
             var calls = new List<PvBuff>();
@@ -72,12 +72,11 @@ namespace DevForge.Lib.Ponder
                 var length = maxChunkSize;
                 ushort seg = (ushort)(addr >> 16);
                 ushort off = (ushort)(addr & 0xFFFF);
-                calls.Add(new PvBuff
+                yield return new PvBuff
                 {
                     Seg = seg, Off = off, Size = (ushort)length
-                });
+                };
             }
-            return calls;
         }
     }
 }
