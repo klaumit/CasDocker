@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace DevForge.Lib.Ponder
 {
@@ -25,10 +26,15 @@ namespace DevForge.Lib.Ponder
                 .Concat(Iter(0x60000000, maxChunkSize, 100)) /* 60004000 error */
                 // .Concat(Iter(0x70000000, maxChunkSize)) TLB Error!!
                 .Concat(Iter(0x80000000, maxChunkSize))
+                .Concat(Iter(0x8A000000, maxChunkSize))
+                .Concat(Iter(0x8B000000, maxChunkSize, 100))
                 .Concat(Iter(0x8C000000, maxChunkSize))
                 .Concat(Iter(0x8C024800, maxChunkSize))
                 .Concat(Iter(0x8C400000, maxChunkSize))
                 .Concat(Iter(0x8CC00000, maxChunkSize))
+                .Concat(Iter(0x8D000000, maxChunkSize))
+                .Concat(Iter(0x8E000000, maxChunkSize))
+                .Concat(Iter(0x8F000000, maxChunkSize))
                 .Concat(Iter(0x90000000, maxChunkSize))
                 .Concat(Iter(0xA0000000, maxChunkSize))
                 .Concat(Iter(0xB0000000, maxChunkSize))
