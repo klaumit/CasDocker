@@ -51,12 +51,19 @@
         	this.gotStiLbl = new System.Windows.Forms.Label();
         	this.groupBox1 = new System.Windows.Forms.GroupBox();
         	this.label13 = new System.Windows.Forms.Label();
+        	this.cstGrpBox = new System.Windows.Forms.GroupBox();
+        	this.customBtn = new System.Windows.Forms.Button();
+        	this.toBox = new System.Windows.Forms.TextBox();
+        	this.fromBox = new System.Windows.Forms.TextBox();
+        	this.label15 = new System.Windows.Forms.Label();
+        	this.label14 = new System.Windows.Forms.Label();
         	((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
         	this.infoBox.SuspendLayout();
         	this.statusSrp.SuspendLayout();
         	((System.ComponentModel.ISupportInitialize)(this.msgLenDw)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.delayDown)).BeginInit();
         	this.groupBox1.SuspendLayout();
+        	this.cstGrpBox.SuspendLayout();
         	this.SuspendLayout();
         	// 
         	// picBox
@@ -291,7 +298,7 @@
         	// 
         	this.statusSrp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
         	        	        	this.statusLbl});
-        	this.statusSrp.Location = new System.Drawing.Point(0, 373);
+        	this.statusSrp.Location = new System.Drawing.Point(0, 331);
         	this.statusSrp.Name = "statusSrp";
         	this.statusSrp.Size = new System.Drawing.Size(508, 22);
         	this.statusSrp.TabIndex = 6;
@@ -428,11 +435,71 @@
         	this.label13.TabIndex = 17;
         	this.label13.Text = "Num:";
         	// 
+        	// cstGrpBox
+        	// 
+        	this.cstGrpBox.Controls.Add(this.customBtn);
+        	this.cstGrpBox.Controls.Add(this.toBox);
+        	this.cstGrpBox.Controls.Add(this.fromBox);
+        	this.cstGrpBox.Controls.Add(this.label15);
+        	this.cstGrpBox.Controls.Add(this.label14);
+        	this.cstGrpBox.Location = new System.Drawing.Point(122, 227);
+        	this.cstGrpBox.Name = "cstGrpBox";
+        	this.cstGrpBox.Size = new System.Drawing.Size(270, 91);
+        	this.cstGrpBox.TabIndex = 18;
+        	this.cstGrpBox.TabStop = false;
+        	this.cstGrpBox.Text = "Custom";
+        	// 
+        	// customBtn
+        	// 
+        	this.customBtn.Location = new System.Drawing.Point(152, 22);
+        	this.customBtn.Name = "customBtn";
+        	this.customBtn.Size = new System.Drawing.Size(99, 23);
+        	this.customBtn.TabIndex = 16;
+        	this.customBtn.Text = "---";
+        	this.customBtn.UseVisualStyleBackColor = true;
+        	// 
+        	// toBox
+        	// 
+        	this.toBox.Location = new System.Drawing.Point(55, 53);
+        	this.toBox.Name = "toBox";
+        	this.toBox.Size = new System.Drawing.Size(80, 20);
+        	this.toBox.TabIndex = 15;
+        	this.toBox.Text = "0xA0000000";
+        	this.toBox.TextChanged += new System.EventHandler(this.ToBoxTextChanged);
+        	// 
+        	// fromBox
+        	// 
+        	this.fromBox.Location = new System.Drawing.Point(55, 24);
+        	this.fromBox.Name = "fromBox";
+        	this.fromBox.Size = new System.Drawing.Size(80, 20);
+        	this.fromBox.TabIndex = 14;
+        	this.fromBox.Text = "0x80000000";
+        	this.fromBox.TextChanged += new System.EventHandler(this.FromBoxTextChanged);
+        	// 
+        	// label15
+        	// 
+        	this.label15.AutoSize = true;
+        	this.label15.Location = new System.Drawing.Point(18, 56);
+        	this.label15.Name = "label15";
+        	this.label15.Size = new System.Drawing.Size(16, 13);
+        	this.label15.TabIndex = 13;
+        	this.label15.Text = "to";
+        	// 
+        	// label14
+        	// 
+        	this.label14.AutoSize = true;
+        	this.label14.Location = new System.Drawing.Point(18, 27);
+        	this.label14.Name = "label14";
+        	this.label14.Size = new System.Drawing.Size(27, 13);
+        	this.label14.TabIndex = 12;
+        	this.label14.Text = "from";
+        	// 
         	// DeviceForm
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        	this.ClientSize = new System.Drawing.Size(508, 395);
+        	this.ClientSize = new System.Drawing.Size(508, 353);
+        	this.Controls.Add(this.cstGrpBox);
         	this.Controls.Add(this.groupBox1);
         	this.Controls.Add(this.msgLenDw);
         	this.Controls.Add(this.statusSrp);
@@ -453,9 +520,17 @@
         	((System.ComponentModel.ISupportInitialize)(this.delayDown)).EndInit();
         	this.groupBox1.ResumeLayout(false);
         	this.groupBox1.PerformLayout();
+        	this.cstGrpBox.ResumeLayout(false);
+        	this.cstGrpBox.PerformLayout();
         	this.ResumeLayout(false);
         	this.PerformLayout();
         }
+        private System.Windows.Forms.Button customBtn;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox fromBox;
+        private System.Windows.Forms.TextBox toBox;
+        private System.Windows.Forms.GroupBox cstGrpBox;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label gotStiLbl;

@@ -86,6 +86,7 @@ namespace DevForge
             Text = dev.Name + " - " + "DevForge";
             Apply(_args.Hello, _args.Stamp);
             Device_Message(dev, new GotMessageArgs { Stamp = _args.Stamp, Message = _args.Hello });
+            UpdateCustomTxt();
         }
 
         private void Apply(Hello hello, DateTime stamp)
@@ -224,6 +225,25 @@ namespace DevForge
                 	             TextExt.ToStr(_packStill);
             };
             Invoke(action);
+        }
+        
+        private void FromBoxTextChanged(object sender, EventArgs e)
+        {
+        	UpdateCustomTxt();
+        }
+        
+        private void ToBoxTextChanged(object sender, EventArgs e)
+        {
+        	UpdateCustomTxt();        	
+        }
+        
+        private void UpdateCustomTxt()
+        {
+        	var from = TextExt.ParseHex(fromBox.Text, 0);
+        	var to = TextExt.ParseHex(toBox.Text, 0);
+        	var diff = to - from;
+        	var txt = "Read "+ TextExt.ToByteSize(diff);
+        	customBtn.Text = txt;
         }
     }
 }

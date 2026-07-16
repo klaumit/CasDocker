@@ -14,6 +14,11 @@ namespace DevForge.Lib.Tools
 
         public static long ParseHex(string text, long defVal)
         {
+        	if (string.IsNullOrWhiteSpace(text))
+        	    return defVal;
+        	const string tmp = "0x";
+        	if (text.StartsWith(tmp))
+        		text = text.Replace(tmp, "");
         	long res;
             if (long.TryParse(text, NumberStyles.HexNumber, null, out res))
                 return res;
