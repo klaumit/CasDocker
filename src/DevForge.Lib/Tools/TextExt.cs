@@ -48,5 +48,11 @@ namespace DevForge.Lib.Tools
                 txt = "0 b";
             return txt;
         }
+        
+        public static string ToStr(long number)
+        {
+            var txt = string.Format("{0:D}", number);;
+            return txt;
+        }
     }
 }

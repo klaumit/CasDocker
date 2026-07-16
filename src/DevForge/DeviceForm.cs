@@ -220,6 +220,8 @@ namespace DevForge
             {
                 stillLbl.Text = TextExt.ToByteSize(_packStill * _packSize);
                 gotLbl.Text = TextExt.ToByteSize(_packGot * _packSize);
+                gotStiLbl.Text = TextExt.ToStr(_packGot)+" / "+
+                	             TextExt.ToStr(_packStill);
             };
             Invoke(action);
         }
