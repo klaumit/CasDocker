@@ -15,7 +15,7 @@ namespace DevForge.Lib.High
             var i = 0;
             foreach (var tmp in text.Split('|'))
             {
-                var key = $"{(++i):D}".TrimOrNull();
+            	var key = string.Format("{0:D}",(++i)).TrimOrNull();
                 var val = tmp.TrimOrNull();
                 if (key == null || val == null)
                     continue;
@@ -54,7 +54,8 @@ namespace DevForge.Lib.High
         {
             var text = read.Text;
             var dict = ParseArray(text);
-            dict.TryGetValue("6", out var hV);
+            string hV;
+            dict.TryGetValue("6", out hV);
             var info = new PvBuff
             {
                 Src = (ushort)TextExt.ParseHex(dict["1"], 0),

@@ -48,7 +48,8 @@ namespace DevForge
             statusLbl.Text = "[" + ts + "] (" + e.Message.Kind + ") " + e.Message.Length + " bytes";
             _log.Write(e.Message);
 
-            if (e.Message is Read r && _reads != null)
+            Read r;
+            if (((r = e.Message as Read) != null) && _reads != null)
             {
                 var buff = r.AsBuff();
                 if (buff.Bytes == null && _args.Device.Name == "FakeDevice")
@@ -154,7 +155,7 @@ namespace DevForge
             SendLive();
         }
 
-        private string LenHex => ((int)msgLenDw.Value).ToString("X2");
+        private string LenHex { get { return ((int)msgLenDw.Value).ToString("X2"); } }
 
         private void testReadBtn_Click(object sender, EventArgs e)
         {

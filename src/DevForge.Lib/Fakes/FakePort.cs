@@ -18,7 +18,7 @@ namespace DevForge.Lib.Fakes
 			_name = name;
 		}
 
-		public override string Prefix => _name;
+		public override string Prefix { get { return _name; } }
 
 		public override ICommPort Create()
 		{
@@ -33,7 +33,8 @@ namespace DevForge.Lib.Fakes
 
 		public void Close()
 		{
-			_mem?.Dispose();
+			if (_mem != null)
+				_mem.Dispose();
 			_mem = null;
 		}
 
@@ -60,7 +61,7 @@ namespace DevForge.Lib.Fakes
 		{
 			var buffer = new byte[count];
 			if (_mem != null)
-				_ = _mem.Read(buffer, 0, buffer.Length);
+				_mem.Read(buffer, 0, buffer.Length);
 			return buffer;
 		}
 

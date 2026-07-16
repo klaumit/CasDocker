@@ -21,6 +21,8 @@ namespace DevForge.Lib.Modern
         public ModernPort(string devicePath)
         {
             _devicePath = devicePath;
+            WaitMs = 25;
+            MaxLen = 256;
         }
 
         public void Open()
@@ -52,8 +54,8 @@ namespace DevForge.Lib.Modern
             Close();
         }
 
-        public int WaitMs { get; set; } = 25;
-        public int MaxLen { get; set; } = 256;
+        public int WaitMs { get; set; }
+        public int MaxLen { get; set; }
 
         private IEnumerable<byte> ReadOneByte()
         {

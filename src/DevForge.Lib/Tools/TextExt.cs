@@ -14,7 +14,8 @@ namespace DevForge.Lib.Tools
 
         public static long ParseHex(string text, long defVal)
         {
-            if (long.TryParse(text, NumberStyles.HexNumber, null, out var res))
+        	long res;
+            if (long.TryParse(text, NumberStyles.HexNumber, null, out res))
                 return res;
             return defVal;
         }
