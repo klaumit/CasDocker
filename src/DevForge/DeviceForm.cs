@@ -172,10 +172,16 @@ namespace DevForge
                 dev.Send(new Read(args));
             }
         }
+        
+        private int GetPkgLen()
+        {
+        	return (int)msgLenDw.Value;
+        }
 
+        
         private void backupBtn_Click(object sender, EventArgs e)
         {
-            var maxChunkSize = (int)msgLenDw.Value;
+        	var maxChunkSize = GetPkgLen();
             if (_info.Cpu == PvCpu.X86)
             {
                 _reads = CollExt.ToDict(MemMap86Gen.GenerateCalls(maxChunkSize),
@@ -186,6 +192,11 @@ namespace DevForge
                 _reads = CollExt.ToDict(MemMapSHGen.GenerateCalls(maxChunkSize),
                     k => k.GetSHAddress(), v => new Read(v));
             }
+            DoBackup();
+        }
+        
+        private void DoBackup()
+        {
             var xxdFile = GetLogName(_info, ".xxd");
             if (_got != null)
             {
@@ -239,11 +250,48 @@ namespace DevForge
         
         private void UpdateCustomTxt()
         {
-        	var from = TextExt.ParseHex(fromBox.Text, 0);
+        	var diff = GetCustomLimits();
+        	var txt = "Try "+ TextExt.ToByteSize(diff);
+        	customBtn.Text = txt;
+        }
+        
+        private long GetCustomLimits()
+        {
+        	var from = GetCustomFrom();
         	var to = TextExt.ParseHex(toBox.Text, 0);
         	var diff = to - from;
-        	var txt = "Read "+ TextExt.ToByteSize(diff);
-        	customBtn.Text = txt;
+        	return diff;
+        }
+        
+        private long GetCustomFrom()
+        {
+        	return TextExt.ParseHex(fromBox.Text, 0);
+        }
+        
+        private void CustomBtnClick(object sender, EventArgs e)
+        {
+        	var maxChunkSize = GetPkgLen();
+        	var from = (uint) GetCustomFrom();
+        	var size = GetCustomLimits();
+        	var pkgs = (int)( size / maxChunkSize );
+            if (_info.Cpu == PvCpu.X86)
+            {
+            	// TODO
+            	return;
+            	
+            	/*
+                _reads = CollExt.ToDict(MemMap86Gen.GenerateCalls(maxChunkSize),
+                    k => k.Get86Address(), v => new Read(v));
+            	*/
+            }
+            else if (_info.Cpu == PvCpu.SH3)
+            {
+            	var addrs = MemMapSHGen.Iter(from, maxChunkSize, pkgs);
+            	var calls = MemMapSHGen.GenerateCalls(maxChunkSize, addrs);
+                _reads = CollExt.ToDict(calls,
+                    k => k.GetSHAddress(), v => new Read(v));
+            }
+            DoBackup();
         }
     }
 }

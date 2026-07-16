@@ -8,7 +8,7 @@ namespace DevForge.Lib.Ponder
     {
         public const uint AddrStart = 0x8C000000;
 
-        private static IEnumerable<uint> Iter(uint start, int size, int count = 1024 * 16)
+        public static IEnumerable<uint> Iter(uint start, int size, int count = 1024 * 16)
         {
             for (uint i = 0; i < count; i++)
                 yield return (uint)(start + (size * i));
@@ -56,11 +56,18 @@ namespace DevForge.Lib.Ponder
             if (array == null) array = new byte[0];
             return MemMapGen.PrintHexDump(buff.GetSHAddress(), array);
         }
-
+        
         public static List<PvBuff> GenerateCalls(int maxChunkSize)
         {
+        	var addresses = GetAddresses(maxChunkSize);
+        	return GenerateCalls(maxChunkSize, addresses);
+        }
+
+        public static List<PvBuff> GenerateCalls(int maxChunkSize, 
+                                                IEnumerable<uint> addresses)
+        {
             var calls = new List<PvBuff>();
-            foreach (var addr in GetAddresses(maxChunkSize))
+            foreach (var addr in addresses)
             {
                 var length = maxChunkSize;
                 ushort seg = (ushort)(addr >> 16);

@@ -451,16 +451,17 @@
         	// 
         	// customBtn
         	// 
-        	this.customBtn.Location = new System.Drawing.Point(152, 22);
+        	this.customBtn.Location = new System.Drawing.Point(161, 22);
         	this.customBtn.Name = "customBtn";
-        	this.customBtn.Size = new System.Drawing.Size(99, 23);
+        	this.customBtn.Size = new System.Drawing.Size(90, 23);
         	this.customBtn.TabIndex = 16;
         	this.customBtn.Text = "---";
         	this.customBtn.UseVisualStyleBackColor = true;
+        	this.customBtn.Click += new System.EventHandler(this.CustomBtnClick);
         	// 
         	// toBox
         	// 
-        	this.toBox.Location = new System.Drawing.Point(55, 53);
+        	this.toBox.Location = new System.Drawing.Point(60, 53);
         	this.toBox.Name = "toBox";
         	this.toBox.Size = new System.Drawing.Size(80, 20);
         	this.toBox.TabIndex = 15;
@@ -469,7 +470,7 @@
         	// 
         	// fromBox
         	// 
-        	this.fromBox.Location = new System.Drawing.Point(55, 24);
+        	this.fromBox.Location = new System.Drawing.Point(60, 24);
         	this.fromBox.Name = "fromBox";
         	this.fromBox.Size = new System.Drawing.Size(80, 20);
         	this.fromBox.TabIndex = 14;
@@ -479,7 +480,7 @@
         	// label15
         	// 
         	this.label15.AutoSize = true;
-        	this.label15.Location = new System.Drawing.Point(18, 56);
+        	this.label15.Location = new System.Drawing.Point(23, 56);
         	this.label15.Name = "label15";
         	this.label15.Size = new System.Drawing.Size(16, 13);
         	this.label15.TabIndex = 13;
@@ -488,7 +489,7 @@
         	// label14
         	// 
         	this.label14.AutoSize = true;
-        	this.label14.Location = new System.Drawing.Point(18, 27);
+        	this.label14.Location = new System.Drawing.Point(23, 27);
         	this.label14.Name = "label14";
         	this.label14.Size = new System.Drawing.Size(27, 13);
         	this.label14.TabIndex = 12;
