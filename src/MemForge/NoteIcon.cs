@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using MemForge.Lib;
+using Vanara.PInvoke;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable RedundantExplicitArrayCreation
@@ -10,6 +12,8 @@ namespace MemForge
 {
 	public sealed class NoteIcon
 	{
+		internal Dictionary<uint, List<Tuple<HWND, string>>> windows;
+
 		internal NotifyIcon noteIcon;
 		private ContextMenuStrip noteMenu;
 
@@ -26,6 +30,7 @@ namespace MemForge
             noteIcon.Icon = new Icon(nis);
 			noteIcon.ContextMenuStrip = noteMenu;
 
+			windows = new Dictionary<uint, List<Tuple<HWND, string>>>();
             _watcher = new ProcWatcher(OnSimStarted, Defaults.Sim86, Defaults.SimSh);
 		}
 		
@@ -50,9 +55,7 @@ namespace MemForge
 
         private void FindMyWindows(uint pid)
         {
-            var windows = WindowExt.GetTopLevelWindows(pid);
-
-            ;
+			windows[pid] = WindowExt.GetTopLevelWindows(pid);
         }
         
         private void menuKillClick(object sender, EventArgs e)
