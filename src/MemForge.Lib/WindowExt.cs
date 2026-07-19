@@ -28,7 +28,7 @@ namespace MemForge.Lib
         public static string GetWindowTitle(HWND hWnd)
         {
             var sb = new StringBuilder(1024);
-            User32.GetWindowText(hWnd, sb, sb.Capacity);
+            VanExt.GetWindowText(hWnd, sb, sb.Capacity);
             var txt = sb.ToString().Trim();
             return txt;
         }
