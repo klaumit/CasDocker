@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using static Vanara.PInvoke.Kernel32;
@@ -11,7 +12,7 @@ namespace MemForge.Lib
 
 		public static void Read(uint pid)
 		{
-			// var proc = Process.GetProcessById((int)pid);
+			var proc = Process.GetProcessById((int)pid);
 			var pac = (uint)(ProcessAccess.PROCESS_VM_READ | ProcessAccess.PROCESS_QUERY_INFORMATION);
 			using (SafeHPROCESS hProc = OpenProcess(pac, false, pid))
 			{
@@ -53,12 +54,7 @@ namespace MemForge.Lib
 										var manBuffer = new byte[(int)bytesRead.Value];
 										Marshal.Copy(regBuffer, manBuffer, 0, manBuffer.Length);
 										output.Write(manBuffer, 0, manBuffer.Length);
-
-										// TODO
-
-										var debug = (string.Format("Read 0x{0:X} bytes at 0x{1:X}",
-											mbi.RegionSize, mbi.BaseAddress.ToInt64()));
-										Console.WriteLine(debug);
+										output.Flush();
 									}
 								}
 								finally
@@ -76,6 +72,15 @@ namespace MemForge.Lib
 					{
 						Marshal.FreeHGlobal(mbiPtr);
 					}
+
+					var fName = proc.ProcessName.Replace(' ', '_') + ".bin";
+					using (var fs = File.Create(fName))
+					{
+						output.Position = 0L;
+						output.CopyTo(fs);
+						output.Flush();
+					}
+					Process.Start(fName);
 				}
 			}
 		}
