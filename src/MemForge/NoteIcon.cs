@@ -50,12 +50,13 @@ namespace MemForge
             var text = string.Format("{0} [{1}]", name, pid);
             noteIcon.ShowBalloonTip(500, title, text, ToolTipIcon.Info);
 
-            FindMyWindows(pid);
+			windows[pid] = WindowExt.GetTopLevelWindows(pid);
+			StartReadingProc(pid);
         }
 
-        private void FindMyWindows(uint pid)
+        private void StartReadingProc(uint pid)
         {
-			windows[pid] = WindowExt.GetTopLevelWindows(pid);
+			MemReader.Read(pid);
         }
         
         private void menuKillClick(object sender, EventArgs e)
