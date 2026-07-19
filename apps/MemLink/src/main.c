@@ -42,11 +42,12 @@ void main()
 	sprintf(arr[9], "###MEMORY_MARKER_START1###");
 	sprintf(arr[10], "###UNIQUE_1234567890ABC###");
 	sprintf(arr[11], "###MEMORY_MARKER_END1#####");
-	sprintf(arr[12], " Ptr = %08X", &arr);
+	sprintf(arr[12], "| Ptr0 = %08X |", &arr);
+	sprintf(arr[13], "| Ptr1 = %08X |", &arr[13]);
 	
 	while (1)
 	{
-		for (z = 0; z < 13; z++)
+		for (z = 0; z < 14; z++)
 		{
 			writeln(arr[z], 0, (z+3) * 8);
 		}
