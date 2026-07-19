@@ -4,6 +4,9 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
+// ReSharper disable InlineOutVariableDeclaration
+// ReSharper disable ConvertToUsingDeclaration
+
 namespace MemForge
 {
     internal static class Program
