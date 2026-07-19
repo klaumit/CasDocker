@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using MemForge.Lib;
-using System.Collections.Generic;
-using System.Text;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable RedundantExplicitArrayCreation
