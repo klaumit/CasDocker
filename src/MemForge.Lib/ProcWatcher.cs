@@ -21,7 +21,14 @@ namespace MemForge.Lib
             string query = "SELECT * FROM Win32_ProcessStartTrace";
             _watcher = new ManagementEventWatcher(query);
             _watcher.EventArrived += ProcessStarted;
-            _watcher.Start();
+            try
+            {
+                _watcher.Start();
+            }
+            catch (ManagementException)
+            {
+                // Ignore!
+            }
 
             Task.Factory.StartNew(() =>
             {

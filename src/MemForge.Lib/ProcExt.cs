@@ -17,8 +17,8 @@ namespace MemForge.Lib
         {
             foreach (var proc in Process.GetProcesses())
             {
-                var procName = proc.ProcessName;
-                if (names.Contains(procName))
+                var procName = proc.ProcessName.ToLowerInvariant();
+                if (names.Select(n => n.ToLowerInvariant()).Contains(procName))
                 {
                     var procId = (uint)proc.Id;
                     started(null, procId, procName);
