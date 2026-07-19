@@ -28,18 +28,30 @@ void main()
 	LibInitDisp();
 	LibClrDisp();
 	
-	LibStringDsp( B@ "### Memory Link ###", 5, 10, 160, B@@ IB_PFONT2);
+	LibStringDsp( B@ "### Memory Link ###", 5, 6, 160, B@@ IB_PFONT2);
 
+	sprintf(arr[0], "###MEMORY_MARKER_START0###");
+	sprintf(arr[1], "###UNIQUE_1234567890ABC###");
+	sprintf(arr[2], "###MEMORY_MARKER_END0#####");
+	sprintf(arr[3], "| Please do not replace  |");
+	sprintf(arr[4], "| the text with anything |");
+	sprintf(arr[5], "| that you would like!   |");	
+	sprintf(arr[6], "| noon gig nun rotor dad |");
+	sprintf(arr[7], "| boob peep kayak level  |");
+	sprintf(arr[8], "| racecar eve mom stats  |");	
+	sprintf(arr[9], "###MEMORY_MARKER_START1###");
+	sprintf(arr[10], "###UNIQUE_1234567890ABC###");
+	sprintf(arr[11], "###MEMORY_MARKER_END1#####");
+	sprintf(arr[12], " Ptr = %08X", &arr);
+	
 	while (1)
 	{
-		for (z = 3; z < 20; z++)
+		for (z = 0; z < 13; z++)
 		{
-			sprintf(arr[z], "%d - %d + %d", z, z, z);
-			writeln(arr[z], 0, z * 8);
+			writeln(arr[z], 0, (z+3) * 8);
 		}
 		wait();
 	}
 
 	LibJumpMenu();
 }
-
