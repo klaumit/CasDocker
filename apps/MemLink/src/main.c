@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#ifdef __HITACHI__
+#else
+    #include <stdrom.h>
+#endif
+
 void wait()
 {
 	LibWait(IB_1SWAIT);
@@ -22,10 +27,12 @@ void main()
 
 	LibInitDisp();
 	LibClrDisp();
+	
+	LibStringDsp( B@ "### Memory Link ###", 5, 10, 160, B@@ IB_PFONT2);
 
 	while (1)
 	{
-		for (z = 0; z < 20; z++)
+		for (z = 3; z < 20; z++)
 		{
 			sprintf(arr[z], "%d - %d + %d", z, z, z);
 			writeln(arr[z], 0, z * 8);
