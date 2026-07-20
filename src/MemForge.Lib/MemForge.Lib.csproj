@@ -47,9 +47,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProcStarted.cs" />
     <Compile Include="Defaults.cs" />
-    <Compile Include="MemRead.cs" />
+    <Compile Include="MemGot.cs" />
+    <Compile Include="MemReader.cs" />
     <Compile Include="ProcExt.cs" />
+    <Compile Include="Printer.cs" />
     <Compile Include="ProcWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResTool.cs" />
