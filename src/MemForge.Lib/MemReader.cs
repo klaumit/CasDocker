@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using static Vanara.PInvoke.Kernel32;
 
 // ReSharper disable UseStringInterpolation
@@ -11,7 +12,13 @@ namespace MemForge.Lib
 {
 	public static class MemReader
 	{
-		private const uint MEM_STATE_MEM_COMMIT = 0x1000;
+		private const uint MEM_STATE_MEM_COMMIT  = 0x1000;
+		private const uint MEM_STATE_MEM_FREE    = 0x10000;
+		private const uint MEM_STATE_MEM_RESERVE = 0x2000;
+
+		private const uint MEM_TYPE_MEM_IMAGE    = 0x1000000;
+		private const uint MEM_TYPE_MEM_MAPPED   = 0x40000;
+		private const uint MEM_TYPE_MEM_PRIVATE  = 0x20000;
 
 		public static IEnumerable<MemGot> ReadAll(uint pid)
 		{
@@ -55,7 +62,7 @@ namespace MemForge.Lib
 								{
 									var manBuffer = new byte[(int)bytesRead.Value];
 									Marshal.Copy(regBuffer, manBuffer, 0, manBuffer.Length);
-									yield return new MemGot(pName, mbi.BaseAddress, manBuffer);
+									yield return new MemGot(pName, mbi, manBuffer);
 								}
 							}
 							finally
@@ -85,6 +92,8 @@ namespace MemForge.Lib
 				foreach (var item in ReadAll(pid))
 				{
 					var array = item.Buffer.SwapEndian(true);
+					var debug = Encoding.ASCII.GetBytes(item.Info.ToStr());
+					outPut.Write(debug, 0, debug.Length);
 					outPut.Write(array, 0, item.Buffer.Length);
 				}
 				outPut.Flush();
@@ -94,6 +103,21 @@ namespace MemForge.Lib
 			var xName = bName + ".xxd";
 			Printer.PrintXxd(fName, xName);
 			Process.Start(xName);
+		}
+
+		public static string ToStr(this MEMORY_BASIC_INFORMATION mbi)
+		{
+			var bld = new StringBuilder();
+			bld.Append("[MBI]");
+			bld.AppendFormat(" BaseAddress={0:X8}", mbi.BaseAddress.ToInt32());
+			bld.AppendFormat(" AllocationBase={0:X8}", mbi.AllocationBase.ToInt32());
+			bld.AppendFormat(" AllocationProtect={0:X8}",mbi.AllocationProtect);
+			bld.AppendFormat(" RegionSize={0:X8}", (uint)mbi.RegionSize.Value);
+			bld.AppendFormat(" State={0:X8}", mbi.State);
+			bld.AppendFormat(" Protect={0:X8}", mbi.Protect);
+			bld.AppendFormat(" Type={0:X8}", mbi.Type);
+			bld.Append(" ");
+			return bld.ToString();
 		}
 	}
 }
