@@ -56,7 +56,7 @@ namespace MemForge
 
         private void StartReadingProc(uint pid)
         {
-			MemReader.Read(pid);
+			MemReader.ReadAndOpen(pid);
         }
         
         private void menuKillClick(object sender, EventArgs e)
