@@ -71,7 +71,7 @@ namespace MemForge.Lib
 							}
 						}
 
-						var next = mbi.BaseAddress.ToInt64() + (long)mbi.RegionSize;
+						var next = mbi.BaseAddress.ToInt64() + mbi.RegionSize;
 						if (next <= address.ToInt64()) break;
 						address = new IntPtr(next);
 					}
