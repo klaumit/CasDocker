@@ -14,12 +14,12 @@ namespace MemForge.Lib
 		{
 			var proc = Process.GetProcessById((int)pid);
 			var pac = (uint)(ProcessAccess.PROCESS_VM_READ | ProcessAccess.PROCESS_QUERY_INFORMATION);
-			using (SafeHPROCESS hProc = OpenProcess(pac, false, pid))
+			using (var hProc = OpenProcess(pac, false, pid))
 			{
 				if (hProc.IsInvalid)
 					throw new InvalidOperationException("Failed to open process!");
 
-				IntPtr address = IntPtr.Zero;
+				var address = IntPtr.Zero;
 				using (var output = new MemoryStream())
 				{
 					var mbiType = typeof(MEMORY_BASIC_INFORMATION);
@@ -31,22 +31,22 @@ namespace MemForge.Lib
 						{
 							var mbi = (MEMORY_BASIC_INFORMATION)Marshal.PtrToStructure(mbiPtr, mbiType);
 
-							bool isCommitted = mbi.State == MEM_STATE_MEM_COMMIT;
-							uint protect = (uint)mbi.Protect;
-							bool isReadable = (protect & (uint)MEM_PROTECTION.PAGE_READONLY) != 0
-											|| (protect & (uint)MEM_PROTECTION.PAGE_READWRITE) != 0
-											|| (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READ) != 0
-											|| (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READWRITE) != 0;
-							bool notGuarded = (protect & (uint)MEM_PROTECTION.PAGE_GUARD) == 0;
+							var isCommitted = mbi.State == MEM_STATE_MEM_COMMIT;
+							var protect = (uint)mbi.Protect;
+							var isReadable = (protect & (uint)MEM_PROTECTION.PAGE_READONLY) != 0
+							                 || (protect & (uint)MEM_PROTECTION.PAGE_READWRITE) != 0
+							                 || (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READ) != 0
+							                 || (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READWRITE) != 0;
+							var notGuarded = (protect & (uint)MEM_PROTECTION.PAGE_GUARD) == 0;
 
 							if (isCommitted && isReadable && notGuarded)
 							{
-								int regSize = (int)mbi.RegionSize;
-								IntPtr regBuffer = Marshal.AllocHGlobal(regSize);
+								var regSize = (int)mbi.RegionSize;
+								var regBuffer = Marshal.AllocHGlobal(regSize);
 
 								try
 								{
-									bool ok = ReadProcessMemory(hProc, mbi.BaseAddress, regBuffer,
+									var ok = ReadProcessMemory(hProc, mbi.BaseAddress, regBuffer,
 																 regSize, out var bytesRead);
 
 									if (ok && bytesRead.Value > 0)
@@ -63,7 +63,7 @@ namespace MemForge.Lib
 								}
 							}
 
-							long next = mbi.BaseAddress.ToInt64() + (long)mbi.RegionSize;
+							var next = mbi.BaseAddress.ToInt64() + (long)mbi.RegionSize;
 							if (next <= address.ToInt64()) break;
 							address = new IntPtr(next);
 						}

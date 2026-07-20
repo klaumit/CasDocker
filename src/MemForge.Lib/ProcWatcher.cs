@@ -7,8 +7,6 @@ using System.Threading;
 
 namespace MemForge.Lib
 {
-    public delegate void ProcStarted(object sender, uint pid, string name);
-
     public sealed class ProcWatcher : IDisposable
     {
         private ManagementEventWatcher _watcher;
@@ -18,7 +16,7 @@ namespace MemForge.Lib
         {
             Started = started;
             _names = new List<string>(names);
-            string query = "SELECT * FROM Win32_ProcessStartTrace";
+            var query = "SELECT * FROM Win32_ProcessStartTrace";
             _watcher = new ManagementEventWatcher(query);
             _watcher.EventArrived += ProcessStarted;
             try
@@ -45,7 +43,7 @@ namespace MemForge.Lib
             var procName = Path.GetFileNameWithoutExtension(procExe);
             if (_names.Contains(procName))
             {
-                uint procId = (uint)e.NewEvent["ProcessID"];
+                var procId = (uint)e.NewEvent["ProcessID"];
                 FireStarted(procId, procName);
             }             
         }
