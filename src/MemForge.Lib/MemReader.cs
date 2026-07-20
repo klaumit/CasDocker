@@ -83,7 +83,10 @@ namespace MemForge.Lib
 			using (var outPut = File.Create(fName))
 			{
 				foreach (var item in ReadAll(pid))
-					outPut.Write(item.Buffer, 0, item.Buffer.Length);
+				{
+					var array = item.Buffer.SwapEndian(true);
+					outPut.Write(array, 0, item.Buffer.Length);
+				}
 				outPut.Flush();
 			}
 			Process.Start(fName);
