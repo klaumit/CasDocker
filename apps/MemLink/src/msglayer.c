@@ -5,6 +5,7 @@
 #include <string.h>
 #include "xhacks.h"
 #include "msglayer.h"
+#include "webby.h"
 
 #ifdef __HITACHI__
 #else

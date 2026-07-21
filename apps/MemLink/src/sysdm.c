@@ -3,6 +3,7 @@
 #include "libc.h"
 #include "l_define.h"
 #include "l_libc.h"
+#include "webby.h"
 
 const char *GetBattStr(void)
 {
