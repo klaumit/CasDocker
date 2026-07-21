@@ -4,7 +4,20 @@
 #include "l_define.h"
 #include "l_libc.h"
 
-char arr[20][128];
+#define SHM_BUF_SIZE 256
+
+char marker_beg[27];
+
+volatile word tx_ready;
+volatile word tx_len;
+volatile byte tx_buf[SHM_BUF_SIZE];
+
+volatile word rx_ready;
+volatile word rx_len;
+volatile byte rx_buf[SHM_BUF_SIZE];
+
+char marker_end[27];
+
 
 word MmLinkGetOpenStat(void)
 {
@@ -13,22 +26,18 @@ word MmLinkGetOpenStat(void)
 
 word MmLinkTxBufClr(void)
 {
-    sprintf(arr[0], "###MEMORY_MARKER_START%s###", "1");
-    sprintf(arr[1], "###UNIQUE_%s_ABC###", "1234567890");
-    sprintf(arr[2], "###MEMORY_MARKER_END%s#####", "1");
     return IW_SRL_NOERR;
 }
 
 word MmLinkRxBufClr(void)
 {
-    sprintf(arr[10], "###MEMORY_MARKER_START%s###", "2");
-    sprintf(arr[11], "###UNIQUE_%s_ABC###", "1234567890");
-    sprintf(arr[12], "###MEMORY_MARKER_END%s#####", "2");
     return IW_SRL_NOERR;
 }
 
 word MmLinkPortOpen(SRL_STAT *po)
 {
+    sprintf(marker_beg, "###MEMORY_MARKER_START%s###", 1);
+    sprintf(marker_end, "###MEMORY_MARKER_START%s###", 2);
     return IW_SRL_NOERR;
 }
 
