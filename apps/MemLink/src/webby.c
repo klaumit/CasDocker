@@ -6,46 +6,46 @@
 
 word MmLinkGetOpenStat(void)
 {
-    int i = 0;
+    return IB_COM2_OPEN;
 }
 
 word MmLinkTxBufClr(void)
 {
-    int i = 0;
+    return IW_SRL_NOERR;
 }
 
 word MmLinkRxBufClr(void)
 {
-    int i = 0;
+    return IW_SRL_NOERR;
 }
 
 word MmLinkPortOpen(SRL_STAT *po)
 {
-    int i = 0;
+    return IW_SRL_NOERR;
 }
 
 word MmLinkPortClose(void)
 {
-    int i = 0;
+    return IW_SRL_NOERR;
 }
 
 word MmLinkPortFClose(void)
 {
-    int i = 0;
+    return IW_SRL_NOERR;
 }
 
 word MmLinkRecvByte(byte *data)
 {
-    int i = 0;
+    return IW_SRL_NOERR;
 }
 
 word MmLinkRecvBlock(byte *data, word size, word *num)
 {
-    int i = 0;
+    return IW_SRL_NOERR;
 }
 
 word MmLinkSendBlock(byte *data, word size)
 {
-    int i = 0;
+    return IW_SRL_NOERR;
 }
 
