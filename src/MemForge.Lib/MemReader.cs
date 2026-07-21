@@ -12,13 +12,13 @@ namespace MemForge.Lib
 {
 	public static class MemReader
 	{
-		private const uint MEM_STATE_MEM_COMMIT  = 0x1000;
-		private const uint MEM_STATE_MEM_FREE    = 0x10000;
+		private const uint MEM_STATE_MEM_COMMIT = 0x1000;
+		private const uint MEM_STATE_MEM_FREE = 0x10000;
 		private const uint MEM_STATE_MEM_RESERVE = 0x2000;
 
-		private const uint MEM_TYPE_MEM_IMAGE    = 0x1000000;
-		private const uint MEM_TYPE_MEM_MAPPED   = 0x40000;
-		private const uint MEM_TYPE_MEM_PRIVATE  = 0x20000;
+		private const uint MEM_TYPE_MEM_IMAGE = 0x1000000;
+		private const uint MEM_TYPE_MEM_MAPPED = 0x40000;
+		private const uint MEM_TYPE_MEM_PRIVATE = 0x20000;
 
 		public static IEnumerable<MemGot> ReadAll(uint pid)
 		{
@@ -43,9 +43,9 @@ namespace MemForge.Lib
 						var isCommitted = mbi.State == MEM_STATE_MEM_COMMIT;
 						var protect = mbi.Protect;
 						var isReadable = (protect & (uint)MEM_PROTECTION.PAGE_READONLY) != 0
-						                 || (protect & (uint)MEM_PROTECTION.PAGE_READWRITE) != 0
-						                 || (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READ) != 0
-						                 || (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READWRITE) != 0;
+										 || (protect & (uint)MEM_PROTECTION.PAGE_READWRITE) != 0
+										 || (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READ) != 0
+										 || (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READWRITE) != 0;
 						var notGuarded = (protect & (uint)MEM_PROTECTION.PAGE_GUARD) == 0;
 
 						if (isCommitted && isReadable && notGuarded)
@@ -83,7 +83,7 @@ namespace MemForge.Lib
 			}
 		}
 
-		public static void ReadAndOpen(uint pid)
+		public static void WriteFullDump(uint pid)
 		{
 			var bName = string.Format("proc_{0}_dmp", pid);
 			var fName = bName + ".bin";
@@ -91,28 +91,10 @@ namespace MemForge.Lib
 			{
 				foreach (var item in ReadAll(pid))
 				{
-					/*
-					var array = item.Buffer.SwapEndian(true);
-					var debug = Encoding.ASCII.GetBytes(item.Info.ToStr());
+					var debug = Encoding.ASCII.GetBytes(item.Info.ToStr() + "\r\n");
 					outPut.Write(debug, 0, debug.Length);
+					var array = item.Buffer.SwapEndian(true);
 					outPut.Write(array, 0, item.Buffer.Length);
-					*/
-
-					if (item.Info.AllocationProtect == 0x00000004 &&
-						item.Info.State == 0x00001000 &&
-						item.Info.Protect == 0x00000004 &&
-						item.Info.Type == 0x00020000 &&
-						item.Info.RegionSize == 0x00085000)
-					{
-						var array = item.Buffer.SwapEndian(true);
-						var text = Encoding.UTF8.GetString(array);
-						if (text.Contains("###MEMORY_MARKER_START7###"))
-						{
-							var debug = Encoding.ASCII.GetBytes(item.Info.ToStr() + "\r\n");
-							outPut.Write(debug, 0, debug.Length);
-							outPut.Write(array, 0, item.Buffer.Length);
-						}
-					}
 				}
 				outPut.Flush();
 			}
@@ -129,7 +111,7 @@ namespace MemForge.Lib
 			bld.Append("[MBI]");
 			bld.AppendFormat(" BaseAddress={0:X8}", mbi.BaseAddress.ToInt32());
 			bld.AppendFormat(" AllocationBase={0:X8}", mbi.AllocationBase.ToInt32());
-			bld.AppendFormat(" AllocationProtect={0:X8}",mbi.AllocationProtect);
+			bld.AppendFormat(" AllocationProtect={0:X8}", mbi.AllocationProtect);
 			bld.AppendFormat(" RegionSize={0:X8}", (uint)mbi.RegionSize.Value);
 			bld.AppendFormat(" State={0:X8}", mbi.State);
 			bld.AppendFormat(" Protect={0:X8}", mbi.Protect);

@@ -37,7 +37,8 @@ namespace MemForge
 		private ToolStripItem[] InitializeMenu()
 		{
 			var menu = new ToolStripMenuItem[] {
-                new ToolStripMenuItem("Kill all", null, menuKillClick),
+				new ToolStripMenuItem("Dump all", null, menuDumpClick),
+				new ToolStripMenuItem("Kill all", null, menuKillClick),
 				new ToolStripMenuItem("About", null, menuAboutClick),
 				new ToolStripMenuItem("Exit", null, menuExitClick)
 			};
@@ -56,10 +57,18 @@ namespace MemForge
 
         private void StartReadingProc(uint pid)
         {
-			MemReader.ReadAndOpen(pid);
+			MemAbstract.FindInSim(pid);
         }
-        
-        private void menuKillClick(object sender, EventArgs e)
+
+		private void menuDumpClick(object sender, EventArgs e)
+		{
+			foreach (var pid in windows.Keys)
+			{
+				MemReader.WriteFullDump(pid);
+			}
+		}
+
+		private void menuKillClick(object sender, EventArgs e)
         {
             ProcExt.KillAll(Defaults.Sim86);
             ProcExt.KillAll(Defaults.SimSh);

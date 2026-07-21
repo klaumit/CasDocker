@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ends.cs" />
+    <Compile Include="MemAbstract.cs" />
     <Compile Include="ProcStarted.cs" />
     <Compile Include="Defaults.cs" />
     <Compile Include="MemGot.cs" />
