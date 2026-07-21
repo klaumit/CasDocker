@@ -7,13 +7,14 @@
 
 char arr[20][128];
 
-sprintf(arr[0], "###MEMORY_MARKER_START0###");
-sprintf(arr[1], "###UNIQUE_1234567890ABC###");
-sprintf(arr[2], "###MEMORY_MARKER_END0#####");
+sprintf(arr[0], "###MEMORY_MARKER_START%d###", 1);
+sprintf(arr[1], "###UNIQUE_%s_ABC###", "1234567890");
+sprintf(arr[2], "###MEMORY_MARKER_END%d#####", 1);
 
-sprintf(arr[10], "###MEMORY_MARKER_START1###");
-sprintf(arr[11], "###UNIQUE_1234567890ABC###");
-sprintf(arr[12], "###MEMORY_MARKER_END1#####");
+sprintf(arr[10], "###MEMORY_MARKER_START%d###", 2);
+sprintf(arr[11], "###UNIQUE_%s_ABC###", "1234567890");
+sprintf(arr[12], "###MEMORY_MARKER_END%d#####", 2);
+
 
 
 word MmLinkGetOpenStat(void)
