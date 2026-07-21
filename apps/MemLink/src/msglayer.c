@@ -66,14 +66,14 @@ void UpdateCrc(word *crc, const byte *data, word length)
 bool ReadPort(byte *data)
 {
     word res;
-    res = LibSrlRecvByte(data);
+    res = MmLinkRecvByte(data);
     return res == IW_SRL_NOERR;
 }
 
 bool ReadBlock(byte *data, word size, word *num)
 {
     word res;
-    res = LibSrlRecvBlock(data, size, num);
+    res = MmLinkRecvBlock(data, size, num);
     return res == IW_SRL_NOERR;
 }
 
@@ -81,7 +81,7 @@ bool SendBlock(byte *data, word size)
 {
     word res;
     /* (0 < size < 255) */
-    res = LibSrlSendBlock(data, size);
+    res = MmLinkSendBlock(data, size);
     return res == IW_SRL_NOERR;
 }
 

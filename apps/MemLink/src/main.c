@@ -69,7 +69,7 @@ void main()
 
 	LibPutDisp();
 
-	sprintf(debug, "app=PocLink;cpu=%s;comm=%s;area=%s;ver=%s;chip=%s;mem=%d",
+	sprintf(debug, "app=MemLink;cpu=%s;comm=%s;area=%s;ver=%s;chip=%s;mem=%d",
 		GetCpuStr(GetCpuKind()), GetCommStr(GetCommKind()),
 		GetLangSuppStr(GetLangSupport()), GetVersionStr(),
 		GetModelStr(), GetTotalMemory()
@@ -104,7 +104,7 @@ void main()
 			{
 				if (sscanf(text, "%x", &newTry) != 1)
 				{
-					newTry = 21;
+					newTry = 180;
 				}
 				sprintf(debug, " -> I will wait %d s!", newTry);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
@@ -153,7 +153,7 @@ void main()
 				while (remaining > 0 && curOff < SEG_SIZE);
 
 				SwitchBank(0x0104, (byte)bank); /* Fonts */
-				maxTry = 25 * TICKS_PER_SEC;
+				maxTry = 200 * TICKS_PER_SEC;
 				i = 0;
 			}
 		}

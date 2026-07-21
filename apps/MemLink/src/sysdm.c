@@ -130,7 +130,7 @@ const char *GetLayoutStr(byte num)
 
 word GetCommState(void)
 {
-    return LibSrlGetOpenStat();
+    return MmLinkGetOpenStat();
 }
 
 const char *GetStateStr(word num)
@@ -169,15 +169,15 @@ const char *GetCpuStr(byte num)
 word OpenPort(byte kind)
 {
     SRL_STAT srl;
-    LibSrlTxBufClr();
-    LibSrlRxBufClr();
+    MmLinkTxBufClr();
+    MmLinkRxBufClr();
     srl.port = kind;
     srl.speed = IB_SRL_38400BPS;
     srl.parit = IX_SRL_NONE;
     srl.datab = IX_SRL_8DATA;
     srl.stopb = IX_SRL_1STOP;
     srl.fctrl = IX_SRL_RSCS;
-    return LibSrlPortOpen(&srl);
+    return MmLinkPortOpen(&srl);
 }
 
 const char *GetOpenPortStr(word num)
@@ -193,11 +193,11 @@ const char *GetOpenPortStr(word num)
 void ClosePort()
 {
     word wTimeout = 8000;
-    while (wTimeout && (LibSrlPortClose() != IW_SRL_NOERR))
+    while (wTimeout && (MmLinkPortClose() != IW_SRL_NOERR))
     {
         --wTimeout;
     }
-    LibSrlPortFClose();
+    MmLinkPortFClose();
 }
 
 void WaitTicks(word ticks)
