@@ -30,11 +30,23 @@ word MmLinkGetOpenStat(void)
 
 word MmLinkTxBufClr(void)
 {
+    word i;
+    shm.tx_ready = 0;
+    shm.tx_len   = 0;
+    for (i = 0; i < SHM_BUF_SIZE; i++) {
+        shm.tx_buf[i] = 0;
+    }
     return IW_SRL_NOERR;
 }
 
 word MmLinkRxBufClr(void)
 {
+    word i;
+    shm.rx_ready = 0;
+    shm.rx_len   = 0;
+    for (i = 0; i < SHM_BUF_SIZE; i++) {
+        shm.rx_buf[i] = 0;
+    }
     return IW_SRL_NOERR;
 }
 
