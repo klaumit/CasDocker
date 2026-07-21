@@ -6,17 +6,21 @@
 
 #define SHM_BUF_SIZE 256
 
-char marker_beg[27];
+typedef struct {
+    char marker_beg[27];
 
-volatile word tx_ready;
-volatile word tx_len;
-volatile byte tx_buf[SHM_BUF_SIZE];
+    volatile word tx_ready;
+    volatile word tx_len;
+    volatile byte tx_buf[SHM_BUF_SIZE];
 
-volatile word rx_ready;
-volatile word rx_len;
-volatile byte rx_buf[SHM_BUF_SIZE];
+    volatile word rx_ready;
+    volatile word rx_len;
+    volatile byte rx_buf[SHM_BUF_SIZE];
 
-char marker_end[27];
+    char marker_end[27];
+} MmLinkShm;
+
+static MmLinkShm shm;
 
 
 word MmLinkGetOpenStat(void)
@@ -36,8 +40,8 @@ word MmLinkRxBufClr(void)
 
 word MmLinkPortOpen(SRL_STAT *po)
 {
-    sprintf(marker_beg, "###MEMORY_MARKER_START%s###", 1);
-    sprintf(marker_end, "###MEMORY_MARKER_START%s###", 2);
+    sprintf(shm.marker_beg, "###MEMORY_MARKER_START%s###", 1);
+    sprintf(shm.marker_end, "###MEMORY_MARKER_START%s###", 2);
     return IW_SRL_NOERR;
 }
 
