@@ -4,6 +4,18 @@
 #include "l_define.h"
 #include "l_libc.h"
 
+
+char arr[20][128];
+
+sprintf(arr[0], "###MEMORY_MARKER_START0###");
+sprintf(arr[1], "###UNIQUE_1234567890ABC###");
+sprintf(arr[2], "###MEMORY_MARKER_END0#####");
+
+sprintf(arr[10], "###MEMORY_MARKER_START1###");
+sprintf(arr[11], "###UNIQUE_1234567890ABC###");
+sprintf(arr[12], "###MEMORY_MARKER_END1#####");
+
+
 word MmLinkGetOpenStat(void)
 {
     return IB_COM2_OPEN;
