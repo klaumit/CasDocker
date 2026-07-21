@@ -106,7 +106,7 @@ namespace MemForge.Lib
 					{
 						var array = item.Buffer.SwapEndian(true);
 						var text = Encoding.UTF8.GetString(array);
-						if (text.Contains("###MEMORY_MARKER_START0###"))
+						if (text.Contains("###MEMORY_MARKER_START7###"))
 						{
 							var debug = Encoding.ASCII.GetBytes(item.Info.ToStr() + "\r\n");
 							outPut.Write(debug, 0, debug.Length);

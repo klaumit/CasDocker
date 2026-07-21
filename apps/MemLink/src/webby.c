@@ -52,8 +52,8 @@ word MmLinkRxBufClr(void)
 
 word MmLinkPortOpen(SRL_STAT *po)
 {
-    sprintf(shm.marker_beg, "###MEMORY_MARKER_START%i###", 1);
-    sprintf(shm.marker_end, "####MEMORY_MARKER_END%i####", 2);
+    sprintf(shm.marker_beg, "###MEMORY_MARKER_START%i###", 7);
+    sprintf(shm.marker_end, "####MEMORY_MARKER_END%i####", 7);
     return IW_SRL_NOERR;
 }
 
