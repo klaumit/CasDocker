@@ -7,20 +7,6 @@ namespace MemForge.Lib
 {
     public sealed class MemShim
     {
-        /*
-           public fixed byte marker_beg[27];
-
-           public volatile ushort tx_ready;
-           public volatile ushort tx_len;
-           public fixed byte tx_buf[SHM_BUF_SIZE];
-
-           public volatile ushort rx_ready;
-           public volatile ushort rx_len;
-           public fixed byte rx_buf[SHM_BUF_SIZE];
-
-           public fixed byte marker_end[27];
-         */
-
         private const int MARKER_SIZE = 28;
         private const int SHM_BUF_SIZE = 256;
         private const int WORD_SIZE = 2;
@@ -49,11 +35,11 @@ namespace MemForge.Lib
         public int Read(byte[] buffer, int offset, int count)
         {
             var region = ReadBytes(OFF_TX_READY, TX_REGION_SIZE);
-            var ready = Ends.ToUInt16(region, 0);
+            var ready = Ends.ToUInt16(region, 0, true);
             if (ready == 0)
                 return 0;
 
-            var len = Ends.ToUInt16(region, WORD_SIZE);
+            var len = Ends.ToUInt16(region, WORD_SIZE, true);
             var got = Math.Min(len, Math.Min(count, SHM_BUF_SIZE));
             Array.Copy(region, WORD_SIZE * 2, buffer, offset, got);
 
@@ -79,7 +65,7 @@ namespace MemForge.Lib
         private ushort ReadWord(int offset)
         {
             var buf = ReadBytes(offset, WORD_SIZE);
-            return Ends.ToUInt16(buf, 0);
+            return Ends.ToUInt16(buf, 0, true);
         }
 
         private byte[] ReadBytes(int offset, int size)
@@ -101,7 +87,7 @@ namespace MemForge.Lib
 
         private void WriteWord(int offset, ushort value)
         {
-            var buf = Ends.GetBytes(value);
+            var buf = Ends.GetBytes(value, true);
             WriteBytes(offset, buf);
         }
 

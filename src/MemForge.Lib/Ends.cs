@@ -26,14 +26,18 @@ namespace MemForge.Lib
             return result;
         }
 
-        public static ushort ToUInt16(byte[] buf, int i)
+        public static ushort ToUInt16(byte[] data, int idx, bool bigEndian)
         {
-            throw new NotImplementedException();
+            return bigEndian
+                ? (ushort)((data[idx] << 8) | data[idx + 1])
+                : (ushort)(data[idx] | (data[idx + 1] << 8));
         }
 
-        public static byte[] GetBytes(ushort value)
+        public static byte[] GetBytes(ushort val, bool bigEndian)
         {
-            throw new NotImplementedException();
+            return bigEndian
+                ? new[] { (byte)(val >> 8), (byte)(val & 0xFF) }
+                : new[] { (byte)(val & 0xFF), (byte)(val >> 8) };
         }
     }
 }
