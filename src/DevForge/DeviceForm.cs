@@ -148,7 +148,7 @@ namespace DevForge
         private void SendLive()
         {
             var dev = _args.Device;
-            dev.Send(new Alive("1E"));
+            dev.Send(new Alive("5A"));
         }
 
         private void keepLiveBtn_Click(object sender, EventArgs e)
@@ -208,7 +208,7 @@ namespace DevForge
             }
             _packStill = _reads.Count;
             _packGot = 0;
-            var existing = File.Exists(xxdFile) ? File.ReadAllLines(xxdFile, Encoding.UTF8) : new string[0];
+            var existing = File.Exists(xxdFile) ? File.ReadLines(xxdFile, Encoding.UTF8) : new string[0];
             foreach (var line in existing)
             {
                 if (string.IsNullOrWhiteSpace(line))
