@@ -23,17 +23,20 @@ namespace MemForge.Lib
 					if (offset >= 0)
 					{
 						var address = IntPtr.Add(item.Info.BaseAddress, offset);
-						var rwHandle = OpenProc(pid, out var pName, true);
+						var rwHandle = OpenProc(pid, out _, true);
 						var shim = new MemShim(rwHandle, address);
 
 						var buffer = new byte[512];
-						var xxx = shim.Read(buffer, 0, buffer.Length);
-						var yyy = Encoding.ASCII.GetString(buffer);
+						if (shim.Read(buffer, 0, buffer.Length) >= 1)
+						{
+							buffer.SwapEndian(true);
+							var yyy = Encoding.ASCII.GetString(buffer);
 
-						// TODO
-						Debugger.Break();
+							// TODO
+							Debugger.Break();
 
-						break;
+							break;
+						}
 					}
 				}
 			}
