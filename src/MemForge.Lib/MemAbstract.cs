@@ -23,10 +23,15 @@ namespace MemForge.Lib
 					if (offset >= 0)
 					{
 						var address = IntPtr.Add(item.Info.BaseAddress, offset);
-						var debug = enc.GetBytes(item.Info.ToStr() + "\r\n");
+						var rwHandle = OpenProc(pid, out var pName, true);
+						var shim = new MemShim(rwHandle, address);
+
+						var buffer = new byte[512];
+						var xxx = shim.Read(buffer, 0, buffer.Length);
+						var yyy = Encoding.ASCII.GetString(buffer);
+
+						// TODO
 						Debugger.Break();
-						// outPut.Write(debug, 0, debug.Length);
-						// outPut.Write(array, 0, item.Buffer.Length);
 
 						break;
 					}

@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using static Vanara.PInvoke.Kernel32;
+using PA = Vanara.PInvoke.Kernel32.ProcessAccess;
 
 // ReSharper disable UseStringInterpolation
 
@@ -20,16 +21,23 @@ namespace MemForge.Lib
 		private const uint MEM_TYPE_MEM_MAPPED = 0x40000;
 		private const uint MEM_TYPE_MEM_PRIVATE = 0x20000;
 
-		public static IEnumerable<MemGot> ReadAll(uint pid)
+		public static SafeHPROCESS OpenProc(uint pid, out string pName, bool rw)
 		{
 			var proc = Process.GetProcessById((int)pid);
-			var pName = proc.ProcessName.Replace(' ', '_');
-			var pac = (uint)(ProcessAccess.PROCESS_VM_READ | ProcessAccess.PROCESS_QUERY_INFORMATION);
-			using (var hProc = OpenProcess(pac, false, pid))
-			{
-				if (hProc.IsInvalid)
-					throw new InvalidOperationException(string.Format("Failed to open process #{0}!", pid));
+			pName = proc.ProcessName.Replace(' ', '_');
+			var acc = PA.PROCESS_VM_READ | PA.PROCESS_QUERY_INFORMATION;
+			if (rw) acc |= PA.PROCESS_VM_WRITE | PA.PROCESS_VM_OPERATION;
+			var pac = (uint)acc;
+			var hProc = OpenProcess(pac, false, pid);
+			if (hProc.IsInvalid)
+				throw new InvalidOperationException(string.Format("Failed to open process #{0}!", pid));
+			return hProc;
+		}
 
+		public static IEnumerable<MemGot> ReadAll(uint pid)
+		{
+			using (var hProc = OpenProc(pid, out var pName, false))
+			{
 				var address = IntPtr.Zero;
 				var mbiType = typeof(MEMORY_BASIC_INFORMATION);
 				var mbiSize = Marshal.SizeOf(mbiType);

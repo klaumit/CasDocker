@@ -1,11 +1,10 @@
 using System;
 using System.Runtime.InteropServices;
-using Vanara.PInvoke;
 using K = Vanara.PInvoke.Kernel32;
 
 namespace MemForge.Lib
 {
-    public sealed class MemShim
+    public sealed class MemShim : IDisposable
     {
         private const int MARKER_SIZE = 28;
         private const int SHM_BUF_SIZE = 256;
@@ -23,12 +22,12 @@ namespace MemForge.Lib
         private const int OFF_RX_BUF = OFF_RX_LEN + WORD_SIZE;
         private const int OFF_MARKER_END = OFF_RX_BUF + SHM_BUF_SIZE;
 
-        private readonly HPROCESS _proc;
+        private readonly K.SafeHPROCESS _proc;
         private readonly IntPtr _baseAddr;
 
-        public MemShim(IntPtr proc, IntPtr baseAddr)
+        public MemShim(K.SafeHPROCESS proc, IntPtr baseAddr)
         {
-            _proc = new HPROCESS(proc);
+            _proc = proc;
             _baseAddr = baseAddr;
         }
 
@@ -105,6 +104,11 @@ namespace MemForge.Lib
             {
                 handle.Free();
             }
+        }
+
+        public void Dispose()
+        {
+            _proc?.Dispose();
         }
     }
 }
