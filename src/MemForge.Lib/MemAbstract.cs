@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Text;
 using static MemForge.Lib.MemReader;
 
@@ -8,19 +9,21 @@ namespace MemForge.Lib
 	{
 		public static void FindInSim(uint pid)
 		{
+			var enc = Encoding.ASCII;
+			var pattern = enc.GetBytes("###MEMORY_MARKER_START17###" + '\0').SwapEndian();
 			foreach (var item in ReadAll(pid))
 			{
 				if (item.Info.AllocationProtect == 0x00000004 &&
-					item.Info.State == 0x00001000 &&
-					item.Info.Protect == 0x00000004 &&
-					item.Info.Type == 0x00020000 &&
-					item.Info.RegionSize == 0x00085000)
+				    item.Info.State == 0x00001000 &&
+				    item.Info.Protect == 0x00000004 &&
+				    item.Info.Type == 0x00020000 &&
+				    item.Info.RegionSize == 0x00085000)
 				{
-					var array = item.Buffer.SwapEndian(true);
-					var text = Encoding.UTF8.GetString(array);
-					if (text.Contains("###MEMORY_MARKER_START7###"))
+					var offset = item.Buffer.IndexOf(pattern);
+					if (offset >= 0)
 					{
-						var debug = Encoding.ASCII.GetBytes(item.Info.ToStr() + "\r\n");
+						var address = IntPtr.Add(item.Info.BaseAddress, offset);
+						var debug = enc.GetBytes(item.Info.ToStr() + "\r\n");
 						Debugger.Break();
 						// outPut.Write(debug, 0, debug.Length);
 						// outPut.Write(array, 0, item.Buffer.Length);
