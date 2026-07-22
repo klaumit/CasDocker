@@ -1,8 +1,9 @@
 using System;
-using System.Diagnostics;
-using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+
+// ReSharper disable InlineOutVariableDeclaration
+// ReSharper disable ConvertToUsingDeclaration
 
 namespace MemForge
 {

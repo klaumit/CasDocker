@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using MemForge.Lib;
-using System.Collections.Generic;
-using System.Text;
+using Vanara.PInvoke;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable RedundantExplicitArrayCreation
@@ -12,6 +12,8 @@ namespace MemForge
 {
 	public sealed class NoteIcon
 	{
+		internal Dictionary<uint, List<Tuple<HWND, string>>> windows;
+
 		internal NotifyIcon noteIcon;
 		private ContextMenuStrip noteMenu;
 
@@ -28,13 +30,15 @@ namespace MemForge
             noteIcon.Icon = new Icon(nis);
 			noteIcon.ContextMenuStrip = noteMenu;
 
+			windows = new Dictionary<uint, List<Tuple<HWND, string>>>();
             _watcher = new ProcWatcher(OnSimStarted, Defaults.Sim86, Defaults.SimSh);
 		}
 		
 		private ToolStripItem[] InitializeMenu()
 		{
 			var menu = new ToolStripMenuItem[] {
-                new ToolStripMenuItem("Kill all", null, menuKillClick),
+				new ToolStripMenuItem("Dump all", null, menuDumpClick),
+				new ToolStripMenuItem("Kill all", null, menuKillClick),
 				new ToolStripMenuItem("About", null, menuAboutClick),
 				new ToolStripMenuItem("Exit", null, menuExitClick)
 			};
@@ -47,17 +51,24 @@ namespace MemForge
             var text = string.Format("{0} [{1}]", name, pid);
             noteIcon.ShowBalloonTip(500, title, text, ToolTipIcon.Info);
 
-            FindMyWindows(pid);
+			windows[pid] = WindowExt.GetTopLevelWindows(pid);
+			StartReadingProc(pid);
         }
 
-        private void FindMyWindows(uint pid)
+        private void StartReadingProc(uint pid)
         {
-            var windows = WindowExt.GetTopLevelWindows(pid);
-
-            ;
+			MemAbstract.FindInSim(pid);
         }
-        
-        private void menuKillClick(object sender, EventArgs e)
+
+		private void menuDumpClick(object sender, EventArgs e)
+		{
+			foreach (var pid in windows.Keys)
+			{
+				MemReader.WriteFullDump(pid);
+			}
+		}
+
+		private void menuKillClick(object sender, EventArgs e)
         {
             ProcExt.KillAll(Defaults.Sim86);
             ProcExt.KillAll(Defaults.SimSh);

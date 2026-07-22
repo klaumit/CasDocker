@@ -36,9 +36,8 @@
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="Vanara.PInvoke.Shared, Version=3.3.15.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\deps\net40\Vanara.PInvoke.Shared.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.Shared">
+      <HintPath>..\deps\fx40\Vanara.PInvoke.Shared.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

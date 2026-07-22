@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Management;
 using System.IO;
 using System.Threading.Tasks;
@@ -9,8 +7,6 @@ using System.Threading;
 
 namespace MemForge.Lib
 {
-    public delegate void ProcStarted(object sender, uint pid, string name);
-
     public sealed class ProcWatcher : IDisposable
     {
         private ManagementEventWatcher _watcher;
@@ -20,10 +16,17 @@ namespace MemForge.Lib
         {
             Started = started;
             _names = new List<string>(names);
-            string query = "SELECT * FROM Win32_ProcessStartTrace";
+            var query = "SELECT * FROM Win32_ProcessStartTrace";
             _watcher = new ManagementEventWatcher(query);
             _watcher.EventArrived += ProcessStarted;
-            _watcher.Start();
+            try
+            {
+                _watcher.Start();
+            }
+            catch (ManagementException)
+            {
+                // Ignore!
+            }
 
             Task.Factory.StartNew(() =>
             {
@@ -40,7 +43,7 @@ namespace MemForge.Lib
             var procName = Path.GetFileNameWithoutExtension(procExe);
             if (_names.Contains(procName))
             {
-                uint procId = (uint)e.NewEvent["ProcessID"];
+                var procId = (uint)e.NewEvent["ProcessID"];
                 FireStarted(procId, procName);
             }             
         }

@@ -12,11 +12,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Vanara.Core">
+      <HintPath>..\deps\fx40\Vanara.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Vanara.PInvoke.Shared">
-      <HintPath>..\deps\net40\Vanara.PInvoke.Shared.dll</HintPath>
+      <HintPath>..\deps\fx40\Vanara.PInvoke.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Kernel32">
+      <HintPath>..\deps\fx40\Vanara.PInvoke.Kernel32.dll</HintPath>
     </Reference>
     <Reference Include="Vanara.PInvoke.User32">
-      <HintPath>..\deps\net40\Vanara.PInvoke.User32.dll</HintPath>
+      <HintPath>..\deps\fx40\Vanara.PInvoke.User32.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
