@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using Vanara.PInvoke;
+using K = Vanara.PInvoke.Kernel32;
 
 namespace MemForge.Lib
 {
@@ -89,7 +90,7 @@ namespace MemForge.Lib
             try
             {
                 var buff = handle.AddrOfPinnedObject();
-                Kernel32.ReadProcessMemory(_proc, addr, buff, size, out _);
+                K.ReadProcessMemory(_proc, addr, buff, size, out _);
             }
             finally
             {
@@ -112,7 +113,7 @@ namespace MemForge.Lib
             {
                 var buff = handle.AddrOfPinnedObject();
                 var size = buf.Length;
-                Kernel32.WriteProcessMemory(_proc, addr, buff, size, out _);
+                K.WriteProcessMemory(_proc, addr, buff, size, out _);
             }
             finally
             {
