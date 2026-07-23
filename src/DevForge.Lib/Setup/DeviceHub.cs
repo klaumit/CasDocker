@@ -12,20 +12,8 @@ using DevForge.Lib.Messages.Impl;
 
 namespace DevForge.Lib.Common
 {
-    public sealed class DeviceHub
+    public sealed class DeviceHub : AbDeviceHub
     {
-        public event EventHandler<DeviceFoundArgs> NewDevice;
-
-        private void OnNewDevice(ICommDevice dev, Hello hel)
-        {
-            if (NewDevice == null) return;
-            var a = new DeviceFoundArgs
-            {
-                Stamp = DateTime.Now, Device = dev, Hello = hel
-            };
-            NewDevice.Invoke(this, a);
-        }
-
         public void StartLegacy()
         {
             Task.Factory.StartNew(DoLegacy);
@@ -57,22 +45,6 @@ namespace DevForge.Lib.Common
             );
             factory.Rewind();
             DoOnePort(factory);
-        }
-
-        private void DoOnePort(BaseFactory factory)
-        {
-            var prefix = factory.Prefix;
-            var port = factory.Create();
-            var dev = new PocketDevice(prefix, port);
-            var h = ToHello(dev.Receive());
-            OnNewDevice(dev, h);
-            dev.Start();
-        }
-
-        private Hello ToHello(Message message)
-        {
-            var hello = message as Hello;
-            return hello;
         }
     }
 }
