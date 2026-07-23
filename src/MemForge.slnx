@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="DevForge.Base/DevForge.Base.n.csproj" />
+  <Project Path="DevForge.UI/DevForge.UI.n.csproj" />
   <Project Path="MemForge.Lib/MemForge.Lib.n.csproj" />
   <Project Path="MemForge/MemForge.n.csproj" />
 </Solution>
