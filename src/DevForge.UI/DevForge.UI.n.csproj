@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFrameworks>net40;net10.0-windows</TargetFrameworks>
     <NoWarn>WFDEV006;CA1416</NoWarn>
-    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -20,9 +18,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\*.ico" />
+    <EmbeddedResource Include="Resources\*.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DevForge.Base\DevForge.Base.n.csproj" />
-    <ProjectReference Include="..\DevForge.Lib\DevForge.Lib.n.csproj" />
-    <ProjectReference Include="..\DevForge.UI\DevForge.UI.n.csproj" />
   </ItemGroup>
 
 </Project>

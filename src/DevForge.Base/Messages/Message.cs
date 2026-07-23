@@ -1,6 +1,6 @@
-namespace DevForge.Lib.Messages
+﻿namespace DevForge.Lib.Messages
 {
-    public class Message
+	public class Message
     {
         public MsgKind Kind { get; set; }
         public ushort Length { get; set; }

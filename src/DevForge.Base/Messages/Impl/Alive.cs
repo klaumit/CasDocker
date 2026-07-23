@@ -2,7 +2,7 @@
 
 namespace DevForge.Lib.Messages.Impl
 {
-    public sealed class Alive : BaseTxt
+	public sealed class Alive : BaseTxt
     {
         public Alive(string text) : base(text)
         {

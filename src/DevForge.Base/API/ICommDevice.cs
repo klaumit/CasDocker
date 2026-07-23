@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using DevForge.Lib.Common;
 using DevForge.Lib.Messages;
 
@@ -6,7 +6,7 @@ using DevForge.Lib.Messages;
 
 namespace DevForge.Lib.API
 {
-    public interface ICommDevice : IDisposable
+	public interface ICommDevice : IDisposable
     {
         string Name { get; }
 

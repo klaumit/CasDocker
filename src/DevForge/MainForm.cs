@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DevForge.Lib.Common;
-using DevForge.Resources;
+using DevForge.UI.Resources;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable LocalizableElement

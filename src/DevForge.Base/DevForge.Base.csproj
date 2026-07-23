@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D719DAD6-AFAA-43BB-854B-DDD6214A0785}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DevForge.Base</RootNamespace>
+    <AssemblyName>DevForge.Base</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\fx40\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\fx40\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API\ICloseable.cs" />
+    <Compile Include="API\ICommDevice.cs" />
+    <Compile Include="API\ICommFactory.cs" />
+    <Compile Include="API\ICommPort.cs" />
+    <Compile Include="Common\BaseFactory.cs" />
+    <Compile Include="Common\PocketDevice.cs" />
+    <Compile Include="Common\CommExt.cs" />
+    <Compile Include="Common\Checking.cs" />
+    <Compile Include="Common\DeviceFoundArgs.cs" />
+    <Compile Include="Common\GotMessageArgs.cs" />
+    <Compile Include="Tools\TextExt.cs" />
+    <Compile Include="Tools\JsonExt.cs" />
+    <Compile Include="Tools\CollExt.cs" />
+    <Compile Include="Tools\JsonLines.cs" />
+    <Compile Include="Tools\Utils.cs" />	
+    <Compile Include="High\Parsers.cs" />
+    <Compile Include="High\PvInfo.cs" />
+    <Compile Include="High\PvCpu.cs" />
+    <Compile Include="High\PvComm.cs" />
+    <Compile Include="High\PvVerConv.cs" />
+    <Compile Include="High\PvArea.cs" />
+    <Compile Include="High\PvVer.cs" />
+    <Compile Include="High\PvChip.cs" />
+	<Compile Include="Ponder\MemMap86Gen.cs" />
+	<Compile Include="Ponder\MemMapSHGen.cs" />
+	<Compile Include="Ponder\MemMapGen.cs" />	
+    <Compile Include="Ponder\PvBuff.cs" />
+    <Compile Include="Messages\Impl\Alive.cs" />
+    <Compile Include="Messages\Impl\BaseTxt.cs" />
+    <Compile Include="Messages\Impl\Quit.cs" />
+    <Compile Include="Messages\Impl\Read.cs" />
+    <Compile Include="Messages\Message.cs" />
+    <Compile Include="Messages\MsgKind.cs" />
+    <Compile Include="Messages\MsgTool.cs" />
+    <Compile Include="Messages\Impl\Hello.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\deps\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ByteSizeLib.dll">
+      <HintPath>..\deps\net40\ByteSizeLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

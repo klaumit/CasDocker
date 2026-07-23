@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using DevForge.Resources;
+using DevForge.UI.Resources;
 using DevForge.Lib.Common;
 using DevForge.Lib.Messages.Impl;
 using DevForge.Lib.High;
@@ -44,6 +44,8 @@ namespace DevForge
 
         private void Device_Message(object sender, GotMessageArgs e)
         {
+            if (e.Message == null)
+                return;
             var ts = e.Stamp.ToString("u").TrimEnd('Z');
             statusLbl.Text = "[" + ts + "] (" + e.Message.Kind + ") " + e.Message.Length + " bytes";
             _log.Write(e.Message);
@@ -177,7 +179,6 @@ namespace DevForge
         {
         	return (int)msgLenDw.Value;
         }
-
         
         private void backupBtn_Click(object sender, EventArgs e)
         {

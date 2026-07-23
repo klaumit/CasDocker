@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Drawing;
 
-namespace DevForge.Resources
+namespace DevForge.UI.Resources
 {
     public static class ResExt
     {
-        internal static Stream GetStream(string name)
+        public static Stream GetStream(string name)
         {
             var type = typeof(ResExt);
             var asm = type.Assembly;
@@ -14,13 +14,13 @@ namespace DevForge.Resources
             return stream;
         }
 
-        internal static Bitmap ToImage(this Stream stream)
+        public static Bitmap ToImage(this Stream stream)
         {
             var img = new Bitmap(stream);
             return img;
         }
 
-        internal static Icon ToIcon(this Stream stream)
+        public static Icon ToIcon(this Stream stream)
         {
             var img = new Icon(stream);
             return img;

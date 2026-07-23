@@ -1,6 +1,6 @@
-namespace DevForge.Lib.Messages.Impl
+﻿namespace DevForge.Lib.Messages.Impl
 {
-    public sealed class Quit : BaseTxt
+	public sealed class Quit : BaseTxt
     {
         public Quit(string text) : base(text)
         {

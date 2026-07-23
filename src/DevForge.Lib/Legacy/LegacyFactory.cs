@@ -1,5 +1,6 @@
 using System.IO.Ports;
 using System.Linq;
+using System.Threading;
 using DevForge.Lib.API;
 using DevForge.Lib.Common;
 
@@ -20,8 +21,15 @@ namespace DevForge.Lib.Legacy
 
         public static LegacyPort CreatePort()
         {
-            var names = GetPortNames().OrderBy(p => p);
-            var name = names.Last();
+            string name = null;
+            while (Thread.CurrentThread.IsAlive)
+            {
+                var names = GetPortNames().OrderBy(p => p);
+                name = names.LastOrDefault();
+                if (!string.IsNullOrWhiteSpace(name))
+                    break;
+                Thread.Sleep(1000);
+            }
             const int speed = 38400;
             const Parity parity = Parity.None;
             const int dataB = 8;
