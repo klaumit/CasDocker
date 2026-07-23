@@ -4,10 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using MemForge.Lib;
 using Vanara.PInvoke;
-using System;
-using System.Windows.Forms;
 using DevForge.Lib.Setup;
-using DevForge.UI.Resources;
 using U = DevForge.Tools.Utils;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident

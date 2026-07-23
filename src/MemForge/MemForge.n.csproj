@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DevForge.UI\DevForge.UI.n.csproj" />
     <ProjectReference Include="..\MemForge.Lib\MemForge.Lib.n.csproj" />
     <Reference Include="Vanara.PInvoke.Shared">
       <HintPath>..\deps\fx40\Vanara.PInvoke.Shared.dll</HintPath>

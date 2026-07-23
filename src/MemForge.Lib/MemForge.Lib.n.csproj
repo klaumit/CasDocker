@@ -31,5 +31,8 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
     <PackageReference Include="System.Management" Version="10.0.9" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevForge.Base\DevForge.Base.n.csproj" />
+  </ItemGroup>
 
 </Project>
