@@ -1,17 +1,16 @@
 ﻿using System;
 using DevForge.Lib.Common;
 using System.Collections.Generic;
-using System.Linq;
 using DevForge.Lib.API;
 using System.Windows.Forms;
 
 // ReSharper disable UseCollectionExpression
 
-namespace DevForge
+namespace DevForge.UI
 {
-    internal static class Utils
+    public static class Utils
     {
-        internal static MainForm Main;
+        public static Form Main;
         private static readonly List<ICommDevice> devices = new List<ICommDevice>();
 
         internal static void InvokeGui(Action action)
@@ -24,7 +23,7 @@ namespace DevForge
             action();
         }
 
-        internal static void OnExiting(object sender, FormClosingEventArgs e)
+        public static void OnExiting(object sender, FormClosingEventArgs e)
         {
             foreach (var device in devices)
             {
@@ -32,7 +31,7 @@ namespace DevForge
             }
         }
 
-        internal static void OnNewDevice(object s, DeviceFoundArgs e)
+        public static void OnNewDevice(object s, DeviceFoundArgs e)
         {
             var dev = e.Device;
             devices.Add(dev);

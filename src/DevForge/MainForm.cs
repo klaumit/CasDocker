@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using DevForge.Lib.Common;
 using DevForge.UI.Resources;
+using U = DevForge.UI.Utils;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable LocalizableElement
@@ -31,9 +32,9 @@ namespace DevForge
         {
             Icon = ResExt.GetStream("app.ico").ToIcon();
 
-            Utils.Main = this;
-            FormClosing += Utils.OnExiting;
-            _hub.Value.NewDevice += Utils.OnNewDevice;
+            U.Main = this;
+            FormClosing += U.OnExiting;
+            _hub.Value.NewDevice += U.OnNewDevice;
             tryFind1Btn_Click(sender, e);
             tryFind2Btn_Click(sender, e);
         }
