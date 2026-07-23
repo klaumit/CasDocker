@@ -4,8 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using static Vanara.PInvoke.Kernel32;
+using K = Vanara.PInvoke.Kernel32;
 using PA = Vanara.PInvoke.Kernel32.ProcessAccess;
+using Vanara.PInvoke;
 
 // ReSharper disable UseStringInterpolation
 
@@ -21,14 +22,14 @@ namespace MemForge.Lib
 		private const uint MEM_TYPE_MEM_MAPPED = 0x40000;
 		private const uint MEM_TYPE_MEM_PRIVATE = 0x20000;
 
-		public static SafeHPROCESS OpenProc(uint pid, out string pName, bool rw)
+		public static K.SafeHPROCESS OpenProc(uint pid, out string pName, bool rw)
 		{
 			var proc = Process.GetProcessById((int)pid);
 			pName = proc.ProcessName.Replace(' ', '_');
 			var acc = PA.PROCESS_VM_READ | PA.PROCESS_QUERY_INFORMATION;
 			if (rw) acc |= PA.PROCESS_VM_WRITE | PA.PROCESS_VM_OPERATION;
 			var pac = (uint)acc;
-			var hProc = OpenProcess(pac, false, pid);
+			var hProc = K.OpenProcess(pac, false, pid);
 			if (hProc.IsInvalid)
 				throw new InvalidOperationException(string.Format("Failed to open process #{0}!", pid));
 			return hProc;
@@ -36,25 +37,26 @@ namespace MemForge.Lib
 
 		public static IEnumerable<MemGot> ReadAll(uint pid)
 		{
-			using (var hProc = OpenProc(pid, out var pName, false))
+            string pName;
+			using (var hProc = OpenProc(pid, out pName, false))
 			{
 				var address = IntPtr.Zero;
-				var mbiType = typeof(MEMORY_BASIC_INFORMATION);
+				var mbiType = typeof(K.MEMORY_BASIC_INFORMATION);
 				var mbiSize = Marshal.SizeOf(mbiType);
 				var mbiPtr = Marshal.AllocHGlobal(mbiSize);
 				try
 				{
-					while (VirtualQueryEx(hProc, address, mbiPtr, mbiSize) != 0)
+					while (K.VirtualQueryEx(hProc, address, mbiPtr, mbiSize) != 0)
 					{
-						var mbi = (MEMORY_BASIC_INFORMATION)Marshal.PtrToStructure(mbiPtr, mbiType);
+						var mbi = (K.MEMORY_BASIC_INFORMATION)Marshal.PtrToStructure(mbiPtr, mbiType);
 
 						var isCommitted = mbi.State == MEM_STATE_MEM_COMMIT;
 						var protect = mbi.Protect;
-						var isReadable = (protect & (uint)MEM_PROTECTION.PAGE_READONLY) != 0
-										 || (protect & (uint)MEM_PROTECTION.PAGE_READWRITE) != 0
-										 || (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READ) != 0
-										 || (protect & (uint)MEM_PROTECTION.PAGE_EXECUTE_READWRITE) != 0;
-						var notGuarded = (protect & (uint)MEM_PROTECTION.PAGE_GUARD) == 0;
+                        var isReadable = (protect & (uint)K.MEM_PROTECTION.PAGE_READONLY) != 0
+										 || (protect & (uint)K.MEM_PROTECTION.PAGE_READWRITE) != 0
+                                         || (protect & (uint)K.MEM_PROTECTION.PAGE_EXECUTE_READ) != 0
+                                         || (protect & (uint)K.MEM_PROTECTION.PAGE_EXECUTE_READWRITE) != 0;
+                        var notGuarded = (protect & (uint)K.MEM_PROTECTION.PAGE_GUARD) == 0;
 
 						if (isCommitted && isReadable && notGuarded)
 						{
@@ -63,8 +65,9 @@ namespace MemForge.Lib
 
 							try
 							{
-								var ok = ReadProcessMemory(hProc, mbi.BaseAddress, regBuffer,
-									regSize, out var bytesRead);
+                                SizeT bytesRead;
+								var ok = K.ReadProcessMemory(hProc, mbi.BaseAddress, regBuffer,
+									regSize, out bytesRead);
 
 								if (ok && bytesRead.Value > 0)
 								{
@@ -113,7 +116,7 @@ namespace MemForge.Lib
 			Process.Start(xName);
 		}
 
-		public static string ToStr(this MEMORY_BASIC_INFORMATION mbi)
+		public static string ToStr(this K.MEMORY_BASIC_INFORMATION mbi)
 		{
 			var bld = new StringBuilder();
 			bld.Append("[MBI]");

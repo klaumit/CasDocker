@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-using static MemForge.Lib.MemReader;
+using MR = MemForge.Lib.MemReader;
 
 namespace MemForge.Lib
 {
@@ -11,7 +11,7 @@ namespace MemForge.Lib
 		{
 			var enc = Encoding.ASCII;
 			var pattern = enc.GetBytes("###MEMORY_MARKER_START17###" + '\0').SwapEndian();
-			foreach (var item in ReadAll(pid))
+			foreach (var item in MR.ReadAll(pid))
 			{
 				if (item.Info.AllocationProtect == 0x00000004 &&
 				    item.Info.State == 0x00001000 &&
@@ -23,7 +23,8 @@ namespace MemForge.Lib
 					if (offset >= 0)
 					{
 						var address = IntPtr.Add(item.Info.BaseAddress, offset);
-						var rwHandle = OpenProc(pid, out _, true);
+                        string pName;
+						var rwHandle = MR.OpenProc(pid, out pName, true);
 						var shim = new MemShim(rwHandle, address);
 
 						var buffer = new byte[512];

@@ -37,7 +37,7 @@ namespace MemForge.Lib
                     var middle = array.ToHexString(lower: true, sp: " ", max: got)
                         .PadRight(39, ' ');
                     var text = PrintAscii(array, got);
-                    var line = $"{adr:x8}: {middle}  {text}";
+                    var line = string.Format("{0:x8}: {1}  {2}", adr, middle, text);
                     writer.WriteLine(line);
                     adr += got;
                 }

@@ -1,18 +1,18 @@
-using static Vanara.PInvoke.Kernel32;
+using MBI = Vanara.PInvoke.Kernel32.MEMORY_BASIC_INFORMATION;
 
 namespace MemForge.Lib
 {
     public struct MemGot
     {
-        public MemGot(string name, MEMORY_BASIC_INFORMATION info, byte[] buffer)
+        public MemGot(string name, MBI info, byte[] buffer)
         {
             Name = name;
             Info = info;
             Buffer = buffer;
         }
 
-        public string Name { get; set; }
-        public MEMORY_BASIC_INFORMATION Info { get; set; }
-        public byte[] Buffer { get; set; }
+        public string Name;
+        public MBI Info;
+        public byte[] Buffer;
     }
 }
