@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Linq;
-using System.Windows.Forms;
-using DevForge.UI.Resources;
-using DevForge.Lib.Common;
-using DevForge.Lib.Messages.Impl;
-using DevForge.Lib.High;
-using DevForge.Lib.Tools;
-using DevForge.Lib.Ponder;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading;
+using System.Windows.Forms;
+using DevForge.Lib.Common;
+using DevForge.Lib.High;
+using DevForge.Lib.Messages.Impl;
+using DevForge.Lib.Ponder;
+using DevForge.Lib.Tools;
+using DevForge.Resources;
 
 // ReSharper disable UseCollectionExpression
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable LocalizableElement
 
-namespace DevForge
+namespace DevForge.Views
 {
     public partial class DeviceForm : Form
     {

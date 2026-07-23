@@ -1,12 +1,13 @@
 ﻿using System;
-using DevForge.Lib.Common;
 using System.Collections.Generic;
-using DevForge.Lib.API;
 using System.Windows.Forms;
+using DevForge.Lib.API;
+using DevForge.Lib.Common;
+using DevForge.Views;
 
 // ReSharper disable UseCollectionExpression
 
-namespace DevForge.UI
+namespace DevForge.Tools
 {
     public static class Utils
     {

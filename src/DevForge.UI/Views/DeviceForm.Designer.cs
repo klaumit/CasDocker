@@ -1,4 +1,4 @@
-﻿namespace DevForge
+﻿namespace DevForge.Views
 {
     partial class DeviceForm
     {

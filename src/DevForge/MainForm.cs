@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using DevForge.Lib.Common;
-using DevForge.UI.Resources;
-using U = DevForge.UI.Utils;
+using DevForge.Lib.Setup;
+using DevForge.Resources;
+using U = DevForge.Tools.Utils;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable LocalizableElement

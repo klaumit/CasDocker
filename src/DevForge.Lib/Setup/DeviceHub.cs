@@ -1,14 +1,15 @@
 using System.Threading.Tasks;
+using DevForge.Lib.Common;
 using DevForge.Lib.Fakes;
 using DevForge.Lib.Legacy;
-using DevForge.Lib.Modern;
 using DevForge.Lib.Messages;
 using DevForge.Lib.Messages.Impl;
+using DevForge.Lib.Modern;
 
 // ReSharper disable UseNullPropagation
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace DevForge.Lib.Common
+namespace DevForge.Lib.Setup
 {
     public sealed class DeviceHub : AbDeviceHub
     {

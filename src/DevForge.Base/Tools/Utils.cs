@@ -3,7 +3,7 @@ using System.Linq;
 
 // ReSharper disable UseCollectionExpression
 
-namespace DevForge
+namespace DevForge.Lib.Tools
 {
     public static class Utils
     {
