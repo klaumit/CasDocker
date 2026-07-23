@@ -34,12 +34,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+        <Compile Include="Setup\DeviceHub.cs" />
     <Compile Include="Fakes\FakePort.cs" />
     <Compile Include="Modern\ModernFactory.cs" />
     <Compile Include="Modern\ModernPort.cs" />
     <Compile Include="Modern\Internals\KernelNative.cs" />
     <Compile Include="Modern\Internals\EnumDevNative.cs" />
-    <Compile Include="Common\DeviceHub.cs" />
     <Compile Include="Legacy\LegacyFactory.cs" />
     <Compile Include="Legacy\LegacyPort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

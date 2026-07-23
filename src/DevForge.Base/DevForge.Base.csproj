@@ -35,6 +35,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+        <Compile Include="Common\DeviceHub.cs" />
     <Compile Include="API\ICloseable.cs" />
     <Compile Include="API\ICommDevice.cs" />
     <Compile Include="API\ICommFactory.cs" />
