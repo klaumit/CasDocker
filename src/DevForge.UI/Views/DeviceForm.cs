@@ -11,7 +11,7 @@ using DevForge.Lib.High;
 using DevForge.Lib.Messages.Impl;
 using DevForge.Lib.Ponder;
 using DevForge.Lib.Tools;
-using DevForge.Resources;
+using DevForge.UI.Resources;
 
 // ReSharper disable UseCollectionExpression
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
