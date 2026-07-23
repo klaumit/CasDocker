@@ -11,7 +11,7 @@ namespace DevForge.Tools
 {
     public static class Utils
     {
-        public static Form Main;
+        public static Control Main;
         private static readonly List<ICommDevice> devices = new List<ICommDevice>();
 
         internal static void InvokeGui(Action action)

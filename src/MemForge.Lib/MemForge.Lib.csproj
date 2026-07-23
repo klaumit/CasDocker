@@ -47,14 +47,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceHub.cs" />
     <Compile Include="Ends.cs" />
     <Compile Include="MemAbstract.cs" />
+    <Compile Include="MemoryFactory.cs" />
+    <Compile Include="MemoryPort.cs" />
     <Compile Include="ProcStarted.cs" />
     <Compile Include="Defaults.cs" />
     <Compile Include="MemGot.cs" />
     <Compile Include="MemReader.cs" />
-	<Compile Include="MemShim.cs" />
-	<Compile Include="ByteExt.cs" />
+    <Compile Include="MemShim.cs" />
+    <Compile Include="ByteExt.cs" />
     <Compile Include="ProcExt.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="ProcWatcher.cs" />
@@ -62,6 +65,12 @@
     <Compile Include="ResTool.cs" />
     <Compile Include="WindowExt.cs" />
     <Compile Include="VanExt.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevForge.Base\DevForge.Base.csproj">
+      <Project>{d719dad6-afaa-43bb-854b-ddd6214a0785}</Project>
+      <Name>DevForge.Base</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

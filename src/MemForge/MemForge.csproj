@@ -46,6 +46,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DevForge.Base\DevForge.Base.csproj">
+      <Project>{d719dad6-afaa-43bb-854b-ddd6214a0785}</Project>
+      <Name>DevForge.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevForge.UI\DevForge.UI.csproj">
+      <Project>{c846f7a5-fc76-42f6-bfa0-aa4a7f36cef2}</Project>
+      <Name>DevForge.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MemForge.Lib\MemForge.Lib.csproj">
       <Project>{14DE83EE-BCD4-4240-B0D4-38E16EEAAACE}</Project>
       <Name>MemForge.Lib</Name>

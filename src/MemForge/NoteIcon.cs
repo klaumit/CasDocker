@@ -4,14 +4,22 @@ using System.Drawing;
 using System.Windows.Forms;
 using MemForge.Lib;
 using Vanara.PInvoke;
+using System;
+using System.Windows.Forms;
+using DevForge.Lib.Setup;
+using DevForge.UI.Resources;
+using U = DevForge.Tools.Utils;
 
 // ReSharper disable ArrangeObjectCreationWhenTypeEvident
 // ReSharper disable RedundantExplicitArrayCreation
+// ReSharper disable LocalizableElement
 
 namespace MemForge
 {
 	public sealed class NoteIcon
 	{
+		private readonly Lazy<DeviceHub> _hub = new Lazy<DeviceHub>();
+
 		internal Dictionary<uint, List<Tuple<HWND, string>>> windows;
 
 		internal NotifyIcon noteIcon;
@@ -32,8 +40,18 @@ namespace MemForge
 
 			windows = new Dictionary<uint, List<Tuple<HWND, string>>>();
             _watcher = new ProcWatcher(OnSimStarted, Defaults.Sim86, Defaults.SimSh);
+			Init();
 		}
-		
+
+		private void Init()
+		{
+			U.Main = noteMenu;
+			noteIcon.Disposed += (o, e) => U.OnExiting(o, 
+				new FormClosingEventArgs(CloseReason.FormOwnerClosing, false));
+			_hub.Value.NewDevice += U.OnNewDevice;
+			_hub.Value.StartMemory();
+		}
+
 		private ToolStripItem[] InitializeMenu()
 		{
 			var menu = new ToolStripMenuItem[] {
