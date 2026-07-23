@@ -7,7 +7,7 @@
 
   <PropertyGroup>
     <RootNamespace>DevForge</RootNamespace>
-    <AssemblyName>DevForge</AssemblyName>
+    <AssemblyName>DevForge.UI</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
