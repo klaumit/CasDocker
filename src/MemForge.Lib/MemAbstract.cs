@@ -11,7 +11,7 @@ namespace MemForge.Lib
 		public static void FindInSim(uint pid)
 		{
 			var enc = Encoding.ASCII;
-			var basePat = enc.GetBytes("###MEMORY_MARKER_START17###" + '\0');
+			var basePat = enc.GetBytes("###ML_A0");
 			var bigPattern = basePat.SwapEndian();
 			foreach (var item in MR.ReadAll(pid))
 			{

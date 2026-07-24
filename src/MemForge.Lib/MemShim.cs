@@ -7,7 +7,7 @@ namespace MemForge.Lib
 {
     public sealed class MemShim : IDisposable
     {
-        private const int MARKER_SIZE = 28;
+        private const int MARKER_SIZE = 24;
         private const int SHM_BUF_SIZE = 256;
         private const int WORD_SIZE = 2;
         private const int STRUCT_SIZE = OFF_MARKER_END + MARKER_SIZE;
