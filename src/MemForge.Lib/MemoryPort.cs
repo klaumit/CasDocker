@@ -84,6 +84,11 @@ namespace DevForge.Lib.Modern
 		{
 			if (_swap)
 			{
+				if (buffer.Length % 4 != 0)
+				{
+					var newLen = ((buffer.Length + 3) / 4) * 4;
+					Array.Resize(ref buffer, newLen);
+				}
 				buffer = buffer.SwapEndian();
 			}
 			var isOk = _shim.Write(buffer, 0, buffer.Length);

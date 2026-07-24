@@ -42,11 +42,20 @@ namespace MemForge
 
 		private void Init()
 		{
-			U.Main = noteMenu;
+			U.Main = CreateDummy();
 			noteIcon.Disposed += (o, e) => U.OnExiting(o, 
 				new FormClosingEventArgs(CloseReason.FormOwnerClosing, false));
 			_hub.Value.NewDevice += U.OnNewDevice;
 			_hub.Value.StartMemory();
+		}
+
+		private Control CreateDummy()
+		{
+			var ctrl = new Form { Text = "Dummy window" };
+			ctrl.CreateControl();
+			ctrl.Show();
+			ctrl.Shown += (o, e) => ctrl.Visible = false;
+			return ctrl;
 		}
 
 		private ToolStripItem[] InitializeMenu()
