@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
+using DevForge.Lib.Modern;
 using MR = MemForge.Lib.MemReader;
 
 namespace MemForge.Lib
@@ -14,30 +15,19 @@ namespace MemForge.Lib
 			foreach (var item in MR.ReadAll(pid))
 			{
 				if (item.Info.AllocationProtect == 0x00000004 &&
-				    item.Info.State == 0x00001000 &&
-				    item.Info.Protect == 0x00000004 &&
-				    item.Info.Type == 0x00020000 &&
-				    item.Info.RegionSize == 0x00085000)
+					item.Info.State == 0x00001000 &&
+					item.Info.Protect == 0x00000004 &&
+					item.Info.Type == 0x00020000 &&
+					item.Info.RegionSize == 0x00085000)
 				{
 					var offset = item.Buffer.IndexOf(pattern);
 					if (offset >= 0)
 					{
 						var address = IntPtr.Add(item.Info.BaseAddress, offset);
-                        string pName;
+						string pName;
 						var rwHandle = MR.OpenProc(pid, out pName, true);
 						var shim = new MemShim(rwHandle, address);
-
-						var buffer = new byte[512];
-						if (shim.Read(buffer, 0, buffer.Length) >= 1)
-						{
-							buffer.SwapEndian(true);
-							var yyy = Encoding.ASCII.GetString(buffer);
-
-							// TODO
-							Debugger.Break();
-
-							break;
-						}
+						MemoryFactory.Queue.Add(shim);
 					}
 				}
 			}

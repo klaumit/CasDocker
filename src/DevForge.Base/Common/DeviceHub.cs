@@ -27,7 +27,10 @@ namespace DevForge.Lib.Common
             var prefix = factory.Prefix;
             var port = factory.Create();
             var dev = new PocketDevice(prefix, port);
-            var h = ToHello(dev.Receive());
+            var raw = dev.Receive();
+            if (raw == null)
+                return;
+            var h = ToHello(raw);
             OnNewDevice(dev, h);
             dev.Start();
         }

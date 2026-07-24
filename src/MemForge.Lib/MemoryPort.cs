@@ -9,40 +9,44 @@ namespace DevForge.Lib.Modern
 {
 	public sealed class MemoryPort : ICommPort
 	{
-		private readonly MemShim shim;
+		private readonly MemShim _shim;
+
+		public MemoryPort(MemShim shim)
+		{
+			_shim = shim;
+		}
 
 		public void Close()
 		{
-			throw new NotImplementedException();
+			_shim.Dispose();
 		}
 
 		public void Dispose()
 		{
-			throw new NotImplementedException();
+			Close();
 		}
 
 		public bool IsOpen()
 		{
-			throw new NotImplementedException();
+			return true;
 		}
 
 		public void Open()
 		{
-			throw new NotImplementedException();
+			// NO-OP!
 		}
 
 		public byte[] ReadBytes(int count)
 		{
 			var buffer = new byte[256];
-			var got = shim.Read(buffer, 0, buffer.Length);
+			var got = _shim.Read(buffer, 0, buffer.Length);
 			Array.Resize(ref buffer, got);
-
-			throw new NotImplementedException();
+			return buffer;
 		}
 
 		public bool WriteBytes(byte[] buffer)
 		{
-			var isOk = shim.Write(buffer, 0, buffer.Length);
+			var isOk = _shim.Write(buffer, 0, buffer.Length);
 			return isOk;
 		}
 	}
