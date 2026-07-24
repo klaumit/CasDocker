@@ -13,26 +13,22 @@ namespace MemForge.Lib
         private const int MARKER_SIZE = 24;
         private const int SHM_BUF_SIZE = 256;
         private const int WORD_SIZE = 2;
-        private const int STRUCT_SIZE = OFF_MARKER_END + MARKER_SIZE;
 
         private const int OFF_MARKER_BEG = 0;
         private const int OFF_TX_READY = OFF_MARKER_BEG + MARKER_SIZE;
         private const int OFF_TX_LEN = OFF_TX_READY + WORD_SIZE;
         private const int OFF_TX_BUF = OFF_TX_LEN + WORD_SIZE;
-        private const int TX_REGION_SIZE = WORD_SIZE + WORD_SIZE + SHM_BUF_SIZE;
-
-        private const int OFF_RX_READY = OFF_TX_BUF + SHM_BUF_SIZE;
+        private const int OFF_MARKER_MID = OFF_TX_BUF + SHM_BUF_SIZE;
+        private const int OFF_RX_READY = OFF_MARKER_MID + MARKER_SIZE;
         private const int OFF_RX_LEN = OFF_RX_READY + WORD_SIZE;
         private const int OFF_RX_BUF = OFF_RX_LEN + WORD_SIZE;
         private const int OFF_MARKER_END = OFF_RX_BUF + SHM_BUF_SIZE;
 
+        private const int STRUCT_SIZE = OFF_MARKER_END + MARKER_SIZE;
+        private const int TX_REGION_SIZE = WORD_SIZE + WORD_SIZE + SHM_BUF_SIZE;      
+
         private readonly K.SafeHPROCESS _proc;
         private readonly IntPtr _baseAddr;
-
-        public const int TOTAL_SIZE = 592;
-        public const int OFFSET_BEG = 0;
-        public const int OFFSET_MID = 284;
-        public const int OFFSET_END = 568;
 
         public uint TxAddr { get; set; }
         public uint RxAddr { get; set; }
@@ -53,15 +49,15 @@ namespace MemForge.Lib
                 return false;
             const string mark = "###ML";
             var enc = Encoding.ASCII;
-            var beg = ReadString(enc, OFFSET_BEG, 24).Split('_');
+            var beg = ReadString(enc, OFF_MARKER_BEG, 24).Split('_');
             if (beg.Length != 3 || beg[0] != mark || beg[2] != "BEG15###")
                 return false;
             TxAddr = (uint)TextExt.ParseHex(beg[1], -1);
-            var mid = ReadString(enc, OFFSET_MID, 24).Split('_');
+            var mid = ReadString(enc, OFF_MARKER_MID, 24).Split('_');
             if (mid.Length != 3 || mid[0] != mark || mid[2] != "MID16###")
                 return false;
             RxAddr = (uint)TextExt.ParseHex(mid[1], -1);
-            var end = ReadString(enc, OFFSET_END, 24).Split('_');
+            var end = ReadString(enc, OFF_MARKER_END, 24).Split('_');
             if (end.Length != 3 || end[0] != mark || end[2] != "END17###")
                 return false;
             EnAddr = (uint)TextExt.ParseHex(end[1], -1);
@@ -70,7 +66,7 @@ namespace MemForge.Lib
 
 		private void PrintDump()
 		{
-            var buffer = ReadBytes(0, TOTAL_SIZE);
+            var buffer = ReadBytes(0, STRUCT_SIZE);
             File.WriteAllBytes("ms1b.bin", buffer);
             File.WriteAllText("ms1b.txt", TextExt.ToHexString(buffer));
 
