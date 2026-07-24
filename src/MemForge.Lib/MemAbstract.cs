@@ -11,7 +11,8 @@ namespace MemForge.Lib
 		public static void FindInSim(uint pid)
 		{
 			var enc = Encoding.ASCII;
-			var pattern = enc.GetBytes("###MEMORY_MARKER_START17###" + '\0').SwapEndian();
+			var basePat = enc.GetBytes("###MEMORY_MARKER_START17###" + '\0');
+			var bigPattern = basePat.SwapEndian();
 			foreach (var item in MR.ReadAll(pid))
 			{
 				if (item.Info.AllocationProtect == 0x00000004 &&
@@ -20,14 +21,15 @@ namespace MemForge.Lib
 					item.Info.Type == 0x00020000 &&
 					item.Info.RegionSize == 0x00085000)
 				{
-					var offset = item.Buffer.IndexOf(pattern);
+					var offset = item.Buffer.IndexOf(bigPattern);
 					if (offset >= 0)
 					{
 						var address = IntPtr.Add(item.Info.BaseAddress, offset);
 						string pName;
 						var rwHandle = MR.OpenProc(pid, out pName, true);
 						var shim = new MemShim(rwHandle, address);
-						MemoryFactory.Queue.Add(shim);
+						var it = Tuple.Create(shim, true);
+						MemoryFactory.Queue.Add(it);
 					}
 				}
 			}

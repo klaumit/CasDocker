@@ -11,12 +11,13 @@ namespace DevForge.Lib.Modern
 {
 	public sealed class MemoryFactory : BaseFactory
 	{
-		internal static readonly BlockingCollection<MemShim> Queue = new BlockingCollection<MemShim>();
+		internal static readonly BlockingCollection<Tuple<MemShim, bool>> Queue 
+			= new BlockingCollection<Tuple<MemShim, bool>>();
 
 		public override ICommPort Create()
 		{
-			var shim = Queue.Take();
-			var port = new MemoryPort(shim);
+			var it = Queue.Take();
+			var port = new MemoryPort(it.Item1, it.Item2);
 			return port;
 		}
 	}
