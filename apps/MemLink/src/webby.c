@@ -54,9 +54,9 @@ word MmLinkRxBufClr(void)
 
 word MmLinkPortOpen(SRL_STAT *po)
 {
-    sprintf(shm.marker_beg, "###%s_%08lX_BEG%i###", "ML", &tx_ready,   15);
-    sprintf(shm.marker_mid, "###%s_%08lX_MID%i###", "ML", &rx_ready,   16);
-    sprintf(shm.marker_end, "###%s_%08lX_END%i###", "ML", &marker_end, 17);
+    sprintf(shm.marker_beg, "###%s_%08lX_BEG%i###", "ML", &shm.tx_ready,   15);
+    sprintf(shm.marker_mid, "###%s_%08lX_MID%i###", "ML", &shm.rx_ready,   16);
+    sprintf(shm.marker_end, "###%s_%08lX_END%i###", "ML", &shm.marker_end, 17);
     return IW_SRL_NOERR;
 }
 
