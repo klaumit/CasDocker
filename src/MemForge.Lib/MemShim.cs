@@ -1,7 +1,9 @@
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using K = Vanara.PInvoke.Kernel32;
 using Vanara.PInvoke;
+using DevForge.Lib.Tools;
 
 namespace MemForge.Lib
 {
@@ -26,13 +28,28 @@ namespace MemForge.Lib
         private readonly K.SafeHPROCESS _proc;
         private readonly IntPtr _baseAddr;
 
+        public const int TOTAL_SIZE = 592;
+
         public MemShim(K.SafeHPROCESS proc, IntPtr baseAddr)
         {
             _proc = proc;
             _baseAddr = baseAddr;
+
+            PrintDump();
         }
 
-        public int Read(byte[] buffer, int offset, int count)
+		private void PrintDump()
+		{
+            var buffer = ReadBytes(0, TOTAL_SIZE);
+            File.WriteAllBytes("ms1b.bin", buffer);
+            File.WriteAllText("ms1b.txt", TextExt.ToHexString(buffer));
+
+            var array = buffer.SwapEndian();
+            File.WriteAllBytes("ms1l.bin", array);
+            File.WriteAllText("ms1l.txt", TextExt.ToHexString(array));
+		}
+
+		public int Read(byte[] buffer, int offset, int count)
         {
             var region = ReadBytes(OFF_TX_READY, TX_REGION_SIZE);
             var ready = Ends.ToUInt16(region, 0, true);
