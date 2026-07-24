@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using DevForge.Lib.API;
 using MemForge.Lib;
 
@@ -18,7 +19,10 @@ namespace DevForge.Lib.Modern
 		{
 			_shim = shim;
 			_swap = swap;
+			WaitMs = 25;
 		}
+
+		public int WaitMs { get; set; }
 
 		private void CloseTmp()
 		{
@@ -61,6 +65,8 @@ namespace DevForge.Lib.Modern
 			{
 				CloseTmp();
 				got = _shim.Read(buffer, 0, buffer.Length);
+				if (got == 0)
+					Thread.Sleep(WaitMs);
 				if (_swap)
 				{
 					buffer.SwapEndian(true);
