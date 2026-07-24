@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using K = Vanara.PInvoke.Kernel32;
 using Vanara.PInvoke;
 using DevForge.Lib.Tools;
+using System.Text;
 
 namespace MemForge.Lib
 {
@@ -29,6 +30,13 @@ namespace MemForge.Lib
         private readonly IntPtr _baseAddr;
 
         public const int TOTAL_SIZE = 592;
+        public const int OFFSET_BEG = 0;
+        public const int OFFSET_MID = 284;
+        public const int OFFSET_END = 568;
+
+        public uint TxAddr { get; set; }
+        public uint RxAddr { get; set; }
+        public uint EnAddr { get; set; }
 
         public MemShim(K.SafeHPROCESS proc, IntPtr baseAddr)
         {
@@ -36,6 +44,28 @@ namespace MemForge.Lib
             _baseAddr = baseAddr;
 
             PrintDump();
+            IsValid();
+        }
+
+        public bool IsValid()
+        {
+            if (_proc.IsNull || _proc.IsInvalid || _proc.IsClosed)
+                return false;
+            const string mark = "###ML";
+            var enc = Encoding.ASCII;
+            var beg = ReadString(enc, OFFSET_BEG, 24).Split('_');
+            if (beg.Length != 3 || beg[0] != mark || beg[2] != "BEG15###")
+                return false;
+            TxAddr = (uint)TextExt.ParseHex(beg[1], -1);
+            var mid = ReadString(enc, OFFSET_MID, 24).Split('_');
+            if (mid.Length != 3 || mid[0] != mark || mid[2] != "MID16###")
+                return false;
+            RxAddr = (uint)TextExt.ParseHex(mid[1], -1);
+            var end = ReadString(enc, OFFSET_END, 24).Split('_');
+            if (end.Length != 3 || end[0] != mark || end[2] != "END17###")
+                return false;
+            EnAddr = (uint)TextExt.ParseHex(end[1], -1);
+            return true;
         }
 
 		private void PrintDump()
@@ -77,6 +107,14 @@ namespace MemForge.Lib
             WriteWord(OFF_RX_LEN, (ushort)len);
             WriteWord(OFF_RX_READY, 1);
             return true;
+        }
+
+        private string ReadString(Encoding enc, int offset, int len)
+        {
+            var bytes = ReadBytes(offset, len);
+            bytes = bytes.SwapEndian();
+            var text = enc.GetString(bytes);
+            return text.CleanTrim();
         }
 
         private ushort ReadWord(int offset)

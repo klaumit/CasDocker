@@ -12,6 +12,11 @@ namespace DevForge.Lib.Tools
             return string.IsNullOrWhiteSpace(value) ? null : value.Trim();
         }
 
+        public static string CleanTrim(this string value)
+        {
+            return string.IsNullOrWhiteSpace(value) ? null : value.Replace('\0', ' ').Trim();
+        }
+
         public static long ParseHex(string text, long defVal)
         {
         	if (string.IsNullOrWhiteSpace(text))
