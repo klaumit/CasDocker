@@ -39,5 +39,19 @@ namespace MemForge.Lib
                 ? new[] { (byte)(val >> 8), (byte)(val & 0xFF) }
                 : new[] { (byte)(val & 0xFF), (byte)(val >> 8) };
         }
+
+        public static uint ToUInt32(byte[] data, int idx, bool bigEndian)
+        {
+            return bigEndian
+                ? (uint)((data[idx] << 24) | (data[idx + 1] << 16) | (data[idx + 2] << 8) | data[idx + 3])
+                : (uint)(data[idx] | (data[idx + 1] << 8) | (data[idx + 2] << 16) | (data[idx + 3] << 24));
+        }
+
+        public static byte[] FromUInt32(uint val, bool bigEndian)
+        {
+            return bigEndian
+                ? new[] { (byte)(val >> 24), (byte)(val >> 16), (byte)(val >> 8), (byte)(val & 0xFF) }
+                : new[] { (byte)(val & 0xFF), (byte)(val >> 8), (byte)(val >> 16), (byte)(val >> 24) };
+        }
     }
 }
