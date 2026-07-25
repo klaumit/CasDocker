@@ -102,7 +102,7 @@ namespace MemForge.Lib
             var official = origSize ?? count;
             WriteBytes(OFF_RX_BUF, payload);
             WriteDWord(OFF_RX_LEN, (uint)official);
-            WriteDWord(OFF_RX_READY, 1);
+            WriteDWord(OFF_RX_READY, (uint)official);
             return true;
         }
 
