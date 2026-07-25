@@ -38,7 +38,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-      <Compile Include="Tools\Utils.cs" />
+    <Compile Include="Tools\Utils.cs" />
     <Compile Include="Resources\ResExt.cs" />
     <Compile Include="Views\DeviceForm.cs">
       <SubType>Form</SubType>
@@ -59,6 +59,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\app.ico" />
     <EmbeddedResource Include="Resources\device.png" />
+    <EmbeddedResource Include="Views\DeviceForm.resx">
+      <DependentUpon>DeviceForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
