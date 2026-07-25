@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 using DevForge.Lib.API;
+using DevForge.Lib.Tools;
 using MemForge.Lib;
 
 // ReSharper disable UseCollectionExpression
@@ -82,6 +84,7 @@ namespace DevForge.Lib.Modern
 
 		public bool WriteBytes(byte[] buffer)
 		{
+			var size = buffer.Length;
 			if (_swap)
 			{
 				if (buffer.Length % 4 != 0)
@@ -91,7 +94,7 @@ namespace DevForge.Lib.Modern
 				}
 				buffer = buffer.SwapEndian();
 			}
-			var isOk = _shim.Write(buffer, 0, buffer.Length);
+			var isOk = _shim.Write(buffer, 0, buffer.Length, size);
 			return isOk;
 		}
 	}

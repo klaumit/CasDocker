@@ -90,7 +90,7 @@ namespace MemForge.Lib
             return (int)got;
         }
 
-        public bool Write(byte[] buffer, int offset, int count)
+        public bool Write(byte[] buffer, int offset, int count, int? origSize)
         {
             if (ReadDWord(OFF_RX_READY) != 0)
                 return false;
@@ -99,8 +99,9 @@ namespace MemForge.Lib
             var payload = new byte[SHM_BUF_SIZE];
             Array.Copy(buffer, offset, payload, 0, len);
 
+            var official = origSize ?? count;
             WriteBytes(OFF_RX_BUF, payload);
-            WriteDWord(OFF_RX_LEN, (uint)len);
+            WriteDWord(OFF_RX_LEN, (uint)official);
             WriteDWord(OFF_RX_READY, 1);
             return true;
         }
