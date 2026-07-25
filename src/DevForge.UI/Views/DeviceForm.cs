@@ -150,7 +150,9 @@ namespace DevForge.Views
         private void SendLive()
         {
             var dev = _args.Device;
-            dev.Send(new Alive("5A"));
+            var aliveMs = waitUpd.Value;
+            var hex = TextExt.ToHexString(new byte[] { (byte)aliveMs });
+            dev.Send(new Alive(hex));
         }
 
         private void keepLiveBtn_Click(object sender, EventArgs e)

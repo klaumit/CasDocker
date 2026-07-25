@@ -58,6 +58,8 @@
 			this.label15 = new System.Windows.Forms.Label();
 			this.label14 = new System.Windows.Forms.Label();
 			this.purgeBtn = new System.Windows.Forms.Button();
+			this.waitUpd = new System.Windows.Forms.NumericUpDown();
+			this.label16 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
@@ -65,6 +67,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.delayDown)).BeginInit();
 			this.groupBox1.SuspendLayout();
 			this.cstGrpBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.waitUpd)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// picBox
@@ -506,11 +509,39 @@
 			this.purgeBtn.UseVisualStyleBackColor = true;
 			this.purgeBtn.Click += new System.EventHandler(this.PurgeBtnClick);
 			// 
+			// waitUpd
+			// 
+			this.waitUpd.Location = new System.Drawing.Point(30, 277);
+			this.waitUpd.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+			this.waitUpd.Name = "waitUpd";
+			this.waitUpd.Size = new System.Drawing.Size(61, 20);
+			this.waitUpd.TabIndex = 20;
+			this.waitUpd.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Location = new System.Drawing.Point(27, 254);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(55, 13);
+			this.label16.TabIndex = 21;
+			this.label16.Text = "Alive (ms):";
+			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 353);
+			this.Controls.Add(this.label16);
+			this.Controls.Add(this.waitUpd);
 			this.Controls.Add(this.purgeBtn);
 			this.Controls.Add(this.cstGrpBox);
 			this.Controls.Add(this.groupBox1);
@@ -535,6 +566,7 @@
 			this.groupBox1.PerformLayout();
 			this.cstGrpBox.ResumeLayout(false);
 			this.cstGrpBox.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.waitUpd)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -583,5 +615,7 @@
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label gotLbl;
 		private System.Windows.Forms.Label stillLbl;
+		private System.Windows.Forms.NumericUpDown waitUpd;
+		private System.Windows.Forms.Label label16;
 	}
 }
