@@ -9,14 +9,14 @@
 typedef struct {
     char marker_beg[24];
 
-    volatile word tx_ready;
-    volatile word tx_len;
+    volatile dword tx_ready;
+    volatile dword tx_len;
     volatile byte tx_buf[SHM_BUF_SIZE];
 
     char marker_mid[24];
 
-    volatile word rx_ready;
-    volatile word rx_len;
+    volatile dword rx_ready;
+    volatile dword rx_len;
     volatile byte rx_buf[SHM_BUF_SIZE];
 
     char marker_end[24];
