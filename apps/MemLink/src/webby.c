@@ -72,27 +72,27 @@ word MmLinkPortFClose(void)
 
 word MmLinkRecvBlock(byte *data, word size, word *num)
 {
-    word n;
-    word i;
-    if (!shm.rx_ready)
+    word n, i, o;
+    if (shm.rx_ready < 1)
     {
         *num = 0;
         return IW_SRL_NODATA;
     }
     n = (shm.rx_len < size) ? shm.rx_len : size;
+    o = (shm.rx_len - shm.rx_ready);
     for (i = 0; i < n; i++)
     {
-        data[i] = shm.rx_buf[i];
+        data[i] = shm.rx_buf[o + i];
     }
     *num = n;
-    shm.rx_ready = 0;
+    shm.rx_ready = shm.rx_ready - n;
     return IW_SRL_NOERR;
 }
 
 word MmLinkSendBlock(byte *data, word size)
 {
     word i;
-    if (shm.tx_ready)
+    if (shm.tx_ready >= 1)
     {
         return IW_SRL_TRSERR;
     }
@@ -105,7 +105,7 @@ word MmLinkSendBlock(byte *data, word size)
         shm.tx_buf[i] = data[i];
     }
     shm.tx_len = size;
-    shm.tx_ready = 1;
+    shm.tx_ready = size;
     return IW_SRL_NOERR;
 }
 
