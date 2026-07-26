@@ -70,7 +70,7 @@ namespace DevForge.Lib.High
 
         public static string WriteStr(PvBuff buf)
         {
-            var hex = TextExt.ToHexString(buf.Bytes);
+            var hex = buf.Bytes.ToHexString();
             var txt = string.Format("{0:X4}|{1:X2}|{2:X4}|{3:X4}|{4:X4}|{5}",
                 buf.Src, buf.Bank, buf.Seg, buf.Off, buf.Size, hex);
             return txt;

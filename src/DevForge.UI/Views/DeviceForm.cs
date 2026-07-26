@@ -151,7 +151,7 @@ namespace DevForge.Views
         {
             var dev = _args.Device;
             var aliveMs = waitUpd.Value;
-            var hex = TextExt.ToHexString(new byte[] { (byte)aliveMs });
+            var hex = new byte[] { (byte)aliveMs }.ToHexString();
             dev.Send(new Alive(hex));
         }
 
@@ -188,14 +188,12 @@ namespace DevForge.Views
             if (_info.Cpu == PvCpu.X86)
             {
             	var calls = MemMap86Gen.GenerateCalls(maxChunkSize);
-                _reads = CollExt.ToDict(calls,
-                    k => k.Get86Address(), v => new Read(v));
+                _reads = calls.ToDict(k => k.Get86Address(), v => new Read(v));
             }
             else if (_info.Cpu == PvCpu.SH3)
             {
             	var calls = MemMapSHGen.GenerateCalls(maxChunkSize);
-                _reads = CollExt.ToDict(calls,
-                    k => k.GetSHAddress(), v => new Read(v));
+                _reads = calls.ToDict(k => k.GetSHAddress(), v => new Read(v));
             }
             DoBackup();
         }
@@ -293,8 +291,7 @@ namespace DevForge.Views
             {
             	var addrs = MemMapSHGen.Iter(from, maxChunkSize, pkgs);
             	var calls = MemMapSHGen.GenerateCalls(maxChunkSize, addrs);
-                _reads = CollExt.ToDict(calls,
-                    k => k.GetSHAddress(), v => new Read(v));
+                _reads = calls.ToDict(k => k.GetSHAddress(), v => new Read(v));
             }
             DoBackup();
         }

@@ -35,10 +35,16 @@ namespace DevForge.Lib.Tools
             return path.Replace('?', '-');
         }
 
-        public static string ToHexString(byte[] bytes)
+        public static string ToHexString(this byte[] bytes, bool lower = false, int? split = null)
         {
             if (bytes == null) return null;
-            return string.Join("", bytes.Select(b => b.ToString("X2")));
+            return string.Join("", bytes.Select((b, i) =>
+            {
+                var txt = b.ToString(lower ? "x2" : "X2");
+                if (split != null && i != 0 && i % split == 0)
+                    txt = " " + txt;
+                return txt;
+            }));
         }
 
         public static byte[] FromHexString(string hex)
