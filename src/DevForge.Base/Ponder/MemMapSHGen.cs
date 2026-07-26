@@ -69,8 +69,8 @@ namespace DevForge.Lib.Ponder
             foreach (var addr in addresses)
             {
                 var length = maxChunkSize;
-                ushort seg = (ushort)(addr >> 16);
-                ushort off = (ushort)(addr & 0xFFFF);
+                var seg = (ushort)(addr >> 16);
+                var off = (ushort)(addr & 0xFFFF);
                 yield return new PvBuff
                 {
                     Seg = seg, Off = off, Size = (ushort)length
