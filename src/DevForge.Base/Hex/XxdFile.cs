@@ -82,9 +82,9 @@ namespace DevForge.Lib.Common
             string line;
             while ((line = reader.ReadLine()) != null)
             {
-                var tmp = line.Split(':', 2);
+                var tmp = line.Split(new[] { ':' }, 2);
                 var addr = uint.Parse(tmp[0], NumberStyles.HexNumber);
-                tmp = tmp[1].Split("  ", 2);
+                tmp = tmp[1].Split(new[] { "  " }, 2, StringSplitOptions.None);
                 var mid = tmp[0].Replace(" ", "").Trim();
                 var raw = TextExt.FromHexString(mid);
                 var txt = tmp[1];
