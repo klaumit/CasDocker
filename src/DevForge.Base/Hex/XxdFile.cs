@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using DevForge.Lib.Tools;
 
 // ReSharper disable ConvertIfStatementToNullCoalescingAssignment
 // ReSharper disable MoveVariableDeclarationInsideLoopCondition
@@ -43,7 +41,9 @@ namespace DevForge.Lib.Hex
                 IntRange last = null;
                 foreach (var line in ReadHexLines(reader))
                 {
-                    var ir = new IntRange { Off = line.Addr, Len = (uint?)line.Raw?.Length };
+                    var addr = line.GetAddr();
+                    var len = (uint?)line.Raw?.Length;
+                    var ir = new IntRange { Off = addr, Len = len };
                     var off = ir.Off ?? 0;
                     if (last != null)
                     {
@@ -76,10 +76,9 @@ namespace DevForge.Lib.Hex
             while ((line = reader.ReadLine()) != null)
             {
                 var tmp = line.Split(new[] { ':' }, 2);
-                var addr = uint.Parse(tmp[0], NumberStyles.HexNumber);
+                var addr = tmp[0];
                 tmp = tmp[1].Split(new[] { "  " }, 2, StringSplitOptions.None);
-                var mid = tmp[0].Replace(" ", "").Trim();
-                var raw = TextExt.FromHexString(mid);
+                var raw = tmp[0];
                 var txt = tmp[1];
                 var obj = new XxdLine { Addr = addr, Raw = raw, Txt = txt };
                 yield return obj;
