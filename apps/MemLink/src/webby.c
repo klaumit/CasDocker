@@ -4,6 +4,11 @@
 #include "l_define.h"
 #include "l_libc.h"
 
+#ifdef __HITACHI__
+#else
+    #include <stdrom.h>
+#endif
+
 #define SHM_BUF_SIZE 256
 
 typedef struct {
@@ -54,9 +59,15 @@ word MmLinkRxBufClr(void)
 
 word MmLinkPortOpen(SRL_STAT *po)
 {
+    #ifdef __HITACHI__
     sprintf(shm.marker_beg, "###%s_%08lX_BEG%i###", "ML", &shm.tx_ready,   15);
     sprintf(shm.marker_mid, "###%s_%08lX_MID%i###", "ML", &shm.rx_ready,   16);
     sprintf(shm.marker_end, "###%s_%08lX_END%i###", "ML", &shm.marker_end, 17);
+    #else
+    sprintf(shm.marker_beg, "###%s_%04X%04X_BEG%i###", "ML", FP_SEG(&shm.tx_ready),   FP_OFF(&shm.tx_ready),   12);
+    sprintf(shm.marker_mid, "###%s_%04X%04X_MID%i###", "ML", FP_SEG(&shm.rx_ready),   FP_OFF(&shm.rx_ready),   13);
+    sprintf(shm.marker_end, "###%s_%04X%04X_END%i###", "ML", FP_SEG(&shm.marker_end), FP_OFF(&shm.marker_end), 14);
+    #endif
     return IW_SRL_NOERR;
 }
 
