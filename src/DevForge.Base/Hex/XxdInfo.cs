@@ -4,7 +4,7 @@ using System.Collections.Generic;
 // ReSharper disable MoveVariableDeclarationInsideLoopCondition
 // ReSharper disable UseStringInterpolation
 
-namespace DevForge.Lib.Common
+namespace DevForge.Lib.Hex
 {
     public sealed class XxdInfo
     {
