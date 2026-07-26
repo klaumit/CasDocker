@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -88,7 +89,9 @@ namespace MemForge
 		{
 			foreach (var pid in windows.Keys)
 			{
-				MemReader.WriteFullDump(pid);
+				var item = windows[pid].Last();
+				var wName = item.Item2;
+				MemReader.WriteFullDump(pid, wName);
 			}
 		}
 

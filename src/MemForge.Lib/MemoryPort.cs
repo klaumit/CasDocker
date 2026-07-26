@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using System.Threading;
 using DevForge.Lib.API;
-using DevForge.Lib.Tools;
 using MemForge.Lib;
 
 // ReSharper disable UseCollectionExpression
@@ -14,14 +12,14 @@ namespace DevForge.Lib.Modern
 	public sealed class MemoryPort : ICommPort
 	{
 		private readonly MemShim _shim;
-		private readonly bool _swap;
+		private readonly ByteOrder _ord;
 		private MemoryStream _tmp;
 
-		public MemoryPort(MemShim shim, bool swap)
+		public MemoryPort(MemShim shim, ByteOrder ord)
 		{
 			_shim = shim;
-			_swap = swap;
-			WaitMs = 25;
+			_ord = ord;
+			WaitMs = 15;
 		}
 
 		public int WaitMs { get; set; }
@@ -69,7 +67,7 @@ namespace DevForge.Lib.Modern
 				got = _shim.Read(buffer, 0, buffer.Length);
 				if (got == 0)
 					Thread.Sleep(WaitMs);
-				if (_swap)
+				if (_ord == ByteOrder.BigEndian)
 				{
 					buffer.SwapEndian(true);
 				}
@@ -85,7 +83,7 @@ namespace DevForge.Lib.Modern
 		public bool WriteBytes(byte[] buffer)
 		{
 			var size = buffer.Length;
-			if (_swap)
+			if (_ord == ByteOrder.BigEndian)
 			{
 				if (buffer.Length % 4 != 0)
 				{

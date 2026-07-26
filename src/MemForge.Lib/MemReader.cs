@@ -94,7 +94,7 @@ namespace MemForge.Lib
 			}
 		}
 
-		public static void WriteFullDump(uint pid)
+		public static void WriteFullDump(uint pid, string wName)
 		{
 			var bName = string.Format("proc_{0}_dmp", pid);
 			var fName = bName + ".bin";
@@ -104,7 +104,11 @@ namespace MemForge.Lib
 				{
 					var debug = Encoding.ASCII.GetBytes(item.Info.ToStr() + "\r\n");
 					outPut.Write(debug, 0, debug.Length);
-					var array = item.Buffer.SwapEndian(true);
+					byte[] array;
+					if (wName.Contains("SIM3022"))
+						array = item.Buffer;
+					else
+						array = item.Buffer.SwapEndian(true);
 					outPut.Write(array, 0, item.Buffer.Length);
 				}
 				outPut.Flush();

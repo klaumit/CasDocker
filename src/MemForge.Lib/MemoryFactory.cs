@@ -11,8 +11,8 @@ namespace DevForge.Lib.Modern
 {
 	public sealed class MemoryFactory : BaseFactory
 	{
-		internal static readonly BlockingCollection<Tuple<MemShim, bool>> Queue 
-			= new BlockingCollection<Tuple<MemShim, bool>>();
+		internal static readonly BlockingCollection<Tuple<MemShim, ByteOrder>> Queue 
+			= new BlockingCollection<Tuple<MemShim, ByteOrder>>();
 
 		public override ICommPort Create()
 		{

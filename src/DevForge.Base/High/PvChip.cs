@@ -4,6 +4,8 @@ namespace DevForge.Lib.High
     {
         Unknown = 0,
 
+        Z481,
+
         G500,
 
         G502
