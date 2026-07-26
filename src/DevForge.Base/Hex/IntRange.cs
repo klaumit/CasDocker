@@ -9,7 +9,6 @@ using DevForge.Lib.API;
 using DevForge.Lib.Messages;
 using System.Linq;
 using System.Text;
-using DevForge.Lib.Tools;
 using Newtonsoft.Json;
 using F = System.IO.File;
 
@@ -19,16 +18,18 @@ using F = System.IO.File;
 
 namespace DevForge.Lib.Common
 {
-    public sealed class XxdLine
+    public sealed class IntRange
     {
-        public uint? Addr { get; set; }
-        public byte[] Raw { get; set; }
-        public string Txt { get; set; }
+        public uint? Off { get; set; }
+        public uint? Len { get; set; }
+        public uint? Next => Off + Len;
+
+        public string Desc
+            => string.Format("{0:X8} + {1:X8} --> {2:X8}", Off, Len, Next);
 
         public override string ToString()
         {
-            return string.Format("{0:X8}: {1}  {2}",
-                Addr, Raw.ToHexString(true, 2), Txt);
+            return Desc;
         }
     }
 }
