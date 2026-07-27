@@ -1,8 +1,10 @@
+using DevForge.Lib.API;
+
 // ReSharper disable UseStringInterpolation
 
 namespace DevForge.Lib.Ponder
 {
-    public sealed class PvBuff
+    public sealed class PvBuff : IPvBuff
     {
         public ushort Src { get; set; }
         public byte Bank { get; set; }

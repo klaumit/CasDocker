@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DevForge.Lib.API;
 
 // ReSharper disable ConvertIfStatementToNullCoalescingExpression
 
@@ -20,11 +21,22 @@ namespace DevForge.Lib.Ponder
                 yield return addr;
         }
 
-        public static uint Get86Address(this PvBuff call)
+        public static uint Get86Address(this IPvBuff call)
         {
-            var addrIndex = (call.Src - AddrStart) / 2;
-            var segIndex = call.Seg == Segments[1] ? 1 : 0;
-            return (uint)(((uint)addrIndex * 2 + segIndex) * SegmentSize + call.Off);
+            var addrIdx = (call.Src - AddrStart) / 2;
+            var segIdx = call.Seg == Segments[1] ? 1 : 0;
+            return (uint)(((uint)addrIdx * 2 + segIdx) * SegmentSize + call.Off);
+        }
+
+        public static PvBuff From86Address(this uint spaceAddr, byte bank = 3, ushort size = 64)
+        {
+            var bucket = spaceAddr / SegmentSize;
+            var off = spaceAddr % SegmentSize;
+            var segIdx = (int)(bucket % 2);
+            var addrIdx = bucket / 2;
+            var seg = (ushort)Segments[segIdx];
+            var src = (ushort)(addrIdx * 2 + AddrStart);
+            return new PvBuff { Src = src, Bank = bank, Seg = seg, Off = (ushort)off, Size = size };
         }
 
         public static IEnumerable<string> Print86Hex(this PvBuff buff)
