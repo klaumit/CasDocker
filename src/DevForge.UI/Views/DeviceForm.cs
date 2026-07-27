@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using DevForge.Lib.Common;
+using DevForge.Lib.Hex;
 using DevForge.Lib.High;
 using DevForge.Lib.Messages.Impl;
 using DevForge.Lib.Ponder;
@@ -261,36 +262,37 @@ namespace DevForge.Views
         private long GetCustomLimits()
         {
         	var from = GetCustomFrom();
-        	var to = TextExt.ParseHex(toBox.Text, 0);
+        	var to = GetCustomTo();
         	var diff = to - from;
         	return diff;
         }
-        
+
+        private long GetCustomTo()
+        {
+            return TextExt.ParseHex(toBox.Text, 0);
+        }
+
         private long GetCustomFrom()
         {
         	return TextExt.ParseHex(fromBox.Text, 0);
         }
-        
+
         private void CustomBtnClick(object sender, EventArgs e)
         {
-        	var maxChunkSize = GetPkgLen();
-        	var from = (uint) GetCustomFrom();
-        	var size = GetCustomLimits();
-        	var pkgs = (int)( size / maxChunkSize );
+            var maxChunkSize = GetPkgLen();
+            var from = (uint)GetCustomFrom();
+            var to = (uint)GetCustomTo();
+            var range = Ranges.Create(from, to);
             if (_info.Cpu == PvCpu.X86)
             {
-            	// TODO
-            	return;
-            	
-            	/*
-                _reads = CollExt.ToDict(MemMap86Gen.GenerateCalls(maxChunkSize),
-                    k => k.Get86Address(), v => new Read(v));
-            	*/
+                var addrs = range.Iterate(maxChunkSize);
+                var calls = MemMap86Gen.GenerateCalls(maxChunkSize, addrs);
+                _reads = calls.ToDict(k => k.Get86Address(), v => new Read(v));
             }
             else if (_info.Cpu == PvCpu.SH3)
             {
-            	var addrs = MemMapSHGen.Iter(from, maxChunkSize, pkgs);
-            	var calls = MemMapSHGen.GenerateCalls(maxChunkSize, addrs);
+                var addrs = range.Iterate(maxChunkSize);
+                var calls = MemMapSHGen.GenerateCalls(maxChunkSize, addrs);
                 _reads = calls.ToDict(k => k.GetSHAddress(), v => new Read(v));
             }
             DoBackup();

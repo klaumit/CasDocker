@@ -46,9 +46,8 @@ namespace DevForge.Lib.Ponder
             return MemMapGen.PrintHexDump(buff.Get86Address(), array);
         }
 
-        public static List<PvBuff> GenerateCalls(int maxChunkSize)
+        public static IEnumerable<PvBuff> GenerateCalls(int maxChunkSize)
         {
-            var calls = new List<PvBuff>();
             foreach (var addr in GetAddresses())
             foreach (var seg in Segments)
             {
@@ -57,15 +56,25 @@ namespace DevForge.Lib.Ponder
                 {
                     var remaining = SegmentSize - offset;
                     var length = Math.Min(maxChunkSize, remaining);
-                    calls.Add(new PvBuff
+                    yield return new PvBuff
                     {
                         Src = (ushort)addr, Bank = DefaultBank, Seg = (ushort)seg,
                         Off = (ushort)offset, Size = (ushort)length
-                    });
+                    };
                     offset += length;
                 }
             }
-            return calls;
         }
-    }
+
+        public static IEnumerable<PvBuff> GenerateCalls(int maxChunkSize,
+                                                IEnumerable<uint> addresses)
+        {
+            foreach (var addr in addresses)
+            {
+                var length = (ushort)maxChunkSize;
+                var buff = From86Address(addr, DefaultBank, length);
+                yield return buff;
+            }
+        }
+	}
 }

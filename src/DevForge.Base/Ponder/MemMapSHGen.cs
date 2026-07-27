@@ -65,7 +65,6 @@ namespace DevForge.Lib.Ponder
         public static IEnumerable<PvBuff> GenerateCalls(int maxChunkSize, 
                                                 IEnumerable<uint> addresses)
         {
-            var calls = new List<PvBuff>();
             foreach (var addr in addresses)
             {
                 var length = maxChunkSize;

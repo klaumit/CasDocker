@@ -41,6 +41,12 @@
     <Compile Include="API\ICommFactory.cs" />
     <Compile Include="API\ICommPort.cs" />
 	<Compile Include="API\IPvBuff.cs" />
+	<Compile Include="Hex\IntRange.cs" />
+	<Compile Include="Hex\Ranges.cs" />
+	<Compile Include="Hex\XxdFile.cs" />
+	<Compile Include="Hex\XxdInfo.cs" />
+	<Compile Include="Hex\XxdLine.cs" />
+	<Compile Include="Hex\XxdStat.cs" />	
     <Compile Include="Common\BaseFactory.cs" />
     <Compile Include="Common\PocketDevice.cs" />
     <Compile Include="Common\CommExt.cs" />
