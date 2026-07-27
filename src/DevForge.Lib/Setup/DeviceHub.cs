@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DevForge.Lib.Common;
 using DevForge.Lib.Fakes;
@@ -35,15 +36,26 @@ namespace DevForge.Lib.Setup
             DoOnePort(factory);
         }
 
-        public void StartFake()
-        {
+		public void StartFake86()
+		{
             var factory = new FakePort();
             factory.Open();
             factory.WriteMessage(
-                new Hello("app=Fake;cpu=X86;comm=Unknown;area=Unknown;ver=1972030723590103;chip=Unknown;mem=42000")
+                new Hello("app=Fake;cpu=X86;comm=Unknown;area=Unknown;ver=1972030723590104;chip=Unknown;mem=42000")
             );
             factory.Rewind();
             DoOnePort(factory);
-        }
-    }
+		}
+
+		public void StartFakeSH()
+		{
+            var factory = new FakePort();
+            factory.Open();
+            factory.WriteMessage(
+                new Hello("app=Fake;cpu=SH3;comm=Unknown;area=Unknown;ver=1972030723590105;chip=Unknown;mem=42000")
+            );
+            factory.Rewind();
+            DoOnePort(factory);
+		}
+	}
 }

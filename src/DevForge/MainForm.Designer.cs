@@ -18,8 +18,9 @@
 			this.quitBtn = new System.Windows.Forms.Button();
 			this.tryFind1Btn = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.fakeUsbBtn = new System.Windows.Forms.Button();
+			this.fakeSerBtn = new System.Windows.Forms.Button();
 			this.tryFind2Btn = new System.Windows.Forms.Button();
-			this.fakeBtn = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -45,16 +46,37 @@
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.Controls.Add(this.fakeBtn);
+			this.groupBox1.Controls.Add(this.fakeUsbBtn);
+			this.groupBox1.Controls.Add(this.fakeSerBtn);
 			this.groupBox1.Controls.Add(this.tryFind2Btn);
 			this.groupBox1.Controls.Add(this.tryFind1Btn);
 			this.groupBox1.Controls.Add(this.quitBtn);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(283, 103);
+			this.groupBox1.Size = new System.Drawing.Size(283, 138);
 			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Monitor";
+			// 
+			// fakeUsbBtn
+			// 
+			this.fakeUsbBtn.Location = new System.Drawing.Point(147, 98);
+			this.fakeUsbBtn.Name = "fakeUsbBtn";
+			this.fakeUsbBtn.Size = new System.Drawing.Size(67, 21);
+			this.fakeUsbBtn.TabIndex = 6;
+			this.fakeUsbBtn.Text = "Fake SH";
+			this.fakeUsbBtn.UseVisualStyleBackColor = true;
+			this.fakeUsbBtn.Click += new System.EventHandler(this.fakeUsbBtn_Click);
+			// 
+			// fakeSerBtn
+			// 
+			this.fakeSerBtn.Location = new System.Drawing.Point(74, 98);
+			this.fakeSerBtn.Name = "fakeSerBtn";
+			this.fakeSerBtn.Size = new System.Drawing.Size(67, 21);
+			this.fakeSerBtn.TabIndex = 5;
+			this.fakeSerBtn.Text = "Fake 86";
+			this.fakeSerBtn.UseVisualStyleBackColor = true;
+			this.fakeSerBtn.Click += new System.EventHandler(this.fakeSerBtn_Click);
 			// 
 			// tryFind2Btn
 			// 
@@ -66,21 +88,11 @@
 			this.tryFind2Btn.UseVisualStyleBackColor = true;
 			this.tryFind2Btn.Click += new System.EventHandler(this.tryFind2Btn_Click);
 			// 
-			// fakeBtn
-			// 
-			this.fakeBtn.Location = new System.Drawing.Point(131, 74);
-			this.fakeBtn.Name = "fakeBtn";
-			this.fakeBtn.Size = new System.Drawing.Size(29, 23);
-			this.fakeBtn.TabIndex = 3;
-			this.fakeBtn.Text = "T";
-			this.fakeBtn.UseVisualStyleBackColor = true;
-			this.fakeBtn.Click += new System.EventHandler(this.fakeBtn_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(305, 128);
+			this.ClientSize = new System.Drawing.Size(305, 162);
 			this.Controls.Add(this.groupBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
@@ -96,7 +108,8 @@
         private System.Windows.Forms.Button tryFind1Btn;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button tryFind2Btn;
-		private System.Windows.Forms.Button fakeBtn;
+		private System.Windows.Forms.Button fakeUsbBtn;
+		private System.Windows.Forms.Button fakeSerBtn;
 	}
 }
 
