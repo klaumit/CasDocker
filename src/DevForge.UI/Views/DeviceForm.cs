@@ -210,7 +210,8 @@ namespace DevForge.Views
             }
             _packStill = _reads.Count;
             _packGot = 0;
-            var existing = File.Exists(xxdFile) ? File.ReadLines(xxdFile, Encoding.UTF8) : new string[0];
+            var xxd = new XxdFile(xxdFile);
+            xxd.ReadLines();
             foreach (var line in existing)
             {
                 if (string.IsNullOrWhiteSpace(line))
