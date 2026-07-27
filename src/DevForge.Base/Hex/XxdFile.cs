@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using F = System.IO.File;
 
 // ReSharper disable ConvertIfStatementToNullCoalescingAssignment
 // ReSharper disable MoveVariableDeclarationInsideLoopCondition
@@ -26,6 +27,7 @@ namespace DevForge.Lib.Hex
         public void ReadLines()
         {
             var enc = Encoding.UTF8;
+            if (!F.Exists(File)) F.WriteAllBytes(File, new byte[0]);
             using (var reader = new StreamReader(File, enc))
             {
                 Stats.Read();

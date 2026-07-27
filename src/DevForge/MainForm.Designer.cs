@@ -60,7 +60,7 @@
 			// 
 			// fakeUsbBtn
 			// 
-			this.fakeUsbBtn.Location = new System.Drawing.Point(147, 98);
+			this.fakeUsbBtn.Location = new System.Drawing.Point(147, 102);
 			this.fakeUsbBtn.Name = "fakeUsbBtn";
 			this.fakeUsbBtn.Size = new System.Drawing.Size(67, 21);
 			this.fakeUsbBtn.TabIndex = 6;
@@ -70,7 +70,7 @@
 			// 
 			// fakeSerBtn
 			// 
-			this.fakeSerBtn.Location = new System.Drawing.Point(74, 98);
+			this.fakeSerBtn.Location = new System.Drawing.Point(74, 102);
 			this.fakeSerBtn.Name = "fakeSerBtn";
 			this.fakeSerBtn.Size = new System.Drawing.Size(67, 21);
 			this.fakeSerBtn.TabIndex = 5;
