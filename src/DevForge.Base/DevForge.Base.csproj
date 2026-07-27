@@ -35,11 +35,12 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-        <Compile Include="Common\DeviceHub.cs" />
+        <Compile Include="Common\AbDeviceHub.cs" />
     <Compile Include="API\ICloseable.cs" />
     <Compile Include="API\ICommDevice.cs" />
     <Compile Include="API\ICommFactory.cs" />
     <Compile Include="API\ICommPort.cs" />
+	<Compile Include="API\IPvBuff.cs" />
     <Compile Include="Common\BaseFactory.cs" />
     <Compile Include="Common\PocketDevice.cs" />
     <Compile Include="Common\CommExt.cs" />
