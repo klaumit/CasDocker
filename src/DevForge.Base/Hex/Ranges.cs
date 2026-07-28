@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using DevForge.Lib.Messages.Impl;
 using DevForge.Lib.Tools;
 
 namespace DevForge.Lib.Hex
@@ -29,5 +31,17 @@ namespace DevForge.Lib.Hex
                 addr = (uint)(addr + step);
             }
         }
-    }
+
+        public static IEnumerable<IntRange> Loop(this XxdFile xxd)
+        {
+            foreach (var range in xxd.Stats.Info.Ranges)
+                yield return range.Value;
+        }
+
+		public static IEnumerable<uint> Intersect(this IntRange range, IEnumerable<uint> values)
+		{
+            var found = values.SkipWhile(k => k < range.Off).TakeWhile(k => k <= range.Next);
+            return found;
+		}
+	}
 }

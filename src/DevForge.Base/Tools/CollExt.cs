@@ -5,12 +5,12 @@ namespace DevForge.Lib.Tools
 {
 	public static class CollExt
 	{
-		public static Dictionary<K, V> ToDict<T, K, V>(
+		public static SortedDictionary<K, V> ToDict<T, K, V>(
 			this IEnumerable<T> items,
 			Func<T, K> keyFunc, Func<T, V> valFunc,
 			Func<K, bool> accept = null)
 		{
-			var dict = new Dictionary<K, V>();
+			var dict = new SortedDictionary<K, V>();
 			foreach (var item in items)
 			{
 				var key = keyFunc(item);

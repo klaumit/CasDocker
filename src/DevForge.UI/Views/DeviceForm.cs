@@ -26,7 +26,7 @@ namespace DevForge.Views
         private PvInfo _info;
         private JsonLines _log;
         private StreamWriter _got;
-        private Dictionary<uint, Read> _reads;
+        private SortedDictionary<uint, Read> _reads;
         private long _packGot;
         private long _packStill;
         private int _packSize = 64;
@@ -198,7 +198,7 @@ namespace DevForge.Views
             }
             DoBackup();
         }
-        
+
         private void DoBackup()
         {
             var xxdFile = GetLogName(_info, ".xxd");
@@ -212,13 +212,10 @@ namespace DevForge.Views
             _packGot = 0;
             var xxd = new XxdFile(xxdFile);
             xxd.ReadLines();
-            foreach (var line in existing)
+            var allKeys = _reads.Keys.ToArray();
+            foreach (var range in xxd.Loop())
             {
-                if (string.IsNullOrWhiteSpace(line))
-                    continue;
-                var tmp = line.Split(new[] { ':' }, 2);
-                var addr = uint.Parse(tmp[0], NumberStyles.HexNumber);
-                if (_reads.ContainsKey(addr))
+                foreach (var addr in Ranges.Intersect(range, allKeys))
                 {
                     _reads.Remove(addr);
                     MarkOne(update: false);
