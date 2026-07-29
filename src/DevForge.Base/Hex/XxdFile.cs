@@ -13,8 +13,8 @@ namespace DevForge.Lib.Hex
 {
     public sealed class XxdFile
     {
-        public string File { get; }
-        public XxdStat Stats { get; }
+        public string File { get; private set; }
+        public XxdStat Stats { get; private set; }
 
         public XxdFile(string file)
         {
@@ -44,7 +44,7 @@ namespace DevForge.Lib.Hex
                 foreach (var line in ReadHexLines(reader))
                 {
                     var addr = line.GetAddr();
-                    var len = (uint?)line.Raw?.Length;
+                    var len = (uint?)line.Raw.Length;
                     var ir = new IntRange { Off = addr, Len = len };
                     var off = ir.Off ?? 0;
                     if (last != null)

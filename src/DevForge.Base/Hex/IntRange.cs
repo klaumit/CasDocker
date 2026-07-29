@@ -9,10 +9,14 @@ namespace DevForge.Lib.Hex
     {
         public uint? Off { get; set; }
         public uint? Len { get; set; }
-        public uint? Next => Off + Len;
+        public uint? Next { get { return Off + Len; } }
 
         public string Desc
-            => string.Format("{0:X8} + {1:X8} --> {2:X8}", Off, Len, Next);
+        {
+        	get { 
+        		return string.Format("{0:X8} + {1:X8} --> {2:X8}", Off, Len, Next);
+        	}
+        }
 
         public override string ToString()
         {

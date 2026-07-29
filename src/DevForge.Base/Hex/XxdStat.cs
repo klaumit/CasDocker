@@ -11,7 +11,7 @@ namespace DevForge.Lib.Hex
 {
     public sealed class XxdStat
     {
-        public string File { get; }
+        public string File { get; private set; }
         public XxdInfo Info { get; private set; }
 
         public XxdStat(string file)
@@ -36,8 +36,9 @@ namespace DevForge.Lib.Hex
         public override string ToString()
         {
             var name = Path.GetFileNameWithoutExtension(File);
+            var rangeCount = Info.Ranges == null ? 0 : Info.Ranges.Count;
             return string.Format("[Info] '{0}' at {1} => {2} range(s)",
-                name, Info.Pos, Info.Ranges?.Count ?? 0);
+                name, Info.Pos, rangeCount);
         }
     }
 }
