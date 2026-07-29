@@ -35,29 +35,30 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-        <Compile Include="Common\AbDeviceHub.cs" />
+    <Compile Include="Common\AbDeviceHub.cs" />
     <Compile Include="API\ICloseable.cs" />
     <Compile Include="API\ICommDevice.cs" />
     <Compile Include="API\ICommFactory.cs" />
     <Compile Include="API\ICommPort.cs" />
-	<Compile Include="API\IPvBuff.cs" />
-	<Compile Include="Hex\IntRange.cs" />
-	<Compile Include="Hex\Ranges.cs" />
-	<Compile Include="Hex\XxdFile.cs" />
-	<Compile Include="Hex\XxdInfo.cs" />
-	<Compile Include="Hex\XxdLine.cs" />
-	<Compile Include="Hex\XxdStat.cs" />	
+    <Compile Include="API\IPvBuff.cs" />
+    <Compile Include="Hex\IntRange.cs" />
+    <Compile Include="Hex\Ranges.cs" />
+    <Compile Include="Hex\XxdFile.cs" />
+    <Compile Include="Hex\XxdInfo.cs" />
+    <Compile Include="Hex\XxdLine.cs" />
+    <Compile Include="Hex\XxdStat.cs" />
     <Compile Include="Common\BaseFactory.cs" />
     <Compile Include="Common\PocketDevice.cs" />
     <Compile Include="Common\CommExt.cs" />
     <Compile Include="Common\Checking.cs" />
     <Compile Include="Common\DeviceFoundArgs.cs" />
     <Compile Include="Common\GotMessageArgs.cs" />
+    <Compile Include="Resources\ResTool.cs" />
     <Compile Include="Tools\TextExt.cs" />
     <Compile Include="Tools\JsonExt.cs" />
     <Compile Include="Tools\CollExt.cs" />
     <Compile Include="Tools\JsonLines.cs" />
-    <Compile Include="Tools\Utils.cs" />	
+    <Compile Include="Tools\Utils.cs" />
     <Compile Include="High\Parsers.cs" />
     <Compile Include="High\PvInfo.cs" />
     <Compile Include="High\PvCpu.cs" />
@@ -66,9 +67,9 @@
     <Compile Include="High\PvArea.cs" />
     <Compile Include="High\PvVer.cs" />
     <Compile Include="High\PvChip.cs" />
-	<Compile Include="Ponder\MemMap86Gen.cs" />
-	<Compile Include="Ponder\MemMapSHGen.cs" />
-	<Compile Include="Ponder\MemMapGen.cs" />	
+    <Compile Include="Ponder\MemMap86Gen.cs" />
+    <Compile Include="Ponder\MemMapSHGen.cs" />
+    <Compile Include="Ponder\MemMapGen.cs" />
     <Compile Include="Ponder\PvBuff.cs" />
     <Compile Include="Messages\Impl\Alive.cs" />
     <Compile Include="Messages\Impl\BaseTxt.cs" />
@@ -87,6 +88,10 @@
     <Reference Include="ByteSizeLib.dll">
       <HintPath>..\deps\net40\ByteSizeLib.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PocLink.json" />
+	<None Include="Resources\MemLink.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
