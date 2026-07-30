@@ -44,7 +44,8 @@ namespace DevForge.Lib.Hex
                 foreach (var line in ReadHexLines(reader))
                 {
                     var addr = line.GetAddr();
-                    var len = (uint?)line.Raw.Length;
+                    var bytes = line.GetRaw();
+                    var len = (uint)bytes.Length;
                     var ir = new IntRange { Off = addr, Len = len };
                     var off = ir.Off ?? 0;
                     if (last != null)
