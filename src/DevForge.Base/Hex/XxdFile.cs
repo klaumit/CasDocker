@@ -73,7 +73,7 @@ namespace DevForge.Lib.Hex
             stats.Write();
         }
 
-        private static IEnumerable<XxdLine> ReadHexLines(StreamReader reader)
+        public static IEnumerable<XxdLine> ReadHexLines(StreamReader reader)
         {
             string line;
             while ((line = reader.ReadLine()) != null)
