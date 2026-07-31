@@ -15,6 +15,7 @@
     <PackageReference Include="ByteSize" Version="2.1.2" />
     <PackageReference Include="System.IO.Ports" Version="10.0.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
     <Reference Include="Newtonsoft.Json.dll">

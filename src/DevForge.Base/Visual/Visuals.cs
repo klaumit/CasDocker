@@ -9,12 +9,20 @@ namespace DevForge.Lib.Visual
 {
     public static class Visuals
     {
+        internal static void Fill<T>(T[] array, T value)
+        {
+            for (var i = 0; i < array.Length; i++)
+            {
+                array[i] = value;
+            }
+        }
+        
         private static double Log2(double x)
         {
             return Math.Log(x, 2);
         }
 
-        private static double Clamp(double value, double min, double max)
+        internal static double Clamp(double value, double min, double max)
         {
             if (value < min) return min;
             if (value > max) return max;
