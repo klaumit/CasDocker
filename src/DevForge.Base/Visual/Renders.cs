@@ -16,7 +16,7 @@ namespace DevForge.Lib.Visual
         public static void Render(string file, string name, out string bs)
         {
             name = Path.GetFileNameWithoutExtension(name);
-            var dest = $"{name}.png";
+            var dest = string.Format("{0}.png", name);
             if (File.Exists(dest))
             {
                 bs = null;
