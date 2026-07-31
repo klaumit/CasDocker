@@ -79,7 +79,7 @@ namespace DevForge.Views
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form_Load(object sender, EventArgs e)
         {
             Icon = ResExt.GetStream("app.ico").ToIcon();
             picBox.Image = ResExt.GetStream("device.png").ToImage();

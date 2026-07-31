@@ -46,6 +46,12 @@
     <Compile Include="Views\DeviceForm.Designer.cs">
       <DependentUpon>DeviceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\HxdForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\HxdForm.Designer.cs">
+      <DependentUpon>HxdForm.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +67,9 @@
     <EmbeddedResource Include="Resources\device.png" />
     <EmbeddedResource Include="Views\DeviceForm.resx">
       <DependentUpon>DeviceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\HxdForm.resx">
+      <DependentUpon>HxdForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

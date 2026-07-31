@@ -554,7 +554,7 @@
 			this.Controls.Add(this.picBox);
 			this.Name = "DeviceForm";
 			this.Text = "DeviceForm";
-			this.Load += new System.EventHandler(this.Form1_Load);
+			this.Load += new System.EventHandler(this.Form_Load);
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
 			this.infoBox.ResumeLayout(false);
 			this.infoBox.PerformLayout();
