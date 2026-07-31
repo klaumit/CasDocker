@@ -15,6 +15,14 @@ namespace DevForge.Lib.Visual
     {
         public static void Render(string file, string name, out string bs)
         {
+            name = Path.GetFileNameWithoutExtension(name);
+            var dest = $"{name}.png";
+            if (File.Exists(dest))
+            {
+                bs = null;
+                return;
+            }
+
             var xxd = new XxdFile(file);
             xxd.ReadLines();
             var fileLen = xxd.Stats.Info.Pos;
@@ -93,8 +101,6 @@ namespace DevForge.Lib.Visual
                     bitmap.UnlockBits(bmpData);
                 }
 
-                name = Path.GetFileNameWithoutExtension(name);
-                var dest = $"{name}.png";
                 bitmap.Save(dest);
             }
         }
