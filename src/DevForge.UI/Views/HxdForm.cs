@@ -24,6 +24,17 @@ namespace DevForge.UI.Views
 			Icon = ResExt.GetStream("app.ico").ToIcon();
 			_name = Path.GetFileNameWithoutExtension(File);
 			Text = _name;
+			SetRanges();
+		}
+
+		private void SetRanges()
+		{
+			rangeBox.Items.Clear();
+			var xxd = new XxdFile(File);
+			xxd.ReadLines();
+			var ranges = xxd.Stats.Info.Ranges;
+			foreach (var range in ranges)
+				rangeBox.Items.Add(range.Value);
 		}
 
 		private void saveAsBtn_Click(object sender, EventArgs e)
