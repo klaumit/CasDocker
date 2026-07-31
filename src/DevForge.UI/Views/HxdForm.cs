@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using DevForge.Lib.Hex;
 using DevForge.UI.Resources;
+using DevForge.UI.Tools;
 using F = System.IO.File;
 
 namespace DevForge.UI.Views
@@ -29,6 +30,7 @@ namespace DevForge.UI.Views
 
 		private void SetRanges()
 		{
+			rangeBox.Font = Fonts.SetMonospace(rangeBox.Font);
 			rangeBox.Items.Clear();
 			var xxd = new XxdFile(File);
 			xxd.ReadLines();

@@ -40,7 +40,7 @@ namespace DevForge.UI.Views
 			this.rangeBox.FormattingEnabled = true;
 			this.rangeBox.Location = new System.Drawing.Point(16, 19);
 			this.rangeBox.Name = "rangeBox";
-			this.rangeBox.Size = new System.Drawing.Size(191, 316);
+			this.rangeBox.Size = new System.Drawing.Size(237, 316);
 			this.rangeBox.TabIndex = 1;
 			// 
 			// saveAsBtn
@@ -58,7 +58,7 @@ namespace DevForge.UI.Views
 			this.groupBox1.Controls.Add(this.rangeBox);
 			this.groupBox1.Location = new System.Drawing.Point(12, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(224, 351);
+			this.groupBox1.Size = new System.Drawing.Size(268, 351);
 			this.groupBox1.TabIndex = 3;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Ranges";
