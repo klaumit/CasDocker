@@ -33,8 +33,8 @@ namespace DevForge.UI.Views
 			this.saveAsBtn = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.hexPanel = new DevForge.UI.Views.HxdPanel();
 			this.hexScroll = new System.Windows.Forms.VScrollBar();
+			this.hexPanel = new DevForge.UI.Views.HxdPanel();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -78,19 +78,23 @@ namespace DevForge.UI.Views
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Data";
 			// 
+			// hexScroll
+			// 
+			this.hexScroll.Location = new System.Drawing.Point(468, 28);
+			this.hexScroll.Maximum = 99;
+			this.hexScroll.Name = "hexScroll";
+			this.hexScroll.Size = new System.Drawing.Size(20, 477);
+			this.hexScroll.TabIndex = 1;
+			this.hexScroll.Value = 45;
+			this.hexScroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hexScroll_Scroll);
+			// 
 			// hexPanel
 			// 
+			this.hexPanel.BackColor = System.Drawing.Color.White;
 			this.hexPanel.Location = new System.Drawing.Point(17, 28);
 			this.hexPanel.Name = "hexPanel";
 			this.hexPanel.Size = new System.Drawing.Size(448, 477);
 			this.hexPanel.TabIndex = 0;
-			// 
-			// hexScroll
-			// 
-			this.hexScroll.Location = new System.Drawing.Point(468, 28);
-			this.hexScroll.Name = "hexScroll";
-			this.hexScroll.Size = new System.Drawing.Size(20, 477);
-			this.hexScroll.TabIndex = 1;
 			// 
 			// HxdForm
 			// 

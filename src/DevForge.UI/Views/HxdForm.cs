@@ -1,17 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using DevForge.Lib.Hex;
+using DevForge.Tools;
+using DevForge.UI.Core;
 using DevForge.UI.Resources;
 using DevForge.UI.Tools;
 using F = System.IO.File;
 
 namespace DevForge.UI.Views
 {
-	public partial class HxdForm : Form
+	public partial class HxdForm : Form, IHexView
 	{
 		private string _name;
+		private int _middleScroll;
 
 		public HxdForm()
 		{
@@ -22,6 +26,7 @@ namespace DevForge.UI.Views
 
 		private void Form_Load(object sender, EventArgs e)
 		{
+			_middleScroll = hexScroll.Value;
 			Icon = ResExt.GetStream("app.ico").ToIcon();
 			_name = Path.GetFileNameWithoutExtension(File);
 			Text = _name;
@@ -65,6 +70,33 @@ namespace DevForge.UI.Views
 				}
 				Process.Start(file);
 			}		
+		}
+
+		private Dictionary<ScrollEventType, int> _scrolls
+			= new Dictionary<ScrollEventType, int>();
+
+		private void hexScroll_Scroll(object sender, ScrollEventArgs e)
+		{
+			if (_scrolls.ContainsKey(e.Type))
+				return;
+			_scrolls[e.Type] = e.NewValue;
+			if (!_scrolls.ContainsKey(ScrollEventType.ThumbTrack)
+				&& e.NewValue != e.OldValue)
+				_scrolls[ScrollEventType.ThumbTrack] = e.OldValue;
+			if (e.Type == ScrollEventType.EndScroll)
+			{
+				var start = _scrolls[ScrollEventType.ThumbTrack];
+				var end = _scrolls[ScrollEventType.EndScroll];
+				var diff = end - start;
+				e.NewValue = _middleScroll;
+				_scrolls.Clear();
+				hexScroll_Scroll(diff);
+			}
+		}
+
+		private void hexScroll_Scroll(int diff)
+		{
+			Debug.WriteLine(" SCROLL => " + diff);
 		}
 	}
 }

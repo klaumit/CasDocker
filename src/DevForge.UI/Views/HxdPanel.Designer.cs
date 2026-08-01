@@ -34,7 +34,6 @@ namespace DevForge.UI.Views
 			// HxdPanel
 			// 
 			this.BackColor = System.Drawing.Color.White;
-			this.DoubleBuffered = true;
 			this.Name = "HxdPanel";
 			this.Size = new System.Drawing.Size(526, 572);
 			this.ResumeLayout(false);

@@ -1,19 +1,34 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using DevForge.UI.Core;
 using DevForge.UI.Tools;
 
 namespace DevForge.UI.Views
 {
-	public partial class HxdPanel : Panel
+	public partial class HxdPanel : UserControl
 	{
 		public HxdPanel()
 		{
 			InitializeComponent();
+			DoubleBuffered = true;
 		}
+
+		private IHexView _parent;
 
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
+			if (_parent == null)
+				_parent = GuiExt.FindParent<IHexView>(this);
+			if (_parent == null)
+				return;
+
+
+
+
+
+			/*
+
 			using (var font = Fonts.SetMonospace(Font))
 			using (var brush = new SolidBrush(Color.Black))
 			{
@@ -21,6 +36,11 @@ namespace DevForge.UI.Views
 				var size = 20;
 				var count = 16;
 				var g = e.Graphics;
+				var width = this.Width / 10;
+				var height = this.Height / 10;
+
+
+
 				var x = 0;
 				var y = 0;
 				for (var i = 0; i < 1000; i++)
@@ -39,6 +59,7 @@ namespace DevForge.UI.Views
 						break;
 				}
 			}
+			*/
 		}
 	}
 }

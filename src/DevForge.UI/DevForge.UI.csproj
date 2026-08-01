@@ -38,7 +38,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\IHexView.cs" />
     <Compile Include="Tools\Fonts.cs" />
+    <Compile Include="Tools\GuiExt.cs" />
     <Compile Include="Tools\Utils.cs" />
     <Compile Include="Resources\ResExt.cs" />
     <Compile Include="Views\DeviceForm.cs">
