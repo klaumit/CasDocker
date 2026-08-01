@@ -50,11 +50,11 @@ namespace DevForge.UI.Views
 			// 
 			// saveAsBtn
 			// 
-			this.saveAsBtn.Location = new System.Drawing.Point(73, 381);
+			this.saveAsBtn.Location = new System.Drawing.Point(90, 380);
 			this.saveAsBtn.Name = "saveAsBtn";
 			this.saveAsBtn.Size = new System.Drawing.Size(92, 23);
 			this.saveAsBtn.TabIndex = 2;
-			this.saveAsBtn.Text = "Save as";
+			this.saveAsBtn.Text = "Save as binary";
 			this.saveAsBtn.UseVisualStyleBackColor = true;
 			this.saveAsBtn.Click += new System.EventHandler(this.saveAsBtn_Click);
 			// 
@@ -74,7 +74,7 @@ namespace DevForge.UI.Views
 			this.groupBox2.Controls.Add(this.hexPanel);
 			this.groupBox2.Location = new System.Drawing.Point(286, 12);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(647, 524);
+			this.groupBox2.Size = new System.Drawing.Size(647, 545);
 			this.groupBox2.TabIndex = 4;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Data";
@@ -84,7 +84,7 @@ namespace DevForge.UI.Views
 			this.hexScroll.Location = new System.Drawing.Point(612, 28);
 			this.hexScroll.Maximum = 99;
 			this.hexScroll.Name = "hexScroll";
-			this.hexScroll.Size = new System.Drawing.Size(20, 477);
+			this.hexScroll.Size = new System.Drawing.Size(20, 498);
 			this.hexScroll.TabIndex = 1;
 			this.hexScroll.Value = 45;
 			this.hexScroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hexScroll_Scroll);
@@ -94,14 +94,14 @@ namespace DevForge.UI.Views
 			this.hexPanel.BackColor = System.Drawing.Color.White;
 			this.hexPanel.Location = new System.Drawing.Point(17, 28);
 			this.hexPanel.Name = "hexPanel";
-			this.hexPanel.Size = new System.Drawing.Size(592, 477);
+			this.hexPanel.Size = new System.Drawing.Size(592, 498);
 			this.hexPanel.TabIndex = 0;
 			// 
 			// HxdForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(945, 548);
+			this.ClientSize = new System.Drawing.Size(945, 572);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.saveAsBtn);
