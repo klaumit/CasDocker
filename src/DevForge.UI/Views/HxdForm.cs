@@ -94,11 +94,6 @@ namespace DevForge.UI.Views
 			}
 		}
 
-		private void hexScroll_Scroll(int diff)
-		{
-			Debug.WriteLine(" SCROLL => " + diff);
-		}
-
 		public IEnumerable<XxdLine> GetLines(long pos, int count)
 		{
 			var xxd = new XxdFile(File);
@@ -118,6 +113,12 @@ namespace DevForge.UI.Views
 			if (range == null)
 				return;
 			hexPanel.Pos = range.Pos;
+			hexPanel.Invalidate();
+		}
+
+		private void hexScroll_Scroll(int diff)
+		{
+			hexPanel.Pos += diff * (67 + 2);
 			hexPanel.Invalidate();
 		}
 	}
