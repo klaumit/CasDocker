@@ -44,13 +44,13 @@ namespace DevForge.UI.Views
 			this.rangeBox.FormattingEnabled = true;
 			this.rangeBox.Location = new System.Drawing.Point(16, 21);
 			this.rangeBox.Name = "rangeBox";
-			this.rangeBox.Size = new System.Drawing.Size(237, 316);
+			this.rangeBox.Size = new System.Drawing.Size(253, 329);
 			this.rangeBox.TabIndex = 1;
 			this.rangeBox.SelectedIndexChanged += new System.EventHandler(this.rangeBox_SelectedIndexChanged);
 			// 
 			// saveAsBtn
 			// 
-			this.saveAsBtn.Location = new System.Drawing.Point(90, 380);
+			this.saveAsBtn.Location = new System.Drawing.Point(757, 394);
 			this.saveAsBtn.Name = "saveAsBtn";
 			this.saveAsBtn.Size = new System.Drawing.Size(92, 23);
 			this.saveAsBtn.TabIndex = 2;
@@ -61,9 +61,9 @@ namespace DevForge.UI.Views
 			// groupBox1
 			// 
 			this.groupBox1.Controls.Add(this.rangeBox);
-			this.groupBox1.Location = new System.Drawing.Point(12, 12);
+			this.groupBox1.Location = new System.Drawing.Point(665, 12);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(268, 351);
+			this.groupBox1.Size = new System.Drawing.Size(286, 367);
 			this.groupBox1.TabIndex = 3;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Ranges";
@@ -72,7 +72,7 @@ namespace DevForge.UI.Views
 			// 
 			this.groupBox2.Controls.Add(this.hexScroll);
 			this.groupBox2.Controls.Add(this.hexPanel);
-			this.groupBox2.Location = new System.Drawing.Point(286, 12);
+			this.groupBox2.Location = new System.Drawing.Point(12, 12);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(647, 545);
 			this.groupBox2.TabIndex = 4;
@@ -101,7 +101,7 @@ namespace DevForge.UI.Views
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(945, 572);
+			this.ClientSize = new System.Drawing.Size(965, 569);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.saveAsBtn);
