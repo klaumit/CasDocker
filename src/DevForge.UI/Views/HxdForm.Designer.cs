@@ -73,7 +73,7 @@ namespace DevForge.UI.Views
 			this.groupBox2.Controls.Add(this.hexPanel);
 			this.groupBox2.Location = new System.Drawing.Point(286, 12);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(660, 524);
+			this.groupBox2.Size = new System.Drawing.Size(647, 524);
 			this.groupBox2.TabIndex = 4;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Data";
@@ -100,7 +100,7 @@ namespace DevForge.UI.Views
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(958, 548);
+			this.ClientSize = new System.Drawing.Size(945, 548);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.saveAsBtn);
