@@ -42,7 +42,7 @@ namespace DevForge.UI.Views
 			// rangeBox
 			// 
 			this.rangeBox.FormattingEnabled = true;
-			this.rangeBox.Location = new System.Drawing.Point(16, 19);
+			this.rangeBox.Location = new System.Drawing.Point(16, 21);
 			this.rangeBox.Name = "rangeBox";
 			this.rangeBox.Size = new System.Drawing.Size(237, 316);
 			this.rangeBox.TabIndex = 1;
