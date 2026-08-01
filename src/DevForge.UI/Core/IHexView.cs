@@ -5,6 +5,6 @@ namespace DevForge.UI.Core
 {
 	public interface IHexView
 	{
-		IEnumerable<XxdLine> GetLines(int offset, int count);
+		IEnumerable<XxdLine> GetLines(long pos, int count);
 	}
 }

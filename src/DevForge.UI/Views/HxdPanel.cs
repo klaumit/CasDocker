@@ -15,6 +15,8 @@ namespace DevForge.UI.Views
 
 		private IHexView _parent;
 
+		public long Pos { get; internal set; }
+
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
@@ -29,7 +31,7 @@ namespace DevForge.UI.Views
 				var size = 20;
 				var margin = 10;
 				var y = 0;
-				foreach (var line in _parent.GetLines(0, 30))
+				foreach (var line in _parent.GetLines(Pos, 30))
 				{
 					var d = string.Format("{0}  {1}   {2}",
 						line.Addr, line.Raw, line.Txt);

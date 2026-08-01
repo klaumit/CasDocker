@@ -46,6 +46,7 @@ namespace DevForge.UI.Views
 			this.rangeBox.Name = "rangeBox";
 			this.rangeBox.Size = new System.Drawing.Size(237, 316);
 			this.rangeBox.TabIndex = 1;
+			this.rangeBox.SelectedIndexChanged += new System.EventHandler(this.rangeBox_SelectedIndexChanged);
 			// 
 			// saveAsBtn
 			// 

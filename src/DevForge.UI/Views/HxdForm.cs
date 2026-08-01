@@ -99,10 +99,10 @@ namespace DevForge.UI.Views
 			Debug.WriteLine(" SCROLL => " + diff);
 		}
 
-		public IEnumerable<XxdLine> GetLines(int offset, int count)
+		public IEnumerable<XxdLine> GetLines(long pos, int count)
 		{
 			var xxd = new XxdFile(File);
-			using (var reader = xxd.OpenReader())
+			using (var reader = xxd.OpenReader(pos))
 			{
 				var lines = XxdFile.ReadHexLines(reader);
 				foreach (var line in lines.Take(count))
@@ -110,6 +110,15 @@ namespace DevForge.UI.Views
 					yield return line;
 				}
 			}
+		}
+
+		private void rangeBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			var range = rangeBox.SelectedItem as IntRange;
+			if (range == null)
+				return;
+			hexPanel.Pos = range.Pos;
+			hexPanel.Invalidate();
 		}
 	}
 }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using DevForge.Lib.Tools;
 using F = System.IO.File;
 
 // ReSharper disable ConvertIfStatementToNullCoalescingAssignment
@@ -24,11 +26,12 @@ namespace DevForge.Lib.Hex
             Stats = new XxdStat(info);
         }
 
-        public StreamReader OpenReader()
+        public StreamReader OpenReader(long? pos = null)
         {
             var enc = Encoding.UTF8;
             if (!F.Exists(File)) F.WriteAllBytes(File, new byte[0]);
             var reader = new StreamReader(File, enc);
+            if (pos != null) reader.BaseStream.Position = pos.Value;
             return reader;
         }
 
@@ -53,6 +56,8 @@ namespace DevForge.Lib.Hex
                     var bytes = line.GetRaw();
                     var len = (uint)bytes.Length;
                     var ir = new IntRange { Off = addr, Len = len };
+                    if (line.Pos != null)
+                        ir.Pos = line.Pos.Value;
                     var off = ir.Off ?? 0;
                     if (last != null)
                     {
@@ -81,8 +86,10 @@ namespace DevForge.Lib.Hex
 
         public static IEnumerable<XxdLine> ReadHexLines(StreamReader reader)
         {
+            var pos = 0L;
+            int len;
             string line;
-            while ((line = reader.ReadLine()) != null)
+            while ((line = reader.ReadLineWithLen(out len)) != null)
             {
                 var tmp = line.Split(new[] { ':' }, 2);
                 var addr = tmp[0];
@@ -90,7 +97,9 @@ namespace DevForge.Lib.Hex
                 var raw = tmp[0];
                 var txt = tmp[1];
                 var obj = new XxdLine { Addr = addr, Raw = raw, Txt = txt };
+                obj.Pos = pos;
                 yield return obj;
+                pos += len;
             }
         }
 

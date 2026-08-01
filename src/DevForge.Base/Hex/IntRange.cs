@@ -17,6 +17,8 @@ namespace DevForge.Lib.Hex
 
         public string Desc { get { return string.Format("{0:X8} + {1:X8} --> {2:X8}", Off, Len, Next); } }
 
+        public long Pos { get; set; }
+
         public string T
         {
             set

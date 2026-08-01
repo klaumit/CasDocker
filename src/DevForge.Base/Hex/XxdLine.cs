@@ -12,6 +12,7 @@ namespace DevForge.Lib.Hex
         public string Addr { get; set; }
         public string Raw { get; set; }
         public string Txt { get; set; }
+        public long? Pos { get; set; }
 
         public override string ToString()
         {
