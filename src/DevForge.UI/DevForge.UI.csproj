@@ -53,6 +53,12 @@
     <Compile Include="Views\HxdForm.Designer.cs">
       <DependentUpon>HxdForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\HxdPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\HxdPanel.Designer.cs">
+      <DependentUpon>HxdPanel.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +77,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\HxdForm.resx">
       <DependentUpon>HxdForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\HxdPanel.resx">
+      <DependentUpon>HxdPanel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

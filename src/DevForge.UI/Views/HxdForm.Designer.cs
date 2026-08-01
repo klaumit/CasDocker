@@ -32,7 +32,11 @@ namespace DevForge.UI.Views
 			this.rangeBox = new System.Windows.Forms.ListBox();
 			this.saveAsBtn = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.hexPanel = new DevForge.UI.Views.HxdPanel();
+			this.hexScroll = new System.Windows.Forms.VScrollBar();
 			this.groupBox1.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// rangeBox
@@ -63,17 +67,44 @@ namespace DevForge.UI.Views
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Ranges";
 			// 
+			// groupBox2
+			// 
+			this.groupBox2.Controls.Add(this.hexScroll);
+			this.groupBox2.Controls.Add(this.hexPanel);
+			this.groupBox2.Location = new System.Drawing.Point(286, 12);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(503, 524);
+			this.groupBox2.TabIndex = 4;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Data";
+			// 
+			// hexPanel
+			// 
+			this.hexPanel.Location = new System.Drawing.Point(17, 28);
+			this.hexPanel.Name = "hexPanel";
+			this.hexPanel.Size = new System.Drawing.Size(448, 477);
+			this.hexPanel.TabIndex = 0;
+			// 
+			// hexScroll
+			// 
+			this.hexScroll.Location = new System.Drawing.Point(468, 28);
+			this.hexScroll.Name = "hexScroll";
+			this.hexScroll.Size = new System.Drawing.Size(20, 477);
+			this.hexScroll.TabIndex = 1;
+			// 
 			// HxdForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(801, 548);
+			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.saveAsBtn);
 			this.Name = "HxdForm";
 			this.Text = "HxdForm";
 			this.Load += new System.EventHandler(this.Form_Load);
 			this.groupBox1.ResumeLayout(false);
+			this.groupBox2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -82,5 +113,8 @@ namespace DevForge.UI.Views
 		private System.Windows.Forms.ListBox rangeBox;
 		private System.Windows.Forms.Button saveAsBtn;
 		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private DevForge.UI.Views.HxdPanel hexPanel;
+		private System.Windows.Forms.VScrollBar hexScroll;
 	}
 }
