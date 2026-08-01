@@ -73,14 +73,14 @@ namespace DevForge.UI.Views
 			this.groupBox2.Controls.Add(this.hexPanel);
 			this.groupBox2.Location = new System.Drawing.Point(286, 12);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(503, 524);
+			this.groupBox2.Size = new System.Drawing.Size(660, 524);
 			this.groupBox2.TabIndex = 4;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Data";
 			// 
 			// hexScroll
 			// 
-			this.hexScroll.Location = new System.Drawing.Point(468, 28);
+			this.hexScroll.Location = new System.Drawing.Point(612, 28);
 			this.hexScroll.Maximum = 99;
 			this.hexScroll.Name = "hexScroll";
 			this.hexScroll.Size = new System.Drawing.Size(20, 477);
@@ -93,14 +93,14 @@ namespace DevForge.UI.Views
 			this.hexPanel.BackColor = System.Drawing.Color.White;
 			this.hexPanel.Location = new System.Drawing.Point(17, 28);
 			this.hexPanel.Name = "hexPanel";
-			this.hexPanel.Size = new System.Drawing.Size(448, 477);
+			this.hexPanel.Size = new System.Drawing.Size(592, 477);
 			this.hexPanel.TabIndex = 0;
 			// 
 			// HxdForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(801, 548);
+			this.ClientSize = new System.Drawing.Size(958, 548);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.saveAsBtn);

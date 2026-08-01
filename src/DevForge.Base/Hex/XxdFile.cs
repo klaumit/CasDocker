@@ -24,11 +24,17 @@ namespace DevForge.Lib.Hex
             Stats = new XxdStat(info);
         }
 
-        public void ReadLines()
+        public StreamReader OpenReader()
         {
             var enc = Encoding.UTF8;
             if (!F.Exists(File)) F.WriteAllBytes(File, new byte[0]);
-            using (var reader = new StreamReader(File, enc))
+            var reader = new StreamReader(File, enc);
+            return reader;
+        }
+
+        public void ReadLines()
+        {
+            using (var reader = OpenReader())
             {
                 Stats.Read();
                 var offset = Stats.Info.Pos;

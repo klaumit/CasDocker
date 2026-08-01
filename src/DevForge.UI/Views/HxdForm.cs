@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using DevForge.Lib.Hex;
-using DevForge.Tools;
 using DevForge.UI.Core;
 using DevForge.UI.Resources;
 using DevForge.UI.Tools;
@@ -97,6 +97,19 @@ namespace DevForge.UI.Views
 		private void hexScroll_Scroll(int diff)
 		{
 			Debug.WriteLine(" SCROLL => " + diff);
+		}
+
+		public IEnumerable<XxdLine> GetLines(int offset, int count)
+		{
+			var xxd = new XxdFile(File);
+			using (var reader = xxd.OpenReader())
+			{
+				var lines = XxdFile.ReadHexLines(reader);
+				foreach (var line in lines.Take(count))
+				{
+					yield return line;
+				}
+			}
 		}
 	}
 }

@@ -22,44 +22,23 @@ namespace DevForge.UI.Views
 				_parent = GuiExt.FindParent<IHexView>(this);
 			if (_parent == null)
 				return;
-
-
-
-
-
-			/*
-
-			using (var font = Fonts.SetMonospace(Font))
+			using (var font = Fonts.SetMonospace(Font, 10))
 			using (var brush = new SolidBrush(Color.Black))
 			{
-				var margin = 10;
-				var size = 20;
-				var count = 16;
 				var g = e.Graphics;
-				var width = this.Width / 10;
-				var height = this.Height / 10;
-
-
-
-				var x = 0;
+				var size = 20;
+				var margin = 10;
 				var y = 0;
-				for (var i = 0; i < 1000; i++)
+				foreach (var line in _parent.GetLines(0, 30))
 				{
-					var txt = string.Format("{0:X2} ", (byte)i);
-					var xPos = margin + x * size;
+					var d = string.Format("{0}  {1}   {2}",
+						line.Addr, line.Raw, line.Txt);
+					var xPos = margin;
 					var yPos = margin + y * size;
-					g.DrawString(txt, font, brush, xPos, yPos);
-					x++;
-					if (x >= count)
-					{
-						y++;
-						x = 0;
-					}
-					if (y >= count)
-						break;
+					g.DrawString(d, font, brush, xPos, yPos);
+					y++;
 				}
 			}
-			*/
 		}
 	}
 }
