@@ -1,8 +1,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using BF = System.Reflection.BindingFlags;
 
 // ReSharper disable UseCollectionExpression
 

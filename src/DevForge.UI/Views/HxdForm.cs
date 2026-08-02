@@ -9,6 +9,7 @@ using DevForge.UI.Core;
 using DevForge.UI.Resources;
 using DevForge.UI.Tools;
 using F = System.IO.File;
+using System.ComponentModel;
 
 namespace DevForge.UI.Views
 {
@@ -22,7 +23,8 @@ namespace DevForge.UI.Views
 			InitializeComponent();
 		}
 
-		public string File { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string File { get; set; }
 
 		private void Form_Load(object sender, EventArgs e)
 		{
@@ -35,7 +37,7 @@ namespace DevForge.UI.Views
 
 		private void SetRanges()
 		{
-			rangeBox.Font = Fonts.SetMonospace(rangeBox.Font);
+			rangeBox.Font = rangeBox.Font.SetMonospace();
 			rangeBox.Items.Clear();
 			var xxd = new XxdFile(File);
 			xxd.ReadLines();

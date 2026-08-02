@@ -72,7 +72,7 @@ namespace DevForge.Lib.Ponder
             foreach (var addr in addresses)
             {
                 var length = (ushort)maxChunkSize;
-                var buff = From86Address(addr, DefaultBank, length);
+                var buff = addr.From86Address(DefaultBank, length);
                 yield return buff;
             }
         }

@@ -1,7 +1,10 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using DevForge.UI.Core;
 using DevForge.UI.Tools;
+
+// ReSharper disable ConvertToUsingDeclaration
 
 namespace DevForge.UI.Views
 {
@@ -15,16 +18,17 @@ namespace DevForge.UI.Views
 
 		private IHexView _parent;
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public long Pos { get; internal set; }
 
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
 			if (_parent == null)
-				_parent = GuiExt.FindParent<IHexView>(this);
+				_parent = this.FindParent<IHexView>();
 			if (_parent == null)
 				return;
-			using (var font = Fonts.SetMonospace(Font, 10))
+			using (var font = Font.SetMonospace(10))
 			using (var brush = new SolidBrush(Color.Black))
 			{
 				var g = e.Graphics;

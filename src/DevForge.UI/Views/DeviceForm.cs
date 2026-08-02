@@ -213,7 +213,7 @@ namespace DevForge.Views
             var allKeys = _reads.Keys.ToArray();
             foreach (var range in xxd.Loop())
             {
-                foreach (var addr in Ranges.Intersect(range, allKeys))
+                foreach (var addr in range.Intersect(allKeys))
                 {
                     _reads.Remove(addr);
                     MarkOne(update: false);

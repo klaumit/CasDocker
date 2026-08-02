@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <RootNamespace>DevForge</RootNamespace>
+    <RootNamespace>DevForge.UI</RootNamespace>
     <AssemblyName>DevForge.UI</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
