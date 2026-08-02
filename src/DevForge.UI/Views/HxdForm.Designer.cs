@@ -35,6 +35,7 @@ namespace DevForge.UI.Views
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.hexScroll = new System.Windows.Forms.VScrollBar();
 			this.hexPanel = new DevForge.UI.Views.HxdPanel();
+			this.showMapBtn = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -97,17 +98,30 @@ namespace DevForge.UI.Views
 			this.hexPanel.Size = new System.Drawing.Size(592, 498);
 			this.hexPanel.TabIndex = 0;
 			// 
+			// showMapBtn
+			// 
+			this.showMapBtn.Location = new System.Drawing.Point(757, 423);
+			this.showMapBtn.Name = "showMapBtn";
+			this.showMapBtn.Size = new System.Drawing.Size(92, 23);
+			this.showMapBtn.TabIndex = 5;
+			this.showMapBtn.Text = "Show minimap";
+			this.showMapBtn.UseVisualStyleBackColor = true;
+			this.showMapBtn.Click += new System.EventHandler(this.showMapBtn_Click);
+			// 
 			// HxdForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(965, 569);
+			this.Controls.Add(this.showMapBtn);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.saveAsBtn);
 			this.Name = "HxdForm";
 			this.Text = "HxdForm";
 			this.Load += new System.EventHandler(this.Form_Load);
+			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HxdForm_KeyUp);
+			this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.HxdForm_PreviewKeyDown);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -121,5 +135,6 @@ namespace DevForge.UI.Views
 		private System.Windows.Forms.GroupBox groupBox2;
 		private DevForge.UI.Views.HxdPanel hexPanel;
 		private System.Windows.Forms.VScrollBar hexScroll;
+		private System.Windows.Forms.Button showMapBtn;
 	}
 }

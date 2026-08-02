@@ -35,6 +35,7 @@ namespace DevForge.UI.Views
 				var size = 20;
 				var margin = 10;
 				var y = 0;
+				if (Pos < 0) Pos = 0;
 				foreach (var line in _parent.GetLines(Pos, 24))
 				{
 					var d = string.Format("{0}  {1}   {2}",

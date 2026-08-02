@@ -21,6 +21,7 @@ namespace DevForge.UI.Views
 		public HxdForm()
 		{
 			InitializeComponent();
+			KeyPreview = true;
 		}
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -122,6 +123,29 @@ namespace DevForge.UI.Views
 		{
 			hexPanel.Pos += diff * (67 + 2);
 			hexPanel.Invalidate();
+		}
+
+		private void showMapBtn_Click(object sender, EventArgs e)
+		{
+			var map = new MapForm();
+			map.Show(this);
+		}
+
+		private void HxdForm_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.PageDown)
+			{
+				hexScroll_Scroll(50);
+			}
+			else if (e.KeyCode == Keys.PageUp)
+			{
+				hexScroll_Scroll(-50);
+			}
+		}
+
+		private void HxdForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+		{			
+			;
 		}
 	}
 }
