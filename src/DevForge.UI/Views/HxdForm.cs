@@ -127,7 +127,7 @@ namespace DevForge.UI.Views
 
 		private void showMapBtn_Click(object sender, EventArgs e)
 		{
-			var map = new MapForm();
+			var map = new MapForm() { File = File };
 			map.Show(this);
 		}
 

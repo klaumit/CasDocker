@@ -13,22 +13,18 @@ namespace DevForge.Lib.Visual
 {
     public static class Renders
     {
-        public static void Render(string file, string name, out string bs)
+        public static string Render(this XxdFile xxd, bool force, out string bs)
         {
-            name = Path.GetFileNameWithoutExtension(name);
-            var dest = string.Format("{0}.png", name);
-            if (File.Exists(dest))
-            {
-                bs = null;
-                return;
-            }
-
-            var xxd = new XxdFile(file);
+            var file = xxd.File;
             xxd.ReadLines();
             var fileLen = xxd.Stats.Info.Pos;
             const double xxdFactor = 4.25;
             var realLen = fileLen / xxdFactor;
             bs = TextExt.ToByteSize(realLen);
+
+            var dest = Path.ChangeExtension(file, ".png");
+            if (!force && File.Exists(dest))
+                return dest;
 
             const int minBytesPerPixel = 256;
             const int minDim = 64;
@@ -103,6 +99,8 @@ namespace DevForge.Lib.Visual
 
                 bitmap.Save(dest);
             }
+
+            return dest;
         }
     }
 }

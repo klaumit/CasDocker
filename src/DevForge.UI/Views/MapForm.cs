@@ -17,6 +17,7 @@ using DevForge.UI.Resources;
 using DevForge.UI.Tools;
 using F = System.IO.File;
 using System.ComponentModel;
+using DevForge.Lib.Visual;
 
 namespace DevForge.UI.Views
 {
@@ -37,6 +38,17 @@ namespace DevForge.UI.Views
 			Icon = ResExt.GetStream("app.ico").ToIcon();
 			_name = Path.GetFileNameWithoutExtension(File);
 			Text = _name;
+			SetImage();
+		}
+
+		private void SetImage()
+		{
+			string bs;
+			var xxd = new XxdFile(File);
+			var imgFile = xxd.Render(false, out bs);
+			Text += " [" + bs + "]";
+			var image = Image.FromFile(imgFile);
+			mapImgBox.Image = image;
 		}
 	}
 }
