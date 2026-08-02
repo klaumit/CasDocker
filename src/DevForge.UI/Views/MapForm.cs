@@ -5,19 +5,38 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using DevForge.Lib.Hex;
+using DevForge.UI.Core;
+using DevForge.UI.Resources;
+using DevForge.UI.Tools;
+using F = System.IO.File;
+using System.ComponentModel;
 
 namespace DevForge.UI.Views
 {
 	public partial class MapForm : Form
 	{
+		private string _name;
+
 		public MapForm()
 		{
 			InitializeComponent();
 		}
 
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		public string File { get; set; }
+
 		private void MapForm_Load(object sender, EventArgs e)
 		{
-
+			Icon = ResExt.GetStream("app.ico").ToIcon();
+			_name = Path.GetFileNameWithoutExtension(File);
+			Text = _name;
 		}
 	}
 }
