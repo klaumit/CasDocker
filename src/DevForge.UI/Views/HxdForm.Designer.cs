@@ -121,7 +121,6 @@ namespace DevForge.UI.Views
 			this.Text = "HxdForm";
 			this.Load += new System.EventHandler(this.Form_Load);
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.HxdForm_KeyUp);
-			this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.HxdForm_PreviewKeyDown);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
 			this.ResumeLayout(false);

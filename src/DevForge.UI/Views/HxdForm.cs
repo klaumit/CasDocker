@@ -134,18 +134,13 @@ namespace DevForge.UI.Views
 		private void HxdForm_KeyUp(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.PageDown)
-			{
 				hexScroll_Scroll(50);
-			}
 			else if (e.KeyCode == Keys.PageUp)
-			{
 				hexScroll_Scroll(-50);
-			}
-		}
-
-		private void HxdForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-		{			
-			;
+			else if (e.KeyCode == Keys.Down)
+				hexScroll_Scroll(1);
+			else if (e.KeyCode == Keys.Up)
+				hexScroll_Scroll(-1);
 		}
 	}
 }
