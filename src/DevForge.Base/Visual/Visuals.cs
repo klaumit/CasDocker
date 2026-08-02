@@ -92,9 +92,8 @@ namespace DevForge.Lib.Visual
                 {
                     var addr = line.GetAddr() ?? 0;
                     var bytes = line.GetRaw() ?? new byte[0];
-                    var p = line.Pos;
                     for (var i = 0; i < bytes.Length; i++)
-                        yield return new HexBit(addr, bytes, i) { Pos = p };
+                        yield return new HexBit(addr, bytes, i);
                 }
             }
         }

@@ -6,6 +6,7 @@ using System.IO;
 using DevForge.Lib.Hex;
 using DevForge.UI.Resources;
 using DevForge.Lib.Visual;
+using System.Diagnostics;
 
 namespace DevForge.UI.Views
 {
@@ -55,6 +56,23 @@ namespace DevForge.UI.Views
 			{
 				SetImage(force: true);
 			}
+		}
+
+		private void mapImgBox_MouseUp(object sender, MouseEventArgs e)
+		{
+			var btn = e.Button;
+			if (btn != MouseButtons.Left)
+				return;
+			var img = ((PictureBox)sender).Image;
+			var imgW = img.Width * 1d;
+			var imgH = img.Height * 1d; 
+			var x = e.X;
+			var y = e.Y;
+			var xPro = (int)((x / imgW) * 100.0);
+			var yPro = (int)((y / imgH) * 100.0);
+			var pro = (yPro * 100 + xPro) / 100.0;
+			var owner = (HxdForm)Owner;
+			owner.OnMapClick(pro);
 		}
 	}
 }

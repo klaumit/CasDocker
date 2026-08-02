@@ -17,6 +17,7 @@ namespace DevForge.UI.Views
 	{
 		private string _name;
 		private int _middleScroll;
+		private long _length;
 
 		public HxdForm()
 		{
@@ -42,7 +43,9 @@ namespace DevForge.UI.Views
 			rangeBox.Items.Clear();
 			var xxd = new XxdFile(File);
 			xxd.ReadLines();
-			var ranges = xxd.Stats.Info.Ranges;
+			var info = xxd.Stats.Info;
+			_length = info.Pos;
+			var ranges = info.Ranges;
 			foreach (var range in ranges)
 				rangeBox.Items.Add(range.Value);
 		}
@@ -135,6 +138,17 @@ namespace DevForge.UI.Views
 				hexScroll_Scroll(1);
 			else if (e.KeyCode == Keys.Up)
 				hexScroll_Scroll(-1);
+		}
+
+		internal void OnMapClick(double pro)
+		{
+			const int perLine = 67 + 2;
+			var newPos = (pro / 100.0) * _length;
+			var mult = (long)(newPos / perLine);
+			var fixPos = mult * perLine;
+			var lgPos = (long)fixPos;
+			hexPanel.Pos = lgPos;
+			hexPanel.Invalidate();
 		}
 
 		private void showMapBtn_Click(object sender, EventArgs e)

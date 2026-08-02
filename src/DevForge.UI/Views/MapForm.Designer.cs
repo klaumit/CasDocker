@@ -46,6 +46,7 @@ namespace DevForge.UI.Views
 			this.mapImgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.mapImgBox.TabIndex = 0;
 			this.mapImgBox.TabStop = false;
+			this.mapImgBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mapImgBox_MouseUp);
 			// 
 			// groupBox1
 			// 
