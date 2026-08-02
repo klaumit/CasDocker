@@ -37,6 +37,9 @@ namespace DevForge.UI.Views
 			// 
 			// mapImgBox
 			// 
+			this.mapImgBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.mapImgBox.Location = new System.Drawing.Point(12, 19);
 			this.mapImgBox.Name = "mapImgBox";
 			this.mapImgBox.Size = new System.Drawing.Size(512, 512);

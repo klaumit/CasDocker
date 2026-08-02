@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Text;
 using DevForge.Lib.Hex;
@@ -55,7 +56,20 @@ namespace DevForge.Lib.Visual
             return entropy;
         }
 
-        private static Color EntropyToColor(double entropyBits, int sampleCount)
+        public static Bitmap ScaleTo(this Image source, int width, int height)
+        {
+            var result = new Bitmap(width, height);
+            using (var g = Graphics.FromImage(result))
+            {
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.PixelOffsetMode = PixelOffsetMode.Half;
+                g.SmoothingMode = SmoothingMode.None;
+                g.DrawImage(source, 0, 0, width, height);
+            }
+            return result;
+        }
+
+		private static Color EntropyToColor(double entropyBits, int sampleCount)
         {
             var maxEntropy = Log2(Math.Max(1, Math.Min(sampleCount, 256)));
             var t = maxEntropy > 0 ? Clamp(entropyBits / maxEntropy, 0.0, 1.0) : 0.0;
