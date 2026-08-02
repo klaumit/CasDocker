@@ -40,6 +40,7 @@ namespace DevForge.UI.Views
 			this.mapImgBox.Location = new System.Drawing.Point(12, 19);
 			this.mapImgBox.Name = "mapImgBox";
 			this.mapImgBox.Size = new System.Drawing.Size(512, 512);
+			this.mapImgBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.mapImgBox.TabIndex = 0;
 			this.mapImgBox.TabStop = false;
 			// 
