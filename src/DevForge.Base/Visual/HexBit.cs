@@ -12,5 +12,7 @@ namespace DevForge.Lib.Visual
         public uint Addr { get; private set; }
         public byte[] Raw { get; private set; }
         public int Idx { get; private set; }
-    }
+
+		public long? Pos { get; internal set; }
+	}
 }

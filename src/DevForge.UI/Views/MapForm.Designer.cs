@@ -67,6 +67,7 @@ namespace DevForge.UI.Views
 			this.Name = "MapForm";
 			this.Text = "MapForm";
 			this.Load += new System.EventHandler(this.MapForm_Load);
+			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MapForm_KeyUp);
 			((System.ComponentModel.ISupportInitialize)(this.mapImgBox)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.ResumeLayout(false);

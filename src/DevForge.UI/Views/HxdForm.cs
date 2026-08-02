@@ -125,12 +125,6 @@ namespace DevForge.UI.Views
 			hexPanel.Invalidate();
 		}
 
-		private void showMapBtn_Click(object sender, EventArgs e)
-		{
-			var map = new MapForm() { File = File };
-			map.Show(this);
-		}
-
 		private void HxdForm_KeyUp(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.PageDown)
@@ -141,6 +135,12 @@ namespace DevForge.UI.Views
 				hexScroll_Scroll(1);
 			else if (e.KeyCode == Keys.Up)
 				hexScroll_Scroll(-1);
+		}
+
+		private void showMapBtn_Click(object sender, EventArgs e)
+		{
+			var map = new MapForm() { File = File };
+			map.Show(this);
 		}
 	}
 }

@@ -16,6 +16,7 @@ namespace DevForge.UI.Views
 		public MapForm()
 		{
 			InitializeComponent();
+			KeyPreview = true;
 		}
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -36,16 +37,24 @@ namespace DevForge.UI.Views
 			SetImage();
 		}
 
-		private string SetImage()
+		private string SetImage(bool force = false)
 		{
 			string bs;
 			var xxd = new XxdFile(File);
-			var imgFile = xxd.Render(false, out bs);
+			var imgFile = xxd.Render(force, out bs);
 			var w = mapImgBox.Width;
 			var h = mapImgBox.Height;
 			var image = Image.FromFile(imgFile).ScaleTo(w, h);
 			mapImgBox.Image = image;
 			return bs;
+		}
+
+		private void MapForm_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete)
+			{
+				SetImage(force: true);
+			}
 		}
 	}
 }
