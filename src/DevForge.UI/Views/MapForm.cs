@@ -6,7 +6,6 @@ using System.IO;
 using DevForge.Lib.Hex;
 using DevForge.UI.Resources;
 using DevForge.Lib.Visual;
-using System.Diagnostics;
 
 namespace DevForge.UI.Views
 {
