@@ -432,3 +432,4 @@ FodyWeavers.xsd
 /src/win_build/
 /src/win_env/
 Thumbs.db
+/src/DevForgeC/*
