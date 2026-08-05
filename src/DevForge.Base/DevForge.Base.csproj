@@ -58,6 +58,9 @@
     <Compile Include="Common\DeviceFoundArgs.cs" />
     <Compile Include="Common\GotMessageArgs.cs" />
     <Compile Include="Resources\ResTool.cs" />
+	<Compile Include="Comb\Searcher.cs" />
+	<Compile Include="Comb\TxtMatch.cs" />
+	<Compile Include="Comb\Needles.cs" />
     <Compile Include="Tools\TextExt.cs" />
     <Compile Include="Tools\JsonExt.cs" />
     <Compile Include="Tools\CollExt.cs" />

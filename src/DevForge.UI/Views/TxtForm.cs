@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using DevForge.Lib.Comb;
 using DevForge.Lib.Hex;
 using DevForge.UI.Resources;
 using DevForge.Lib.Visual;
@@ -41,7 +42,12 @@ namespace DevForge.UI.Views
 			findLstBx.Items.Clear();
 
 
+
+			Searcher.FindNeedle("?", Needles.PvAplHed);
 			
+			
+
+
 		}
 	}
 }
