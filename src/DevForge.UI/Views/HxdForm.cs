@@ -156,5 +156,11 @@ namespace DevForge.UI.Views
 			var map = new MapForm() { File = File };
 			map.Show(this);
 		}
+
+		private void findingsBtn_Click(object sender, EventArgs e)
+		{
+			var fnd = new TxtForm() { File = File };
+			fnd.Show(this);
+		}
 	}
 }

@@ -67,6 +67,12 @@
     <Compile Include="Views\MapForm.Designer.cs">
       <DependentUpon>MapForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TxtForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TxtForm.Designer.cs">
+      <DependentUpon>TxtForm.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MapForm.resx">
       <DependentUpon>MapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TxtForm.resx">
+      <DependentUpon>TxtForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

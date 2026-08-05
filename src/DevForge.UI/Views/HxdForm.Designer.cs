@@ -36,6 +36,7 @@ namespace DevForge.UI.Views
 			this.hexScroll = new System.Windows.Forms.VScrollBar();
 			this.hexPanel = new DevForge.UI.Views.HxdPanel();
 			this.showMapBtn = new System.Windows.Forms.Button();
+			this.findingsBtn = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -108,11 +109,22 @@ namespace DevForge.UI.Views
 			this.showMapBtn.UseVisualStyleBackColor = true;
 			this.showMapBtn.Click += new System.EventHandler(this.showMapBtn_Click);
 			// 
+			// findingsBtn
+			// 
+			this.findingsBtn.Location = new System.Drawing.Point(757, 452);
+			this.findingsBtn.Name = "findingsBtn";
+			this.findingsBtn.Size = new System.Drawing.Size(92, 23);
+			this.findingsBtn.TabIndex = 6;
+			this.findingsBtn.Text = "Show findings";
+			this.findingsBtn.UseVisualStyleBackColor = true;
+			this.findingsBtn.Click += new System.EventHandler(this.findingsBtn_Click);
+			// 
 			// HxdForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(965, 569);
+			this.Controls.Add(this.findingsBtn);
 			this.Controls.Add(this.showMapBtn);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
@@ -135,5 +147,6 @@ namespace DevForge.UI.Views
 		private DevForge.UI.Views.HxdPanel hexPanel;
 		private System.Windows.Forms.VScrollBar hexScroll;
 		private System.Windows.Forms.Button showMapBtn;
+		private System.Windows.Forms.Button findingsBtn;
 	}
 }
