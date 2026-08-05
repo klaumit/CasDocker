@@ -39,5 +39,18 @@ namespace DevForge.UI.Views
 			foreach (var item in it)
 				findLstBx.Items.Add(item.First());
 		}
+
+		private void findLstBx_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			var fnd = findLstBx.SelectedItem as TxtMatch;
+			if (fnd == null)
+				return;
+
+			// ?!
+
+			var pro = 0.5;
+			var owner = (HxdForm)Owner;
+			owner.OnMapClick(pro);
+		}
 	}
 }

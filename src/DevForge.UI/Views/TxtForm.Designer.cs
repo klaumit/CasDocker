@@ -52,6 +52,7 @@ namespace DevForge.UI.Views
 			this.findLstBx.Name = "findLstBx";
 			this.findLstBx.Size = new System.Drawing.Size(223, 459);
 			this.findLstBx.TabIndex = 0;
+			this.findLstBx.SelectedIndexChanged += new System.EventHandler(this.findLstBx_SelectedIndexChanged);
 			// 
 			// TxtForm
 			// 
