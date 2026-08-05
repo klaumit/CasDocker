@@ -9,6 +9,8 @@ namespace DevForge.Lib.Comb
         public int Offset { get; set; }
         public uint Absolute { get; set; }
 
+        public int LineNo { get; set; }
+
         public override string ToString()
         {
             return string.Format("{0} +{1:d2} ({2:x8})", Address, Offset, Absolute);

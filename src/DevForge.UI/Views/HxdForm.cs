@@ -96,7 +96,7 @@ namespace DevForge.UI.Views
 				var diff = end - start;
 				e.NewValue = _middleScroll;
 				_scrolls.Clear();
-				hexScroll_Scroll(diff);
+				ScrollRelative(diff);
 			}
 		}
 
@@ -118,11 +118,16 @@ namespace DevForge.UI.Views
 			var range = rangeBox.SelectedItem as IntRange;
 			if (range == null)
 				return;
-			hexPanel.Pos = range.Pos;
+			ScrollAbsolute(range.Pos);
+		}
+
+		private void ScrollAbsolute(long pos)
+		{
+			hexPanel.Pos = pos;
 			hexPanel.Invalidate();
 		}
 
-		private void hexScroll_Scroll(int diff)
+		private void ScrollRelative(int diff)
 		{
 			hexPanel.Pos += diff * (67 + 2);
 			hexPanel.Invalidate();
@@ -131,13 +136,13 @@ namespace DevForge.UI.Views
 		private void HxdForm_KeyUp(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.PageDown)
-				hexScroll_Scroll(50);
+				ScrollRelative(50);
 			else if (e.KeyCode == Keys.PageUp)
-				hexScroll_Scroll(-50);
+				ScrollRelative(-50);
 			else if (e.KeyCode == Keys.Down)
-				hexScroll_Scroll(1);
+				ScrollRelative(1);
 			else if (e.KeyCode == Keys.Up)
-				hexScroll_Scroll(-1);
+				ScrollRelative(-1);
 		}
 
 		internal void OnMapClick(double pro)
@@ -146,9 +151,14 @@ namespace DevForge.UI.Views
 			var newPos = (pro / 100.0) * _length;
 			var mult = (long)(newPos / perLine);
 			var fixPos = mult * perLine;
-			var lgPos = (long)fixPos;
-			hexPanel.Pos = lgPos;
-			hexPanel.Invalidate();
+			ScrollAbsolute(fixPos);
+		}
+
+		internal void OnPosClick(int lineNo)
+		{
+			const int perLine = 67 + 2;
+			var pos = perLine * lineNo;
+			ScrollAbsolute(pos);
 		}
 
 		private void showMapBtn_Click(object sender, EventArgs e)

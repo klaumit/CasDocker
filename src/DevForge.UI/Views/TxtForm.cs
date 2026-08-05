@@ -46,11 +46,8 @@ namespace DevForge.UI.Views
 			if (fnd == null)
 				return;
 
-			// ?!
-
-			var pro = 0.5;
 			var owner = (HxdForm)Owner;
-			owner.OnMapClick(pro);
+			owner.OnPosClick(Math.Max(0, fnd.LineNo - 1));
 		}
 	}
 }

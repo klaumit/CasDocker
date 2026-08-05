@@ -23,9 +23,11 @@ namespace DevForge.Lib.Comb
 
             string prevAddrText = null;
             var prevHex = "";
+            var lineNo = -1;
 
             foreach (var line in lines)
             {
+                lineNo++;
                 var curAddrText = line.Addr;
                 var curHex = line.Raw.Replace(" ", "");
 
@@ -55,6 +57,7 @@ namespace DevForge.Lib.Comb
 
                     yield return new TxtMatch
                     {
+                        LineNo = lineNo,
                         Address = matchAddrText,
                         Offset = matchOffset,
                         Absolute = absolute
