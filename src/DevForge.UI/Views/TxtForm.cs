@@ -45,7 +45,6 @@ namespace DevForge.UI.Views
 			var fnd = findLstBx.SelectedItem as TxtMatch;
 			if (fnd == null)
 				return;
-
 			var owner = (HxdForm)Owner;
 			owner.OnPosClick(Math.Max(0, fnd.LineNo - 1));
 		}
