@@ -4,6 +4,10 @@ using System.Windows.Forms;
 using System.IO;
 using DevForge.Lib.Comb;
 using DevForge.UI.Resources;
+using DevForge.UI.Tools;
+using System.Linq;
+using N = DevForge.Lib.Comb.Needles;
+using S = DevForge.Lib.Comb.Searcher;
 
 namespace DevForge.UI.Views
 {
@@ -29,12 +33,11 @@ namespace DevForge.UI.Views
 
 		private void SetFindings()
 		{
+			findLstBx.Font = findLstBx.Font.SetMonospace(size: 11);
 			findLstBx.Items.Clear();
-			var items = Searcher.FindNeedle(File, Needles.PvAplHed);
-			foreach (var item in items)
-			{
-				findLstBx.Items.Add(item);
-			}
+			var it = S.FindNeedle(File, N.PvAplHed).GroupBy(i => i.Absolute);
+			foreach (var item in it)
+				findLstBx.Items.Add(item.First());
 		}
 	}
 }
