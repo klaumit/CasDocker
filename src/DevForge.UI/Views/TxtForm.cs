@@ -33,6 +33,15 @@ namespace DevForge.UI.Views
 			Icon = ResExt.GetStream("app.ico").ToIcon();
 			_name = Path.GetFileNameWithoutExtension(File);
 			Text = _name;
+			SetFindings();
+		}
+
+		private void SetFindings()
+		{
+			findLstBx.Items.Clear();
+
+
+			
 		}
 	}
 }
