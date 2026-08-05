@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using DevForge.Lib.Comb;
-using DevForge.Lib.Hex;
 using DevForge.UI.Resources;
-using DevForge.Lib.Visual;
 
 namespace DevForge.UI.Views
 {
@@ -40,14 +30,11 @@ namespace DevForge.UI.Views
 		private void SetFindings()
 		{
 			findLstBx.Items.Clear();
-
-
-
-			Searcher.FindNeedle("?", Needles.PvAplHed);
-			
-			
-
-
+			var items = Searcher.FindNeedle(File, Needles.PvAplHed);
+			foreach (var item in items)
+			{
+				findLstBx.Items.Add(item);
+			}
 		}
 	}
 }
