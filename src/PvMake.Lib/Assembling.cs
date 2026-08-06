@@ -26,11 +26,13 @@ namespace PvMake.Lib
                 "echo Executing Assembler phase",
                 "echo.",
                 "",
+                "set \"dir=%~dp1\"",
                 "set \"file=%~1\"",
-                "ren \"%file%\" \"%~n1.asm\"",
+                "move /y \"%dir%%~n1.obj\" \"%dir%%~n1.asm\"",
                 "",
                 "asmsh -cpu=sh3 -object=\"%1\" -cross_reference " +
-                "-section -source -nologo \"debug\\%~n1.asm\""
+                "-section -source -nologo \"%dir%%~n1.asm\"",
+                "echo."
             };
             File.WriteAllLines(asmBat, lines, TextExt.Win);
 
