@@ -22,8 +22,15 @@ namespace PvMake.Lib
                 "@echo off",
                 "setlocal",
                 "",
+                "echo.",
+                "echo Executing Assembler phase",
+                "echo.",
+                "",
                 "set \"file=%~1\"",
-                "ren \"%file%\" \"%~n1.asm\""
+                "ren \"%file%\" \"%~n1.asm\"",
+                "",
+                "asmsh -cpu=sh3 -object=\"%1\" -cross_reference " +
+                "-section -source -nologo \"debug\\%~n1.asm\""
             };
             File.WriteAllLines(asmBat, lines, TextExt.Win);
 
