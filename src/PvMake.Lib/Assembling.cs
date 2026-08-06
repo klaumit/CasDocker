@@ -1,6 +1,6 @@
 using System.IO;
 using System.Collections.Generic;
-using FileEx = PvMake.Lib.FileExt;
+using F = PvMake.Lib.FileExt;
 
 // ReSharper disable UseStringInterpolation
 // ReSharper disable UseObjectOrCollectionInitializer
@@ -12,9 +12,20 @@ namespace PvMake.Lib
     {
         public static void FixHitachiAsm(string pDir)
         {
-            var myFiles = FileEx.FindAllFiles(pDir);
+            var myFiles = F.FindAllFiles(pDir);
             SortedSet<string> mkFiles;
             myFiles.TryGetValue(".mak", out mkFiles);
+
+            var asmBat = Path.Combine(pDir, "doAsm.bat");
+            var lines = new List<string>
+            {
+                "@echo off",
+                "setlocal",
+                "",
+                "set \"file=%~1\"",
+                "ren \"%file%\" \"%~n1.asm\""
+            };
+            File.WriteAllLines(asmBat, lines, TextExt.Win);
 
             const string ccInfo = "CCINF{0}=";
             const string lnkAnc = "\t$(LNK) -";
@@ -34,7 +45,8 @@ namespace PvMake.Lib
                     }
                     if (text.Contains(lnkAnc))
                     {
-                        var ins = "\t$(ASM) -cpu=sh3 -nologo";
+                        // var ins = "\t$(ASM) -cpu=sh3 -nologo";
+                        var ins = "\tdoAsm $(ALLOBJ)";
                         text = text.Replace(lnkAnc, ins + "\r\n" + lnkAnc);
                         isDirty = true;
                     }
