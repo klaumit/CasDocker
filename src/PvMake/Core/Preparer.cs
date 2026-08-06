@@ -3,6 +3,7 @@ using System.IO;
 using PvMake.Lib;
 using W = PvMake.Lib.Writing;
 using M = PvMake.Lib.Making;
+using A = PvMake.Lib.Assembling;
 using S = PvMake.Lib.Siming;
 using B = PvMake.Core.Bases;
 using System.Collections.Generic;
@@ -57,11 +58,13 @@ namespace PvMake.Core
             FileExt.GetDir(Path.Combine(cDir, "User_Bin"), true);
             FileExt.GetDir(Path.Combine(pDir, "OBJ"), true);
 
+            var hit = new HitMe { PatchHit = false };
+            
             var ccDir = FileExt.GetDir(Path.Combine(pDir, "C"), true);
-            W.ReWrite(cFiles, ccDir, false, cDir);
+            W.ReWrite(cFiles, ccDir, hit, cDir);
 
             var hhDir = FileExt.GetDir(Path.Combine(pDir, "H"), true);
-            W.ReWrite(hFiles, hhDir, false, cDir);
+            W.ReWrite(hFiles, hhDir, hit, cDir);
 
             var miDir = FileExt.GetDir(Path.Combine(pDir, "MENUICON"), true);
             W.ReCopy(bFiles, miDir, cDir);
@@ -100,11 +103,13 @@ namespace PvMake.Core
             FileExt.GetDir(Path.Combine(pDir, "User_Bin"), true);
             FileExt.GetDir(Path.Combine(pDir, "Release"), true);
 
+            var hit = new HitMe { PatchHit = true };
+
             var ccDir = FileExt.GetDir(Path.Combine(pDir, "SRC"), true);
-            W.ReWrite(cFiles, ccDir, true, sdkDir);
+            W.ReWrite(cFiles, ccDir, hit, sdkDir);
 
             var hhDir = FileExt.GetDir(Path.Combine(pDir, "DEF"), true);
-            W.ReWrite(hFiles, hhDir, true, sdkDir);
+            W.ReWrite(hFiles, hhDir, hit, sdkDir);
 
             var miDir = FileExt.GetDir(Path.Combine(pDir, "ICON"), true);
             W.ReCopy(bFiles, miDir, sdkDir);
@@ -114,6 +119,8 @@ namespace PvMake.Core
 
             var sFile = Path.Combine(pDir, "PV3S1600.dlp");
             FileEx.WriteWin(sFile, S.CreatePv3Dlp(proj));
+
+            if (hit.InlineAsm) A.FixHitachiAsm(pDir);
         }
     }
 }

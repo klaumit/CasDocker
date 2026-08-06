@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+// ReSharper disable UseStringInterpolation
 // ReSharper disable TooWideLocalVariableScope
 // ReSharper disable UseObjectOrCollectionInitializer
 
 namespace PvMake.Lib
 {
+    public sealed class HitMe
+    {
+        public bool PatchHit { get; set; }
+        public bool InlineAsm { get; set; }
+    }
+    
     public static class Writing
     {
         public static void ReCopy(IEnumerable<string> files, string dest, string root)
@@ -49,11 +56,11 @@ namespace PvMake.Lib
             return symbols;
         }
 
-        public static void ReWrite(IEnumerable<string> files, string dest, bool patchHit, string root)
+        public static void ReWrite(IEnumerable<string> files, string dest, HitMe hit, string root)
         {
             if (files == null)
                 return;
-            var symbols = GetSymbols(patchHit);
+            var symbols = GetSymbols(hit.PatchHit);
             foreach (var file in files)
             {
                 var name = Path.GetFileName(file);
@@ -74,6 +81,8 @@ namespace PvMake.Lib
                         if (line.Contains(tmp))
                             line = line.Replace(tmp, val);
                     }
+                    if (hit.PatchHit && line.Contains("#pragma inline_asm"))
+                        hit.InlineAsm = true;
                     lines.Add(line);
                 }
                 FileExt.WriteWin(tgt, lines);
