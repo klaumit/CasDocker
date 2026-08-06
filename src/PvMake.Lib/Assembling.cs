@@ -1,19 +1,6 @@
-using System;
 using System.IO;
-using PvMake.Lib;
-using W = PvMake.Lib.Writing;
-using M = PvMake.Lib.Making;
-using A = PvMake.Lib.Assembling;
-using S = PvMake.Lib.Siming;
 using System.Collections.Generic;
-using K = PvMake.Lib.KnowIt;
-using FileExt = Pva2cpa.Lib.Files;
 using FileEx = PvMake.Lib.FileExt;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mime;
-using Pva2cpa.Lib;
 
 // ReSharper disable UseStringInterpolation
 // ReSharper disable UseObjectOrCollectionInitializer
@@ -30,6 +17,7 @@ namespace PvMake.Lib
             myFiles.TryGetValue(".mak", out mkFiles);
 
             const string ccInfo = "CCINF{0}=";
+            const string lnkAnc = "\t$(LNK) -";
             if (mkFiles != null)
                 foreach (var file in mkFiles)
                 {
@@ -44,9 +32,14 @@ namespace PvMake.Lib
                             isDirty = true;
                         }
                     }
+                    if (text.Contains(lnkAnc))
+                    {
+                        var ins = "\t$(ASM) -cpu=sh3 -nologo";
+                        text = text.Replace(lnkAnc, ins + "\r\n" + lnkAnc);
+                        isDirty = true;
+                    }
                     if (!isDirty)
                         continue;
-                    Console.WriteLine(" * '" + file + "'");
                     File.WriteAllText(file, text, TextExt.Win);
                 }
         }

@@ -6,7 +6,6 @@ using B = PvMake.Core.Bases;
 using P = PvMake.Lib.Patching;
 using K = PvMake.Lib.KnowIt;
 using System.Collections.Generic;
-using Pva2cpa.Lib;
 
 // ReSharper disable InlineOutVariableDeclaration
 
