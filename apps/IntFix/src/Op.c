@@ -105,14 +105,14 @@ void main(void)
 		print_char('0' + a); /* 0,3,6 */
 	
 	b = 0;
-	#ifdef _MH3
+	#ifdef __HITACHI__
 		b = 8;
 	#endif
 
 	print_char('0'+sizeof(xa)-b); /* 8 */
 
 	b = 0;
-	#ifdef _MH3
+	#ifdef __HITACHI__
 		b = 2;
 	#endif
 	
