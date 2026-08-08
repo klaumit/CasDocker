@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-	<Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
@@ -48,9 +48,10 @@
     <Compile Include="Hex\XxdInfo.cs" />
     <Compile Include="Hex\XxdLine.cs" />
     <Compile Include="Hex\XxdStat.cs" />
-	<Compile Include="Visual\HexBit.cs" />
-	<Compile Include="Visual\Renders.cs" />
-	<Compile Include="Visual\Visuals.cs" />	
+    <Compile Include="Messages\Impl\Jump.cs" />
+    <Compile Include="Visual\HexBit.cs" />
+    <Compile Include="Visual\Renders.cs" />
+    <Compile Include="Visual\Visuals.cs" />
     <Compile Include="Common\BaseFactory.cs" />
     <Compile Include="Common\PocketDevice.cs" />
     <Compile Include="Common\CommExt.cs" />
@@ -58,9 +59,9 @@
     <Compile Include="Common\DeviceFoundArgs.cs" />
     <Compile Include="Common\GotMessageArgs.cs" />
     <Compile Include="Resources\ResTool.cs" />
-	<Compile Include="Comb\Searcher.cs" />
-	<Compile Include="Comb\TxtMatch.cs" />
-	<Compile Include="Comb\Needles.cs" />
+    <Compile Include="Comb\Searcher.cs" />
+    <Compile Include="Comb\TxtMatch.cs" />
+    <Compile Include="Comb\Needles.cs" />
     <Compile Include="Tools\TextExt.cs" />
     <Compile Include="Tools\JsonExt.cs" />
     <Compile Include="Tools\CollExt.cs" />
@@ -98,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PocLink.json" />
-	<None Include="Resources\MemLink.json" />
+    <None Include="Resources\MemLink.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

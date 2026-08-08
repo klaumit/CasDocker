@@ -175,7 +175,30 @@ namespace DevForge.Views
                 dev.Send(new Read(args));
             }
         }
-        
+
+        private long GetJumpTo()
+        {
+            return TextExt.ParseHex(jumpBox.Text, 0);
+        }
+
+        private void jumpToBtn_Click(object sender, EventArgs e)
+        {
+            var dev = _args.Device;
+            var hex = string.Format("{0:x8}", (uint)GetJumpTo());
+            var seg = hex.Substring(0, 4);
+            var off = hex.Substring(4, 4);
+            if (_info.Cpu == PvCpu.X86)
+            {
+                var args = string.Join("|", new[] { "0000", "00", seg, off, "" });
+                dev.Send(new Jump(args));
+            }
+            else if (_info.Cpu == PvCpu.SH3)
+            {
+                var args = string.Join("|", new[] { "0000", "00", seg, off, "" });
+                dev.Send(new Jump(args));
+            }
+        }
+
         private int GetPkgLen()
         {
         	return (int)msgLenDw.Value;
@@ -298,5 +321,5 @@ namespace DevForge.Views
         {
         	_reads.Clear();
         }
-    }
+	}
 }

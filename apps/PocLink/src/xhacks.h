@@ -3,6 +3,8 @@
 
 #define SwitchBank(addr,bank) 
 
+typedef void (*FarFun)(void);
+
 #else
 
 /*
@@ -55,6 +57,8 @@ unsigned int _asm_getipseg(char *);
 
 unsigned int _asm_getipoff(char *);
 #define GetIPOff() _asm_getipoff("\n CALL $+3\n POP AX\n")
+
+typedef void (far *FarFun)(void);
 
 #endif
 

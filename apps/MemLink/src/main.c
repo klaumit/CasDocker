@@ -19,8 +19,10 @@ void main()
 	char debug[128];
 	int i, maxTry, newTry, srcAdr, bank, seg, off, len;
 	int curOff, remaining, chunkLen;
+	FarFun jump;
 
 	#ifdef __HITACHI__
+	    unsigned int code[3];
 	    volatile byte *src;
 	    byte c;
 	#else
@@ -111,6 +113,32 @@ void main()
 				LibPutDisp();
 				maxTry = newTry * TICKS_PER_SEC;
 				i = 0;
+			}
+			if (kind == MSG_JUMP_FAR)
+			{
+				if (sscanf(text, "%x|%x|%x|%x", &srcAdr, &bank, &seg, &off) != 4)
+				{
+					srcAdr = 0; bank = 0; seg = 0; off = 0;
+				}
+				sprintf(debug, " -> J %04X %d %04X %04X", srcAdr, bank, seg, off);
+				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
+				LibPutDisp();
+				WaitTicks(7 * TICKS_PER_SEC);
+				if (bank != 0) { SwitchBank((word)srcAdr, (byte)bank); }
+
+				#ifdef __HITACHI__
+					code[0] = 0xD201E400; code[1] = 0x422B0009;
+					code[2] = ((unsigned long)(word)(seg) << 16) | ((unsigned long)(word)(off));
+					jump = (FarFun)code;
+				#else
+					jump = (FarFun)MK_FP((word)seg, (word)off);
+				#endif
+
+				ClosePort();
+				jump();
+
+				if (bank != 0) { SwitchBank(0x0104, (byte)bank); /* Fonts */ }
+				break;
 			}
 			if (kind == MSG_MEM_READ)
 			{

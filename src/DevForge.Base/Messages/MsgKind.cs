@@ -10,6 +10,8 @@ namespace DevForge.Lib.Messages
 
         Alive = 3,
 
-        MemRead = 4
+        MemRead = 4,
+
+        JumpFar = 5
     }
 }

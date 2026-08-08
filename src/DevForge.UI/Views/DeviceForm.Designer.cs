@@ -60,6 +60,8 @@
 			this.purgeBtn = new System.Windows.Forms.Button();
 			this.waitUpd = new System.Windows.Forms.NumericUpDown();
 			this.label16 = new System.Windows.Forms.Label();
+			this.jumpBox = new System.Windows.Forms.TextBox();
+			this.jumpToBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
@@ -290,7 +292,7 @@
 			// 
 			// testReadBtn
 			// 
-			this.testReadBtn.Location = new System.Drawing.Point(24, 155);
+			this.testReadBtn.Location = new System.Drawing.Point(24, 128);
 			this.testReadBtn.Name = "testReadBtn";
 			this.testReadBtn.Size = new System.Drawing.Size(75, 23);
 			this.testReadBtn.TabIndex = 4;
@@ -316,7 +318,7 @@
 			// 
 			// msgLenDw
 			// 
-			this.msgLenDw.Location = new System.Drawing.Point(30, 188);
+			this.msgLenDw.Location = new System.Drawing.Point(30, 161);
 			this.msgLenDw.Maximum = new decimal(new int[] {
             66560,
             0,
@@ -511,7 +513,7 @@
 			// 
 			// waitUpd
 			// 
-			this.waitUpd.Location = new System.Drawing.Point(30, 277);
+			this.waitUpd.Location = new System.Drawing.Point(30, 223);
 			this.waitUpd.Maximum = new decimal(new int[] {
             5000,
             0,
@@ -529,17 +531,37 @@
 			// label16
 			// 
 			this.label16.AutoSize = true;
-			this.label16.Location = new System.Drawing.Point(27, 254);
+			this.label16.Location = new System.Drawing.Point(27, 200);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(55, 13);
 			this.label16.TabIndex = 21;
 			this.label16.Text = "Alive (ms):";
+			// 
+			// jumpBox
+			// 
+			this.jumpBox.Location = new System.Drawing.Point(15, 299);
+			this.jumpBox.Name = "jumpBox";
+			this.jumpBox.Size = new System.Drawing.Size(80, 20);
+			this.jumpBox.TabIndex = 23;
+			this.jumpBox.Text = "0x8C06ED4C";
+			// 
+			// jumpToBtn
+			// 
+			this.jumpToBtn.Location = new System.Drawing.Point(15, 272);
+			this.jumpToBtn.Name = "jumpToBtn";
+			this.jumpToBtn.Size = new System.Drawing.Size(53, 21);
+			this.jumpToBtn.TabIndex = 24;
+			this.jumpToBtn.Text = "Jump to";
+			this.jumpToBtn.UseVisualStyleBackColor = true;
+			this.jumpToBtn.Click += new System.EventHandler(this.jumpToBtn_Click);
 			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 353);
+			this.Controls.Add(this.jumpToBtn);
+			this.Controls.Add(this.jumpBox);
 			this.Controls.Add(this.label16);
 			this.Controls.Add(this.waitUpd);
 			this.Controls.Add(this.purgeBtn);
@@ -617,5 +639,7 @@
 		private System.Windows.Forms.Label stillLbl;
 		private System.Windows.Forms.NumericUpDown waitUpd;
 		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.TextBox jumpBox;
+		private System.Windows.Forms.Button jumpToBtn;
 	}
 }

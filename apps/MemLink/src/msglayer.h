@@ -13,6 +13,7 @@ bool ReadBlock(byte *data, word size, word *num);
 #define MSG_QUIT     2
 #define MSG_ALIVE    3
 #define MSG_MEM_READ 4
+#define MSG_JUMP_FAR 5
 
 #define MAX_PAYLOAD 240
 #define PKT_SIZE     64
