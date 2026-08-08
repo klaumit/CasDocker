@@ -19,8 +19,8 @@ namespace MemForge.Lib
 					item.Info.State == 0x00001000 &&
 					item.Info.Protect == 0x00000004 &&
 					item.Info.Type == 0x00020000 &&
-					(item.Info.RegionSize == 0x0075C000 || 
-					 item.Info.RegionSize == 0x00740000))
+					(item.Info.RegionSize >= 0x00370000 || 
+					 item.Info.RegionSize <= 0x0075C000))
 					||
 					(item.Info.AllocationProtect == 0x00000004 &&
 					item.Info.State == 0x00001000 &&
