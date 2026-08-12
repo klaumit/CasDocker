@@ -98,12 +98,15 @@ namespace MemForge
 
 		private void menuFindClick(object sender, EventArgs e)
 		{
+			var count = 0;
 			foreach (var pid in windows.Keys)
 			{
 				var item = windows[pid].Last();
 				var wName = item.Item2;
-				AppReader.WriteAllFound(pid, wName);
+				count += AppReader.WriteAllFound(pid, wName);
 			}
+			MessageBox.Show(string.Format("Found {0} app(s)!", count),
+				"Result", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 		}
 
 		private void menuKillClick(object sender, EventArgs e)

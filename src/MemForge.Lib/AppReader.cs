@@ -14,8 +14,9 @@ namespace MemForge.Lib
 {
     public static class AppReader
     {
-        public static void WriteAllFound(uint pid, string wName)
+        public static int WriteAllFound(uint pid, string wName)
         {
+            var count = 0;
             var localDir = string.Format("proc_{0}_apps", pid);
             if (!Directory.Exists(localDir))
                 Directory.CreateDirectory(localDir);
@@ -44,6 +45,7 @@ namespace MemForge.Lib
                         try
                         {
                             BW.ExtractFiles(ai, e.pvaSize, e.elfSize, array, anchor, localDir);
+                            count++;
                         }
                         catch (ArgumentException ex)
                         {
@@ -52,6 +54,7 @@ namespace MemForge.Lib
                     }
                 }
             }
+            return count;
         }
     }
 }
