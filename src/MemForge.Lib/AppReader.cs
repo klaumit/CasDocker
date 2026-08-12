@@ -22,36 +22,39 @@ namespace MemForge.Lib
                 Directory.CreateDirectory(localDir);
             var pvaBytes = Consts.PvaMarkB;
             var rldBytes = Consts.RldMarkB;
+            var stream = new MemoryStream();
             foreach (var item in MR.ReadAll(pid))
             {
                 var ii = item.Info;
                 if (ii.AllocationProtect == 0x00000004 && ii.RegionSize == 0x00085000 &&
                     ii.State == 0x00001000 && ii.Protect == 0x00000004 && ii.Type == 0x00020000)
                 {
-                    var array = item.Buffer.SwapEndian(true);
-                    var pvaIdx = array.IndicesOf(pvaBytes).ToArray();
-                    var rldIdx = array.IndicesOf(rldBytes).ToArray();
-                    if (!(pvaIdx.Length >= 1 && rldIdx.Length >= 1))
-                        continue;
-                    var anchors = EE.FindAnchors(pvaIdx, rldIdx).ToArray();
-                    if (anchors.Length < 1)
-                        continue;
-                    var baseAddr = ii.BaseAddress.ToInt64();
-                    foreach (var anchor in anchors)
-                    {
-                        var pvaName = string.Format("{0:x8}_{1:D2}.pva", baseAddr, anchor.I);
-                        var e = anchor.GetSizes(array);
-                        var ai = new AI { Name = pvaName };
-                        try
-                        {
-                            BW.ExtractFiles(ai, e.pvaSize, e.elfSize, array, anchor, localDir);
-                            count++;
-                        }
-                        catch (ArgumentException ex)
-                        {
-                            Debug.WriteLine(ex);
-                        }
-                    }
+                    var buff = item.Buffer.SwapEndian(true);
+                    stream.Write(buff, 0, buff.Length);
+                }
+            }
+            var array = stream.ToArray();
+            stream.Dispose();
+            var pvaIdx = array.IndicesOf(pvaBytes).ToArray();
+            var rldIdx = array.IndicesOf(rldBytes).ToArray();
+            if (!(pvaIdx.Length >= 1 && rldIdx.Length >= 1))
+                return 0;
+            var anchors = EE.FindAnchors(pvaIdx, rldIdx).ToArray();
+            if (anchors.Length < 1)
+                return 0;
+            foreach (var anchor in anchors)
+            {
+                var pvaName = string.Format("app_{0:D2}.pva", anchor.I);
+                var e = anchor.GetSizes(array);
+                var ai = new AI { Name = pvaName };
+                try
+                {
+                    BW.ExtractFiles(ai, e.pvaSize, e.elfSize, array, anchor, localDir);
+                    count++;
+                }
+                catch (ArgumentException ex)
+                {
+                    Debug.WriteLine(ex);
                 }
             }
             return count;
