@@ -59,6 +59,7 @@
     <Compile Include="Defaults.cs" />
     <Compile Include="MemGot.cs" />
     <Compile Include="MemReader.cs" />
+	<Compile Include="AppReader.cs" />
     <Compile Include="MemShim.cs" />
     <Compile Include="ByteExt.cs" />
     <Compile Include="ProcExt.cs" />
