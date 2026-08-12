@@ -63,6 +63,7 @@ namespace MemForge
 		{
 			var menu = new ToolStripMenuItem[] {
 				new ToolStripMenuItem("Dump all", null, menuDumpClick),
+				new ToolStripMenuItem("Find apps", null, menuFindClick),
 				new ToolStripMenuItem("Kill all", null, menuKillClick),
 				new ToolStripMenuItem("About", null, menuAboutClick),
 				new ToolStripMenuItem("Exit", null, menuExitClick)
@@ -92,6 +93,16 @@ namespace MemForge
 				var item = windows[pid].Last();
 				var wName = item.Item2;
 				MemReader.WriteFullDump(pid, wName);
+			}
+		}
+
+		private void menuFindClick(object sender, EventArgs e)
+		{
+			foreach (var pid in windows.Keys)
+			{
+				var item = windows[pid].Last();
+				var wName = item.Item2;
+				AppReader.WriteAllFound(pid, wName);
 			}
 		}
 

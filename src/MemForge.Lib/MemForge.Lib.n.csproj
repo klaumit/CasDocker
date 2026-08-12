@@ -12,6 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Hexer.Lib">
+      <HintPath>..\deps\net40\Hexer.Lib.dll</HintPath>
+    </Reference>
     <Reference Include="Vanara.Core">
       <HintPath>..\deps\fx40\Vanara.Core.dll</HintPath>
     </Reference>

@@ -115,9 +115,9 @@ namespace MemForge.Lib
 			}
 			Process.Start(fName);
 
-			var xName = bName + ".xxd";
-			Printer.PrintXxd(fName, xName);
-			Process.Start(xName);
+			// var xName = bName + ".xxd";
+			// Printer.PrintXxd(fName, xName);
+			// Process.Start(xName);
 		}
 
 		public static string ToStr(this K.MEMORY_BASIC_INFORMATION mbi)
