@@ -44,12 +44,12 @@ namespace MemForge.Lib
                 return 0;
             foreach (var anchor in anchors)
             {
-                var pvaName = string.Format("app_{0:D2}.pva", anchor.I);
+                var pvaName = "app.pva";
                 var e = anchor.GetSizes(array);
                 var ai = new AI { Name = pvaName };
                 try
                 {
-                    BW.ExtractFiles(ai, e.pvaSize, e.elfSize, array, anchor, localDir);
+                    BW.ExtractFiles(ai, e, array, anchor, localDir, true);
                     count++;
                 }
                 catch (ArgumentException ex)
