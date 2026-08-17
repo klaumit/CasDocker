@@ -10,7 +10,7 @@ cd win_build
 # winetricks vb6run
 
 export EXE="wine pvmake"
-export PRJ="%USERPROFILE%\Projects\IntFix"
+export PRJ="%USERPROFILE%\Projects\Hello"
 
 echo 
 echo  ::: Prepare ::: 
