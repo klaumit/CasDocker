@@ -183,6 +183,11 @@ void main()
 					#endif
 					ptr = 1;
 				}
+				else if (bank == 5)
+				{
+					LibCallListMenu();
+					ptr = 1;
+				}
 				sprintf(tmp, "%02X|%04X|%04X|%02X", bank, m_code, m_sts, ptr);
 				SendTxtMessage(MSG_JUMP_OS, (char *)tmp);
 				maxTry = 25 * TICKS_PER_SEC;
