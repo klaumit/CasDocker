@@ -20,14 +20,17 @@ void main()
 	int i, maxTry, newTry, srcAdr, bank, seg, off, len;
 	int curOff, remaining, chunkLen;
 	FarFun jump;
+	word *m_code, *m_sts;
 
 	#ifdef __HITACHI__
 	    unsigned int code[3];
 	    volatile byte *src;
 	    byte c;
+		void **mode_info;
 	#else
 	    unsigned char far *src;
 	    unsigned char c;
+		word *m_seg, *m_ofs;
 	#endif
 	char tmp[MAX_PAYLOAD];
 	word j, ptr;
@@ -113,6 +116,44 @@ void main()
 				LibPutDisp();
 				maxTry = newTry * TICKS_PER_SEC;
 				i = 0;
+			}
+			if (kind == MSG_GET_MODE)
+			{
+				if (sscanf(text, "%x", &bank) != 1)
+				{
+					bank = 0;
+				}
+				sprintf(debug, " -> I will answer #%d!", bank);
+				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
+				LibPutDisp();
+				if (bank == 1)
+				{
+					#ifdef __HITACHI__
+					LibGetLastMode(&m_code, &m_sts, &mode_info);
+					#else
+					LibGetLastMode(&m_code, &m_sts, &m_seg, &m_ofs);
+					#endif
+				}
+				else if (bank == 2)
+				{
+					#ifdef __HITACHI__
+					LibGetMode(&m_code, &m_sts, &mode_info);
+					#else
+					LibGetMode(&m_code, &m_sts, &m_seg, &m_ofs);
+					#endif
+				}
+				#ifdef __HITACHI__
+				    sprintf(tmp, "%02X|%04X|%04X|%08X|", bank, m_code, m_sts, mode_info);
+				#else
+				    sprintf(tmp, "%02X|%04X|%04X|%08X|", bank, m_code, m_sts, MK_FP(m_seg, m_ofs));
+				#endif
+				SendTxtMessage(MSG_GET_MODE, (char *)tmp);
+				maxTry = 25 * TICKS_PER_SEC;
+				i = 0;
+			}
+			if (kind == MSG_JUMP_OS)
+			{
+
 			}
 			if (kind == MSG_JUMP_FAR)
 			{
