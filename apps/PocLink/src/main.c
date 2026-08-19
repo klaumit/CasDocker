@@ -153,7 +153,40 @@ void main()
 			}
 			if (kind == MSG_JUMP_OS)
 			{
-
+				if (sscanf(text, "%x|%x|%x", &bank, &m_code, &m_sts) != 3)
+				{
+					bank = 0; m_code = 0; m_sts = 0;
+				}
+				sprintf(debug, " -> K %02X %04X %04X", bank, m_code, m_sts);
+				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
+				LibPutDisp();
+				if (bank == 1)
+				{
+					ptr = LibModeJump(m_code, m_sts);
+				}
+				else if (bank == 2)
+				{
+					LibMenuJump(m_code);
+					ptr = 1;
+				}
+				else if (bank == 3)
+				{
+					LibScrtJmp(m_sts, m_code);
+					ptr = 1;
+				}
+				else if (bank == 4)
+				{
+					#ifdef __HITACHI__
+						LibSecretCall((void *)(((dword)m_code << 16) | (word)m_sts));
+					#else
+						LibSecretCall(m_code, m_sts);
+					#endif
+					ptr = 1;
+				}
+				sprintf(tmp, "%02X|%04X|%04X|%02X", bank, m_code, m_sts, ptr);
+				SendTxtMessage(MSG_JUMP_OS, (char *)tmp);
+				maxTry = 25 * TICKS_PER_SEC;
+				i = 0;
 			}
 			if (kind == MSG_JUMP_FAR)
 			{
