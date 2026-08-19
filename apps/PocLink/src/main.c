@@ -123,7 +123,7 @@ void main()
 				{
 					bank = 0;
 				}
-				sprintf(debug, " -> I will answer #%d!", bank);
+				sprintf(debug, " -> Get the mode #%d!", bank);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
 				if (bank == 1)
@@ -143,9 +143,9 @@ void main()
 					#endif
 				}
 				#ifdef __HITACHI__
-				    sprintf(tmp, "%02X|%04X|%04X|%08X|", bank, m_code, m_sts, mode_info);
+				    sprintf(tmp, "%02X|%04X|%04X|%08X", bank, m_code, m_sts, mode_info);
 				#else
-				    sprintf(tmp, "%02X|%04X|%04X|%08X|", bank, m_code, m_sts, MK_FP(m_seg, m_ofs));
+				    sprintf(tmp, "%02X|%04X|%04X|%08X", bank, m_code, m_sts, MK_FP(m_seg, m_ofs));
 				#endif
 				SendTxtMessage(MSG_GET_MODE, (char *)tmp);
 				maxTry = 25 * TICKS_PER_SEC;
