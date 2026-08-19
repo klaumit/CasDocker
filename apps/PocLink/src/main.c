@@ -21,6 +21,7 @@ void main()
 	int curOff, remaining, chunkLen;
 	FarFun jump;
 	word *m_code, *m_sts;
+	byte array[64];
 
 	#ifdef __HITACHI__
 	    unsigned int code[3];
@@ -187,6 +188,10 @@ void main()
 				{
 					LibCallListMenu();
 					ptr = 1;
+				}
+				else if (bank == 6)
+				{
+					ptr = LibDualWin(m_code, m_sts, &array);
 				}
 				sprintf(tmp, "%02X|%04X|%04X|%02X", bank, m_code, m_sts, ptr);
 				SendTxtMessage(MSG_JUMP_OS, (char *)tmp);
