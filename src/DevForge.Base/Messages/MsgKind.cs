@@ -1,6 +1,6 @@
 namespace DevForge.Lib.Messages
 {
-	public enum MsgKind : byte
+    public enum MsgKind : byte
     {
         Unknown = 0,
 
@@ -12,6 +12,10 @@ namespace DevForge.Lib.Messages
 
         MemRead = 4,
 
-        JumpFar = 5
+        JumpFar = 5,
+
+        GetMode = 6,
+
+        JumpOS = 7
     }
 }
