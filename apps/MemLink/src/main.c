@@ -20,14 +20,19 @@ void main()
 	int i, maxTry, newTry, srcAdr, bank, seg, off, len;
 	int curOff, remaining, chunkLen;
 	FarFun jump;
+	FarPtr fat;
+	word m_code, m_sts;
+	byte array[64];
 
 	#ifdef __HITACHI__
 	    unsigned int code[3];
 	    volatile byte *src;
 	    byte c;
+	    void *mode_info;
 	#else
 	    unsigned char far *src;
 	    unsigned char c;
+	    word m_seg, m_ofs;
 	#endif
 	char tmp[MAX_PAYLOAD];
 	word j, ptr;
@@ -112,6 +117,86 @@ void main()
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
 				maxTry = newTry * TICKS_PER_SEC;
+				i = 0;
+			}
+			if (kind == MSG_GET_MODE)
+			{
+				if (sscanf(text, "%x", &bank) != 1)
+				{
+					bank = 0;
+				}
+				sprintf(debug, " -> Get the mode #%d!", bank);
+				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
+				LibPutDisp();
+				if (bank == 1)
+				{
+					#ifdef __HITACHI__
+					LibGetLastMode(&m_code, &m_sts, &mode_info);
+					#else
+					LibGetLastMode(&m_code, &m_sts, &m_seg, &m_ofs);
+					#endif
+				}
+				else if (bank == 2)
+				{
+					#ifdef __HITACHI__
+					LibGetMode(&m_code, &m_sts, &mode_info);
+					#else
+					LibGetMode(&m_code, &m_sts, &m_seg, &m_ofs);
+					#endif
+				}
+				#ifdef __HITACHI__
+				    sprintf(tmp, "%02X|%04X|%04X|%08X", bank, m_code, m_sts, mode_info);
+				#else
+				    sprintf(tmp, "%02X|%04X|%04X|%08X", bank, m_code, m_sts, MK_FP(m_seg, m_ofs));
+				#endif
+				SendTxtMessage(MSG_GET_MODE, (char *)tmp);
+				maxTry = 200 * TICKS_PER_SEC;
+				i = 0;
+			}
+			if (kind == MSG_JUMP_OS)
+			{
+				if (sscanf(text, "%x|%x|%x", &bank, &m_code, &m_sts) != 3)
+				{
+					bank = 0; m_code = 0; m_sts = 0;
+				}
+				sprintf(debug, " -> K %02X %04X %04X", bank, m_code, m_sts);
+				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
+				LibPutDisp();
+				if (bank == 1)
+				{
+					ptr = LibModeJump(m_code, m_sts);
+				}
+				else if (bank == 2)
+				{
+					LibMenuJump(m_code);
+					ptr = 1;
+				}
+				else if (bank == 3)
+				{
+					LibScrtJmp(m_sts, m_code);
+					ptr = 1;
+				}
+				else if (bank == 4)
+				{
+					#ifdef __HITACHI__
+						LibSecretCall((void *)(((dword)m_code << 16) | (word)m_sts));
+					#else
+						LibSecretCall(m_code, m_sts);
+					#endif
+					ptr = 1;
+				}
+				else if (bank == 5)
+				{
+					LibCallListMenu();
+					ptr = 1;
+				}
+				else if (bank == 6)
+				{
+					fat = LibDualWin(m_code, m_sts, array);
+				}
+				sprintf(tmp, "%02X|%04X|%04X|%02X|%08X", bank, m_code, m_sts, ptr, fat);
+				SendTxtMessage(MSG_JUMP_OS, (char *)tmp);
+				maxTry = 200 * TICKS_PER_SEC;
 				i = 0;
 			}
 			if (kind == MSG_JUMP_FAR)
