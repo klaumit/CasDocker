@@ -62,6 +62,8 @@
 			this.label16 = new System.Windows.Forms.Label();
 			this.jumpBox = new System.Windows.Forms.TextBox();
 			this.jumpToBtn = new System.Windows.Forms.Button();
+			this.gcmBtn = new System.Windows.Forms.Button();
+			this.glmBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
@@ -555,11 +557,33 @@
 			this.jumpToBtn.UseVisualStyleBackColor = true;
 			this.jumpToBtn.Click += new System.EventHandler(this.jumpToBtn_Click);
 			// 
+			// gcmBtn
+			// 
+			this.gcmBtn.Location = new System.Drawing.Point(410, 283);
+			this.gcmBtn.Name = "gcmBtn";
+			this.gcmBtn.Size = new System.Drawing.Size(40, 23);
+			this.gcmBtn.TabIndex = 25;
+			this.gcmBtn.Text = "GCM";
+			this.gcmBtn.UseVisualStyleBackColor = true;
+			this.gcmBtn.Click += new System.EventHandler(this.gcmBtn_Click);
+			// 
+			// glmBtn
+			// 
+			this.glmBtn.Location = new System.Drawing.Point(456, 283);
+			this.glmBtn.Name = "glmBtn";
+			this.glmBtn.Size = new System.Drawing.Size(40, 23);
+			this.glmBtn.TabIndex = 26;
+			this.glmBtn.Text = "GLM";
+			this.glmBtn.UseVisualStyleBackColor = true;
+			this.glmBtn.Click += new System.EventHandler(this.glmBtn_Click);
+			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 353);
+			this.Controls.Add(this.glmBtn);
+			this.Controls.Add(this.gcmBtn);
 			this.Controls.Add(this.jumpToBtn);
 			this.Controls.Add(this.jumpBox);
 			this.Controls.Add(this.label16);
@@ -641,5 +665,7 @@
 		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.TextBox jumpBox;
 		private System.Windows.Forms.Button jumpToBtn;
+		private System.Windows.Forms.Button gcmBtn;
+		private System.Windows.Forms.Button glmBtn;
 	}
 }

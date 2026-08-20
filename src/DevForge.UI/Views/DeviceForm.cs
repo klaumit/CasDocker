@@ -146,6 +146,20 @@ namespace DevForge.Views
             dev.Send(new Quit("Please stop. Now."));
         }
 
+        private void gcmBtn_Click(object sender, EventArgs e)
+        {
+            var dev = _args.Device;
+            var hex = new byte[] { 2 }.ToHexString();
+            dev.Send(new GetMode(hex));
+        }
+
+        private void glmBtn_Click(object sender, EventArgs e)
+        {
+            var dev = _args.Device;
+            var hex = new byte[] { 1 }.ToHexString();
+            dev.Send(new GetMode(hex));
+        }
+
         private void SendLive()
         {
             var dev = _args.Device;
