@@ -52,6 +52,14 @@ namespace DevForge.Views
             GetMode gm;
             if ((gm = e.Message as GetMode) != null)
             {
+                Action gmA = () =>
+                {
+                    gm.Unpack(out var kind, out var code, out var stat, out var ptr);
+                    mCodeTb.Text = "0x" + code.ToString("X4");
+                    mStatTb.Text = "0x" + stat.ToString("X4");
+                    jumpBox.Text = "0x" + ptr.ToString("X8");
+                };
+                Invoke(gmA);
             }
 
             Read r;

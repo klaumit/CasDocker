@@ -64,6 +64,8 @@
 			this.jumpToBtn = new System.Windows.Forms.Button();
 			this.gcmBtn = new System.Windows.Forms.Button();
 			this.glmBtn = new System.Windows.Forms.Button();
+			this.mCodeTb = new System.Windows.Forms.TextBox();
+			this.mStatTb = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
@@ -274,7 +276,7 @@
 			// 
 			// closeBtn
 			// 
-			this.closeBtn.Location = new System.Drawing.Point(421, 182);
+			this.closeBtn.Location = new System.Drawing.Point(421, 154);
 			this.closeBtn.Name = "closeBtn";
 			this.closeBtn.Size = new System.Drawing.Size(75, 23);
 			this.closeBtn.TabIndex = 2;
@@ -284,7 +286,7 @@
 			// 
 			// keepLiveBtn
 			// 
-			this.keepLiveBtn.Location = new System.Drawing.Point(421, 153);
+			this.keepLiveBtn.Location = new System.Drawing.Point(421, 125);
 			this.keepLiveBtn.Name = "keepLiveBtn";
 			this.keepLiveBtn.Size = new System.Drawing.Size(75, 23);
 			this.keepLiveBtn.TabIndex = 3;
@@ -505,7 +507,7 @@
 			// 
 			// purgeBtn
 			// 
-			this.purgeBtn.Location = new System.Drawing.Point(421, 244);
+			this.purgeBtn.Location = new System.Drawing.Point(421, 186);
 			this.purgeBtn.Name = "purgeBtn";
 			this.purgeBtn.Size = new System.Drawing.Size(75, 23);
 			this.purgeBtn.TabIndex = 19;
@@ -559,7 +561,7 @@
 			// 
 			// gcmBtn
 			// 
-			this.gcmBtn.Location = new System.Drawing.Point(410, 283);
+			this.gcmBtn.Location = new System.Drawing.Point(410, 221);
 			this.gcmBtn.Name = "gcmBtn";
 			this.gcmBtn.Size = new System.Drawing.Size(40, 23);
 			this.gcmBtn.TabIndex = 25;
@@ -569,7 +571,7 @@
 			// 
 			// glmBtn
 			// 
-			this.glmBtn.Location = new System.Drawing.Point(456, 283);
+			this.glmBtn.Location = new System.Drawing.Point(456, 221);
 			this.glmBtn.Name = "glmBtn";
 			this.glmBtn.Size = new System.Drawing.Size(40, 23);
 			this.glmBtn.TabIndex = 26;
@@ -577,11 +579,29 @@
 			this.glmBtn.UseVisualStyleBackColor = true;
 			this.glmBtn.Click += new System.EventHandler(this.glmBtn_Click);
 			// 
+			// mCodeTb
+			// 
+			this.mCodeTb.Location = new System.Drawing.Point(402, 254);
+			this.mCodeTb.Name = "mCodeTb";
+			this.mCodeTb.Size = new System.Drawing.Size(46, 20);
+			this.mCodeTb.TabIndex = 27;
+			this.mCodeTb.Text = "0x8C06";
+			// 
+			// mStatTb
+			// 
+			this.mStatTb.Location = new System.Drawing.Point(453, 254);
+			this.mStatTb.Name = "mStatTb";
+			this.mStatTb.Size = new System.Drawing.Size(46, 20);
+			this.mStatTb.TabIndex = 28;
+			this.mStatTb.Text = "0x8C06";
+			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 353);
+			this.Controls.Add(this.mStatTb);
+			this.Controls.Add(this.mCodeTb);
 			this.Controls.Add(this.glmBtn);
 			this.Controls.Add(this.gcmBtn);
 			this.Controls.Add(this.jumpToBtn);
@@ -667,5 +687,7 @@
 		private System.Windows.Forms.Button jumpToBtn;
 		private System.Windows.Forms.Button gcmBtn;
 		private System.Windows.Forms.Button glmBtn;
+		private System.Windows.Forms.TextBox mCodeTb;
+		private System.Windows.Forms.TextBox mStatTb;
 	}
 }
