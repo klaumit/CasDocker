@@ -95,15 +95,18 @@ namespace DevForge.Lib.Messages
             {
                 Kind = kind, Length = length, Payload = body, Checksum = myCheck
             };
-            switch (kind)
+			switch (kind)
             {
                 case MsgKind.Hello: return new Hello(msg);
                 case MsgKind.Quit: return new Quit(msg);
                 case MsgKind.Alive: return new Alive(msg);
                 case MsgKind.MemRead: return new Read(msg);
+                case MsgKind.JumpFar: return new Jump(msg);
+                case MsgKind.GetMode: return new GetMode(msg);
+                case MsgKind.JumpOS: return new Jumpo(msg);
                 case MsgKind.Unknown:
                 default: return msg;
             }
-        }
-    }
+		}
+	}
 }
