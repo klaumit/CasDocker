@@ -20,18 +20,19 @@ void main()
 	int i, maxTry, newTry, srcAdr, bank, seg, off, len;
 	int curOff, remaining, chunkLen;
 	FarFun jump;
-	word *m_code, *m_sts;
+	FarPtr fat;
+	word m_code, m_sts;
 	byte array[64];
 
 	#ifdef __HITACHI__
 	    unsigned int code[3];
 	    volatile byte *src;
 	    byte c;
-		void **mode_info;
+	    void *mode_info;
 	#else
 	    unsigned char far *src;
 	    unsigned char c;
-		word *m_seg, *m_ofs;
+	    word m_seg, m_ofs;
 	#endif
 	char tmp[MAX_PAYLOAD];
 	word j, ptr;
@@ -191,9 +192,9 @@ void main()
 				}
 				else if (bank == 6)
 				{
-					ptr = LibDualWin(m_code, m_sts, &array);
+					fat = LibDualWin(m_code, m_sts, array);
 				}
-				sprintf(tmp, "%02X|%04X|%04X|%02X", bank, m_code, m_sts, ptr);
+				sprintf(tmp, "%02X|%04X|%04X|%02X|%08X", bank, m_code, m_sts, ptr, fat);
 				SendTxtMessage(MSG_JUMP_OS, (char *)tmp);
 				maxTry = 25 * TICKS_PER_SEC;
 				i = 0;
