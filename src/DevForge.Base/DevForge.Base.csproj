@@ -48,7 +48,9 @@
     <Compile Include="Hex\XxdInfo.cs" />
     <Compile Include="Hex\XxdLine.cs" />
     <Compile Include="Hex\XxdStat.cs" />
+    <Compile Include="Messages\Impl\GetMode.cs" />
     <Compile Include="Messages\Impl\Jump.cs" />
+    <Compile Include="Messages\Impl\Jumpo.cs" />
     <Compile Include="Visual\HexBit.cs" />
     <Compile Include="Visual\Renders.cs" />
     <Compile Include="Visual\Visuals.cs" />
