@@ -49,6 +49,11 @@ namespace DevForge.Views
             statusLbl.Text = "[" + ts + "] (" + e.Message.Kind + ") " + e.Message.Length + " bytes";
             _log.Write(e.Message);
 
+            GetMode gm;
+            if ((gm = e.Message as GetMode) != null)
+            {
+            }
+
             Read r;
             if (((r = e.Message as Read) != null) && _reads != null)
             {
