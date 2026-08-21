@@ -155,10 +155,11 @@ void main()
 			}
 			if (kind == MSG_JUMP_OS)
 			{
-				if (sscanf(text, "%x|%x|%x", &bank, &m_code, &m_sts) != 3)
+				if (sscanf(text, "%x|%x|%x", &bank, &seg, &off) != 3)
 				{
-					bank = 0; m_code = 0; m_sts = 0;
+					bank = 0; seg = 0; off = 0;
 				}
+				m_code = (word)seg; m_sts = (word)off;
 				sprintf(debug, " -> K %02X %04X %04X", bank, m_code, m_sts);
 				LibStringDsp( B@ debug, 5, 140, 160, B@@ IB_PFONT2);
 				LibPutDisp();
