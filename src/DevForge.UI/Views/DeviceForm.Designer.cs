@@ -66,6 +66,7 @@
 			this.glmBtn = new System.Windows.Forms.Button();
 			this.mCodeTb = new System.Windows.Forms.TextBox();
 			this.mStatTb = new System.Windows.Forms.TextBox();
+			this.osClBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
@@ -585,7 +586,7 @@
 			this.mCodeTb.Name = "mCodeTb";
 			this.mCodeTb.Size = new System.Drawing.Size(46, 20);
 			this.mCodeTb.TabIndex = 27;
-			this.mCodeTb.Text = "0x8C06";
+			this.mCodeTb.Text = "0x0000";
 			// 
 			// mStatTb
 			// 
@@ -593,13 +594,24 @@
 			this.mStatTb.Name = "mStatTb";
 			this.mStatTb.Size = new System.Drawing.Size(46, 20);
 			this.mStatTb.TabIndex = 28;
-			this.mStatTb.Text = "0x8C06";
+			this.mStatTb.Text = "0x0000";
+			// 
+			// osClBtn
+			// 
+			this.osClBtn.Location = new System.Drawing.Point(398, 283);
+			this.osClBtn.Name = "osClBtn";
+			this.osClBtn.Size = new System.Drawing.Size(35, 23);
+			this.osClBtn.TabIndex = 29;
+			this.osClBtn.Text = "CL";
+			this.osClBtn.UseVisualStyleBackColor = true;
+			this.osClBtn.Click += new System.EventHandler(this.osClBtn_Click);
 			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 353);
+			this.Controls.Add(this.osClBtn);
 			this.Controls.Add(this.mStatTb);
 			this.Controls.Add(this.mCodeTb);
 			this.Controls.Add(this.glmBtn);
@@ -689,5 +701,6 @@
 		private System.Windows.Forms.Button glmBtn;
 		private System.Windows.Forms.TextBox mCodeTb;
 		private System.Windows.Forms.TextBox mStatTb;
+		private System.Windows.Forms.Button osClBtn;
 	}
 }

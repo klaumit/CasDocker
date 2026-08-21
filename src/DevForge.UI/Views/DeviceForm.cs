@@ -159,19 +159,26 @@ namespace DevForge.Views
             dev.Send(new Quit("Please stop. Now."));
         }
 
-        private void gcmBtn_Click(object sender, EventArgs e)
+        private void SendGetMode(byte val)
         {
             var dev = _args.Device;
-            var hex = new byte[] { 2 }.ToHexString();
+            var hex = new byte[] { val }.ToHexString();
             dev.Send(new GetMode(hex));
         }
 
-        private void glmBtn_Click(object sender, EventArgs e)
+        private void gcmBtn_Click(object sender, EventArgs e) { SendGetMode(2); }
+        private void glmBtn_Click(object sender, EventArgs e) { SendGetMode(1); }
+
+        private void SendJumpo(byte val)
         {
             var dev = _args.Device;
-            var hex = new byte[] { 1 }.ToHexString();
-            dev.Send(new GetMode(hex));
+            var code = mCodeTb.Text.Replace("0x", "");
+            var stat = mStatTb.Text.Replace("0x", "");
+            var txt = string.Format("{0:X2}|{1}|{2}", val, code, stat);
+            dev.Send(new Jumpo(txt));
         }
+
+        private void osClBtn_Click(object sender, EventArgs e) { SendJumpo(5); }
 
         private void SendLive()
         {
