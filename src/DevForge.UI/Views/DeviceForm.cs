@@ -62,6 +62,19 @@ namespace DevForge.Views
                 Invoke(gmA);
             }
 
+            Jumpo jo;
+            if ((jo = e.Message as Jumpo) != null)
+            {
+                Action joA = () =>
+                {
+                    jo.Unpack(out var kind, out var code, out var stat, out var val, out var ptr);
+                    mCodeTb.Text = "0x" + code.ToString("X4");
+                    mStatTb.Text = "0x" + stat.ToString("X4");
+                    jumpBox.Text = "0x" + ptr.ToString("X8");
+                };
+                Invoke(joA);
+            }
+
             Read r;
             if (((r = e.Message as Read) != null) && _reads != null)
             {
@@ -179,6 +192,9 @@ namespace DevForge.Views
         }
 
         private void osClBtn_Click(object sender, EventArgs e) { SendJumpo(5); }
+        private void doMjBtn_Click(object sender, EventArgs e) { SendJumpo(2); }
+        private void doJmBtn_Click(object sender, EventArgs e) { SendJumpo(1); }
+        private void doDwBtn_Click(object sender, EventArgs e) { SendJumpo(6); }
 
         private void SendLive()
         {

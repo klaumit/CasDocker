@@ -67,6 +67,9 @@
 			this.mCodeTb = new System.Windows.Forms.TextBox();
 			this.mStatTb = new System.Windows.Forms.TextBox();
 			this.osClBtn = new System.Windows.Forms.Button();
+			this.doMjBtn = new System.Windows.Forms.Button();
+			this.doJmBtn = new System.Windows.Forms.Button();
+			this.doDwBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
 			this.infoBox.SuspendLayout();
 			this.statusSrp.SuspendLayout();
@@ -598,19 +601,52 @@
 			// 
 			// osClBtn
 			// 
-			this.osClBtn.Location = new System.Drawing.Point(398, 283);
+			this.osClBtn.Location = new System.Drawing.Point(415, 278);
 			this.osClBtn.Name = "osClBtn";
-			this.osClBtn.Size = new System.Drawing.Size(35, 23);
+			this.osClBtn.Size = new System.Drawing.Size(28, 23);
 			this.osClBtn.TabIndex = 29;
 			this.osClBtn.Text = "CL";
 			this.osClBtn.UseVisualStyleBackColor = true;
 			this.osClBtn.Click += new System.EventHandler(this.osClBtn_Click);
+			// 
+			// doMjBtn
+			// 
+			this.doMjBtn.Location = new System.Drawing.Point(449, 278);
+			this.doMjBtn.Name = "doMjBtn";
+			this.doMjBtn.Size = new System.Drawing.Size(29, 23);
+			this.doMjBtn.TabIndex = 30;
+			this.doMjBtn.Text = "MJ";
+			this.doMjBtn.UseVisualStyleBackColor = true;
+			this.doMjBtn.Click += new System.EventHandler(this.doMjBtn_Click);
+			// 
+			// doJmBtn
+			// 
+			this.doJmBtn.Location = new System.Drawing.Point(414, 303);
+			this.doJmBtn.Name = "doJmBtn";
+			this.doJmBtn.Size = new System.Drawing.Size(29, 23);
+			this.doJmBtn.TabIndex = 31;
+			this.doJmBtn.Text = "JM";
+			this.doJmBtn.UseVisualStyleBackColor = true;
+			this.doJmBtn.Click += new System.EventHandler(this.doJmBtn_Click);
+			// 
+			// doDwBtn
+			// 
+			this.doDwBtn.Location = new System.Drawing.Point(449, 303);
+			this.doDwBtn.Name = "doDwBtn";
+			this.doDwBtn.Size = new System.Drawing.Size(34, 23);
+			this.doDwBtn.TabIndex = 32;
+			this.doDwBtn.Text = "DW";
+			this.doDwBtn.UseVisualStyleBackColor = true;
+			this.doDwBtn.Click += new System.EventHandler(this.doDwBtn_Click);
 			// 
 			// DeviceForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(508, 353);
+			this.Controls.Add(this.doDwBtn);
+			this.Controls.Add(this.doJmBtn);
+			this.Controls.Add(this.doMjBtn);
 			this.Controls.Add(this.osClBtn);
 			this.Controls.Add(this.mStatTb);
 			this.Controls.Add(this.mCodeTb);
@@ -702,5 +738,8 @@
 		private System.Windows.Forms.TextBox mCodeTb;
 		private System.Windows.Forms.TextBox mStatTb;
 		private System.Windows.Forms.Button osClBtn;
+		private System.Windows.Forms.Button doMjBtn;
+		private System.Windows.Forms.Button doJmBtn;
+		private System.Windows.Forms.Button doDwBtn;
 	}
 }
