@@ -58,7 +58,7 @@
     <Compile Include="ProcStarted.cs" />
     <Compile Include="Defaults.cs" />
     <Compile Include="Monitoring.cs" />
-	<Compile Include="RegAbstract.cs" />
+    <Compile Include="RegAbstract.cs" />
     <Compile Include="MemGot.cs" />
     <Compile Include="MemReader.cs" />
     <Compile Include="AppReader.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="ProcWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResTool.cs" />
+    <Compile Include="Shimming.cs" />
     <Compile Include="WindowExt.cs" />
     <Compile Include="VanExt.cs" />
   </ItemGroup>

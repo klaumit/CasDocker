@@ -123,20 +123,7 @@ namespace MemForge.Lib
 
         private byte[] ReadBytes(int offset, int size)
         {
-            var buf = new byte[size];
-            var addr = IntPtr.Add(_baseAddr, offset);
-            var handle = GCHandle.Alloc(buf, GCHandleType.Pinned);
-            try
-            {
-                var buff = handle.AddrOfPinnedObject();
-                SizeT rs;
-                K.ReadProcessMemory(_proc, addr, buff, size, out rs);
-            }
-            finally
-            {
-                handle.Free();
-            }
-            return buf;
+            return Shimming.ReadBytes(_proc, _baseAddr, offset, size);
         }
 
         private void WriteDWord(int offset, uint value)
