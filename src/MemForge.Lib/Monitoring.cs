@@ -15,6 +15,11 @@ namespace WinFinder
 	{
 		public static void ReadReg86(uint pid)
 		{
+			byte[] pattern = {
+				0x02, 0x00, 0x00, 0x01, 0x00, 0x50, 0x6F, 0x63,
+				0x6B, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x65,
+				0x72, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+			};
 			foreach (var item in MR.ReadAll(pid))
 			{
 				if (item.Info.AllocationProtect == 0x00000080 &&
@@ -23,8 +28,12 @@ namespace WinFinder
 					item.Info.Type == 0x01000000 &&
 					item.Info.RegionSize == 0x0005F000)
 				{
-					Console.WriteLine(" x86 | " + item);
-					;
+					var offset = item.Buffer.IndexOf(pattern);
+					if (offset >= 0)
+					{
+						Console.WriteLine(" x86 | " + item);
+						;
+					}
 				}
 			}
 		}

@@ -9,21 +9,17 @@ namespace MemForge.Lib
 	{
 		public static void FindInSim(uint pid)
 		{
-			var enc = Encoding.ASCII;
-
-			// x86 | 02 00 00 01 00 50 6F 63 6B 65 74 56 69 65 77 65 72 00 00 00 00 00 00 00 00
+			var enc = Encoding.ASCII;					
 
 			// var litPattern = enc.GetBytes("###ML_19");
-			// var bigPattern = enc.GetBytes("###ML_A0").SwapEndian();
-
-			foreach (var item in MR.ReadAll(pid))
-			{
+			// var bigPattern = enc.GetBytes("###ML_A0").SwapEndian();						
+			
 				;
 
 				/*
-				var offsetB = item.Buffer.IndexOf(bigPattern);
+				  
 				var offsetL = item.Buffer.IndexOf(litPattern);
-				if (offsetB >= 0 || offsetL >= 0)
+				if (offsetL >= 0)
 				{
 					var offset = Math.Max(offsetB, offsetL);
 					var address = IntPtr.Add(item.Info.BaseAddress, offset);
@@ -35,7 +31,7 @@ namespace MemForge.Lib
 					MemoryFactory.Queue.Add(it);
 				}
 				*/
-			}
+			
 		}
 	}
 }
