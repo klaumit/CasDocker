@@ -57,6 +57,8 @@
     <Compile Include="MemoryPort.cs" />
     <Compile Include="ProcStarted.cs" />
     <Compile Include="Defaults.cs" />
+    <Compile Include="Monitoring.cs" />
+	<Compile Include="RegAbstract.cs" />
     <Compile Include="MemGot.cs" />
     <Compile Include="MemReader.cs" />
     <Compile Include="AppReader.cs" />

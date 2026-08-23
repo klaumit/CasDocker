@@ -6,6 +6,13 @@ namespace MemForge.Lib
 {
 	public static class ProcExt
     {
+        public static Process Find(string name)
+        {
+            var procs = Process.GetProcessesByName(name);
+            var proc = procs.FirstOrDefault();
+            return proc;
+        }
+
         public static void KillAll(string name)
         {
             var procs = Process.GetProcessesByName(name);
