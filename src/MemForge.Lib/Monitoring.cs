@@ -31,7 +31,10 @@ namespace WinFinder
 					var offset = item.Buffer.IndexOf(pattern);
 					if (offset >= 0)
 					{
-						Console.WriteLine(" x86 | " + item);
+						var real = offset - 55;
+
+						// 0=AX|2=CX|4=DX|6=BX|8=SP|10=BP|12=SI|14=DI|16=ES|18=CS|20=SS|22=DS|24=IP
+						Console.WriteLine(" x86 | " + real + " |" + item);
 						;
 					}
 				}
@@ -57,7 +60,10 @@ namespace WinFinder
 					var offset = item.Buffer.IndexOf(pattern);
 					if (offset >= 0)
 					{
-						Console.WriteLine(" sh3 | " + item);
+						var real = offset - 267;
+
+						// 0=R0|8=R1|16=R2|24=R3|32=R4|40=R5|48=R6|56=R7|64=R8|72=R9|80=R10|88=R11|96=R12|104=R13|112=R14|120=R15|128=SR|136=GBR|144=VBR|152=SSR|160=SPC|168=R0b|176=R1b|184=R2b|192=R3b|200=R4b|208=R5b|216=R6b|224=R7b|232=MACH|240=MACL|248=PR|256=PC
+						Console.WriteLine(" sh3 | " + real + " |" + item);
 						;
 					}
 				}
