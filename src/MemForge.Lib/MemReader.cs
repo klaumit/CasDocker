@@ -134,5 +134,15 @@ namespace MemForge.Lib
 			bld.Append(" ");
 			return bld.ToString();
 		}
+
+		public static string ToStr(this MemGot mg)
+		{
+			var bld = new StringBuilder();
+			bld.Append("[MG]");
+			bld.AppendFormat(" Name={0}", mg.Name);
+			bld.AppendFormat(" Size={0:X8}", mg.Buffer.Length);
+			bld.AppendFormat(" {0} ", ToStr(mg.Info));
+			return bld.ToString();
+		}
 	}
 }
