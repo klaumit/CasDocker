@@ -7,31 +7,35 @@ using SP = Vanara.PInvoke.Kernel32.SafeHPROCESS;
 
 namespace MemForge.Lib
 {
-	public abstract class RegShim
+	public abstract class RegShim : IDisposable
 	{
+		public SP Proc { get; }
+		public IntPtr BaseAddr { get; }
+
+		public RegShim(SP proc, IntPtr baseAddr)
+		{
+			Proc = proc;
+			BaseAddr = baseAddr;
+		}
+
+		public void Dispose()
+		{
+		}
 	}
 
 	public sealed class Reg86Shim : RegShim
 	{
-		public Reg86Shim(SP rwHandle, IntPtr address)
+		public Reg86Shim(SP proc, IntPtr baseAddr)
+			: base(proc, baseAddr)
 		{
-			RwHandle = rwHandle;
-			Address = address;
 		}
-
-		public SP RwHandle { get; }
-		public IntPtr Address { get; }
 	}
 
 	public sealed class RegShShim : RegShim
 	{
-		public RegShShim(SP rwHandle, IntPtr address)
+		public RegShShim(SP proc, IntPtr baseAddr)
+			: base(proc, baseAddr)
 		{
-			RwHandle = rwHandle;
-			Address = address;
 		}
-
-		public SP RwHandle { get; }
-		public IntPtr Address { get; }
 	}
 }
