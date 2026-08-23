@@ -134,19 +134,7 @@ namespace MemForge.Lib
 
         private void WriteBytes(int offset, byte[] buf)
         {
-            var addr = IntPtr.Add(_baseAddr, offset);
-            var handle = GCHandle.Alloc(buf, GCHandleType.Pinned);
-            try
-            {
-                var buff = handle.AddrOfPinnedObject();
-                var size = buf.Length;
-                SizeT ws;
-                K.WriteProcessMemory(_proc, addr, buff, size, out ws);
-            }
-            finally
-            {
-                handle.Free();
-            }
+            Shimming.WriteBytes(_proc, _baseAddr, offset, buf);
         }
 
         public void Dispose()

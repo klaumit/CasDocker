@@ -30,5 +30,22 @@ namespace MemForge.Lib
             }
             return buf;
         }
+
+        public static void WriteBytes(this P proc, IntPtr bAddr, int offset, byte[] buf)
+        {
+            var addr = IntPtr.Add(bAddr, offset);
+            var handle = GCHandle.Alloc(buf, GCHandleType.Pinned);
+            try
+            {
+                var buff = handle.AddrOfPinnedObject();
+                var size = buf.Length;
+                SizeT ws;
+                K.WriteProcessMemory(proc, addr, buff, size, out ws);
+            }
+            finally
+            {
+                handle.Free();
+            }
+        }
     }
 }
