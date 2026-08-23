@@ -40,6 +40,12 @@ namespace WinFinder
 
 		public static void ReadRegSh(uint pid)
 		{
+			byte[] pattern ={
+				0x00, 0xE6, 0x78, 0x02, 0x8C, 0x08, 0x5A, 0x02, 0x8C,
+				0xE1, 0x10, 0x00, 0x40, 0xE0, 0x00, 0x00, 0x00, 0x01,
+				0x00, 0x00, 0x00, 0x19, 0x07, 0x00, 0x00, 0x85, 0xAA,
+				0x58, 0x02, 0xB8, 0xF6, 0x12, 0x00, 0x00
+			};
 			foreach (var item in MR.ReadAll(pid))
 			{
 				if (item.Info.AllocationProtect == 0x00000080 &&
@@ -48,8 +54,12 @@ namespace WinFinder
 					item.Info.Type == 0x01000000 &&
 					item.Info.RegionSize == 0x001E9000)
 				{
-					Console.WriteLine(" sh3 | " + item);
-					;
+					var offset = item.Buffer.IndexOf(pattern);
+					if (offset >= 0)
+					{
+						Console.WriteLine(" sh3 | " + item);
+						;
+					}
 				}
 			}
 		}

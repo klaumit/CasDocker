@@ -10,17 +10,9 @@ namespace MemForge.Lib
 		public static void FindInSim(uint pid)
 		{
 			var enc = Encoding.ASCII;					
-
-			// var litPattern = enc.GetBytes("###ML_19");
-			// var bigPattern = enc.GetBytes("###ML_A0").SwapEndian();						
 			
-				;
-
-				/*
-				  
-				var offsetL = item.Buffer.IndexOf(litPattern);
-				if (offsetL >= 0)
-				{
+				/*				  
+				
 					var offset = Math.Max(offsetB, offsetL);
 					var address = IntPtr.Add(item.Info.BaseAddress, offset);
 					string pName;
@@ -29,7 +21,7 @@ namespace MemForge.Lib
 					var order = offsetB == offset ? ByteOrder.BigEndian : ByteOrder.LittleEndian; 
 					var it = Tuple.Create(shim, order);
 					MemoryFactory.Queue.Add(it);
-				}
+				
 				*/
 			
 		}
