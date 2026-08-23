@@ -1,7 +1,37 @@
+using System.Linq;
+using System.Collections.Generic;
+
 namespace MemForge.Lib
 {
     public static class ByteExt
     {
+        public static IEnumerable<KeyValuePair<int, int>> FirstIndicesOf(
+            this byte[] haystack, params byte[][] patterns)
+        {
+            var i = 0;
+            foreach (var pattern in patterns)
+            {
+                var idx = IndicesOf(haystack, pattern).Take(1).ToArray();
+                if (idx.Length == 1)
+                {
+                    yield return new KeyValuePair<int, int>(i++, idx[0]);
+                    continue;
+                }
+                break;
+            }
+        }
+
+        public static IEnumerable<int> IndicesOf(this byte[] haystack, byte[] pattern)
+        {
+            var start = 0;
+            int idx;
+            while ((idx = haystack.IndexOf(pattern, start)) >= 0)
+            {
+                yield return idx;
+                start = idx + pattern.Length;
+            }
+        }
+
         public static int IndexOf(this byte[] haystack, byte[] pattern, int startIndex = 0)
         {
             if (pattern == null || pattern.Length == 0)
