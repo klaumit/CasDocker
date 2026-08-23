@@ -1,29 +1,37 @@
 ﻿using System;
 using System.Text;
 using DevForge.Lib.Modern;
+using Vanara.PInvoke;
 using MR = MemForge.Lib.MemReader;
+using SP = Vanara.PInvoke.Kernel32.SafeHPROCESS;
 
 namespace MemForge.Lib
 {
-	public static class RegAbstract
+	public abstract class RegShim
 	{
-		public static void FindInSim(uint pid)
+	}
+
+	public sealed class Reg86Shim : RegShim
+	{
+		public Reg86Shim(SP rwHandle, IntPtr address)
 		{
-			var enc = Encoding.ASCII;					
-			
-				/*				  
-				
-					var offset = Math.Max(offsetB, offsetL);
-					var address = IntPtr.Add(item.Info.BaseAddress, offset);
-					string pName;
-					var rwHandle = MR.OpenProc(pid, out pName, true);
-					var shim = new MemShim(rwHandle, address);
-					var order = offsetB == offset ? ByteOrder.BigEndian : ByteOrder.LittleEndian; 
-					var it = Tuple.Create(shim, order);
-					MemoryFactory.Queue.Add(it);
-				
-				*/
-			
+			RwHandle = rwHandle;
+			Address = address;
 		}
+
+		public SP RwHandle { get; }
+		public IntPtr Address { get; }
+	}
+
+	public sealed class RegShShim : RegShim
+	{
+		public RegShShim(SP rwHandle, IntPtr address)
+		{
+			RwHandle = rwHandle;
+			Address = address;
+		}
+
+		public SP RwHandle { get; }
+		public IntPtr Address { get; }
 	}
 }
