@@ -20,6 +20,8 @@ namespace MemForge.Lib
 
 		public void Dispose()
 		{
+			if (Proc != null)
+				Proc.Dispose();
 		}
 	}
 }
