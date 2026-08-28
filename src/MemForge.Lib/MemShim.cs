@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using K = Vanara.PInvoke.Kernel32;
+using S = MemForge.Lib.Shimming;
 using Vanara.PInvoke;
 using DevForge.Lib.Tools;
 using System.Text;
@@ -123,7 +124,7 @@ namespace MemForge.Lib
 
         private byte[] ReadBytes(int offset, int size)
         {
-            return Shimming.ReadBytes(_proc, _baseAddr, offset, size);
+            return S.ReadBytes(_proc, _baseAddr, offset, size);
         }
 
         private void WriteDWord(int offset, uint value)
@@ -134,7 +135,7 @@ namespace MemForge.Lib
 
         private void WriteBytes(int offset, byte[] buf)
         {
-            Shimming.WriteBytes(_proc, _baseAddr, offset, buf);
+			S.WriteBytes(_proc, _baseAddr, offset, buf);
         }
 
         public void Dispose()

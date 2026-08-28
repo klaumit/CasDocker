@@ -4,6 +4,11 @@ using DevForge.Lib.Modern;
 using Vanara.PInvoke;
 using MR = MemForge.Lib.MemReader;
 using SP = Vanara.PInvoke.Kernel32.SafeHPROCESS;
+using System.IO;
+using System.Runtime.InteropServices;
+using K = Vanara.PInvoke.Kernel32;
+using S = MemForge.Lib.Shimming;
+using DevForge.Lib.Tools;
 
 namespace MemForge.Lib
 {
@@ -23,5 +28,7 @@ namespace MemForge.Lib
 			if (Proc != null)
 				Proc.Dispose();
 		}
+
+		public abstract void TestIt();
 	}
 }
