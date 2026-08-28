@@ -58,11 +58,14 @@
     <Compile Include="ProcStarted.cs" />
     <Compile Include="Defaults.cs" />
     <Compile Include="Monitoring.cs" />
-    <Compile Include="RegAbstract.cs" />
+    <Compile Include="RegShim.cs" />
+    <Compile Include="RegShShim.cs" />
+    <Compile Include="Reg86Shim.cs" />
     <Compile Include="MemGot.cs" />
     <Compile Include="MemReader.cs" />
     <Compile Include="AppReader.cs" />
     <Compile Include="MemShim.cs" />
+    <Compile Include="ByteOrder.cs" />
     <Compile Include="ByteExt.cs" />
     <Compile Include="ProcExt.cs" />
     <Compile Include="Printer.cs" />
