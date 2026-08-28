@@ -22,20 +22,4 @@ namespace MemForge.Lib
 		{
 		}
 	}
-
-	public sealed class Reg86Shim : RegShim
-	{
-		public Reg86Shim(SP proc, IntPtr baseAddr)
-			: base(proc, baseAddr)
-		{
-		}
-	}
-
-	public sealed class RegShShim : RegShim
-	{
-		public RegShShim(SP proc, IntPtr baseAddr)
-			: base(proc, baseAddr)
-		{
-		}
-	}
 }

@@ -4,8 +4,6 @@ using System.IO;
 
 namespace PvMake.Lib
 {
-    public delegate void OutputFilter(string line);
-
     public static class ProcExt
     {
         private static void PrintLines(StreamReader reader, string prefix)

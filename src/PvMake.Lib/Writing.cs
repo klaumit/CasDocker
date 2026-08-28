@@ -9,12 +9,6 @@ using System.Text;
 
 namespace PvMake.Lib
 {
-    public sealed class HitMe
-    {
-        public bool PatchHit { get; set; }
-        public bool InlineAsm { get; set; }
-    }
-    
     public static class Writing
     {
         public static void ReCopy(IEnumerable<string> files, string dest, string root)

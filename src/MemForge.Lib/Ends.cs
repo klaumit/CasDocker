@@ -2,12 +2,6 @@
 
 namespace MemForge.Lib
 {
-    public enum ByteOrder
-    {
-        BigEndian = 0,
-        LittleEndian
-    }
-
     public static class Ends
     {
         public static byte[] SwapEndian(this byte[] data, bool inPlace = false)
