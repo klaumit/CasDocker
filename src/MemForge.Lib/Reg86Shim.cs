@@ -11,6 +11,8 @@ using K = Vanara.PInvoke.Kernel32;
 using S = MemForge.Lib.Shimming;
 using DevForge.Lib.Tools;
 
+// ReSharper disable ArrangeObjectCreationWhenTypeEvident
+
 namespace MemForge.Lib
 {
 	public enum Reg86Name

@@ -72,7 +72,7 @@ namespace WinFinder
 						var rwHandle = MR.OpenProc(pid, out pName, true);
 						var shim = new RegShShim(rwHandle, address);
 
-						Console.WriteLine(" sh3 | " + real + " |" + shim);
+						Console.WriteLine(" sh3 | " + real + " | " + shim);
 
 						shim.TestIt();
 					}
