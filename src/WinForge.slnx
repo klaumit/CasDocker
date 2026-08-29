@@ -1,2 +1,4 @@
 <Solution>
+  <Project Path="MemForge.Lib/MemForge.Lib.n.csproj" />
+  <Project Path="WinForge/WinForge.n.csproj" />
 </Solution>

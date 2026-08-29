@@ -24,4 +24,8 @@
     <EmbeddedResource Include="Resources\*.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MemForge.Lib\MemForge.Lib.n.csproj" />
+  </ItemGroup>
+
 </Project>
