@@ -59,5 +59,11 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MemForge.Lib\MemForge.Lib.csproj">
+      <Project>{14de83ee-bcd4-4240-b0d4-38e16eeaaace}</Project>
+      <Name>MemForge.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
