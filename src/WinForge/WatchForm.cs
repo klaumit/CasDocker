@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using MemForge.Lib;
 using WinFinder;
+using SE = MemForge.Lib.SysExt;
 
 namespace WinForge
 {
@@ -53,6 +55,15 @@ namespace WinForge
 			clocker_Tick(sender, e);
 			delayNd.Value = clocker.Interval;
 			clocker.Enabled = true;
+			FindExes();
+		}
+
+		private Dictionary<string, string> _exes;
+
+		private void FindExes()
+		{
+			var root = SE.GetSrcRoot();
+			_exes = SE.GetSimExes(root);
 		}
 	}
 }
