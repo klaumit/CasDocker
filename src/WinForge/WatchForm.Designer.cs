@@ -25,14 +25,16 @@ namespace WinForge
 			this.clocker = new System.Windows.Forms.Timer(this.components);
 			this.delayNd = new System.Windows.Forms.NumericUpDown();
 			this.label3 = new System.Windows.Forms.Label();
+			this.start86Btn = new System.Windows.Forms.Button();
+			this.startShBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.delayNd)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// closeBtn
 			// 
-			this.closeBtn.Location = new System.Drawing.Point(351, 251);
+			this.closeBtn.Location = new System.Drawing.Point(351, 270);
 			this.closeBtn.Name = "closeBtn";
-			this.closeBtn.Size = new System.Drawing.Size(75, 23);
+			this.closeBtn.Size = new System.Drawing.Size(75, 25);
 			this.closeBtn.TabIndex = 0;
 			this.closeBtn.Text = "Close";
 			this.closeBtn.UseVisualStyleBackColor = true;
@@ -40,14 +42,14 @@ namespace WinForge
 			// 
 			// sim86Tb
 			// 
-			this.sim86Tb.Location = new System.Drawing.Point(75, 26);
+			this.sim86Tb.Location = new System.Drawing.Point(75, 28);
 			this.sim86Tb.Name = "sim86Tb";
 			this.sim86Tb.Size = new System.Drawing.Size(55, 20);
 			this.sim86Tb.TabIndex = 1;
 			// 
 			// simShTb
 			// 
-			this.simShTb.Location = new System.Drawing.Point(207, 26);
+			this.simShTb.Location = new System.Drawing.Point(207, 28);
 			this.simShTb.Name = "simShTb";
 			this.simShTb.Size = new System.Drawing.Size(55, 20);
 			this.simShTb.TabIndex = 2;
@@ -55,18 +57,18 @@ namespace WinForge
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(25, 29);
+			this.label1.Location = new System.Drawing.Point(25, 31);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(36, 13);
+			this.label1.Size = new System.Drawing.Size(36, 14);
 			this.label1.TabIndex = 3;
 			this.label1.Text = "Sim86";
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(155, 29);
+			this.label2.Location = new System.Drawing.Point(155, 31);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(39, 13);
+			this.label2.Size = new System.Drawing.Size(39, 14);
 			this.label2.TabIndex = 4;
 			this.label2.Text = "SimSH";
 			// 
@@ -77,12 +79,12 @@ namespace WinForge
 			// 
 			// delayNd
 			// 
-			this.delayNd.Location = new System.Drawing.Point(343, 27);
+			this.delayNd.Location = new System.Drawing.Point(343, 29);
 			this.delayNd.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
+									5000,
+									0,
+									0,
+									0});
 			this.delayNd.Name = "delayNd";
 			this.delayNd.Size = new System.Drawing.Size(55, 20);
 			this.delayNd.TabIndex = 5;
@@ -91,17 +93,39 @@ namespace WinForge
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(292, 29);
+			this.label3.Location = new System.Drawing.Point(292, 31);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(34, 13);
+			this.label3.Size = new System.Drawing.Size(34, 14);
 			this.label3.TabIndex = 6;
 			this.label3.Text = "Delay";
 			// 
+			// start86Btn
+			// 
+			this.start86Btn.Location = new System.Drawing.Point(75, 54);
+			this.start86Btn.Name = "start86Btn";
+			this.start86Btn.Size = new System.Drawing.Size(55, 23);
+			this.start86Btn.TabIndex = 7;
+			this.start86Btn.Text = "Start";
+			this.start86Btn.UseVisualStyleBackColor = true;
+			this.start86Btn.Click += new System.EventHandler(this.Start86BtnClick);
+			// 
+			// startShBtn
+			// 
+			this.startShBtn.Location = new System.Drawing.Point(207, 54);
+			this.startShBtn.Name = "startShBtn";
+			this.startShBtn.Size = new System.Drawing.Size(55, 23);
+			this.startShBtn.TabIndex = 8;
+			this.startShBtn.Text = "Start";
+			this.startShBtn.UseVisualStyleBackColor = true;
+			this.startShBtn.Click += new System.EventHandler(this.StartShBtnClick);
+			// 
 			// WatchForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(442, 286);
+			this.ClientSize = new System.Drawing.Size(442, 308);
+			this.Controls.Add(this.startShBtn);
+			this.Controls.Add(this.start86Btn);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.delayNd);
 			this.Controls.Add(this.label2);
@@ -115,8 +139,9 @@ namespace WinForge
 			((System.ComponentModel.ISupportInitialize)(this.delayNd)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
-
 		}
+		private System.Windows.Forms.Button startShBtn;
+		private System.Windows.Forms.Button start86Btn;
 
 		private System.Windows.Forms.Button closeBtn;
 		private System.Windows.Forms.TextBox sim86Tb;

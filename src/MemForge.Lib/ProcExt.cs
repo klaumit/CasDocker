@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
+using System.IO;
 
 namespace MemForge.Lib
 {
-	public static class ProcExt
+    public static class ProcExt
     {
         public static Process Find(string name)
         {
@@ -31,6 +32,15 @@ namespace MemForge.Lib
                     started(null, procId, procName);
                 }
             }
+        }
+
+        public static void Start(string fileName)
+        {
+            var workDir = Path.GetDirectoryName(fileName);
+            var info = new ProcessStartInfo { FileName = fileName };
+            if (!string.IsNullOrWhiteSpace(workDir))
+                info.WorkingDirectory = workDir;
+            Process.Start(info);
         }
     }
 }

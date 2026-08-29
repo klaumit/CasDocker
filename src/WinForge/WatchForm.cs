@@ -65,5 +65,17 @@ namespace WinForge
 			var root = SE.GetSrcRoot();
 			_exes = SE.GetSimExes(root);
 		}
+
+		private void Start86BtnClick(object sender, EventArgs e)
+		{
+			if (_exes.TryGetValue("Sim86", out var exe))
+				ProcExt.Start(exe);
+		}
+
+		private void StartShBtnClick(object sender, EventArgs e)
+		{
+			if (_exes.TryGetValue("SimSH", out var exe))
+				ProcExt.Start(exe);
+		}
 	}
 }
