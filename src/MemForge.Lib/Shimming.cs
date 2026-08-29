@@ -47,5 +47,21 @@ namespace MemForge.Lib
                 handle.Free();
             }
         }
+
+        public static IDictionary<T, ushort> ReadUInt16<T>(this byte[] data, IDictionary<int, T> offsets)
+        {
+            var res = new Dictionary<T, ushort>();
+            foreach (var pair in offsets)
+                res[pair.Value] = Ends.ToUInt16(data, pair.Key, false);
+            return res;
+        }
+
+        public static IDictionary<T, uint> ReadUInt32<T>(this byte[] data, IDictionary<int, T> offsets)
+        {
+            var res = new Dictionary<T, uint>();
+            foreach (var pair in offsets)
+                res[pair.Value] = Ends.ToUInt32(data, pair.Key, false);
+            return res;
+        }
     }
 }
