@@ -34,11 +34,12 @@ namespace MemForge.Lib
 		R13,
 		R14,
 		R15,
-		SR,
 		GBR,
-		VBR,
-		SSR,
-		SPC,
+		MACH,
+		MACL,
+		PR,
+		PC,
+		SR,
 		R0b,
 		R1b,
 		R2b,
@@ -47,10 +48,9 @@ namespace MemForge.Lib
 		R5b,
 		R6b,
 		R7b,
-		MACH,
-		MACL,
-		PR,
-		PC
+		VBR,
+		SPC,
+		SSR
 	}
 
 	public sealed class RegShShim : RegShim
@@ -77,7 +77,7 @@ namespace MemForge.Lib
 
 		public override void TestIt()
 		{
-			var region = S.ReadBytes(Proc, BaseAddr, 0, 32);
+			var region = S.ReadBytes(Proc, BaseAddr, 0, 270);
 
 			var res = S.ReadUInt32(region, Offsets);
 
@@ -85,7 +85,7 @@ namespace MemForge.Lib
 
 			var debug = hex + "\n" + JsonExt.ToJson(res);
 
-			throw new NotImplementedException(debug);
+			Console.WriteLine(debug);
 		}
 	}
 }
