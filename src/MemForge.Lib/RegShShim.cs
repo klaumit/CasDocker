@@ -83,7 +83,9 @@ namespace MemForge.Lib
 
 			var hex = Hexer.Tools.TextExt.ToHex(region);
 
-			throw new NotImplementedException(hex + "\n" + JsonExt.ToJson(res));
+			var debug = hex + "\n" + JsonExt.ToJson(res);
+
+			throw new NotImplementedException(debug);
 		}
 	}
 }

@@ -48,19 +48,21 @@ namespace MemForge.Lib
             }
         }
 
-        public static IDictionary<T, ushort> ReadUInt16<T>(this byte[] data, IDictionary<int, T> offsets)
+        public static IDictionary<T, string> ReadUInt16<T>(this byte[] data, IDictionary<int, T> offsets)
         {
-            var res = new Dictionary<T, ushort>();
+            var res = new SortedDictionary<T, string>();
             foreach (var pair in offsets)
-                res[pair.Value] = Ends.ToUInt16(data, pair.Key, false);
+                res[pair.Value] = string.Format("{0:X4}", 
+                    Ends.ToUInt16(data, pair.Key, false));
             return res;
         }
 
-        public static IDictionary<T, uint> ReadUInt32<T>(this byte[] data, IDictionary<int, T> offsets)
+        public static IDictionary<T, string> ReadUInt32<T>(this byte[] data, IDictionary<int, T> offsets)
         {
-            var res = new Dictionary<T, uint>();
+            var res = new SortedDictionary<T, string>();
             foreach (var pair in offsets)
-                res[pair.Value] = Ends.ToUInt32(data, pair.Key, false);
+                res[pair.Value] = string.Format("{0:X8}", 
+                    Ends.ToUInt32(data, pair.Key, false));
             return res;
         }
     }

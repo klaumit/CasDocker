@@ -20,17 +20,17 @@ namespace MemForge.Lib
 		None = 0,
 
 		AX,
+		BX,
 		CX,
 		DX,
-		BX,
-		SP,
-		BP,
 		SI,
 		DI,
-		ES,
-		CS,
-		SS,
 		DS,
+		ES,
+		SS,
+		SP,
+		BP,
+		CS,
 		IP
 	}
 
@@ -58,7 +58,9 @@ namespace MemForge.Lib
 
 			var hex = Hexer.Tools.TextExt.ToHex(region);
 
-			throw new NotImplementedException(hex + "\n" + JsonExt.ToJson(res));
+			var debug = hex + "\n" + JsonExt.ToJson(res);
+
+			Console.WriteLine(debug);
 		}
 	}
 }
