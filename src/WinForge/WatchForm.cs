@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using MemForge.Lib;
+using WinFinder;
 
 namespace WinForge
 {
