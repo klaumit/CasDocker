@@ -1,5 +1,5 @@
 ﻿
-namespace WinFinder
+namespace WinForge
 {
 	partial class WatchForm
 	{

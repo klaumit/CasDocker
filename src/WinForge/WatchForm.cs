@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using MemForge.Lib;
 
-namespace WinFinder
+namespace WinForge
 {
 	public partial class WatchForm : Form
 	{
