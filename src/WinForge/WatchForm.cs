@@ -45,15 +45,19 @@ namespace WinForge
 		private void SetList(RegShShim sim)
 		{
 			regShList.Items.Clear();
-			foreach (var pair in sim.ReadRegs())
-				regShList.Items.Add(pair.Key + " = " + pair.Value);
+			var regs = sim.ReadRegs();
+			if (regs != null)
+				foreach (var pair in regs)
+					regShList.Items.Add(pair.Key + " = " + pair.Value);
 		}
 
 		private void SetList(Reg86Shim sim)
 		{
 			reg86List.Items.Clear();
-			foreach (var pair in sim.ReadRegs())
-				reg86List.Items.Add(pair.Key + " = " + pair.Value);
+			var regs = sim.ReadRegs();
+			if (regs != null)
+				foreach (var pair in regs)
+					reg86List.Items.Add(pair.Key + " = " + pair.Value);
 		}
 
 		private void delayNd_ValueChanged(object sender, EventArgs e)
