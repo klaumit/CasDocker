@@ -13,8 +13,10 @@ namespace WinFinder
 {
 	public static class Monitoring
 	{
-		public static void ReadReg86(uint pid)
+		public static void ReadReg86(uint? myPid)
 		{
+			if (myPid == null) return;
+			var pid = myPid.Value;
 			byte[] pattern =
 			{
 				0x02, 0x00, 0x00, 0x01, 0x00, 0x50, 0x6F, 0x63,
@@ -46,8 +48,10 @@ namespace WinFinder
 			}
 		}
 
-		public static void ReadRegSh(uint pid)
+		public static void ReadRegSh(uint? myPid)
 		{
+			if (myPid == null) return;
+			var pid = myPid.Value;
 			byte[] pattern =
 			{
 				0x00, 0xE6, 0x78, 0x02, 0x8C, 0x08, 0x5A, 0x02, 0x8C,

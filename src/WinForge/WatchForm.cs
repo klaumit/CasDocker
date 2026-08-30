@@ -30,13 +30,13 @@ namespace WinForge
 		private void clocker_Tick(object sender, EventArgs e)
 		{
 			var sim86 = ProcExt.Find("Sim3022");
-			var sim86Pid = (uint)sim86.Id;
-			sim86Tb.Text = sim86Pid.ToString("X4");
+			var sim86Pid = sim86 == null ? null : (uint?)sim86.Id;
+			sim86Tb.Text = sim86Pid?.ToString("X4");
 			Monitoring.ReadReg86(sim86Pid);
 
 			var simSh = ProcExt.Find("CASIO SimSH");
-			var simShPid = (uint)simSh.Id;
-			simShTb.Text = simShPid.ToString("X4");
+			var simShPid = simSh == null ? null : (uint?)simSh.Id;
+			simShTb.Text = simShPid?.ToString("X4");
 			Monitoring.ReadRegSh(simShPid);
 		}
 
