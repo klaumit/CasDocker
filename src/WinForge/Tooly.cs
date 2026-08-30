@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Globalization;
 
 namespace WinForge
@@ -9,6 +10,13 @@ namespace WinForge
             return uint.TryParse(text, NumberStyles.HexNumber, null, out var res)
                 ? res
                 : (uint?)null;
+        }
+
+        public static Font GetMonospace(this Font font)
+        {
+            var family = FontFamily.GenericMonospace;
+            var res = new Font(family, font.Size);
+            return res;
         }
     }
 }

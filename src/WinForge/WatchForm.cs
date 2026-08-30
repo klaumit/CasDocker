@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using MemForge.Lib;
 using WinFinder;
@@ -78,6 +79,13 @@ namespace WinForge
 			delayNd.Value = clocker.Interval;
 			clocker.Enabled = true;
 			FindExes();
+			SetFonts();
+		}
+
+		private void SetFonts()
+		{
+			reg86List.Font = reg86List.Font.GetMonospace();
+			regShList.Font = regShList.Font.GetMonospace();
 		}
 
 		private Dictionary<string, string> _exes;
