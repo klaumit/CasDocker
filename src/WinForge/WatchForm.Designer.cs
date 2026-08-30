@@ -36,7 +36,7 @@ namespace WinForge
 			// 
 			// closeBtn
 			// 
-			this.closeBtn.Location = new System.Drawing.Point(351, 270);
+			this.closeBtn.Location = new System.Drawing.Point(355, 297);
 			this.closeBtn.Name = "closeBtn";
 			this.closeBtn.Size = new System.Drawing.Size(75, 25);
 			this.closeBtn.TabIndex = 0;
@@ -145,27 +145,31 @@ namespace WinForge
 			// 
 			// reg86List
 			// 
+			this.reg86List.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+									| System.Windows.Forms.AnchorStyles.Left)));
 			this.reg86List.FormattingEnabled = true;
 			this.reg86List.ItemHeight = 14;
 			this.reg86List.Location = new System.Drawing.Point(25, 122);
 			this.reg86List.Name = "reg86List";
-			this.reg86List.Size = new System.Drawing.Size(105, 172);
+			this.reg86List.Size = new System.Drawing.Size(105, 200);
 			this.reg86List.TabIndex = 11;
 			// 
 			// regShList
 			// 
+			this.regShList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+									| System.Windows.Forms.AnchorStyles.Left)));
 			this.regShList.FormattingEnabled = true;
 			this.regShList.ItemHeight = 14;
 			this.regShList.Location = new System.Drawing.Point(155, 122);
 			this.regShList.Name = "regShList";
-			this.regShList.Size = new System.Drawing.Size(107, 172);
+			this.regShList.Size = new System.Drawing.Size(107, 200);
 			this.regShList.TabIndex = 12;
 			// 
 			// WatchForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(442, 312);
+			this.ClientSize = new System.Drawing.Size(442, 342);
 			this.Controls.Add(this.regShList);
 			this.Controls.Add(this.reg86List);
 			this.Controls.Add(this.stopShBtn);

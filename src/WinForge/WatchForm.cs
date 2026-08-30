@@ -5,6 +5,7 @@ using MemForge.Lib;
 using WinFinder;
 using SE = MemForge.Lib.SysExt;
 
+// ReSharper disable UseNullPropagation
 // ReSharper disable LocalizableElement
 // ReSharper disable UseStringInterpolation
 // ReSharper disable InlineOutVariableDeclaration
@@ -45,19 +46,25 @@ namespace WinForge
 		private void SetList(RegShShim sim)
 		{
 			regShList.Items.Clear();
+			if (sim == null)
+				return;
 			var regs = sim.ReadRegs();
-			if (regs != null)
-				foreach (var pair in regs)
-					regShList.Items.Add(pair.Key + " = " + pair.Value);
+			if (regs == null)
+				return;
+			foreach (var pair in regs)
+				regShList.Items.Add(pair.Key + " = " + pair.Value);
 		}
 
 		private void SetList(Reg86Shim sim)
 		{
 			reg86List.Items.Clear();
+			if (sim == null)
+				return;
 			var regs = sim.ReadRegs();
-			if (regs != null)
-				foreach (var pair in regs)
-					reg86List.Items.Add(pair.Key + " = " + pair.Value);
+			if (regs == null)
+				return;
+			foreach (var pair in regs)
+				reg86List.Items.Add(pair.Key + " = " + pair.Value);
 		}
 
 		private void delayNd_ValueChanged(object sender, EventArgs e)

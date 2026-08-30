@@ -34,11 +34,6 @@ namespace MemForge.Lib
 		{
 			var region = S.ReadBytes(Proc, BaseAddr, 0, 26);
 			var res = S.ReadUInt16(region, Offsets);
-
-			var hex = Hexer.Tools.TextExt.ToHex(region);
-			var debug = hex + "\n" + JsonExt.ToJson(res, false);
-			Console.WriteLine(debug);
-
 			return res;
 		}
 	}
