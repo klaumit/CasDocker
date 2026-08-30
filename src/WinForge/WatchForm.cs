@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using MemForge.Lib;
-using WinFinder;
 using SE = MemForge.Lib.SysExt;
+using M = WinFinder.Monitoring;
 
 // ReSharper disable UseNullPropagation
 // ReSharper disable LocalizableElement
@@ -36,12 +36,12 @@ namespace WinForge
 			var sim86 = ProcExt.Find("Sim3022");
 			var sim86Pid = sim86 == null ? null : (uint?)sim86.Id;
 			sim86Tb.Text = string.Format("{0:X4}", sim86Pid);
-			SetList(Monitoring.ReadReg86(sim86Pid));
+			SetList(M.ReadReg86(sim86Pid));
 
 			var simSh = ProcExt.Find("CASIO SimSH");
 			var simShPid = simSh == null ? null : (uint?)simSh.Id;
 			simShTb.Text = string.Format("{0:X4}", simShPid);
-			SetList(Monitoring.ReadRegSh(simShPid));
+			SetList(M.ReadRegSh(simShPid));
 		}
 
 		private void SetList(RegShShim sim)
@@ -125,9 +125,8 @@ namespace WinForge
 			var sim86Pid = Tooly.ParseUInt32(sim86Tb.Text);
 			if (sim86Pid == null)
 				return;
-			var file = Path.GetFullPath("sim86.txt");
-			Monitoring.DumpMem(sim86Pid, file);
-			MessageBox.Show(file, "Dump 86");
+			var f = M.DumpMem(sim86Pid, Path.GetFullPath("sim86.txt"));
+			MessageBox.Show(f, "Dump 86");
 		}
 
 		private void DumpShBtnClick(object sender, EventArgs e)
@@ -135,9 +134,8 @@ namespace WinForge
 			var simShPid = Tooly.ParseUInt32(simShTb.Text);
 			if (simShPid == null)
 				return;
-			var file = Path.GetFullPath("simSH.txt");
-			Monitoring.DumpMem(simShPid, file);
-			MessageBox.Show(file, "Dump SH");
+			var f = M.DumpMem(simShPid, Path.GetFullPath("simSH.txt"));
+			MessageBox.Show(f, "Dump SH");
 		}
 	}
 }
