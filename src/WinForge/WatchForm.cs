@@ -122,6 +122,7 @@ namespace WinForge
 
 		private void Dump86BtnClick(object sender, EventArgs e)
 		{
+			// Tooly.ParseUInt32(sim86Tb.Text)
 
 			Console.WriteLine(" ! Fuck 86 ! ");
 
@@ -129,6 +130,7 @@ namespace WinForge
 
 		private void DumpShBtnClick(object sender, EventArgs e)
 		{
+			// Tooly.ParseUInt32(simShTb.Text)
 
 			Console.WriteLine(" ! Fuck SH ! ");
 

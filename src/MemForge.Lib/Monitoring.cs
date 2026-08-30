@@ -7,12 +7,40 @@ using MemForge.Lib;
 using B = System.BitConverter;
 using X = MemForge.Lib.ByteExt;
 using DevForge.Lib.Modern;
+using Vanara.Extensions;
 using MR = MemForge.Lib.MemReader;
 
 namespace WinFinder
 {
 	public static class Monitoring
 	{
+		public static string DumpMem(uint? myPid, string file)
+		{
+			if (myPid == null) return null;
+			var pid = myPid.Value;
+			var first = true;
+			var i = 0;
+			using (var stream = File.CreateText(file))
+			{
+				foreach (var item in MR.ReadAll(pid))
+				{
+					if (first)
+					{
+						first = false;
+						stream.WriteLine("[{0}]", item.Name);
+					}
+					stream.WriteLine();
+					++i;
+					stream.WriteLine("({0}) {1}", i, item.Info.ToStr());
+					var array = item.Buffer;
+					stream.WriteLine(array.ToHexString());
+				}
+				stream.WriteLine();
+				stream.Flush();
+			}
+			return file;
+		}
+
 		public static Reg86Shim ReadReg86(uint? myPid)
 		{
 			if (myPid == null) return null;
