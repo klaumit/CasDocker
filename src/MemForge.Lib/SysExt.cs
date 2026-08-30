@@ -19,7 +19,8 @@ namespace MemForge.Lib
         public static Dictionary<string, string> GetSimExes(string root)
         {
             var l = Path.DirectorySeparatorChar;
-            var pt = string.Format("src{0}PvMake{0}bin{0}Debug{0}net40{0}_pv", l);
+            // var pt = string.Format("src{0}PvMake{0}bin{0}Debug{0}net40{0}_pv", l);
+            var pt = string.Format("src{0}win_build{0}_pv", l);
             var dir = Path.Combine(root, pt);
             const SearchOption so = SearchOption.AllDirectories;
             var dict = new Dictionary<string, string>();
