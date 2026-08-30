@@ -13,13 +13,13 @@ namespace WinFinder
 {
 	public static class Monitoring
 	{
-		public static void ReadReg86(uint? myPid)
+		public static Reg86Shim ReadReg86(uint? myPid)
 		{
-			if (myPid == null) return;
+			if (myPid == null) return null;
 			var pid = myPid.Value;
 			byte[] pattern =
 			{
-				                        0x00, 0x50, 0x6F, 0x63,
+				0x00, 0x50, 0x6F, 0x63,
 				0x6B, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x65,
 				0x72, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 			};
@@ -39,18 +39,16 @@ namespace WinFinder
 						string pName;
 						var rwHandle = MR.OpenProc(pid, out pName, true);
 						var shim = new Reg86Shim(rwHandle, address);
-
-						Console.WriteLine(" x86 | " + real + " | " + shim);
-
-						shim.TestIt();
+						return shim;
 					}
 				}
 			}
+			return null;
 		}
 
-		public static void ReadRegSh(uint? myPid)
+		public static RegShShim ReadRegSh(uint? myPid)
 		{
-			if (myPid == null) return;
+			if (myPid == null) return null;
 			var pid = myPid.Value;
 			byte[] pattern =
 			{
@@ -75,13 +73,11 @@ namespace WinFinder
 						string pName;
 						var rwHandle = MR.OpenProc(pid, out pName, true);
 						var shim = new RegShShim(rwHandle, address);
-
-						Console.WriteLine(" sh3 | " + real + " | " + shim);
-
-						shim.TestIt();
+						return shim;
 					}
 				}
 			}
+			return null;
 		}
 	}
 }

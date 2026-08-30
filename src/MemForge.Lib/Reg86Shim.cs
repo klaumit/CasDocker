@@ -15,7 +15,7 @@ using DevForge.Lib.Tools;
 
 namespace MemForge.Lib
 {
-	public sealed class Reg86Shim : RegShim
+	public sealed class Reg86Shim : RegShim<Reg86Name>
 	{
 		private static readonly Dictionary<int, Reg86Name> Offsets = new Dictionary<int, Reg86Name>
 		{
@@ -26,22 +26,20 @@ namespace MemForge.Lib
 			[24] = Reg86Name.IP
 		};
 
-		public Reg86Shim(SP proc, IntPtr baseAddr)
-			: base(proc, baseAddr)
+		public Reg86Shim(SP proc, IntPtr baseAddr) : base(proc, baseAddr)
 		{
 		}
 
-		public override void TestIt()
+		public override IDictionary<Reg86Name, string> ReadRegs()
 		{
 			var region = S.ReadBytes(Proc, BaseAddr, 0, 26);
-
 			var res = S.ReadUInt16(region, Offsets);
 
 			var hex = Hexer.Tools.TextExt.ToHex(region);
-
 			var debug = hex + "\n" + JsonExt.ToJson(res, false);
-
 			Console.WriteLine(debug);
+
+			return res;
 		}
 	}
 }

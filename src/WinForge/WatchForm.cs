@@ -34,12 +34,26 @@ namespace WinForge
 			var sim86 = ProcExt.Find("Sim3022");
 			var sim86Pid = sim86 == null ? null : (uint?)sim86.Id;
 			sim86Tb.Text = string.Format("{0:X4}", sim86Pid);
-			Monitoring.ReadReg86(sim86Pid);
+			SetList(Monitoring.ReadReg86(sim86Pid));
 
 			var simSh = ProcExt.Find("CASIO SimSH");
 			var simShPid = simSh == null ? null : (uint?)simSh.Id;
 			simShTb.Text = string.Format("{0:X4}", simShPid);
-			Monitoring.ReadRegSh(simShPid);
+			SetList(Monitoring.ReadRegSh(simShPid));
+		}
+
+		private void SetList(RegShShim sim)
+		{
+			regShList.Items.Clear();
+			foreach (var pair in sim.ReadRegs())
+				regShList.Items.Add(pair.Key + " = " + pair.Value);
+		}
+
+		private void SetList(Reg86Shim sim)
+		{
+			reg86List.Items.Clear();
+			foreach (var pair in sim.ReadRegs())
+				reg86List.Items.Add(pair.Key + " = " + pair.Value);
 		}
 
 		private void delayNd_ValueChanged(object sender, EventArgs e)

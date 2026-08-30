@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using DevForge.Lib.Modern;
 using Vanara.PInvoke;
@@ -12,7 +13,7 @@ using DevForge.Lib.Tools;
 
 namespace MemForge.Lib
 {
-	public abstract class RegShim : IDisposable
+	public abstract class RegShim<T> : IDisposable
 	{
 		public SP Proc { get; }
 		public IntPtr BaseAddr { get; }
@@ -29,6 +30,6 @@ namespace MemForge.Lib
 				Proc.Dispose();
 		}
 
-		public abstract void TestIt();
+		public abstract IDictionary<T, string> ReadRegs();
 	}
 }
