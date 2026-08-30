@@ -16,7 +16,11 @@ namespace MemForge.Lib
 
         public static void KillAll(string name)
         {
-            var procs = Process.GetProcessesByName(name);
+            KillAll(Process.GetProcessesByName(name));
+        }
+
+        public static void KillAll(params Process[] procs)
+        {
             foreach (var proc in procs)
                 proc.Kill();
         }
@@ -41,6 +45,13 @@ namespace MemForge.Lib
             if (!string.IsNullOrWhiteSpace(workDir))
                 info.WorkingDirectory = workDir;
             Process.Start(info);
+        }
+
+        public static Process GetByPid(uint? pid)
+        {
+            return pid == null
+                ? null
+                : Process.GetProcessById((int)pid.Value);
         }
     }
 }

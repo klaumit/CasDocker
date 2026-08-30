@@ -27,6 +27,8 @@ namespace WinForge
 			this.label3 = new System.Windows.Forms.Label();
 			this.start86Btn = new System.Windows.Forms.Button();
 			this.startShBtn = new System.Windows.Forms.Button();
+			this.stop86Btn = new System.Windows.Forms.Button();
+			this.stopShBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.delayNd)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -68,7 +70,7 @@ namespace WinForge
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(155, 31);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(39, 14);
+			this.label2.Size = new System.Drawing.Size(38, 14);
 			this.label2.TabIndex = 4;
 			this.label2.Text = "SimSH";
 			// 
@@ -119,11 +121,33 @@ namespace WinForge
 			this.startShBtn.UseVisualStyleBackColor = true;
 			this.startShBtn.Click += new System.EventHandler(this.StartShBtnClick);
 			// 
+			// stop86Btn
+			// 
+			this.stop86Btn.Location = new System.Drawing.Point(75, 83);
+			this.stop86Btn.Name = "stop86Btn";
+			this.stop86Btn.Size = new System.Drawing.Size(55, 23);
+			this.stop86Btn.TabIndex = 9;
+			this.stop86Btn.Text = "Stop";
+			this.stop86Btn.UseVisualStyleBackColor = true;
+			this.stop86Btn.Click += new System.EventHandler(this.Stop86BtnClick);
+			// 
+			// stopShBtn
+			// 
+			this.stopShBtn.Location = new System.Drawing.Point(207, 83);
+			this.stopShBtn.Name = "stopShBtn";
+			this.stopShBtn.Size = new System.Drawing.Size(55, 23);
+			this.stopShBtn.TabIndex = 10;
+			this.stopShBtn.Text = "Stop";
+			this.stopShBtn.UseVisualStyleBackColor = true;
+			this.stopShBtn.Click += new System.EventHandler(this.StopShBtnClick);
+			// 
 			// WatchForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(442, 308);
+			this.Controls.Add(this.stopShBtn);
+			this.Controls.Add(this.stop86Btn);
 			this.Controls.Add(this.startShBtn);
 			this.Controls.Add(this.start86Btn);
 			this.Controls.Add(this.label3);
@@ -140,6 +164,8 @@ namespace WinForge
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Button stopShBtn;
+		private System.Windows.Forms.Button stop86Btn;
 		private System.Windows.Forms.Button startShBtn;
 		private System.Windows.Forms.Button start86Btn;
 

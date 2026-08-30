@@ -5,6 +5,8 @@ using MemForge.Lib;
 using WinFinder;
 using SE = MemForge.Lib.SysExt;
 
+// ReSharper disable InlineOutVariableDeclaration
+
 namespace WinForge
 {
 	public partial class WatchForm : Form
@@ -28,21 +30,14 @@ namespace WinForge
 		private void clocker_Tick(object sender, EventArgs e)
 		{
 			var sim86 = ProcExt.Find("Sim3022");
-			if (sim86 != null)
-			{
-				var pid = (uint)sim86.Id;
-				sim86Tb.Text = pid.ToString("X4");
+			var sim86Pid = (uint)sim86.Id;
+			sim86Tb.Text = sim86Pid.ToString("X4");
+			Monitoring.ReadReg86(sim86Pid);
 
-				Monitoring.ReadReg86(pid);
-			}
 			var simSh = ProcExt.Find("CASIO SimSH");
-			if (simSh != null)
-			{
-				var pid = (uint)simSh.Id;
-				simShTb.Text = pid.ToString("X4");
-
-				Monitoring.ReadRegSh(pid);
-			}
+			var simShPid = (uint)simSh.Id;
+			simShTb.Text = simShPid.ToString("X4");
+			Monitoring.ReadRegSh(simShPid);
 		}
 
 		private void delayNd_ValueChanged(object sender, EventArgs e)
@@ -68,14 +63,26 @@ namespace WinForge
 
 		private void Start86BtnClick(object sender, EventArgs e)
 		{
-			if (_exes.TryGetValue("Sim86", out var exe))
+			string exe;
+			if (_exes.TryGetValue("Sim86", out exe))
 				ProcExt.Start(exe);
 		}
 
 		private void StartShBtnClick(object sender, EventArgs e)
 		{
-			if (_exes.TryGetValue("SimSH", out var exe))
+			string exe;
+			if (_exes.TryGetValue("SimSH", out exe))
 				ProcExt.Start(exe);
+		}
+
+		private void Stop86BtnClick(object sender, EventArgs e)
+		{
+			ProcExt.KillAll(ProcExt.GetByPid(Tooly.ParseUInt32(sim86Tb.Text)));
+		}
+
+		private void StopShBtnClick(object sender, EventArgs e)
+		{
+			ProcExt.KillAll(ProcExt.GetByPid(Tooly.ParseUInt32(simShTb.Text)));
 		}
 	}
 }
