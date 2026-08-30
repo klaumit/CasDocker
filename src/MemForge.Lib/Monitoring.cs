@@ -32,6 +32,7 @@ namespace WinFinder
 					stream.WriteLine();
 					++i;
 					stream.WriteLine("({0}) {1}", i, item.Info.ToStr());
+					stream.WriteLine();
 					var array = item.Buffer;
 					stream.WriteLine(array.ToHexString());
 				}

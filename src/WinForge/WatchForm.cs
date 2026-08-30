@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using MemForge.Lib;
 using WinFinder;
@@ -124,9 +125,9 @@ namespace WinForge
 			var sim86Pid = Tooly.ParseUInt32(sim86Tb.Text);
 			if (sim86Pid == null)
 				return;
-			const string file = "sim86.txt";
+			var file = Path.GetFullPath("sim86.txt");
 			Monitoring.DumpMem(sim86Pid, file);
-			ProcExt.Start(file);
+			MessageBox.Show(file, "Dump 86");
 		}
 
 		private void DumpShBtnClick(object sender, EventArgs e)
@@ -134,9 +135,9 @@ namespace WinForge
 			var simShPid = Tooly.ParseUInt32(simShTb.Text);
 			if (simShPid == null)
 				return;
-			const string file = "simSH.txt";
+			var file = Path.GetFullPath("simSH.txt");
 			Monitoring.DumpMem(simShPid, file);
-			ProcExt.Start(file);
+			MessageBox.Show(file, "Dump SH");
 		}
 	}
 }
