@@ -5,6 +5,8 @@ using MemForge.Lib;
 using WinFinder;
 using SE = MemForge.Lib.SysExt;
 
+// ReSharper disable LocalizableElement
+// ReSharper disable UseStringInterpolation
 // ReSharper disable InlineOutVariableDeclaration
 
 namespace WinForge
@@ -31,12 +33,12 @@ namespace WinForge
 		{
 			var sim86 = ProcExt.Find("Sim3022");
 			var sim86Pid = sim86 == null ? null : (uint?)sim86.Id;
-			sim86Tb.Text = sim86Pid?.ToString("X4");
+			sim86Tb.Text = string.Format("{0:X4}", sim86Pid);
 			Monitoring.ReadReg86(sim86Pid);
 
 			var simSh = ProcExt.Find("CASIO SimSH");
 			var simShPid = simSh == null ? null : (uint?)simSh.Id;
-			simShTb.Text = simShPid?.ToString("X4");
+			simShTb.Text = string.Format("{0:X4}", simShPid);
 			Monitoring.ReadRegSh(simShPid);
 		}
 

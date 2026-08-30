@@ -29,6 +29,8 @@ namespace WinForge
 			this.startShBtn = new System.Windows.Forms.Button();
 			this.stop86Btn = new System.Windows.Forms.Button();
 			this.stopShBtn = new System.Windows.Forms.Button();
+			this.reg86List = new System.Windows.Forms.ListBox();
+			this.regShList = new System.Windows.Forms.ListBox();
 			((System.ComponentModel.ISupportInitialize)(this.delayNd)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -141,11 +143,31 @@ namespace WinForge
 			this.stopShBtn.UseVisualStyleBackColor = true;
 			this.stopShBtn.Click += new System.EventHandler(this.StopShBtnClick);
 			// 
+			// reg86List
+			// 
+			this.reg86List.FormattingEnabled = true;
+			this.reg86List.ItemHeight = 14;
+			this.reg86List.Location = new System.Drawing.Point(25, 122);
+			this.reg86List.Name = "reg86List";
+			this.reg86List.Size = new System.Drawing.Size(105, 172);
+			this.reg86List.TabIndex = 11;
+			// 
+			// regShList
+			// 
+			this.regShList.FormattingEnabled = true;
+			this.regShList.ItemHeight = 14;
+			this.regShList.Location = new System.Drawing.Point(155, 122);
+			this.regShList.Name = "regShList";
+			this.regShList.Size = new System.Drawing.Size(107, 172);
+			this.regShList.TabIndex = 12;
+			// 
 			// WatchForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(442, 308);
+			this.ClientSize = new System.Drawing.Size(442, 312);
+			this.Controls.Add(this.regShList);
+			this.Controls.Add(this.reg86List);
 			this.Controls.Add(this.stopShBtn);
 			this.Controls.Add(this.stop86Btn);
 			this.Controls.Add(this.startShBtn);
@@ -164,6 +186,8 @@ namespace WinForge
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.ListBox regShList;
+		private System.Windows.Forms.ListBox reg86List;
 		private System.Windows.Forms.Button stopShBtn;
 		private System.Windows.Forms.Button stop86Btn;
 		private System.Windows.Forms.Button startShBtn;
