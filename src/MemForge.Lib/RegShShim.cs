@@ -15,44 +15,6 @@ using DevForge.Lib.Tools;
 
 namespace MemForge.Lib
 {
-	public enum RegShName
-	{
-		None = 0,
-		R0,
-		R1,
-		R2,
-		R3,
-		R4,
-		R5,
-		R6,
-		R7,
-		R8,
-		R9,
-		R10,
-		R11,
-		R12,
-		R13,
-		R14,
-		R15,
-		GBR,
-		MACH,
-		MACL,
-		PR,
-		PC,
-		SR,
-		R0b,
-		R1b,
-		R2b,
-		R3b,
-		R4b,
-		R5b,
-		R6b,
-		R7b,
-		VBR,
-		SPC,
-		SSR
-	}
-
 	public sealed class RegShShim : RegShim
 	{
 		private static readonly Dictionary<int, RegShName> Offsets = new Dictionary<int, RegShName>

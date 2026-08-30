@@ -15,25 +15,6 @@ using DevForge.Lib.Tools;
 
 namespace MemForge.Lib
 {
-	public enum Reg86Name
-	{
-		None = 0,
-
-		AX,
-		BX,
-		CX,
-		DX,
-		SI,
-		DI,
-		DS,
-		ES,
-		SS,
-		SP,
-		BP,
-		CS,
-		IP
-	}
-
 	public sealed class Reg86Shim : RegShim
 	{
 		private static readonly Dictionary<int, Reg86Name> Offsets = new Dictionary<int, Reg86Name>
