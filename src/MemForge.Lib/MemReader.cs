@@ -53,8 +53,10 @@ namespace MemForge.Lib
 						var isCommitted = mbi.State == MEM_STATE_MEM_COMMIT;
 						var protect = mbi.Protect;
                         var isReadable = (protect & (uint)K.MEM_PROTECTION.PAGE_READONLY) != 0
+                                         || (protect & (uint)K.MEM_PROTECTION.PAGE_WRITECOPY) != 0
 										 || (protect & (uint)K.MEM_PROTECTION.PAGE_READWRITE) != 0
                                          || (protect & (uint)K.MEM_PROTECTION.PAGE_EXECUTE_READ) != 0
+                                         || (protect & (uint)K.MEM_PROTECTION.PAGE_EXECUTE_WRITECOPY) != 0
                                          || (protect & (uint)K.MEM_PROTECTION.PAGE_EXECUTE_READWRITE) != 0;
                         var notGuarded = (protect & (uint)K.MEM_PROTECTION.PAGE_GUARD) == 0;
 

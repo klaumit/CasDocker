@@ -45,7 +45,7 @@ namespace MemForge.Lib
 
 			var hex = Hexer.Tools.TextExt.ToHex(region);
 
-			var debug = hex + "\n" + JsonExt.ToJson(res);
+			var debug = hex + "\n" + JsonExt.ToJson(res, false);
 
 			Console.WriteLine(debug);
 		}
