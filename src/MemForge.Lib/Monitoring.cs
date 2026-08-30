@@ -19,7 +19,7 @@ namespace WinFinder
 			var pid = myPid.Value;
 			byte[] pattern =
 			{
-				0x02, 0x00, 0x00, 0x01, 0x00, 0x50, 0x6F, 0x63,
+				                        0x00, 0x50, 0x6F, 0x63,
 				0x6B, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x65,
 				0x72, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 			};
@@ -27,14 +27,14 @@ namespace WinFinder
 			{
 				if (item.Info.AllocationProtect == 0x00000080 &&
 				    item.Info.State == 0x00001000 &&
-				    item.Info.Protect == 0x00000004 &&
+				    (item.Info.Protect == 0x00000004 || item.Info.Protect == 0x00000008) &&
 				    item.Info.Type == 0x01000000 &&
-				    item.Info.RegionSize == 0x0005F000)
+				    (item.Info.RegionSize == 0x0005F000 || item.Info.RegionSize == 0x0007E000))
 				{
 					var offset = item.Buffer.IndexOf(pattern);
 					if (offset >= 0)
 					{
-						var real = offset - 55;
+						var real = offset - 55 - 4;
 						var address = IntPtr.Add(item.Info.BaseAddress, real);
 						string pName;
 						var rwHandle = MR.OpenProc(pid, out pName, true);
