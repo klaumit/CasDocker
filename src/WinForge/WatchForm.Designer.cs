@@ -31,6 +31,8 @@ namespace WinForge
 			this.stopShBtn = new System.Windows.Forms.Button();
 			this.reg86List = new System.Windows.Forms.ListBox();
 			this.regShList = new System.Windows.Forms.ListBox();
+			this.dump86Btn = new System.Windows.Forms.Button();
+			this.dumpShBtn = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.delayNd)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -149,9 +151,9 @@ namespace WinForge
 									| System.Windows.Forms.AnchorStyles.Left)));
 			this.reg86List.FormattingEnabled = true;
 			this.reg86List.ItemHeight = 14;
-			this.reg86List.Location = new System.Drawing.Point(25, 122);
+			this.reg86List.Location = new System.Drawing.Point(40, 122);
 			this.reg86List.Name = "reg86List";
-			this.reg86List.Size = new System.Drawing.Size(105, 200);
+			this.reg86List.Size = new System.Drawing.Size(90, 200);
 			this.reg86List.TabIndex = 11;
 			// 
 			// regShList
@@ -160,16 +162,38 @@ namespace WinForge
 									| System.Windows.Forms.AnchorStyles.Left)));
 			this.regShList.FormattingEnabled = true;
 			this.regShList.ItemHeight = 14;
-			this.regShList.Location = new System.Drawing.Point(155, 122);
+			this.regShList.Location = new System.Drawing.Point(172, 122);
 			this.regShList.Name = "regShList";
-			this.regShList.Size = new System.Drawing.Size(107, 200);
+			this.regShList.Size = new System.Drawing.Size(90, 200);
 			this.regShList.TabIndex = 12;
+			// 
+			// dump86Btn
+			// 
+			this.dump86Btn.Location = new System.Drawing.Point(40, 83);
+			this.dump86Btn.Name = "dump86Btn";
+			this.dump86Btn.Size = new System.Drawing.Size(29, 23);
+			this.dump86Btn.TabIndex = 13;
+			this.dump86Btn.Text = "D";
+			this.dump86Btn.UseVisualStyleBackColor = true;
+			this.dump86Btn.Click += new System.EventHandler(this.Dump86BtnClick);
+			// 
+			// dumpShBtn
+			// 
+			this.dumpShBtn.Location = new System.Drawing.Point(172, 83);
+			this.dumpShBtn.Name = "dumpShBtn";
+			this.dumpShBtn.Size = new System.Drawing.Size(29, 23);
+			this.dumpShBtn.TabIndex = 14;
+			this.dumpShBtn.Text = "D";
+			this.dumpShBtn.UseVisualStyleBackColor = true;
+			this.dumpShBtn.Click += new System.EventHandler(this.DumpShBtnClick);
 			// 
 			// WatchForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(442, 342);
+			this.Controls.Add(this.dumpShBtn);
+			this.Controls.Add(this.dump86Btn);
 			this.Controls.Add(this.regShList);
 			this.Controls.Add(this.reg86List);
 			this.Controls.Add(this.stopShBtn);
@@ -190,6 +214,8 @@ namespace WinForge
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Button dumpShBtn;
+		private System.Windows.Forms.Button dump86Btn;
 		private System.Windows.Forms.ListBox regShList;
 		private System.Windows.Forms.ListBox reg86List;
 		private System.Windows.Forms.Button stopShBtn;

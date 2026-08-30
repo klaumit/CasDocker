@@ -119,5 +119,19 @@ namespace WinForge
 		{
 			ProcExt.KillAll(ProcExt.GetByPid(Tooly.ParseUInt32(simShTb.Text)));
 		}
+
+		private void Dump86BtnClick(object sender, EventArgs e)
+		{
+
+			Console.WriteLine(" ! Fuck 86 ! ");
+
+		}
+
+		private void DumpShBtnClick(object sender, EventArgs e)
+		{
+
+			Console.WriteLine(" ! Fuck SH ! ");
+
+		}
 	}
 }
