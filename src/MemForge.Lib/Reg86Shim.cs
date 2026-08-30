@@ -33,7 +33,7 @@ namespace MemForge.Lib
 
 		public override void TestIt()
 		{
-			var region = S.ReadBytes(Proc, BaseAddr, 0, 32);
+			var region = S.ReadBytes(Proc, BaseAddr, 0, 26);
 
 			var res = S.ReadUInt16(region, Offsets);
 
