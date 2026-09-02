@@ -47,6 +47,7 @@
     <Compile Include="WatchForm.Designer.cs">
       <DependentUpon>WatchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tooly.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="WatchForm.resx">

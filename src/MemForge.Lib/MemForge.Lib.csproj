@@ -59,7 +59,9 @@
     <Compile Include="Defaults.cs" />
     <Compile Include="Monitoring.cs" />
     <Compile Include="RegShim.cs" />
+    <Compile Include="RegShName.cs" />
     <Compile Include="RegShShim.cs" />
+    <Compile Include="Reg86Name.cs" />
     <Compile Include="Reg86Shim.cs" />
     <Compile Include="MemGot.cs" />
     <Compile Include="MemReader.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="ResTool.cs" />
     <Compile Include="Shimming.cs" />
     <Compile Include="WindowExt.cs" />
+	<Compile Include="SysExt.cs" />
     <Compile Include="VanExt.cs" />
   </ItemGroup>
   <ItemGroup>

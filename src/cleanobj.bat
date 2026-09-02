@@ -13,3 +13,5 @@ rd /s /q Y:\src\DevForge.UI\obj
 rd /s /q Y:\src\MemForge\obj
 rd /s /q Y:\src\MemForge.Lib\obj
 
+rd /s /q Y:\src\WinForge\obj
+
